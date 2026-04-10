@@ -364,15 +364,23 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.31/jspdf.plugin.autotable.min.js"></script>
 
 <base target="_blank">
+<base target="_blank">
 </head>
 <body>
     <!-- Modal -->
     <div class="modal-overlay" id="modal">
         <div class="modal-content">
             <i class="fas fa-check-circle"></i>
-            <h3>Merci pour votre demande !</h3>
-            <p>Nous vous contacterons très rapidement au <strong>0492 85 91 27</strong> pour discuter de votre projet.</p>
-            <button onclick="closeModal()">Fermer</button>
+            <h3>Devis envoyé avec succès !</h3>
+            <p>Votre devis a été généré et sauvegardé.</p>
+            <p style="margin-top: 1rem; padding: 1rem; background: rgba(212, 165, 165, 0.1); border-radius: 10px; border-left: 3px solid var(--primary);">
+                <i class="fas fa-phone-alt" style="color: var(--primary); margin-right: 0.5rem;"></i>
+                <strong>Nous vous recontacterons très prochainement</strong> au numéro que vous avez fourni pour finaliser votre réservation.
+            </p>
+            <p style="margin-top: 0.8rem; font-size: 0.9rem; color: var(--text-light);">
+                Référence de votre devis : <strong id="modalRef" style="color: var(--primary-dark);"></strong>
+            </p>
+            <button onclick="closeModal()" style="margin-top: 1rem;">Fermer</button>
         </div>
     </div>
 
@@ -1162,6 +1170,8 @@
 
         // Modal functions
         function showModal() {
+            const ref = document.getElementById('quoteRef').textContent;
+            document.getElementById('modalRef').textContent = ref;
             document.getElementById('modal').classList.add('active');
             document.body.style.overflow = 'hidden';
         }
@@ -1581,54 +1591,146 @@ Pour toute question: 0492 85 91 27`);
         // Mettre à jour le récapitulatif initial
             updateSummary();
             
-            // Gestionnaire de soumission du formulaire
-            const quoteForm = document.getElementById('quoteFormSignature');
-            if (quoteForm) {
-                quoteForm.addEventListener('submit', async function(e) {
-                    e.preventDefault();
-                    
-                    // Vérifier qu'il y a des articles
-                    const hasItems = Object.values(cart).some(qty => qty > 0);
-                    if (!hasItems) {
-                        alert('Veuillez sélectionner au moins un article avant de valider votre devis.');
-                        return;
-                    }
-                    
-                    // Vérifier la signature
-                    if (!hasSig) {
-                        alert('Veuillez signer le devis avant de le valider.');
-                        return;
-                    }
-                    
-                    // Récupérer les données
-                    const formData = new FormData(this);
-                    const reference = document.getElementById('quoteRef').textContent;
-                    
-                    // Convertir la signature en image
-                    const signatureData = await getSignatureImage();
-                    
-                    // Simuler l'envoi
-                    console.log('Devis envoyé:', {
-                        reference: reference,
-                        nom: formData.get('nom'),
-                        email: formData.get('email'),
-                        telephone: formData.get('telephone'),
-                        date: formData.get('date'),
-                        adresse: formData.get('adresse'),
-                        message: formData.get('message'),
-                        cart: cart,
-                        signature: signatureData
-                    });
-                    
-                    // Afficher le modal de confirmation
-                    showModal();
-                    
-                    // Réinitialiser
-                    setTimeout(() => {
-                        resetQuote();
-                        quoteForm.reset();
-                    }, 500);
-                });
+            // Gestionnaire de soumission du formulaire - VERSION MAILTO FONCTIONNELLE
+const quoteForm = document.getElementById('quoteFormSignature');
+if (quoteForm) {
+    quoteForm.addEventListener('submit', async function(e) {
+        e.preventDefault();
+        
+        // Vérifier qu'il y a des articles
+        const hasItems = Object.values(cart).some(qty => qty > 0);
+        if (!hasItems) {
+            showErrorModal('Veuillez sélectionner au moins un article avant de valider votre devis.');
+            return;
+        }
+        
+        // Vérifier la signature
+        if (!hasSig) {
+            showErrorModal('Veuillez signer le devis avant de le valider.');
+            return;
+        }
+        
+        // Vérifier les conditions
+        if (!document.getElementById('acceptConditions').checked) {
+            showErrorModal('Veuillez accepter les conditions générales de location.');
+            return;
+        }
+        
+        // Récupérer les données du formulaire
+        const nom = document.getElementById('nomDevis').value;
+        const email = document.getElementById('emailDevis').value;
+        const telephone = document.getElementById('telephoneDevis').value;
+        const dateEvent = document.getElementById('dateDevis').value;
+        const adresse = document.getElementById('adresseDevis').value;
+        const message = document.getElementById('messageDevis').value;
+        const reference = document.getElementById('quoteRef').textContent;
+        
+        // Construire le corps du mail avec les articles sélectionnés
+        let body = `Nouvelle demande de devis - Référence: ${reference}\n\n`;
+        body += `=== COORDONNÉES ===\n`;
+        body += `Nom: ${nom}\n`;
+        body += `Email: ${email}\n`;
+        body += `Téléphone: ${telephone}\n`;
+        body += `Date événement: ${dateEvent}\n`;
+        body += `Adresse: ${adresse}\n\n`;
+        
+        body += `=== ARTICLES SÉLECTIONNÉS ===\n`;
+        
+        // Récupérer les produits sélectionnés
+        const products = document.querySelectorAll('.product-item');
+        let subtotal = 0;
+        
+        products.forEach(product => {
+            const id = product.dataset.id;
+            const qty = parseInt(document.getElementById(`qty-${id}`).value) || 0;
+            
+            if (qty > 0) {
+                const name = product.querySelector('h4').textContent;
+                const price = parseFloat(product.dataset.price);
+                const total = price * qty;
+                subtotal += total;
+                
+                body += `- ${name} (x${qty}) : ${total.toFixed(2).replace('.', ',')} €\n`;
+            }
+        });
+        
+        // Ajouter détails décoration si présent
+        if (decorationServiceActive) {
+            const desc = document.getElementById('decorationDescription').value;
+            body += `\n=== DÉTAILS DÉCORATION ===\n${desc || 'Non spécifié'}\n`;
+        }
+        
+        // Calculs TVA
+        const tva = subtotal * 0.21;
+        const total = subtotal + tva;
+        
+        body += `\n=== TOTAL ===\n`;
+        body += `Sous-total HT: ${subtotal.toFixed(2).replace('.', ',')} €\n`;
+        body += `TVA 21%: ${tva.toFixed(2).replace('.', ',')} €\n`;
+        body += `TOTAL TTC: ${total.toFixed(2).replace('.', ',')} €\n\n`;
+        
+        if (message) {
+            body += `=== COMMENTAIRES ===\n${message}\n\n`;
+        }
+        
+        body += `---\nEnvoyé depuis le formulaire de devis Tessa & D Events\n`;
+        body += `Signature électronique apposée: OUI\n`;
+        
+        // Créer le lien mailto
+        const subject = `Nouveau devis ${reference} - ${nom}`;
+        const mailtoLink = `mailto:contact@tessaetdevents.be?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+        
+        // Ouvrir le client mail
+        window.location.href = mailtoLink;
+        
+        // Afficher le modal de succès
+        showModal();
+        
+        // Réinitialiser après un court délai
+        setTimeout(() => {
+            resetQuote();
+            quoteForm.reset();
+        }, 1000);
+    });
+}
+
+// Fonction pour afficher une erreur dans le modal existant
+function showErrorModal(message) {
+    const modal = document.getElementById('modal');
+    const icon = document.getElementById('modalIcon');
+    const title = document.getElementById('modalTitle');
+    const text = document.getElementById('modalText');
+    const phone = document.getElementById('modalPhone');
+    
+    // Changer l'icône et les couleurs pour erreur
+    icon.className = 'fas fa-exclamation-circle';
+    icon.style.color = '#e74c3c';
+    title.textContent = 'Attention';
+    text.textContent = message;
+    phone.style.display = 'none';
+    
+    modal.classList.add('active');
+    document.body.style.overflow = 'hidden';
+}
+
+// Modifier closeModal pour réinitialiser les styles du modal
+const originalCloseModal = closeModal;
+closeModal = function() {
+    document.getElementById('modal').classList.remove('active');
+    document.body.style.overflow = '';
+    
+    // Réinitialiser les styles après fermeture
+    setTimeout(() => {
+        const icon = document.getElementById('modalIcon');
+        const phone = document.getElementById('modalPhone');
+        if (icon) {
+            icon.className = 'fas fa-check-circle';
+            icon.style.color = '';
+        }
+        if (phone) phone.style.display = 'block';
+    }, 300);
+};
+
             }
         });
     </script>
