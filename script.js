@@ -171,79 +171,79 @@
         .form-group input:focus, .form-group select:focus, .form-group textarea:focus { outline: none; border-color: var(--primary); box-shadow: 0 0 0 3px rgba(212, 165, 165, 0.1); }
         .form-group textarea { resize: vertical; min-height: 100px; }
 
-                      /* SIGNATURE - SOLUTION QUI FONCTIONNE */
-.signature-section { margin-top: 2rem; padding-top: 2rem; border-top: 2px solid var(--accent); }
-.signature-section h4 { font-family: 'Cormorant Garamond', serif; font-size: 1.3rem; color: var(--text-dark); margin-bottom: 0.5rem; }
-.signature-info { color: var(--text-light); font-size: 0.9rem; margin-bottom: 1rem; font-style: italic; }
+        /* SIGNATURE - SOLUTION QUI FONCTIONNE */
+        .signature-section { margin-top: 2rem; padding-top: 2rem; border-top: 2px solid var(--accent); }
+        .signature-section h4 { font-family: 'Cormorant Garamond', serif; font-size: 1.3rem; color: var(--text-dark); margin-bottom: 0.5rem; }
+        .signature-info { color: var(--text-light); font-size: 0.9rem; margin-bottom: 1rem; font-style: italic; }
 
-.signature-box {
-    position: relative;
-    background: var(--white);
-    border: 2px dashed var(--accent);
-    border-radius: 12px;
-    overflow: hidden;
-    margin-bottom: 1rem;
-    touch-action: none;
-    -webkit-touch-callout: none;
-    cursor: crosshair;
-    height: 150px;
-    width: 100%;
-}
+        .signature-box {
+            position: relative;
+            background: var(--white);
+            border: 2px dashed var(--accent);
+            border-radius: 12px;
+            overflow: hidden;
+            margin-bottom: 1rem;
+            touch-action: none;
+            -webkit-touch-callout: none;
+            cursor: crosshair;
+            height: 150px;
+            width: 100%;
+        }
 
-.signature-box.active {
-    border-style: solid;
-    border-color: var(--primary);
-}
+        .signature-box.active {
+            border-style: solid;
+            border-color: var(--primary);
+        }
 
-.signature-svg {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-}
+        .signature-svg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
 
-.signature-svg path {
-    fill: none;
-    stroke: #2c2c2c;
-    stroke-width: 2.5;
-    stroke-linecap: round;
-    stroke-linejoin: round;
-}
+        .signature-svg path {
+            fill: none;
+            stroke: #2c2c2c;
+            stroke-width: 2.5;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
 
-.signature-hint {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    color: var(--text-light);
-    font-size: 1rem;
-    pointer-events: none;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 0.5rem;
-    opacity: 0.5;
-    transition: opacity 0.3s;
-    text-align: center;
-}
+        .signature-hint {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: var(--text-light);
+            font-size: 1rem;
+            pointer-events: none;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.5rem;
+            opacity: 0.5;
+            transition: opacity 0.3s;
+            text-align: center;
+        }
 
-.signature-hint.hidden {
-    opacity: 0;
-}
+        .signature-hint.hidden {
+            opacity: 0;
+        }
 
-.signature-hint i {
-    font-size: 2rem;
-}
+        .signature-hint i {
+            font-size: 2rem;
+        }
 
-.signature-actions { display: flex; justify-content: flex-end; margin-bottom: 1.5rem; }
-.btn-clear-signature { background: transparent; border: 1px solid var(--text-light); color: var(--text-light); padding: 0.4rem 0.8rem; border-radius: 50px; cursor: pointer; font-size: 0.8rem; display: flex; align-items: center; gap: 0.3rem; transition: all 0.3s ease; }
-.btn-clear-signature:hover { border-color: #e74c3c; color: #e74c3c; }
+        .signature-actions { display: flex; justify-content: flex-end; margin-bottom: 1.5rem; }
+        .btn-clear-signature { background: transparent; border: 1px solid var(--text-light); color: var(--text-light); padding: 0.4rem 0.8rem; border-radius: 50px; cursor: pointer; font-size: 0.8rem; display: flex; align-items: center; gap: 0.3rem; transition: all 0.3s ease; }
+        .btn-clear-signature:hover { border-color: #e74c3c; color: #e74c3c; }
 
-.signature-checkbox { display: flex; align-items: flex-start; gap: 0.8rem; margin: 1.5rem 0; }
-.signature-checkbox input[type="checkbox"] { width: 20px; height: 20px; margin-top: 0.2rem; accent-color: var(--primary); cursor: pointer; }
-.signature-checkbox label { font-size: 0.9rem; color: var(--text-dark); line-height: 1.5; cursor: pointer; }
-.signature-checkbox a { color: var(--primary); text-decoration: underline; }
+        .signature-checkbox { display: flex; align-items: flex-start; gap: 0.8rem; margin: 1.5rem 0; }
+        .signature-checkbox input[type="checkbox"] { width: 20px; height: 20px; margin-top: 0.2rem; accent-color: var(--primary); cursor: pointer; }
+        .signature-checkbox label { font-size: 0.9rem; color: var(--text-dark); line-height: 1.5; cursor: pointer; }
+        .signature-checkbox a { color: var(--primary); text-decoration: underline; }
 
         .btn-submit-devis { width: 100%; padding: 1rem; font-size: 1rem; display: flex; align-items: center; justify-content: center; gap: 0.5rem; background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%); border: none; color: var(--white); border-radius: 50px; cursor: pointer; font-weight: 500; transition: all 0.3s ease; }
         .btn-submit-devis:hover { transform: translateY(-2px); box-shadow: 0 8px 25px rgba(212, 165, 165, 0.4); }
@@ -349,7 +349,7 @@
             .footer-content { grid-template-columns: 1fr; gap: 1.8rem; text-align: center; }
             .social-links { justify-content: center; }
         }
-            /* Fix champ date mobile */
+        /* Fix champ date mobile */
         @media (max-width: 768px) {
             input[type="date"] {
                 font-size: 16px;
@@ -358,22 +358,19 @@
         }
 
     </style>
-<base target="_blank">
     <!-- jsPDF -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.31/jspdf.plugin.autotable.min.js"></script>
-
-<base target="_blank">
-<base target="_blank">
+    <base target="_blank">
 </head>
 <body>
     <!-- Modal -->
     <div class="modal-overlay" id="modal">
         <div class="modal-content">
-            <i class="fas fa-check-circle"></i>
-            <h3>Devis envoyé avec succès !</h3>
-            <p>Votre devis a été généré et sauvegardé.</p>
-            <p style="margin-top: 1rem; padding: 1rem; background: rgba(212, 165, 165, 0.1); border-radius: 10px; border-left: 3px solid var(--primary);">
+            <i class="fas fa-check-circle" id="modalIcon"></i>
+            <h3 id="modalTitle">Devis envoyé avec succès !</h3>
+            <p id="modalText">Votre devis a été généré et sauvegardé.</p>
+            <p id="modalPhone" style="margin-top: 1rem; padding: 1rem; background: rgba(212, 165, 165, 0.1); border-radius: 10px; border-left: 3px solid var(--primary);">
                 <i class="fas fa-phone-alt" style="color: var(--primary); margin-right: 0.5rem;"></i>
                 <strong>Nous vous recontacterons très prochainement</strong> au numéro que vous avez fourni pour finaliser votre réservation.
             </p>
@@ -746,7 +743,8 @@
                         </div>
                     </div>
                 </div>
-                            <div class="product-item service-option-item" data-id="service-decoration" data-price="100.00" id="serviceDecorationItem">
+                
+                <div class="product-item service-option-item" data-id="service-decoration" data-price="100.00" id="serviceDecorationItem">
                     <div class="product-image">
                         <img src="https://kimi-web-img.moonshot.cn/img/www.valarflowers.com/7694f3d1efe594fcdabada3b81a880d99baac204.jpg" alt="Service décoration" loading="lazy">
                     </div>
@@ -853,34 +851,35 @@
                     </div>
                 </div>
 
-              <!-- Zone de signature - SOLUTION QUI FONCTIONNE -->
-<div class="signature-section">
-    <h4>Signature du devis</h4>
-    <p class="signature-info">En signant, vous acceptez les conditions générales de location et confirmez votre demande de devis.</p>
-    
-    <div class="signature-box" id="signatureBox">
-        <svg class="signature-svg" id="signatureSvg" width="100%" height="150">
-            <!-- Le path sera créé dynamiquement -->
-        </svg>
-        <div class="signature-hint" id="signatureHint">
-            <i class="fas fa-signature"></i>
-            <span>Cliquez ou touchez ici pour signer</span>
-        </div>
-    </div>
-    
-    <div class="signature-actions">
-        <button type="button" class="btn-clear-signature" onclick="clearSignature()">
-            <i class="fas fa-eraser"></i> Effacer la signature
-        </button>
-    </div>
-    
-    <div class="signature-checkbox">
-        <input type="checkbox" id="acceptConditions" name="acceptConditions" required>
-        <label for="acceptConditions">
-            J'accepte les <a href="#" onclick="showConditions(event)">conditions générales de location</a> et certifie l'exactitude des informations fournies. *
-        </label>
-    </div>
-</div>
+                <!-- Zone de signature - SOLUTION QUI FONCTIONNE -->
+                <div class="signature-section">
+                    <h4>Signature du devis</h4>
+                    <p class="signature-info">En signant, vous acceptez les conditions générales de location et confirmez votre demande de devis.</p>
+                    
+                    <div class="signature-box" id="signatureBox">
+                        <svg class="signature-svg" id="signatureSvg" width="100%" height="150">
+                            <!-- Le path sera créé dynamiquement -->
+                        </svg>
+                        <div class="signature-hint" id="signatureHint">
+                            <i class="fas fa-signature"></i>
+                            <span>Cliquez ou touchez ici pour signer</span>
+                        </div>
+                    </div>
+                    
+                    <div class="signature-actions">
+                        <button type="button" class="btn-clear-signature" onclick="clearSignature()">
+                            <i class="fas fa-eraser"></i> Effacer la signature
+                        </button>
+                    </div>
+                    
+                    <div class="signature-checkbox">
+                        <input type="checkbox" id="acceptConditions" name="acceptConditions" required>
+                        <label for="acceptConditions">
+                            J'accepte les <a href="#" onclick="showConditions(event)">conditions générales de location</a> et certifie l'exactitude des informations fournies. *
+                        </label>
+                    </div>
+                </div>
+                
                 <button type="submit" class="btn-submit-devis" id="submitDevis">
                     <i class="fas fa-file-signature"></i>
                     Valider et envoyer mon devis signé
@@ -1074,7 +1073,7 @@
         </div>
     </footer>
 
-  <script>
+    <script>
         // Header scroll effect
         window.addEventListener('scroll', function() {
             const header = document.getElementById('header');
@@ -1218,6 +1217,8 @@
         // ============================================
         
         let cart = {};
+        let decorationServiceActive = false;
+        let hasSignature = false;
 
         // Générer une référence unique
         function generateReference() {
@@ -1251,10 +1252,16 @@
 
         // Réinitialiser un produit
         function resetProduct(productId) {
-            document.getElementById(`qty-${productId}`).value = 0;
-            cart[productId] = 0;
-            document.querySelector(`[data-id="${productId}"]`).classList.remove('selected');
-            updateSummary();
+            if (productId === 'service-decoration') {
+                if (decorationServiceActive) {
+                    toggleDecorationService();
+                }
+            } else {
+                document.getElementById(`qty-${productId}`).value = 0;
+                cart[productId] = 0;
+                document.querySelector(`[data-id="${productId}"]`).classList.remove('selected');
+                updateSummary();
+            }
         }
 
         // Réinitialiser tout le devis
@@ -1267,15 +1274,29 @@
                     item.classList.remove('selected');
                 });
                 cart = {};
+                decorationServiceActive = false;
                 document.getElementById('quoteRef').textContent = generateReference();
                 clearSignature();
                 updateSummary();
+                
+                // Reset service decoration UI
+                const btn = document.getElementById('btnToggleDecoration');
+                const item = document.getElementById('serviceDecorationItem');
+                const details = document.getElementById('decorationDetails');
+                const qtyInput = document.getElementById('qty-service-decoration');
+                
+                btn.innerHTML = '<i class="fas fa-plus-circle"></i><span>Ajouter ce service</span>';
+                btn.style.background = 'transparent';
+                btn.style.color = 'var(--text-light)';
+                btn.style.borderColor = 'var(--accent)';
+                item.classList.remove('selected');
+                details.style.display = 'none';
+                qtyInput.value = '0';
+                document.getElementById('decorationDescription').value = '';
             }
         }
 
-                // Gestion du service de décoration (toggle ON/OFF)
-        let decorationServiceActive = false;
-
+        // Gestion du service de décoration (toggle ON/OFF)
         function toggleDecorationService() {
             decorationServiceActive = !decorationServiceActive;
             const btn = document.getElementById('btnToggleDecoration');
@@ -1308,18 +1329,6 @@
 
             updateSummary();
         }
-
-        // Override resetProduct pour le service de décoration
-        const originalResetProduct = resetProduct;
-        resetProduct = function(productId) {
-            if (productId === 'service-decoration') {
-                if (decorationServiceActive) {
-                    toggleDecorationService();
-                }
-            } else {
-                originalResetProduct(productId);
-            }
-        };
 
         // Mettre à jour le récapitulatif
         function updateSummary() {
@@ -1540,199 +1549,149 @@ Pour toute question: 0492 85 91 27`);
                 refElement.textContent = generateReference();
             }
             
-                    // Gestion du service de décoration (toggle ON/OFF)
-        let decorationServiceActive = false;
-
-        function toggleDecorationService() {
-            decorationServiceActive = !decorationServiceActive;
-            const btn = document.getElementById('btnToggleDecoration');
-            const item = document.getElementById('serviceDecorationItem');
-            const details = document.getElementById('decorationDetails');
-            const qtyInput = document.getElementById('qty-service-decoration');
-
-            if (decorationServiceActive) {
-                // Activer
-                btn.innerHTML = '<i class="fas fa-check"></i><span>Service ajouté</span>';
-                btn.style.background = 'var(--primary)';
-                btn.style.color = 'var(--white)';
-                btn.style.borderColor = 'var(--primary)';
-                item.classList.add('selected');
-                details.style.display = 'block';
-                qtyInput.value = '1';
-                cart['service-decoration'] = 1;
-            } else {
-                // Désactiver
-                btn.innerHTML = '<i class="fas fa-plus-circle"></i><span>Ajouter ce service</span>';
-                btn.style.background = 'transparent';
-                btn.style.color = 'var(--text-light)';
-                btn.style.borderColor = 'var(--accent)';
-                item.classList.remove('selected');
-                details.style.display = 'none';
-                qtyInput.value = '0';
-                cart['service-decoration'] = 0;
-                document.getElementById('decorationDescription').value = '';
-            }
-
+            // Mettre à jour le récapitulatif initial
             updateSummary();
-        }
-
-        // Override resetProduct pour le service de décoration
-        const originalResetProduct = resetProduct;
-        resetProduct = function(productId) {
-            if (productId === 'service-decoration') {
-                if (decorationServiceActive) {
-                    toggleDecorationService();
-                }
-            } else {
-                originalResetProduct(productId);
-            }
-        };
-
-        // Mettre à jour le récapitulatif initial
-            updateSummary();
-            
+          
             // Gestionnaire de soumission du formulaire - VERSION MAILTO FONCTIONNELLE
-const quoteForm = document.getElementById('quoteFormSignature');
-if (quoteForm) {
-    quoteForm.addEventListener('submit', async function(e) {
-        e.preventDefault();
-        
-        // Vérifier qu'il y a des articles
-        const hasItems = Object.values(cart).some(qty => qty > 0);
-        if (!hasItems) {
-            showErrorModal('Veuillez sélectionner au moins un article avant de valider votre devis.');
-            return;
-        }
-        
-        // Vérifier la signature
-        if (!hasSig) {
-            showErrorModal('Veuillez signer le devis avant de le valider.');
-            return;
-        }
-        
-        // Vérifier les conditions
-        if (!document.getElementById('acceptConditions').checked) {
-            showErrorModal('Veuillez accepter les conditions générales de location.');
-            return;
-        }
-        
-        // Récupérer les données du formulaire
-        const nom = document.getElementById('nomDevis').value;
-        const email = document.getElementById('emailDevis').value;
-        const telephone = document.getElementById('telephoneDevis').value;
-        const dateEvent = document.getElementById('dateDevis').value;
-        const adresse = document.getElementById('adresseDevis').value;
-        const message = document.getElementById('messageDevis').value;
-        const reference = document.getElementById('quoteRef').textContent;
-        
-        // Construire le corps du mail avec les articles sélectionnés
-        let body = `Nouvelle demande de devis - Référence: ${reference}\n\n`;
-        body += `=== COORDONNÉES ===\n`;
-        body += `Nom: ${nom}\n`;
-        body += `Email: ${email}\n`;
-        body += `Téléphone: ${telephone}\n`;
-        body += `Date événement: ${dateEvent}\n`;
-        body += `Adresse: ${adresse}\n\n`;
-        
-        body += `=== ARTICLES SÉLECTIONNÉS ===\n`;
-        
-        // Récupérer les produits sélectionnés
-        const products = document.querySelectorAll('.product-item');
-        let subtotal = 0;
-        
-        products.forEach(product => {
-            const id = product.dataset.id;
-            const qty = parseInt(document.getElementById(`qty-${id}`).value) || 0;
+            const quoteForm = document.getElementById('quoteFormSignature');
+            if (quoteForm) {
+                quoteForm.addEventListener('submit', async function(e) {
+                    e.preventDefault();
+                    
+                    // Vérifier qu'il y a des articles
+                    const hasItems = Object.values(cart).some(qty => qty > 0);
+                    if (!hasItems) {
+                        showErrorModal('Veuillez sélectionner au moins un article avant de valider votre devis.');
+                        return;
+                    }
+                    
+                    // Vérifier la signature
+                    if (!hasSignature) {
+                        showErrorModal('Veuillez signer le devis avant de le valider.');
+                        return;
+                    }
+                    
+                    // Vérifier les conditions
+                    if (!document.getElementById('acceptConditions').checked) {
+                        showErrorModal('Veuillez accepter les conditions générales de location.');
+                        return;
+                    }
+                    
+                    // Récupérer les données du formulaire
+                    const nom = document.getElementById('nomDevis').value;
+                    const email = document.getElementById('emailDevis').value;
+                    const telephone = document.getElementById('telephoneDevis').value;
+                    const dateEvent = document.getElementById('dateDevis').value;
+                    const adresse = document.getElementById('adresseDevis').value;
+                    const message = document.getElementById('messageDevis').value;
+                    const reference = document.getElementById('quoteRef').textContent;
+                    
+                    // Construire le corps du mail avec les articles sélectionnés
+                    let body = `Nouvelle demande de devis - Référence: ${reference}\n\n`;
+                    body += `=== COORDONNÉES ===\n`;
+                    body += `Nom: ${nom}\n`;
+                    body += `Email: ${email}\n`;
+                    body += `Téléphone: ${telephone}\n`;
+                    body += `Date événement: ${dateEvent}\n`;
+                    body += `Adresse: ${adresse}\n\n`;
+                    
+                    body += `=== ARTICLES SÉLECTIONNÉS ===\n`;
+                    
+                    // Récupérer les produits sélectionnés
+                    const products = document.querySelectorAll('.product-item');
+                    let subtotal = 0;
+                    
+                    products.forEach(product => {
+                        const id = product.dataset.id;
+                        const qty = parseInt(document.getElementById(`qty-${id}`).value) || 0;
+                        
+                        if (qty > 0) {
+                            const name = product.querySelector('h4').textContent;
+                            const price = parseFloat(product.dataset.price);
+                            const total = price * qty;
+                            subtotal += total;
+                            
+                            body += `- ${name} (x${qty}) : ${total.toFixed(2).replace('.', ',')} €\n`;
+                        }
+                    });
+                    
+                    // Ajouter détails décoration si présent
+                    if (decorationServiceActive) {
+                        const desc = document.getElementById('decorationDescription').value;
+                        body += `\n=== DÉTAILS DÉCORATION ===\n${desc || 'Non spécifié'}\n`;
+                    }
+                    
+                    // Calculs TVA
+                    const tva = subtotal * 0.21;
+                    const total = subtotal + tva;
+                    
+                    body += `\n=== TOTAL ===\n`;
+                    body += `Sous-total HT: ${subtotal.toFixed(2).replace('.', ',')} €\n`;
+                    body += `TVA 21%: ${tva.toFixed(2).replace('.', ',')} €\n`;
+                    body += `TOTAL TTC: ${total.toFixed(2).replace('.', ',')} €\n\n`;
+                    
+                    if (message) {
+                        body += `=== COMMENTAIRES ===\n${message}\n\n`;
+                    }
+                    
+                    body += `---\nEnvoyé depuis le formulaire de devis Tessa & D Events\n`;
+                    body += `Signature électronique apposée: OUI\n`;
+                    
+                    // Créer le lien mailto
+                    const subject = `Nouveau devis ${reference} - ${nom}`;
+                    const mailtoLink = `mailto:contact@tessaetdevents.be?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+                    
+                    // Ouvrir le client mail
+                    window.location.href = mailtoLink;
+                    
+                    // Afficher le modal de succès
+                    showModal();
+                    
+                    // Réinitialiser après un court délai
+                    setTimeout(() => {
+                        resetQuote();
+                        quoteForm.reset();
+                    }, 1000);
+                });
+            }
+        });
+
+        // Fonction pour afficher une erreur dans le modal existant
+        function showErrorModal(message) {
+            const modal = document.getElementById('modal');
+            const icon = document.getElementById('modalIcon');
+            const title = document.getElementById('modalTitle');
+            const text = document.getElementById('modalText');
+            const phone = document.getElementById('modalPhone');
             
-            if (qty > 0) {
-                const name = product.querySelector('h4').textContent;
-                const price = parseFloat(product.dataset.price);
-                const total = price * qty;
-                subtotal += total;
-                
-                body += `- ${name} (x${qty}) : ${total.toFixed(2).replace('.', ',')} €\n`;
-            }
-        });
-        
-        // Ajouter détails décoration si présent
-        if (decorationServiceActive) {
-            const desc = document.getElementById('decorationDescription').value;
-            body += `\n=== DÉTAILS DÉCORATION ===\n${desc || 'Non spécifié'}\n`;
+            // Changer l'icône et les couleurs pour erreur
+            icon.className = 'fas fa-exclamation-circle';
+            icon.style.color = '#e74c3c';
+            title.textContent = 'Attention';
+            text.textContent = message;
+            phone.style.display = 'none';
+            
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden';
         }
-        
-        // Calculs TVA
-        const tva = subtotal * 0.21;
-        const total = subtotal + tva;
-        
-        body += `\n=== TOTAL ===\n`;
-        body += `Sous-total HT: ${subtotal.toFixed(2).replace('.', ',')} €\n`;
-        body += `TVA 21%: ${tva.toFixed(2).replace('.', ',')} €\n`;
-        body += `TOTAL TTC: ${total.toFixed(2).replace('.', ',')} €\n\n`;
-        
-        if (message) {
-            body += `=== COMMENTAIRES ===\n${message}\n\n`;
-        }
-        
-        body += `---\nEnvoyé depuis le formulaire de devis Tessa & D Events\n`;
-        body += `Signature électronique apposée: OUI\n`;
-        
-        // Créer le lien mailto
-        const subject = `Nouveau devis ${reference} - ${nom}`;
-        const mailtoLink = `mailto:contact@tessaetdevents.be?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-        
-        // Ouvrir le client mail
-        window.location.href = mailtoLink;
-        
-        // Afficher le modal de succès
-        showModal();
-        
-        // Réinitialiser après un court délai
-        setTimeout(() => {
-            resetQuote();
-            quoteForm.reset();
-        }, 1000);
-    });
-}
 
-// Fonction pour afficher une erreur dans le modal existant
-function showErrorModal(message) {
-    const modal = document.getElementById('modal');
-    const icon = document.getElementById('modalIcon');
-    const title = document.getElementById('modalTitle');
-    const text = document.getElementById('modalText');
-    const phone = document.getElementById('modalPhone');
-    
-    // Changer l'icône et les couleurs pour erreur
-    icon.className = 'fas fa-exclamation-circle';
-    icon.style.color = '#e74c3c';
-    title.textContent = 'Attention';
-    text.textContent = message;
-    phone.style.display = 'none';
-    
-    modal.classList.add('active');
-    document.body.style.overflow = 'hidden';
-}
-
-// Modifier closeModal pour réinitialiser les styles du modal
-const originalCloseModal = closeModal;
-closeModal = function() {
-    document.getElementById('modal').classList.remove('active');
-    document.body.style.overflow = '';
-    
-    // Réinitialiser les styles après fermeture
-    setTimeout(() => {
-        const icon = document.getElementById('modalIcon');
-        const phone = document.getElementById('modalPhone');
-        if (icon) {
-            icon.className = 'fas fa-check-circle';
-            icon.style.color = '';
-        }
-        if (phone) phone.style.display = 'block';
-    }, 300);
-};
-
-            }
-        });
+        // Modifier closeModal pour réinitialiser les styles du modal
+        const originalCloseModal = closeModal;
+        closeModal = function() {
+            document.getElementById('modal').classList.remove('active');
+            document.body.style.overflow = '';
+            
+            // Réinitialiser les styles après fermeture
+            setTimeout(() => {
+                const icon = document.getElementById('modalIcon');
+                const phone = document.getElementById('modalPhone');
+                if (icon) {
+                    icon.className = 'fas fa-check-circle';
+                    icon.style.color = '';
+                }
+                if (phone) phone.style.display = 'block';
+            }, 300);
+        };
     </script>
 </body>
 </html>
