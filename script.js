@@ -1,0 +1,1474 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="description" content="Tessa & D Events - Location de mobilier et décoration de mariage en Belgique. Transformez votre événement en moment magique avec notre sélection chic et élégante.">
+    <title>Tessa & D Events | Location Mobilier & Décoration Mariage Belgique</title>
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+    
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --primary: #D4A5A5;
+            --primary-dark: #B88A8A;
+            --secondary: #F5E6E0;
+            --accent: #E8D5D0;
+            --text-dark: #4A4A4A;
+            --text-light: #7A7A7A;
+            --white: #FFFFFF;
+            --cream: #FAF7F5;
+            --gold: #C9B037;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; overflow-x: hidden; width: 100%; }
+        body { font-family: 'Montserrat', sans-serif; color: var(--text-dark); background-color: var(--cream); line-height: 1.6; overflow-x: hidden; width: 100%; max-width: 100vw; }
+        h1, h2, h3, h4, h5, h6 { font-family: 'Cormorant Garamond', serif; font-weight: 600; line-height: 1.2; }
+
+        /* Top Bar */
+        .top-bar { background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%); color: var(--white); padding: 0.4rem 1rem; font-size: 0.8rem; position: fixed; width: 100%; top: 0; z-index: 1001; box-shadow: 0 1px 5px rgba(0,0,0,0.1); height: 32px; display: flex; align-items: center; justify-content: center; }
+        .top-bar-content { max-width: 1200px; width: 100%; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; gap: 1rem; }
+        .top-bar a { color: var(--white); text-decoration: none; font-weight: 500; }
+        .top-bar-text { font-size: 0.75rem; opacity: 0.9; }
+
+        /* Header */
+        header { background: var(--white); box-shadow: 0 2px 15px rgba(0,0,0,0.05); position: fixed; width: 100%; top: 32px; z-index: 1000; transition: all 0.3s ease; height: 60px; display: flex; align-items: center; }
+        header.scrolled { box-shadow: 0 4px 20px rgba(0,0,0,0.1); }
+        nav { max-width: 1200px; width: 100%; margin: 0 auto; padding: 0 1.5rem; display: flex; justify-content: space-between; align-items: center; }
+        .logo { font-family: 'Cormorant Garamond', serif; font-size: 1.4rem; font-weight: 600; color: var(--text-dark); text-decoration: none; display: flex; align-items: center; gap: 0.4rem; }
+        .logo i { font-size: 1rem; color: var(--primary); }
+        .logo span { color: var(--primary-dark); }
+        .nav-links { display: flex; list-style: none; gap: 1.5rem; align-items: center; margin: 0; padding: 0; }
+        .nav-links a { text-decoration: none; color: var(--text-dark); font-weight: 500; font-size: 0.85rem; position: relative; transition: color 0.3s; }
+        .nav-links a::after { content: ''; position: absolute; bottom: -4px; left: 0; width: 0; height: 2px; background: var(--primary); transition: width 0.3s ease; }
+        .nav-links a:hover::after { width: 100%; }
+        .nav-links .btn { padding: 0.5rem 1rem; font-size: 0.8rem; margin-left: 0.5rem; }
+        .mobile-menu { display: none; font-size: 1.2rem; cursor: pointer; color: var(--text-dark); padding: 0.4rem; background: none; border: none; }
+
+        /* Hero */
+        .hero { margin-top: 92px; min-height: calc(100vh - 92px); max-height: 800px; position: relative; overflow: hidden; display: flex; align-items: center; justify-content: center; width: 100%; }
+        .hero-slider { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 1; }
+        .slide { position: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: 0; transition: opacity 1.2s ease-in-out; background-size: cover; background-position: center; }
+        .slide.active { opacity: 1; }
+        .slide::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(to bottom, rgba(0,0,0,0.2) 0%, rgba(0,0,0,0.4) 100%); }
+        .hero-content { position: relative; z-index: 2; text-align: center; color: var(--white); max-width: 700px; padding: 2rem; width: 100%; }
+        .hero h1 { font-size: clamp(1.8rem, 4vw, 3rem); margin-bottom: 1rem; text-shadow: 2px 2px 4px rgba(0,0,0,0.3); font-style: italic; }
+        .hero p { font-size: clamp(0.95rem, 2vw, 1.2rem); margin-bottom: 2rem; font-weight: 300; text-shadow: 1px 1px 2px rgba(0,0,0,0.3); }
+        .hero-buttons { display: flex; gap: 0.8rem; justify-content: center; flex-wrap: wrap; }
+        .btn { display: inline-block; padding: 0.9rem 1.8rem; background: var(--primary); color: var(--white); text-decoration: none; border-radius: 50px; font-weight: 500; transition: all 0.3s ease; border: 2px solid var(--primary); cursor: pointer; font-size: 0.95rem; text-align: center; }
+        .btn:hover { background: transparent; color: var(--white); transform: translateY(-2px); box-shadow: 0 8px 25px rgba(212, 165, 165, 0.4); }
+        .btn-outline { background: transparent; border: 2px solid var(--white); }
+        .btn-outline:hover { background: var(--white); color: var(--text-dark); }
+        .slider-dots { position: absolute; bottom: 30px; left: 50%; transform: translateX(-50%); z-index: 3; display: flex; gap: 10px; }
+        .dot { width: 10px; height: 10px; border-radius: 50%; background: rgba(255,255,255,0.4); cursor: pointer; transition: all 0.3s ease; }
+        .dot.active { background: var(--white); transform: scale(1.2); }
+
+        /* Sections */
+        section { padding: 4rem 1.5rem; max-width: 1200px; margin: 0 auto; width: 100%; }
+        .section-title { text-align: center; margin-bottom: 2.5rem; }
+        .section-title h2 { font-size: clamp(1.6rem, 3.5vw, 2.2rem); color: var(--text-dark); margin-bottom: 0.8rem; position: relative; display: inline-block; }
+        .section-title h2::after { content: ''; position: absolute; bottom: -8px; left: 50%; transform: translateX(-50%); width: 50px; height: 3px; background: var(--primary); }
+        .section-title p { color: var(--text-light); font-size: 1rem; max-width: 550px; margin: 1.2rem auto 0; }
+
+        /* About */
+        .about { background: var(--white); padding: 4rem 1.5rem; width: 100%; }
+        .about-content { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: center; max-width: 1200px; margin: 0 auto; width: 100%; }
+        .about-text h3 { font-size: clamp(1.4rem, 3vw, 1.8rem); margin-bottom: 1.2rem; }
+        .about-text p { margin-bottom: 1.2rem; color: var(--text-light); line-height: 1.7; font-size: 0.95rem; }
+        .values { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin-top: 2rem; }
+        .value-card { text-align: center; padding: 1.2rem 0.8rem; background: var(--cream); border-radius: 10px; transition: all 0.3s ease; }
+        .value-card:hover { transform: translateY(-3px); box-shadow: 0 8px 20px rgba(0,0,0,0.05); }
+        .value-card i { font-size: 1.6rem; color: var(--primary); margin-bottom: 0.6rem; }
+        .value-card h4 { font-size: 1rem; margin-bottom: 0.3rem; }
+        .value-card p { font-size: 0.8rem; color: var(--text-light); margin: 0; }
+        .about-image { position: relative; border-radius: 10px; overflow: hidden; box-shadow: 0 15px 35px rgba(0,0,0,0.1); }
+        .about-image img { width: 100%; height: auto; display: block; }
+
+        /* Services */
+        .services { background: var(--cream); padding: 4rem 1.5rem; width: 100%; }
+        .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; max-width: 1200px; margin: 0 auto; width: 100%; }
+        .service-card { background: var(--white); border-radius: 12px; overflow: hidden; box-shadow: 0 8px 25px rgba(0,0,0,0.06); transition: all 0.4s ease; display: flex; flex-direction: column; height: 100%; }
+        .service-card:hover { transform: translateY(-6px); box-shadow: 0 15px 35px rgba(0,0,0,0.1); }
+        .service-image { height: 180px; overflow: hidden; }
+        .service-image img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s ease; }
+        .service-card:hover .service-image img { transform: scale(1.08); }
+        .service-content { padding: 1.3rem; display: flex; flex-direction: column; flex-grow: 1; }
+        .service-content h3 { font-size: 1.15rem; margin-bottom: 0.6rem; }
+        .service-content p { color: var(--text-light); margin-bottom: 0.8rem; line-height: 1.6; font-size: 0.9rem; flex-grow: 1; }
+        .service-content ul { list-style: none; margin-bottom: 1.2rem; }
+        .service-content ul li { padding: 0.25rem 0; color: var(--text-light); position: relative; padding-left: 1.3rem; font-size: 0.85rem; }
+        .service-content ul li::before { content: '✓'; position: absolute; left: 0; color: var(--primary); font-weight: bold; }
+        .service-content .btn { align-self: flex-start; margin-top: auto; padding: 0.6rem 1.2rem; font-size: 0.85rem; }
+
+        /* Gallery */
+        .gallery { background: var(--white); padding: 4rem 1.5rem; width: 100%; }
+        .gallery-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.2rem; max-width: 1200px; margin: 0 auto; width: 100%; }
+        .gallery-item { position: relative; overflow: hidden; border-radius: 10px; cursor: pointer; aspect-ratio: 4/3; box-shadow: 0 4px 12px rgba(0,0,0,0.08); }
+        .gallery-item img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s ease; }
+        .gallery-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(212, 165, 165, 0.9); display: flex; align-items: center; justify-content: center; opacity: 0; transition: opacity 0.4s ease; }
+        .gallery-item:hover .gallery-overlay { opacity: 1; }
+        .gallery-item:hover img { transform: scale(1.1); }
+        .gallery-overlay i { color: var(--white); font-size: 1.8rem; }
+
+        /* Quote Section */
+        .quote-section { background: linear-gradient(135deg, var(--secondary) 0%, var(--accent) 100%); padding: 4rem 1.5rem; text-align: center; width: 100%; }
+        .quote-container { max-width: 800px; margin: 0 auto; background: var(--white); border-radius: 20px; box-shadow: 0 15px 50px rgba(0,0,0,0.08); overflow: hidden; }
+        .quote-header { display: flex; align-items: center; justify-content: space-between; padding: 1.5rem 2rem; background: linear-gradient(135deg, var(--cream) 0%, var(--secondary) 100%); border-bottom: 2px solid var(--accent); flex-wrap: wrap; gap: 1rem; }
+        .quote-header h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.4rem; color: var(--text-dark); margin: 0; }
+        .quote-reference { display: flex; align-items: center; gap: 0.3rem; background: var(--white); padding: 0.6rem 1.2rem; border-radius: 50px; border: 2px solid var(--primary); font-family: 'Montserrat', sans-serif; }
+        .ref-label { color: var(--text-light); font-size: 0.85rem; }
+        .ref-number { color: var(--primary-dark); font-weight: 600; font-size: 0.95rem; }
+        .btn-reset { background: transparent; border: 2px solid var(--primary); color: var(--primary-dark); padding: 0.5rem 1rem; border-radius: 50px; cursor: pointer; font-family: 'Montserrat', sans-serif; font-size: 0.85rem; transition: all 0.3s ease; display: flex; align-items: center; gap: 0.4rem; }
+        .btn-reset:hover { background: var(--primary); color: var(--white); }
+
+        /* Products */
+        .products-list { padding: 1.5rem 2rem; display: flex; flex-direction: column; gap: 1rem; }
+        .product-item { display: flex; gap: 1rem; padding: 1rem; background: var(--cream); border-radius: 15px; border: 2px solid transparent; transition: all 0.3s ease; }
+        .product-item:hover { border-color: var(--accent); transform: translateX(5px); }
+        .product-item.selected { border-color: var(--primary); background: linear-gradient(135deg, var(--white) 0%, var(--secondary) 100%); }
+        .product-image { width: 100px; height: 100px; border-radius: 10px; overflow: hidden; flex-shrink: 0; }
+        .product-image img { width: 100%; height: 100%; object-fit: cover; }
+        .product-details { flex: 1; display: flex; flex-direction: column; justify-content: space-between; }
+        .product-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 0.3rem; }
+        .product-header h4 { font-family: 'Montserrat', sans-serif; font-size: 1rem; font-weight: 600; color: var(--text-dark); margin: 0; }
+        .product-category { background: var(--secondary); color: var(--primary-dark); padding: 0.3rem 0.8rem; border-radius: 50px; font-size: 0.75rem; font-weight: 500; border: 1px solid var(--accent); }
+        .product-price { color: var(--primary-dark); font-weight: 600; font-size: 1.1rem; margin-bottom: 0.5rem; }
+        .product-controls { display: flex; align-items: center; gap: 0.5rem; }
+        .qty-btn { width: 36px; height: 36px; border-radius: 10px; border: 2px solid var(--accent); background: var(--white); color: var(--primary); cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.3s ease; font-size: 0.8rem; }
+        .qty-btn:hover { background: var(--primary); color: var(--white); border-color: var(--primary); }
+        .qty-input { width: 60px; height: 36px; text-align: center; border: 2px solid var(--accent); border-radius: 10px; font-family: 'Montserrat', sans-serif; font-weight: 600; font-size: 1rem; color: var(--text-dark); background: var(--white); }
+        .remove-btn { width: 36px; height: 36px; border-radius: 50%; border: none; background: transparent; color: var(--text-light); cursor: pointer; display: flex; align-items: center; justify-content: center; margin-left: auto; transition: all 0.3s ease; font-size: 1.1rem; }
+        .remove-btn:hover { color: #e74c3c; transform: scale(1.1); }
+
+        /* Summary */
+        .quote-summary { background: linear-gradient(135deg, var(--secondary) 0%, var(--accent) 100%); padding: 1.5rem 2rem; border-top: 2px solid var(--accent); }
+        .summary-header h4 { font-family: 'Cormorant Garamond', serif; font-size: 1.2rem; color: var(--text-dark); margin-bottom: 1rem; }
+        .summary-items { margin-bottom: 1rem; }
+        .summary-item { display: flex; justify-content: space-between; padding: 0.5rem 0; border-bottom: 1px dashed var(--accent); font-size: 0.9rem; }
+        .summary-item:last-child { border-bottom: none; }
+        .summary-item-name { color: var(--text-dark); }
+        .summary-item-qty { color: var(--text-light); font-size: 0.85rem; }
+        .summary-item-price { color: var(--primary-dark); font-weight: 600; }
+        .summary-total { background: var(--white); padding: 1rem; border-radius: 12px; margin-top: 1rem; }
+        .total-line { display: flex; justify-content: space-between; padding: 0.4rem 0; font-size: 0.9rem; color: var(--text-light); }
+        .total-line.final { border-top: 2px solid var(--primary); margin-top: 0.5rem; padding-top: 0.8rem; font-size: 1.2rem; font-weight: 700; color: var(--text-dark); }
+
+        /* Form */
+        .quote-form-signature { padding: 2rem; background: var(--white); }
+        .form-section h4 { font-family: 'Cormorant Garamond', serif; font-size: 1.3rem; color: var(--text-dark); margin-bottom: 1.2rem; }
+        .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.2rem; margin-bottom: 1.2rem; }
+        .form-group { text-align: left; }
+        .form-group.full { grid-column: 1 / -1; }
+        .form-group label { display: block; margin-bottom: 0.4rem; color: var(--text-dark); font-weight: 500; font-size: 0.85rem; }
+        .form-group input, .form-group select, .form-group textarea { width: 100%; padding: 0.8rem; border: 2px solid var(--accent); border-radius: 8px; font-family: 'Montserrat', sans-serif; transition: all 0.3s ease; font-size: 0.95rem; background: var(--white); }
+        .form-group input:focus, .form-group select:focus, .form-group textarea:focus { outline: none; border-color: var(--primary); box-shadow: 0 0 0 3px rgba(212, 165, 165, 0.1); }
+        .form-group textarea { resize: vertical; min-height: 100px; }
+
+                      /* SIGNATURE - SOLUTION QUI FONCTIONNE */
+.signature-section { margin-top: 2rem; padding-top: 2rem; border-top: 2px solid var(--accent); }
+.signature-section h4 { font-family: 'Cormorant Garamond', serif; font-size: 1.3rem; color: var(--text-dark); margin-bottom: 0.5rem; }
+.signature-info { color: var(--text-light); font-size: 0.9rem; margin-bottom: 1rem; font-style: italic; }
+
+.signature-box {
+    position: relative;
+    background: var(--white);
+    border: 2px dashed var(--accent);
+    border-radius: 12px;
+    overflow: hidden;
+    margin-bottom: 1rem;
+    touch-action: none;
+    -webkit-touch-callout: none;
+    cursor: crosshair;
+    height: 150px;
+    width: 100%;
+}
+
+.signature-box.active {
+    border-style: solid;
+    border-color: var(--primary);
+}
+
+.signature-svg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.signature-svg path {
+    fill: none;
+    stroke: #2c2c2c;
+    stroke-width: 2.5;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+.signature-hint {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: var(--text-light);
+    font-size: 1rem;
+    pointer-events: none;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    opacity: 0.5;
+    transition: opacity 0.3s;
+    text-align: center;
+}
+
+.signature-hint.hidden {
+    opacity: 0;
+}
+
+.signature-hint i {
+    font-size: 2rem;
+}
+
+.signature-actions { display: flex; justify-content: flex-end; margin-bottom: 1.5rem; }
+.btn-clear-signature { background: transparent; border: 1px solid var(--text-light); color: var(--text-light); padding: 0.4rem 0.8rem; border-radius: 50px; cursor: pointer; font-size: 0.8rem; display: flex; align-items: center; gap: 0.3rem; transition: all 0.3s ease; }
+.btn-clear-signature:hover { border-color: #e74c3c; color: #e74c3c; }
+
+.signature-checkbox { display: flex; align-items: flex-start; gap: 0.8rem; margin: 1.5rem 0; }
+.signature-checkbox input[type="checkbox"] { width: 20px; height: 20px; margin-top: 0.2rem; accent-color: var(--primary); cursor: pointer; }
+.signature-checkbox label { font-size: 0.9rem; color: var(--text-dark); line-height: 1.5; cursor: pointer; }
+.signature-checkbox a { color: var(--primary); text-decoration: underline; }
+
+        .btn-submit-devis { width: 100%; padding: 1rem; font-size: 1rem; display: flex; align-items: center; justify-content: center; gap: 0.5rem; background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%); border: none; color: var(--white); border-radius: 50px; cursor: pointer; font-weight: 500; transition: all 0.3s ease; }
+        .btn-submit-devis:hover { transform: translateY(-2px); box-shadow: 0 8px 25px rgba(212, 165, 165, 0.4); }
+        .form-note { text-align: center; color: var(--text-light); font-size: 0.85rem; margin-top: 1rem; }
+
+        /* Testimonials */
+        .testimonials { background: var(--cream); padding: 4rem 1.5rem; width: 100%; }
+        .testimonials-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; max-width: 1200px; margin: 0 auto; width: 100%; }
+        .testimonial-card { background: var(--white); padding: 1.8rem; border-radius: 12px; box-shadow: 0 8px 25px rgba(0,0,0,0.04); position: relative; transition: transform 0.3s ease; }
+        .testimonial-card:hover { transform: translateY(-3px); }
+        .testimonial-card::before { content: '"'; font-family: 'Cormorant Garamond', serif; font-size: 3.5rem; color: var(--primary); opacity: 0.15; position: absolute; top: 5px; left: 15px; line-height: 1; }
+        .stars { color: var(--gold); margin-bottom: 0.8rem; font-size: 0.85rem; }
+        .testimonial-text { font-style: italic; color: var(--text-light); margin-bottom: 1.2rem; line-height: 1.7; position: relative; z-index: 1; font-size: 0.95rem; }
+        .testimonial-author { display: flex; align-items: center; gap: 0.8rem; }
+        .author-avatar { width: 42px; height: 42px; border-radius: 50%; background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%); display: flex; align-items: center; justify-content: center; color: var(--white); font-weight: 600; font-size: 0.9rem; flex-shrink: 0; }
+        .author-info h4 { color: var(--text-dark); font-size: 0.95rem; margin-bottom: 0.1rem; }
+        .author-info p { color: var(--text-light); font-size: 0.8rem; }
+
+        /* Contact */
+        .contact { background: var(--white); padding: 4rem 1.5rem; width: 100%; }
+        .contact-content { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; max-width: 1200px; margin: 0 auto; width: 100%; }
+        .contact-info h3 { font-size: 1.5rem; margin-bottom: 1rem; color: var(--text-dark); }
+        .contact-info > p { color: var(--text-light); margin-bottom: 1.5rem; line-height: 1.7; font-size: 0.95rem; }
+        .contact-details { margin-bottom: 1.5rem; }
+        .contact-item { display: flex; align-items: flex-start; gap: 0.8rem; margin-bottom: 1.2rem; }
+        .contact-item i { font-size: 1.1rem; color: var(--primary); margin-top: 0.2rem; width: 20px; text-align: center; flex-shrink: 0; }
+        .contact-item div h4 { margin-bottom: 0.2rem; color: var(--text-dark); font-size: 0.95rem; }
+        .contact-item div p { color: var(--text-light); line-height: 1.5; font-size: 0.9rem; }
+        .contact-item a { color: var(--primary-dark); text-decoration: none; transition: color 0.3s; font-weight: 500; }
+        .contact-item a:hover { color: var(--text-dark); text-decoration: underline; }
+        .social-links { display: flex; gap: 0.6rem; margin-top: 1.2rem; }
+        .social-links a { width: 40px; height: 40px; border-radius: 50%; background: var(--cream); display: flex; align-items: center; justify-content: center; color: var(--primary); text-decoration: none; transition: all 0.3s ease; font-size: 1rem; }
+        .social-links a:hover { background: var(--primary); color: var(--white); transform: translateY(-2px); box-shadow: 0 4px 12px rgba(212, 165, 165, 0.3); }
+        .map-container { background: var(--cream); border-radius: 12px; overflow: hidden; height: 100%; min-height: 350px; display: flex; align-items: center; justify-content: center; position: relative; border: 2px solid var(--accent); }
+        .map-placeholder { text-align: center; color: var(--text-light); padding: 1.5rem; }
+        .map-placeholder i { font-size: 2.5rem; color: var(--primary); margin-bottom: 0.8rem; }
+        .map-placeholder h3 { color: var(--text-dark); margin-bottom: 0.4rem; font-size: 1.2rem; }
+        .map-placeholder p { margin-bottom: 0.4rem; line-height: 1.5; font-size: 0.9rem; }
+
+        /* Footer */
+        footer { background: var(--text-dark); color: var(--white); padding: 2.5rem 1.5rem 1.2rem; width: 100%; }
+        .footer-content { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 2rem; margin-bottom: 2rem; width: 100%; }
+        .footer-section h3 { color: var(--primary); margin-bottom: 1rem; font-size: 1.1rem; }
+        .footer-section p { color: #bbb; line-height: 1.7; margin-bottom: 0.6rem; font-size: 0.85rem; }
+        .footer-section ul { list-style: none; }
+        .footer-section ul li { margin-bottom: 0.5rem; }
+        .footer-section ul li a { color: #bbb; text-decoration: none; transition: all 0.3s; display: inline-block; font-size: 0.85rem; }
+        .footer-section ul li a:hover { color: var(--primary); transform: translateX(3px); }
+        .footer-phone { font-size: 1.1rem; color: var(--primary); font-weight: 600; display: inline-flex; align-items: center; margin-top: 0.3rem; text-decoration: none; transition: color 0.3s; }
+        .footer-phone:hover { color: var(--white); }
+        .footer-bottom { text-align: center; padding-top: 1.2rem; border-top: 1px solid #555; color: #999; font-size: 0.8rem; max-width: 1200px; margin: 0 auto; }
+
+        /* Modal */
+        .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); z-index: 10000; display: none; align-items: center; justify-content: center; padding: 1rem; }
+        .modal-overlay.active { display: flex; }
+        .modal-content { background: white; padding: 2rem; border-radius: 16px; text-align: center; max-width: 380px; width: 100%; box-shadow: 0 20px 60px rgba(0,0,0,0.3); animation: modalIn 0.3s ease; }
+        @keyframes modalIn { from { opacity: 0; transform: scale(0.9); } to { opacity: 1; transform: scale(1); } }
+        .modal-content i { color: var(--primary); font-size: 3rem; margin-bottom: 0.8rem; }
+        .modal-content h3 { margin-bottom: 0.8rem; color: var(--text-dark); font-size: 1.3rem; }
+        .modal-content p { color: var(--text-light); margin-bottom: 1.2rem; line-height: 1.6; font-size: 0.95rem; }
+        .modal-content button { background: var(--primary); color: white; border: none; padding: 0.8rem 2rem; border-radius: 50px; cursor: pointer; font-weight: 500; font-size: 0.95rem; transition: all 0.3s; }
+        .modal-content button:hover { background: var(--primary-dark); transform: translateY(-2px); }
+
+        /* Animations */
+        .fade-in { opacity: 0; transform: translateY(20px); transition: all 0.5s ease; }
+        .fade-in.visible { opacity: 1; transform: translateY(0); }
+
+        /* Responsive */
+        @media (max-width: 968px) {
+            .about-content, .contact-content { grid-template-columns: 1fr; gap: 2.5rem; }
+            .values { grid-template-columns: 1fr; }
+            .about-image { order: -1; max-width: 500px; margin: 0 auto; }
+        }
+
+        @media (max-width: 768px) {
+            .top-bar { height: 28px; padding: 0.3rem 0.8rem; font-size: 0.75rem; }
+            .top-bar-text { display: none; }
+            header { top: 28px; height: 55px; }
+            nav { padding: 0 1rem; }
+            .logo { font-size: 1.2rem; }
+            .nav-links { display: none; position: absolute; top: 100%; left: 0; width: 100%; background: var(--white); flex-direction: column; padding: 1rem; box-shadow: 0 10px 30px rgba(0,0,0,0.1); gap: 0.8rem; border-top: 1px solid var(--accent); max-height: calc(100vh - 83px); overflow-y: auto; }
+            .nav-links.active { display: flex; }
+            .nav-links a { font-size: 0.95rem; padding: 0.6rem 0; width: 100%; text-align: center; }
+            .nav-links .btn { margin: 0.5rem 0 0 0; width: 100%; max-width: 200px; }
+            .mobile-menu { display: block; }
+            .hero { margin-top: 83px; min-height: calc(100vh - 83px); }
+            .hero-content { padding: 1.5rem 1rem; }
+            .hero-buttons { flex-direction: column; align-items: center; width: 100%; padding: 0 0.5rem; gap: 0.6rem; }
+            .btn { width: 100%; max-width: 260px; padding: 0.8rem 1.5rem; font-size: 0.9rem; }
+            .scroll-indicator { display: none; }
+            section { padding: 3rem 1rem; }
+            .services-grid, .gallery-grid, .testimonials-grid { grid-template-columns: 1fr; gap: 1.2rem; }
+            .quote-header { flex-direction: column; text-align: center; padding: 1rem; }
+            .products-list { padding: 1rem; }
+            .product-item { flex-direction: column; }
+            .product-image { width: 100%; height: 150px; }
+            .product-controls { justify-content: center; }
+            .remove-btn { margin-left: 0; }
+            .quote-form-signature { padding: 1.5rem 1rem; }
+            .signature-box { height: 120px; }
+            .form-grid { grid-template-columns: 1fr; }
+            .map-container { min-height: 280px; }
+            .footer-content { grid-template-columns: 1fr; gap: 1.8rem; text-align: center; }
+            .social-links { justify-content: center; }
+        }
+    </style>
+<base target="_blank">
+</head>
+<body>
+    <!-- Modal -->
+    <div class="modal-overlay" id="modal">
+        <div class="modal-content">
+            <i class="fas fa-check-circle"></i>
+            <h3>Merci pour votre demande !</h3>
+            <p>Nous vous contacterons très rapidement au <strong>0492 85 91 27</strong> pour discuter de votre projet.</p>
+            <button onclick="closeModal()">Fermer</button>
+        </div>
+    </div>
+
+    <!-- Top Bar -->
+    <div class="top-bar">
+        <div class="top-bar-content">
+            <div class="top-bar-left">
+                <a href="tel:0492859127"><i class="fas fa-phone"></i> 0492 85 91 27</a>
+            </div>
+            <span class="top-bar-text">Intervention sur toute la Belgique</span>
+        </div>
+    </div>
+
+    <!-- Header -->
+    <header id="header">
+        <nav>
+            <a href="#" class="logo">
+                <i class="fas fa-gem"></i>
+                Tessa <span>&</span> D Events
+            </a>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#accueil">Accueil</a></li>
+                <li><a href="#prestations">Prestations</a></li>
+                <li><a href="#galerie">Galerie</a></li>
+                <li><a href="#devis">Devis</a></li>
+                <li><a href="#contact">Contact</a></li>
+                <li><a href="tel:0492859127" class="btn">Appelez-nous</a></li>
+            </ul>
+            <button class="mobile-menu" id="mobileMenu" aria-label="Menu">
+                <i class="fas fa-bars"></i>
+            </button>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="accueil">
+        <div class="hero-slider">
+            <div class="slide active" style="background-image: url('https://kimi-web-img.moonshot.cn/img/southerneventsonline.com/481751c14e2f8f338470b13820432221009cc867.jpg');"></div>
+            <div class="slide" style="background-image: url('https://kimi-web-img.moonshot.cn/img/curatedevents.com/d6cd880e6aa22fd58226e35c5c968e597c35058f.webp');"></div>
+            <div class="slide" style="background-image: url('https://kimi-web-img.moonshot.cn/img/treasuryontheplaza.com/0defb7378a71023e697a570c307e7cb49af4a89c.jpeg');"></div>
+        </div>
+        <div class="hero-content">
+            <h1>Votre Mariage, Notre Passion</h1>
+            <p>Location de mobilier et décoration d'exception pour des moments inoubliables en Belgique</p>
+            <div class="hero-buttons">
+                <a href="#devis" class="btn">Demander un devis</a>
+                <a href="#contact" class="btn btn-outline">Contactez-nous</a>
+            </div>
+        </div>
+        <div class="slider-dots">
+            <span class="dot active" onclick="currentSlide(1)"></span>
+            <span class="dot" onclick="currentSlide(2)"></span>
+            <span class="dot" onclick="currentSlide(3)"></span>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="about" id="apropos">
+        <div class="about-content">
+            <div class="about-text fade-in">
+                <h3>Créateurs d'Ambiances Uniques</h3>
+                <p>Chez Tessa & D Events, nous transformons vos rêves en réalité. Spécialisés dans la location de mobilier et la décoration de mariage en Belgique, nous mettons notre expertise et notre créativité au service de votre événement.</p>
+                <p>De la cérémonie laïque à la réception, nous vous accompagnons dans la création d'une atmosphère qui vous ressemble, alliant élégance, raffinement et attention aux détails.</p>
+                
+                <div class="values">
+                    <div class="value-card">
+                        <i class="fas fa-heart"></i>
+                        <h4>Passion</h4>
+                        <p>Chaque mariage est unique et mérite toute notre attention</p>
+                    </div>
+                    <div class="value-card">
+                        <i class="fas fa-award"></i>
+                        <h4>Qualité</h4>
+                        <p>Des matériaux premium et un service irréprochable</p>
+                    </div>
+                    <div class="value-card">
+                        <i class="fas fa-handshake"></i>
+                        <h4>Confiance</h4>
+                        <p>À vos côtés de la conception au jour J</p>
+                    </div>
+                </div>
+            </div>
+            <div class="about-image fade-in">
+                <img src="https://kimi-web-img.moonshot.cn/img/generalwax.com/195b4e0974eda929d87e448850b320302f08d2cd.jpg" alt="Décoration de table élégante">
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section class="services" id="prestations">
+        <div class="section-title fade-in">
+            <h2>Nos Prestations</h2>
+            <p>Des solutions complètes pour sublimer votre événement, de la location de mobilier à la décoration florale</p>
+        </div>
+        
+        <div class="services-grid">
+            <div class="service-card fade-in">
+                <div class="service-image">
+                    <img src="https://kimi-web-img.moonshot.cn/img/apexpartyrentals.com/6b40b956491cb5c6db5fb5df33bdb1a0af2792cd.png" alt="Location de chaises" loading="lazy">
+                </div>
+                <div class="service-content">
+                    <h3>Location de Mobilier</h3>
+                    <p>Des chaises Chiavari aux tables en bois massif, découvrez notre sélection de mobilier haut de gamme pour votre réception.</p>
+                    <ul>
+                        <li>Chaises Chiavari (or, argent, transparent)</li>
+                        <li>Tables rondes et rectangulaires</li>
+                        <li>Bar et tabourets</li>
+                        <li>Lounge et mobilier d'extérieur</li>
+                    </ul>
+                    <a href="#devis" class="btn">En savoir plus</a>
+                </div>
+            </div>
+
+            <div class="service-card fade-in">
+                <div class="service-image">
+                    <img src="https://kimi-web-img.moonshot.cn/img/www.valarflowers.com/7694f3d1efe594fcdabada3b81a880d99baac204.jpg" alt="Arche florale" loading="lazy">
+                </div>
+                <div class="service-content">
+                    <h3>Décoration Florale</h3>
+                    <p>Des compositions florales sur mesure pour créer l'ambiance romantique et élégante de vos rêves.</p>
+                    <ul>
+                        <li>Arches et structures florales</li>
+                        <li>Centres de table</li>
+                        <li>Bouquets de mariée</li>
+                        <li>Décoration d'allée</li>
+                    </ul>
+                    <a href="#devis" class="btn">En savoir plus</a>
+                </div>
+            </div>
+
+            <div class="service-card fade-in">
+                <div class="service-image">
+                    <img src="https://kimi-web-img.moonshot.cn/img/static.wixstatic.com/082df7346e0abe118e6cc7072f547e7e719e69ea.jpg" alt="Accessoires de décoration" loading="lazy">
+                </div>
+                <div class="service-content">
+                    <h3>Accessoires & Détails</h3>
+                    <p>La touche finale qui fait toute la différence. Découvrez nos accessoires soigneusement sélectionnés.</p>
+                    <ul>
+                        <li>Vaisselle et verrerie</li>
+                        <li>Linge de table</li>
+                        <li>Éclairage et bougies</li>
+                        <li>Panneaux et signalétique</li>
+                    </ul>
+                    <a href="#devis" class="btn">En savoir plus</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery Section -->
+    <section class="gallery" id="galerie">
+        <div class="section-title fade-in">
+            <h2>Notre Galerie</h2>
+            <p>Inspirez-vous de nos réalisations et imaginez votre propre décoration de rêve</p>
+        </div>
+        
+        <div class="gallery-grid">
+            <div class="gallery-item fade-in">
+                <img src="https://kimi-web-img.moonshot.cn/img/curatedevents.com/9b872ae167562006ea644f8dac62b0b6f70150e5.webp" alt="Réception élégante sous tente" loading="lazy">
+                <div class="gallery-overlay">
+                    <i class="fas fa-search-plus"></i>
+                </div>
+            </div>
+            <div class="gallery-item fade-in">
+                <img src="https://kimi-web-img.moonshot.cn/img/www.valarflowers.com/6f23ab267ece9a083d78db6efe50fd05b94ac0ee.jpg" alt="Arche florale bohème" loading="lazy">
+                <div class="gallery-overlay">
+                    <i class="fas fa-search-plus"></i>
+                </div>
+            </div>
+            <div class="gallery-item fade-in">
+                <img src="https://kimi-web-img.moonshot.cn/img/www.venturarental.com/2b4e8fd1f092147e1c654b5ec72e77a2751614db.webp" alt="Table d'honneur luxueuse" loading="lazy">
+                <div class="gallery-overlay">
+                    <i class="fas fa-search-plus"></i>
+                </div>
+            </div>
+            <div class="gallery-item fade-in">
+                <img src="https://kimi-web-img.moonshot.cn/img/southerneventsonline.com/481751c14e2f8f338470b13820432221009cc867.jpg" alt="Salle de réception décorée" loading="lazy">
+                <div class="gallery-overlay">
+                    <i class="fas fa-search-plus"></i>
+                </div>
+            </div>
+            <div class="gallery-item fade-in">
+                <img src="https://kimi-web-img.moonshot.cn/img/generalwax.com/195b4e0974eda929d87e448850b320302f08d2cd.jpg" alt="Centre de table romantique" loading="lazy">
+                <div class="gallery-overlay">
+                    <i class="fas fa-search-plus"></i>
+                </div>
+            </div>
+            <div class="gallery-item fade-in">
+                <img src="https://kimi-web-img.moonshot.cn/img/treasuryontheplaza.com/0defb7378a71023e697a570c307e7cb49af4a89c.jpeg" alt="Cérémonie élégante" loading="lazy">
+                <div class="gallery-overlay">
+                    <i class="fas fa-search-plus"></i>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Quote Section -->
+    <section class="quote-section" id="devis">
+        <div class="section-title fade-in" style="color: var(--text-dark); margin-bottom: 2rem;">
+            <h2>Configurez votre Devis</h2>
+            <p>Sélectionnez vos articles et recevez votre estimation personnalisée</p>
+        </div>
+        
+        <div class="quote-container fade-in">
+            <div class="quote-header">
+                <h3>Sélectionnez vos articles</h3>
+                <div class="quote-reference">
+                    <span class="ref-label">Réf TD-#</span>
+                    <span class="ref-number" id="quoteRef">260409-5529</span>
+                </div>
+                <button type="button" class="btn-reset" onclick="resetQuote()">
+                    <i class="fas fa-undo"></i> Réinitialiser
+                </button>
+            </div>
+
+            <div class="products-list" id="productsList">
+                <div class="product-item" data-id="chiavari-or" data-price="4.50">
+                    <div class="product-image">
+                        <img src="https://kimi-web-img.moonshot.cn/img/apexpartyrentals.com/6b40b956491cb5c6db5fb5df33bdb1a0af2792cd.png" alt="Chaise Chiavari Or" loading="lazy">
+                    </div>
+                    <div class="product-details">
+                        <div class="product-header">
+                            <h4>Chaise Chiavari Or</h4>
+                            <span class="product-category">Mobilier</span>
+                        </div>
+                        <div class="product-price">4,50 € / unité</div>
+                        <div class="product-controls">
+                            <button type="button" class="qty-btn minus" onclick="updateQuantity('chiavari-or', -1)">
+                                <i class="fas fa-minus"></i>
+                            </button>
+                            <input type="number" class="qty-input" id="qty-chiavari-or" value="0" min="0" readonly>
+                            <button type="button" class="qty-btn plus" onclick="updateQuantity('chiavari-or', 1)">
+                                <i class="fas fa-plus"></i>
+                            </button>
+                            <button type="button" class="remove-btn" onclick="resetProduct('chiavari-or')">
+                                <i class="fas fa-minus-circle"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="product-item" data-id="chiavari-transparente" data-price="5.00">
+                    <div class="product-image">
+                        <img src="https://kimi-web-img.moonshot.cn/img/curatedevents.com/d6cd880e6aa22fd58226e35c5c968e597c35058f.webp" alt="Chaise Chiavari Transparente" loading="lazy">
+                    </div>
+                    <div class="product-details">
+                        <div class="product-header">
+                            <h4>Chaise Chiavari Transparente</h4>
+                            <span class="product-category">Mobilier</span>
+                        </div>
+                        <div class="product-price">5,00 € / unité</div>
+                        <div class="product-controls">
+                            <button type="button" class="qty-btn minus" onclick="updateQuantity('chiavari-transparente', -1)">
+                                <i class="fas fa-minus"></i>
+                            </button>
+                            <input type="number" class="qty-input" id="qty-chiavari-transparente" value="0" min="0" readonly>
+                            <button type="button" class="qty-btn plus" onclick="updateQuantity('chiavari-transparente', 1)">
+                                <i class="fas fa-plus"></i>
+                            </button>
+                            <button type="button" class="remove-btn" onclick="resetProduct('chiavari-transparente')">
+                                <i class="fas fa-minus-circle"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="product-item" data-id="table-ronde" data-price="12.00">
+                    <div class="product-image">
+                        <img src="https://kimi-web-img.moonshot.cn/img/southerneventsonline.com/481751c14e2f8f338470b13820432221009cc867.jpg" alt="Table ronde" loading="lazy">
+                    </div>
+                    <div class="product-details">
+                        <div class="product-header">
+                            <h4>Table ronde</h4>
+                            <span class="product-category">Mobilier</span>
+                        </div>
+                        <div class="product-price">12,00 € / unité</div>
+                        <div class="product-controls">
+                            <button type="button" class="qty-btn minus" onclick="updateQuantity('table-ronde', -1)">
+                                <i class="fas fa-minus"></i>
+                            </button>
+                            <input type="number" class="qty-input" id="qty-table-ronde" value="0" min="0" readonly>
+                            <button type="button" class="qty-btn plus" onclick="updateQuantity('table-ronde', 1)">
+                                <i class="fas fa-plus"></i>
+                            </button>
+                            <button type="button" class="remove-btn" onclick="resetProduct('table-ronde')">
+                                <i class="fas fa-minus-circle"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="product-item" data-id="mange-debout" data-price="12.00">
+                    <div class="product-image">
+                        <img src="https://kimi-web-img.moonshot.cn/img/www.venturarental.com/2b4e8fd1f092147e1c654b5ec72e77a2751614db.webp" alt="Mange-debout + housse" loading="lazy">
+                    </div>
+                    <div class="product-details">
+                        <div class="product-header">
+                            <h4>Mange-debout + housse</h4>
+                            <span class="product-category">Mobilier</span>
+                        </div>
+                        <div class="product-price">12,00 € / unité</div>
+                        <div class="product-controls">
+                            <button type="button" class="qty-btn minus" onclick="updateQuantity('mange-debout', -1)">
+                                <i class="fas fa-minus"></i>
+                            </button>
+                            <input type="number" class="qty-input" id="qty-mange-debout" value="0" min="0" readonly>
+                            <button type="button" class="qty-btn plus" onclick="updateQuantity('mange-debout', 1)">
+                                <i class="fas fa-plus"></i>
+                            </button>
+                            <button type="button" class="remove-btn" onclick="resetProduct('mange-debout')">
+                                <i class="fas fa-minus-circle"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="product-item" data-id="arche-florale" data-price="350.00">
+                    <div class="product-image">
+                        <img src="https://kimi-web-img.moonshot.cn/img/www.valarflowers.com/7694f3d1efe594fcdabada3b81a880d99baac204.jpg" alt="Arche florale sur mesure" loading="lazy">
+                    </div>
+                    <div class="product-details">
+                        <div class="product-header">
+                            <h4>Arche florale sur mesure</h4>
+                            <span class="product-category">Décoration</span>
+                        </div>
+                        <div class="product-price">350,00 € / unité</div>
+                        <div class="product-controls">
+                            <button type="button" class="qty-btn minus" onclick="updateQuantity('arche-florale', -1)">
+                                <i class="fas fa-minus"></i>
+                            </button>
+                            <input type="number" class="qty-input" id="qty-arche-florale" value="0" min="0" readonly>
+                            <button type="button" class="qty-btn plus" onclick="updateQuantity('arche-florale', 1)">
+                                <i class="fas fa-plus"></i>
+                            </button>
+                            <button type="button" class="remove-btn" onclick="resetProduct('arche-florale')">
+                                <i class="fas fa-minus-circle"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="product-item" data-id="centre-table" data-price="45.00">
+                    <div class="product-image">
+                        <img src="https://kimi-web-img.moonshot.cn/img/generalwax.com/195b4e0974eda929d87e448850b320302f08d2cd.jpg" alt="Centre de table" loading="lazy">
+                    </div>
+                    <div class="product-details">
+                        <div class="product-header">
+                            <h4>Centre de table floral</h4>
+                            <span class="product-category">Décoration</span>
+                        </div>
+                        <div class="product-price">45,00 € / unité</div>
+                        <div class="product-controls">
+                            <button type="button" class="qty-btn minus" onclick="updateQuantity('centre-table', -1)">
+                                <i class="fas fa-minus"></i>
+                            </button>
+                            <input type="number" class="qty-input" id="qty-centre-table" value="0" min="0" readonly>
+                            <button type="button" class="qty-btn plus" onclick="updateQuantity('centre-table', 1)">
+                                <i class="fas fa-plus"></i>
+                            </button>
+                            <button type="button" class="remove-btn" onclick="resetProduct('centre-table')">
+                                <i class="fas fa-minus-circle"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="quote-summary" id="quoteSummary">
+                <div class="summary-header">
+                    <h4>Récapitulatif de votre sélection</h4>
+                </div>
+                <div class="summary-items" id="summaryItems"></div>
+                <div class="summary-total">
+                    <div class="total-line">
+                        <span>Sous-total HT</span>
+                        <span id="subtotalHT">0,00 €</span>
+                    </div>
+                    <div class="total-line">
+                        <span>TVA 21%</span>
+                        <span id="tvaAmount">0,00 €</span>
+                    </div>
+                    <div class="total-line final">
+                        <span>Total TTC</span>
+                        <span id="totalTTC">0,00 €</span>
+                    </div>
+                </div>
+            </div>
+
+            <form class="quote-form-signature" id="quoteFormSignature">
+                <div class="form-section">
+                    <h4>Vos coordonnées</h4>
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label for="nomDevis">Nom complet *</label>
+                            <input type="text" id="nomDevis" name="nom" required placeholder="Votre nom">
+                        </div>
+                        <div class="form-group">
+                            <label for="emailDevis">Email *</label>
+                            <input type="email" id="emailDevis" name="email" required placeholder="votre@email.com">
+                        </div>
+                        <div class="form-group">
+                            <label for="telephoneDevis">Téléphone *</label>
+                            <input type="tel" id="telephoneDevis" name="telephone" placeholder="0492 85 91 27" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="dateDevis">Date de l'événement *</label>
+                            <input type="date" id="dateDevis" name="date" required>
+                        </div>
+                        <div class="form-group full">
+                            <label for="adresseDevis">Adresse de l'événement *</label>
+                            <input type="text" id="adresseDevis" name="adresse" required placeholder="Rue, numéro, ville">
+                        </div>
+                        <div class="form-group full">
+                            <label for="messageDevis">Commentaires / Demandes spéciales</label>
+                            <textarea id="messageDevis" name="message" rows="3" placeholder="Précisez vos besoins spécifiques..."></textarea>
+                        </div>
+                    </div>
+                </div>
+
+              <!-- Zone de signature - SOLUTION QUI FONCTIONNE -->
+<div class="signature-section">
+    <h4>Signature du devis</h4>
+    <p class="signature-info">En signant, vous acceptez les conditions générales de location et confirmez votre demande de devis.</p>
+    
+    <div class="signature-box" id="signatureBox">
+        <svg class="signature-svg" id="signatureSvg" width="100%" height="150">
+            <!-- Le path sera créé dynamiquement -->
+        </svg>
+        <div class="signature-hint" id="signatureHint">
+            <i class="fas fa-signature"></i>
+            <span>Cliquez ou touchez ici pour signer</span>
+        </div>
+    </div>
+    
+    <div class="signature-actions">
+        <button type="button" class="btn-clear-signature" onclick="clearSignature()">
+            <i class="fas fa-eraser"></i> Effacer la signature
+        </button>
+    </div>
+    
+    <div class="signature-checkbox">
+        <input type="checkbox" id="acceptConditions" name="acceptConditions" required>
+        <label for="acceptConditions">
+            J'accepte les <a href="#" onclick="showConditions(event)">conditions générales de location</a> et certifie l'exactitude des informations fournies. *
+        </label>
+    </div>
+</div>
+                <button type="submit" class="btn-submit-devis" id="submitDevis">
+                    <i class="fas fa-file-signature"></i>
+                    Valider et envoyer mon devis signé
+                </button>
+                
+                <p class="form-note">
+                    <i class="fas fa-info-circle"></i>
+                    Un exemplaire PDF vous sera envoyé par email. Nous vous contacterons sous 24h au 0492 85 91 27.
+                </p>
+            </form>
+        </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="testimonials">
+        <div class="section-title fade-in">
+            <h2>Ils nous ont fait confiance</h2>
+            <p>Découvrez les témoignages de nos mariés</p>
+        </div>
+        
+        <div class="testimonials-grid">
+            <div class="testimonial-card fade-in">
+                <div class="stars">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                </div>
+                <p class="testimonial-text">Tessa & D Events a transformé notre salle en un véritable conte de fées. L'attention aux détails, la qualité du mobilier et la créativité de l'équipe ont dépassé toutes nos attentes. Nos invités sont encore émerveillés !</p>
+                <div class="testimonial-author">
+                    <div class="author-avatar">ML</div>
+                    <div class="author-info">
+                        <h4>Marie & Laurent</h4>
+                        <p>Mariage - Juin 2025</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="testimonial-card fade-in">
+                <div class="stars">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                </div>
+                <p class="testimonial-text">Un service impeccable du début à la fin. L'équipe a été à l'écoute de nos besoins et a su s'adapter à notre budget sans compromettre l'élégance. Les chaises Chiavari dorées ont fait sensation !</p>
+                <div class="testimonial-author">
+                    <div class="author-avatar">SD</div>
+                    <div class="author-info">
+                        <h4>Sophie & David</h4>
+                        <p>Mariage - Août 2025</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="testimonial-card fade-in">
+                <div class="stars">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                </div>
+                <p class="testimonial-text">Professionnalisme, réactivité et créativité. Tessa & D Events a parfaitement compris notre vision d'un mariage champêtre chic. Je recommande vivement leurs services à tous les futurs mariés !</p>
+                <div class="testimonial-author">
+                    <div class="author-avatar">ET</div>
+                    <div class="author-info">
+                        <h4>Emma & Thomas</h4>
+                        <p>Mariage - Septembre 2025</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact" id="contact">
+        <div class="section-title fade-in">
+            <h2>Contactez-nous</h2>
+            <p>Prêts à donner vie à votre événement ? Parlons-en !</p>
+        </div>
+        
+        <div class="contact-content">
+            <div class="contact-info fade-in">
+                <h3>Parlons de votre projet</h3>
+                <p>Que vous ayez une vision précise ou que vous cherchiez l'inspiration, notre équipe est là pour vous accompagner dans la création de votre événement de rêve.</p>
+                
+                <div class="contact-details">
+                    <div class="contact-item">
+                        <i class="fas fa-phone-alt"></i>
+                        <div>
+                            <h4>Téléphone</h4>
+                            <p><a href="tel:0492859127">0492 85 91 27</a></p>
+                            <p style="font-size: 0.8rem; margin-top: 0.1rem; color: var(--text-light);">Du lundi au samedi, 9h-19h</p>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-item">
+                        <i class="fas fa-envelope"></i>
+                        <div>
+                            <h4>Email</h4>
+                            <p><a href="mailto:contact@tessaetdevents.be">contact@tessaetdevents.be</a></p>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-item">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <div>
+                            <h4>Zone d'intervention</h4>
+                            <p>Toute la Belgique</p>
+                            <p style="font-size: 0.85rem; color: var(--primary-dark); font-weight: 500;">Basés à Liège</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="social-links">
+                    <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                    <a href="#" aria-label="Pinterest"><i class="fab fa-pinterest-p"></i></a>
+                    <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                </div>
+            </div>
+
+            <div class="map-container fade-in">
+                <div class="map-placeholder">
+                    <i class="fas fa-map-marked-alt"></i>
+                    <h3>Intervention sur toute la Belgique</h3>
+                    <p>Liège, Bruxelles, Namur, Charleroi, Anvers...</p>
+                    <p style="margin-bottom: 0.8rem;">et partout ailleurs selon vos besoins</p>
+                    <a href="tel:0492859127" class="btn" style="margin-top: 0.3rem; padding: 0.7rem 1.5rem; font-size: 0.9rem;">
+                        <i class="fas fa-phone" style="margin-right: 0.4rem;"></i>
+                        0492 85 91 27
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Tessa & D Events</h3>
+                <p>Votre partenaire décoration et location de mobilier pour des mariages et événements d'exception en Belgique.</p>
+                <a href="tel:0492859127" class="footer-phone">
+                    <i class="fas fa-phone" style="margin-right: 0.4rem;"></i>
+                    0492 85 91 27
+                </a>
+            </div>
+            
+            <div class="footer-section">
+                <h3>Liens rapides</h3>
+                <ul>
+                    <li><a href="#accueil">Accueil</a></li>
+                    <li><a href="#prestations">Nos Prestations</a></li>
+                    <li><a href="#galerie">Galerie Photos</a></li>
+                    <li><a href="#devis">Demander un devis</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-section">
+                <h3>Nos Services</h3>
+                <ul>
+                    <li><a href="#prestations">Location de mobilier</a></li>
+                    <li><a href="#prestations">Décoration florale</a></li>
+                    <li><a href="#prestations">Accessoires de mariage</a></li>
+                    <li><a href="#prestations">Installation complète</a></li>
+                    <li><a href="#contact">Conseil personnalisé</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-section">
+                <h3>Contact</h3>
+                <p>Basés à Liège, nous intervenons dans toute la Belgique pour faire de votre événement un moment magique et inoubliable.</p>
+                <p style="margin-top: 0.8rem;">
+                    <i class="fas fa-phone" style="margin-right: 0.4rem; color: var(--primary);"></i> 
+                    <a href="tel:0492859127" style="color: var(--primary); text-decoration: none;">0492 85 91 27</a>
+                </p>
+                <p>
+                    <i class="fas fa-envelope" style="margin-right: 0.4rem; color: var(--primary);"></i> 
+                    <a href="mailto:contact@tessaetdevents.be" style="color: #bbb; text-decoration: none;">contact@tessaetdevents.be</a>
+                </p>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <p>&copy; 2025 Tessa & D Events. Tous droits réservés. | Location mobilier et décoration mariage Belgique</p>
+        </div>
+    </footer>
+
+  <script>
+        // Header scroll effect
+        window.addEventListener('scroll', function() {
+            const header = document.getElementById('header');
+            if (window.scrollY > 50) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+
+        // Mobile menu toggle
+        const mobileMenu = document.getElementById('mobileMenu');
+        const navLinks = document.getElementById('navLinks');
+
+        mobileMenu.addEventListener('click', function() {
+            navLinks.classList.toggle('active');
+            const icon = this.querySelector('i');
+            if (navLinks.classList.contains('active')) {
+                icon.classList.remove('fa-bars');
+                icon.classList.add('fa-times');
+            } else {
+                icon.classList.remove('fa-times');
+                icon.classList.add('fa-bars');
+            }
+        });
+
+        // Close mobile menu when clicking on a link
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                navLinks.classList.remove('active');
+                const icon = mobileMenu.querySelector('i');
+                icon.classList.remove('fa-times');
+                icon.classList.add('fa-bars');
+            });
+        });
+
+        // Hero Slider
+        let slideIndex = 1;
+        let slideInterval;
+
+        function showSlide(n) {
+            const slides = document.getElementsByClassName('slide');
+            const dots = document.getElementsByClassName('dot');
+            
+            if (n > slides.length) slideIndex = 1;
+            if (n < 1) slideIndex = slides.length;
+            
+            for (let i = 0; i < slides.length; i++) {
+                slides[i].classList.remove('active');
+            }
+            
+            for (let i = 0; i < dots.length; i++) {
+                dots[i].classList.remove('active');
+            }
+            
+            slides[slideIndex - 1].classList.add('active');
+            dots[slideIndex - 1].classList.add('active');
+        }
+
+        function currentSlide(n) {
+            clearInterval(slideInterval);
+            showSlide(slideIndex = n);
+            autoSlide();
+        }
+
+        function nextSlide() {
+            showSlide(slideIndex += 1);
+        }
+
+        function autoSlide() {
+            slideInterval = setInterval(nextSlide, 5000);
+        }
+
+        autoSlide();
+
+        // Fade in animation on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: "0px 0px -50px 0px"
+        };
+
+        const observer = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.fade-in').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Modal functions
+        function showModal() {
+            document.getElementById('modal').classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal() {
+            document.getElementById('modal').classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        // Close modal on overlay click
+        document.getElementById('modal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeModal();
+            }
+        });
+
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    const headerOffset = 92;
+                    const elementPosition = target.getBoundingClientRect().top;
+                    const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+
+                    window.scrollTo({
+                        top: offsetPosition,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // Close modal on Escape key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                closeModal();
+            }
+        });
+
+        // ============================================
+        // SYSTÈME DE DEVIS
+        // ============================================
+        
+        let cart = {};
+
+        // Générer une référence unique
+        function generateReference() {
+            const date = new Date();
+            const day = String(date.getDate()).padStart(2, '0');
+            const month = String(date.getMonth() + 1).padStart(2, '0');
+            const year = date.getFullYear();
+            const random = Math.floor(1000 + Math.random() * 9000);
+            return `${day}${month}${year.slice(-2)}-${random}`;
+        }
+
+        // Mettre à jour la quantité
+        function updateQuantity(productId, change) {
+            const input = document.getElementById(`qty-${productId}`);
+            const currentQty = parseInt(input.value) || 0;
+            const newQty = Math.max(0, currentQty + change);
+            
+            input.value = newQty;
+            cart[productId] = newQty;
+            
+            // Mettre à jour l'apparence
+            const productItem = document.querySelector(`[data-id="${productId}"]`);
+            if (newQty > 0) {
+                productItem.classList.add('selected');
+            } else {
+                productItem.classList.remove('selected');
+            }
+            
+            updateSummary();
+        }
+
+        // Réinitialiser un produit
+        function resetProduct(productId) {
+            document.getElementById(`qty-${productId}`).value = 0;
+            cart[productId] = 0;
+            document.querySelector(`[data-id="${productId}"]`).classList.remove('selected');
+            updateSummary();
+        }
+
+        // Réinitialiser tout le devis
+        function resetQuote() {
+            if (confirm('Êtes-vous sûr de vouloir réinitialiser votre sélection ?')) {
+                document.querySelectorAll('.qty-input').forEach(input => {
+                    input.value = 0;
+                });
+                document.querySelectorAll('.product-item').forEach(item => {
+                    item.classList.remove('selected');
+                });
+                cart = {};
+                document.getElementById('quoteRef').textContent = generateReference();
+                clearSignature();
+                updateSummary();
+            }
+        }
+
+        // Mettre à jour le récapitulatif
+        function updateSummary() {
+            const summaryItems = document.getElementById('summaryItems');
+            const products = document.querySelectorAll('.product-item');
+            
+            let html = '';
+            let subtotal = 0;
+            let hasItems = false;
+            
+            products.forEach(product => {
+                const id = product.dataset.id;
+                const qty = parseInt(document.getElementById(`qty-${id}`).value) || 0;
+                
+                if (qty > 0) {
+                    hasItems = true;
+                    const price = parseFloat(product.dataset.price);
+                    const total = price * qty;
+                    subtotal += total;
+                    
+                    const name = product.querySelector('h4').textContent;
+                    html += `
+                        <div class="summary-item">
+                            <div>
+                                <span class="summary-item-name">${name}</span>
+                                <span class="summary-item-qty"> (x${qty})</span>
+                            </div>
+                            <span class="summary-item-price">${total.toFixed(2).replace('.', ',')} €</span>
+                        </div>
+                    `;
+                }
+            });
+            
+            if (!hasItems) {
+                html = '<p style="text-align: center; color: var(--text-light); font-style: italic;">Aucun article sélectionné</p>';
+            }
+            
+            summaryItems.innerHTML = html;
+            
+            // Calculs TVA
+            const tva = subtotal * 0.21;
+            const total = subtotal + tva;
+            
+            document.getElementById('subtotalHT').textContent = subtotal.toFixed(2).replace('.', ',') + ' €';
+            document.getElementById('tvaAmount').textContent = tva.toFixed(2).replace('.', ',') + ' €';
+            document.getElementById('totalTTC').textContent = total.toFixed(2).replace('.', ',') + ' €';
+        }
+
+        // Afficher les conditions
+        function showConditions(e) {
+            e.preventDefault();
+            alert(`Conditions générales de location Tessa & D Events:
+
+1. Réservation: Un acompte de 30% est requis pour confirmer la réservation.
+2. Annulation: Gratuite jusqu'à 30 jours avant l'événement. 50% retenu entre 30 et 15 jours. 100% retenu sous 15 jours.
+3. Livraison: Incluse dans un rayon de 50km de Liège. Au-delà, 0,50€/km supplémentaire.
+4. Installation: Nos équipes installent et retirent le mobilier aux horaires convenus.
+5. Caution: Une caution peut être demandée selon le montant total et sera restituée sous 7 jours après l'événement.
+6. Dégradations: Le locataire est responsable des dégradations causées par ses invités.
+
+Pour toute question: 0492 85 91 27`);
+        }
+
+        // ============================================
+        // SYSTÈME DE SIGNATURE - SOLUTION QUI FONCTIONNE
+        // ============================================
+        
+        let isDrawing = false;
+        let points = [];
+        let hasSig = false;
+        
+        let sigBox, sigSvg, sigPath, sigHint;
+        
+        // CORRECTION CRITIQUE: Attendre que tout soit chargé
+        window.addEventListener('load', function() {
+            console.log('Page chargée, initialisation signature...');
+            initSignature();
+        });
+        
+        function initSignature() {
+            sigBox = document.getElementById('signatureBox');
+            sigSvg = document.getElementById('signatureSvg');
+            sigHint = document.getElementById('signatureHint');
+            
+            // Créer le path s'il n'existe pas
+            sigPath = document.getElementById('sigPath');
+            if (!sigPath) {
+                sigPath = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+                sigPath.setAttribute('id', 'sigPath');
+                sigPath.setAttribute('stroke', '#2c2c2c');
+                sigPath.setAttribute('stroke-width', '2.5');
+                sigPath.setAttribute('fill', 'none');
+                sigPath.setAttribute('stroke-linecap', 'round');
+                sigPath.setAttribute('stroke-linejoin', 'round');
+                sigSvg.appendChild(sigPath);
+            }
+            
+            // S'assurer que le SVG a la bonne taille
+            const rect = sigBox.getBoundingClientRect();
+            sigSvg.setAttribute('width', rect.width);
+            sigSvg.setAttribute('height', 150);
+            sigSvg.setAttribute('viewBox', `0 0 ${rect.width} 150`);
+            
+            // Événements souris
+            sigBox.addEventListener('mousedown', startDraw);
+            sigBox.addEventListener('mousemove', draw);
+            sigBox.addEventListener('mouseup', endDraw);
+            sigBox.addEventListener('mouseleave', endDraw);
+            
+            // Événements tactiles - CRITICAL: passive: false
+            sigBox.addEventListener('touchstart', startDrawTouch, {passive: false});
+            sigBox.addEventListener('touchmove', drawTouch, {passive: false});
+            sigBox.addEventListener('touchend', endDraw);
+            
+            console.log('Signature prête! Dimensions:', rect.width, 'x', 150);
+        }
+        
+        function getPos(e) {
+            const rect = sigSvg.getBoundingClientRect();
+            // Gérer à la fois souris et touch
+            const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+            const clientY = e.touches ? e.touches[0].clientY : e.clientY;
+            return {
+                x: clientX - rect.left,
+                y: clientY - rect.top
+            };
+        }
+        
+        function startDraw(e) {
+            e.preventDefault();
+            isDrawing = true;
+            const p = getPos(e);
+            points = [p];
+            drawPath();
+            
+            sigHint.classList.add('hidden');
+            sigBox.classList.add('active');
+            hasSig = true;
+            hasSignature = true; // Pour compatibilité avec le reste du code
+            console.log('Dessin commencé');
+        }
+        
+        function startDrawTouch(e) {
+            e.preventDefault(); // Empêche le scroll
+            startDraw(e);
+        }
+        
+        function draw(e) {
+            if (!isDrawing) return;
+            e.preventDefault();
+            const p = getPos(e);
+            points.push(p);
+            drawPath();
+        }
+        
+        function drawTouch(e) {
+            if (!isDrawing) return;
+            e.preventDefault(); // Empêche le scroll sur mobile
+            const p = getPos(e);
+            points.push(p);
+            drawPath();
+        }
+        
+        function endDraw(e) {
+            isDrawing = false;
+        }
+        
+        function drawPath() {
+            if (points.length < 2) return;
+            
+            let d = 'M ' + points[0].x + ' ' + points[0].y;
+            for (let i = 1; i < points.length; i++) {
+                d += ' L ' + points[i].x + ' ' + points[i].y;
+            }
+            sigPath.setAttribute('d', d);
+        }
+        
+        function clearSignature() {
+            points = [];
+            if (sigPath) sigPath.setAttribute('d', '');
+            if (sigHint) sigHint.classList.remove('hidden');
+            if (sigBox) sigBox.classList.remove('active');
+            hasSig = false;
+            hasSignature = false;
+            console.log('Signature effacée');
+        }
+        
+        function getSignatureImage() {
+            if (!hasSig || !sigSvg) return null;
+            
+            // Récupérer la signature comme image PNG
+            const svgData = new XMLSerializer().serializeToString(sigSvg);
+            const canvas = document.createElement('canvas');
+            const ctx = canvas.getContext('2d');
+            const img = new Image();
+            
+            // Créer une promesse pour attendre le chargement
+            return new Promise((resolve) => {
+                img.onload = function() {
+                    canvas.width = img.width;
+                    canvas.height = img.height;
+                    ctx.fillStyle = '#ffffff';
+                    ctx.fillRect(0, 0, canvas.width, canvas.height);
+                    ctx.drawImage(img, 0, 0);
+                    resolve(canvas.toDataURL('image/png'));
+                };
+                img.src = 'data:image/svg+xml;base64,' + btoa(unescape(encodeURIComponent(svgData)));
+            });
+        }
+
+        // Initialisation au chargement (backup)
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('DOM chargé');
+            
+            // Initialiser la référence
+            const refElement = document.getElementById('quoteRef');
+            if (refElement) {
+                refElement.textContent = generateReference();
+            }
+            
+            // Mettre à jour le récapitulatif initial
+            updateSummary();
+            
+            // Gestionnaire de soumission du formulaire
+            const quoteForm = document.getElementById('quoteFormSignature');
+            if (quoteForm) {
+                quoteForm.addEventListener('submit', async function(e) {
+                    e.preventDefault();
+                    
+                    // Vérifier qu'il y a des articles
+                    const hasItems = Object.values(cart).some(qty => qty > 0);
+                    if (!hasItems) {
+                        alert('Veuillez sélectionner au moins un article avant de valider votre devis.');
+                        return;
+                    }
+                    
+                    // Vérifier la signature
+                    if (!hasSig) {
+                        alert('Veuillez signer le devis avant de le valider.');
+                        return;
+                    }
+                    
+                    // Récupérer les données
+                    const formData = new FormData(this);
+                    const reference = document.getElementById('quoteRef').textContent;
+                    
+                    // Convertir la signature en image
+                    const signatureData = await getSignatureImage();
+                    
+                    // Simuler l'envoi
+                    console.log('Devis envoyé:', {
+                        reference: reference,
+                        nom: formData.get('nom'),
+                        email: formData.get('email'),
+                        telephone: formData.get('telephone'),
+                        date: formData.get('date'),
+                        adresse: formData.get('adresse'),
+                        message: formData.get('message'),
+                        cart: cart,
+                        signature: signatureData
+                    });
+                    
+                    // Afficher le modal de confirmation
+                    showModal();
+                    
+                    // Réinitialiser
+                    setTimeout(() => {
+                        resetQuote();
+                        quoteForm.reset();
+                    }, 500);
+                });
+            }
+        });
+    </script>
+</body>
+</html>
