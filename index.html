@@ -171,7 +171,7 @@
         .form-group input:focus, .form-group select:focus, .form-group textarea:focus { outline: none; border-color: var(--primary); box-shadow: 0 0 0 3px rgba(212, 165, 165, 0.1); }
         .form-group textarea { resize: vertical; min-height: 100px; }
 
-                /* SIGNATURE - VERSION CORRIGÉE ET FONCTIONNELLE */
+                      /* SIGNATURE - VERSION UNIVERSELLE */
         .signature-section { margin-top: 2rem; padding-top: 2rem; border-top: 2px solid var(--accent); }
         .signature-section h4 { font-family: 'Cormorant Garamond', serif; font-size: 1.3rem; color: var(--text-dark); margin-bottom: 0.5rem; }
         .signature-info { color: var(--text-light); font-size: 0.9rem; margin-bottom: 1rem; font-style: italic; }
@@ -183,13 +183,21 @@
             border-radius: 12px;
             overflow: hidden;
             margin-bottom: 1rem;
-            touch-action: none; /* CRUCIAL: Empêche le défilement tactile */
-            user-select: none;
-            -webkit-user-select: none;
-            -webkit-touch-callout: none;
+            touch-action: none !important;
+            -ms-touch-action: none !important;
+            user-select: none !important;
+            -webkit-user-select: none !important;
+            -moz-user-select: none !important;
+            -ms-user-select: none !important;
+            -webkit-touch-callout: none !important;
             cursor: crosshair;
             height: 150px;
             width: 100%;
+        }
+
+        .signature-box * {
+            touch-action: none !important;
+            user-select: none !important;
         }
 
         .signature-box.active {
@@ -203,7 +211,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            pointer-events: none; /* Laisse passer les événements à la div parent */
+            pointer-events: none;
         }
 
         .signature-svg path {
@@ -212,7 +220,6 @@
             stroke-width: 2.5;
             stroke-linecap: round;
             stroke-linejoin: round;
-            pointer-events: none;
         }
 
         .signature-hint {
@@ -247,7 +254,7 @@
         .signature-checkbox { display: flex; align-items: flex-start; gap: 0.8rem; margin: 1.5rem 0; }
         .signature-checkbox input[type="checkbox"] { width: 20px; height: 20px; margin-top: 0.2rem; accent-color: var(--primary); cursor: pointer; }
         .signature-checkbox label { font-size: 0.9rem; color: var(--text-dark); line-height: 1.5; cursor: pointer; }
-        .signature-checkbox a { color: var(--primary); text-decoration: underline; }
+        .signature-checkbox a { color: var(--primary); text-decoration: underline; } 
 
         .btn-submit-devis { width: 100%; padding: 1rem; font-size: 1rem; display: flex; align-items: center; justify-content: center; gap: 0.5rem; background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%); border: none; color: var(--white); border-radius: 50px; cursor: pointer; font-weight: 500; transition: all 0.3s ease; }
         .btn-submit-devis:hover { transform: translateY(-2px); box-shadow: 0 8px 25px rgba(212, 165, 165, 0.4); }
@@ -1005,7 +1012,7 @@
         </div>
     </footer>
 
-   <script>
+  <script>
         // Header scroll effect
         window.addEventListener('scroll', function() {
             const header = document.getElementById('header');
@@ -1265,7 +1272,7 @@ Pour toute question: 0492 85 91 27`);
         }
 
         // ============================================
-        // SYSTÈME DE SIGNATURE - VERSION CORRIGÉE
+        // SYSTÈME DE SIGNATURE - VERSION UNIVERSELLE PC/MOBILE
         // ============================================
         
         let isDrawing = false;
@@ -1284,142 +1291,88 @@ Pour toute question: 0492 85 91 27`);
                 return;
             }
             
-            console.log('Initialisation de la signature...');
+            console.log('Initialisation signature...');
             
-            // IMPORTANT: Empêcher le défilement de la page sur la zone de signature
+            // IMPORTANT: Styles inline pour forcer le comportement
             signatureBox.style.touchAction = 'none';
+            signatureBox.style.webkitUserSelect = 'none';
+            signatureBox.style.userSelect = 'none';
+            signatureBox.style.webkitTouchCallout = 'none';
             
-            // Événements souris
-            signatureBox.addEventListener('mousedown', startDrawingMouse, {passive: false});
-            signatureBox.addEventListener('mousemove', drawMouse, {passive: false});
-            signatureBox.addEventListener('mouseup', stopDrawing, {passive: false});
-            signatureBox.addEventListener('mouseleave', stopDrawing, {passive: false});
+            // Événements souris (PC)
+            signatureBox.addEventListener('mousedown', onMouseDown, {passive: false});
+            signatureBox.addEventListener('mousemove', onMouseMove, {passive: false});
+            signatureBox.addEventListener('mouseup', onEnd, {passive: false});
+            signatureBox.addEventListener('mouseleave', onEnd, {passive: false});
             
-            // Événements tactiles - CORRECTION PRINCIPALE
-            signatureBox.addEventListener('touchstart', startDrawingTouch, {passive: false});
-            signatureBox.addEventListener('touchmove', drawTouch, {passive: false});
-            signatureBox.addEventListener('touchend', stopDrawing, {passive: false});
-            signatureBox.addEventListener('touchcancel', stopDrawing, {passive: false});
+            // Événements tactiles (Mobile)
+            signatureBox.addEventListener('touchstart', onTouchStart, {passive: false});
+            signatureBox.addEventListener('touchmove', onTouchMove, {passive: false});
+            signatureBox.addEventListener('touchend', onEnd, {passive: false});
+            signatureBox.addEventListener('touchcancel', onEnd, {passive: false});
             
-            // Empêcher le comportement par défaut du navigateur sur la zone de signature
-            signatureBox.addEventListener('touchstart', function(e) {
+            // Empêcher le menu contextuel sur mobile
+            signatureBox.addEventListener('contextmenu', function(e) {
                 e.preventDefault();
-            }, {passive: false});
-            
-            signatureBox.addEventListener('touchmove', function(e) {
-                e.preventDefault();
-            }, {passive: false});
+                return false;
+            });
         }
 
-        function getCoordinates(e) {
+        // Gestionnaire souris - PC
+        function onMouseDown(e) {
+            e.preventDefault();
+            if (e.button !== 0) return; // Clic gauche uniquement
+            
             const rect = signatureBox.getBoundingClientRect();
-            let clientX, clientY;
+            const x = ((e.clientX - rect.left) / rect.width) * 100;
+            const y = ((e.clientY - rect.top) / rect.height) * 100;
             
-            if (e.touches && e.touches.length > 0) {
-                clientX = e.touches[0].clientX;
-                clientY = e.touches[0].clientY;
-            } else if (e.changedTouches && e.changedTouches.length > 0) {
-                clientX = e.changedTouches[0].clientX;
-                clientY = e.changedTouches[0].clientY;
-            } else {
-                clientX = e.clientX;
-                clientY = e.clientY;
-            }
-            
-            // Calculer les coordonnées en pourcentage (0-100)
-            const x = ((clientX - rect.left) / rect.width) * 100;
-            const y = ((clientY - rect.top) / rect.height) * 100;
-            
-            return { x, y };
+            startPath(x, y);
         }
 
-        function startDrawingMouse(e) {
-            e.preventDefault();
-            if (e.button !== 0) return; // Seulement clic gauche
-            
-            console.log('Démarrage dessin souris');
-            startDrawing(e);
-        }
-
-        function startDrawingTouch(e) {
-            // IMPORTANT: Empêcher le comportement par défaut
-            if (e.cancelable) {
-                e.preventDefault();
-            }
-            e.stopPropagation();
-            
-            console.log('Démarrage dessin tactile');
-            startDrawing(e);
-        }
-
-        function startDrawing(e) {
-            isDrawing = true;
-            const point = getCoordinates(e);
-            currentPoints = [point];
-            
-            console.log('Point initial:', point);
-            
-            // Créer un nouveau chemin SVG
-            currentPath = document.createElementNS('http://www.w3.org/2000/svg', 'path');
-            currentPath.setAttribute('stroke', '#2c2c2c');
-            currentPath.setAttribute('stroke-width', '2');
-            currentPath.setAttribute('fill', 'none');
-            currentPath.setAttribute('stroke-linecap', 'round');
-            currentPath.setAttribute('stroke-linejoin', 'round');
-            currentPath.setAttribute('d', `M ${point.x} ${point.y}`);
-            
-            signatureSvg.appendChild(currentPath);
-            
-            // Masquer le hint
-            hideHint();
-            hasSignature = true;
-        }
-
-        function drawMouse(e) {
+        function onMouseMove(e) {
             if (!isDrawing) return;
             e.preventDefault();
-            draw(e);
+            
+            const rect = signatureBox.getBoundingClientRect();
+            const x = ((e.clientX - rect.left) / rect.width) * 100;
+            const y = ((e.clientY - rect.top) / rect.height) * 100;
+            
+            addPoint(x, y);
         }
 
-        function drawTouch(e) {
-            if (!isDrawing) return;
-            
-            // IMPORTANT: Empêcher le défilement
-            if (e.cancelable) {
-                e.preventDefault();
-            }
+        // Gestionnaire tactile - Mobile
+        function onTouchStart(e) {
+            // Empêcher tout comportement par défaut
+            e.preventDefault();
             e.stopPropagation();
             
-            draw(e);
+            const touch = e.touches[0];
+            const rect = signatureBox.getBoundingClientRect();
+            const x = ((touch.clientX - rect.left) / rect.width) * 100;
+            const y = ((touch.clientY - rect.top) / rect.height) * 100;
+            
+            startPath(x, y);
         }
 
-        function draw(e) {
-            const point = getCoordinates(e);
-            
-            // Vérifier la distance minimale pour éviter trop de points
-            const lastPoint = currentPoints[currentPoints.length - 1];
-            const distance = Math.sqrt(
-                Math.pow(point.x - lastPoint.x, 2) + 
-                Math.pow(point.y - lastPoint.y, 2)
-            );
-            
-            // Seuil de 0.5% de la taille du conteneur
-            if (distance > 0.5) {
-                currentPoints.push(point);
-                
-                // Mettre à jour l'attribut d du chemin
-                let d = `M ${currentPoints[0].x} ${currentPoints[0].y}`;
-                for (let i = 1; i < currentPoints.length; i++) {
-                    d += ` L ${currentPoints[i].x} ${currentPoints[i].y}`;
-                }
-                currentPath.setAttribute('d', d);
-            }
-        }
-
-        function stopDrawing(e) {
+        function onTouchMove(e) {
             if (!isDrawing) return;
             
-            console.log('Arrêt du dessin');
+            // Empêcher le défilement
+            e.preventDefault();
+            e.stopPropagation();
+            
+            const touch = e.touches[0];
+            const rect = signatureBox.getBoundingClientRect();
+            const x = ((touch.clientX - rect.left) / rect.width) * 100;
+            const y = ((touch.clientY - rect.top) / rect.height) * 100;
+            
+            addPoint(x, y);
+        }
+
+        // Commun aux deux
+        function onEnd(e) {
+            if (!isDrawing) return;
             isDrawing = false;
             
             if (currentPoints.length > 0) {
@@ -1428,6 +1381,45 @@ Pour toute question: 0492 85 91 27`);
             
             currentPath = null;
             currentPoints = [];
+        }
+
+        function startPath(x, y) {
+            isDrawing = true;
+            currentPoints = [{x, y}];
+            
+            // Créer le chemin SVG
+            currentPath = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+            currentPath.setAttribute('stroke', '#2c2c2c');
+            currentPath.setAttribute('stroke-width', '2');
+            currentPath.setAttribute('fill', 'none');
+            currentPath.setAttribute('stroke-linecap', 'round');
+            currentPath.setAttribute('stroke-linejoin', 'round');
+            currentPath.setAttribute('d', `M ${x} ${y}`);
+            
+            signatureSvg.appendChild(currentPath);
+            
+            hideHint();
+            hasSignature = true;
+        }
+
+        function addPoint(x, y) {
+            const lastPoint = currentPoints[currentPoints.length - 1];
+            
+            // Distance minimale pour éviter trop de points
+            const dx = x - lastPoint.x;
+            const dy = y - lastPoint.y;
+            const distance = Math.sqrt(dx * dx + dy * dy);
+            
+            if (distance > 0.3) {
+                currentPoints.push({x, y});
+                
+                // Mettre à jour le chemin
+                let d = `M ${currentPoints[0].x} ${currentPoints[0].y}`;
+                for (let i = 1; i < currentPoints.length; i++) {
+                    d += ` L ${currentPoints[i].x} ${currentPoints[i].y}`;
+                }
+                currentPath.setAttribute('d', d);
+            }
         }
 
         function hideHint() {
@@ -1447,7 +1439,6 @@ Pour toute question: 0492 85 91 27`);
         function clearSignature() {
             if (!signatureSvg) return;
             
-            // Supprimer tous les chemins
             while (signatureSvg.firstChild) {
                 signatureSvg.removeChild(signatureSvg.firstChild);
             }
@@ -1455,7 +1446,6 @@ Pour toute question: 0492 85 91 27`);
             allPaths = [];
             hasSignature = false;
             showHint();
-            console.log('Signature effacée');
         }
 
         function getSignatureImage() {
@@ -1501,7 +1491,7 @@ Pour toute question: 0492 85 91 27`);
 
         // Initialisation au chargement
         document.addEventListener('DOMContentLoaded', function() {
-            console.log('DOM chargé, initialisation...');
+            console.log('DOM chargé');
             
             // Initialiser la référence
             const refElement = document.getElementById('quoteRef');
@@ -1509,11 +1499,8 @@ Pour toute question: 0492 85 91 27`);
                 refElement.textContent = generateReference();
             }
             
-            // Initialiser la signature avec un délai pour s'assurer que tout est rendu
-            setTimeout(function() {
-                initSignature();
-                console.log('Signature initialisée');
-            }, 500);
+            // Initialiser la signature
+            setTimeout(initSignature, 300);
             
             // Mettre à jour le récapitulatif initial
             updateSummary();
