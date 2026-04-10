@@ -160,90 +160,59 @@
         .total-line { display: flex; justify-content: space-between; padding: 0.4rem 0; font-size: 0.9rem; color: var(--text-light); }
         .total-line.final { border-top: 2px solid var(--primary); margin-top: 0.5rem; padding-top: 0.8rem; font-size: 1.2rem; font-weight: 700; color: var(--text-dark); }
 
-        /* Form */
+        /* Form - CORRECTION DATE RESPONSIVE */
         .quote-form-signature { padding: 2rem; background: var(--white); }
         .form-section h4 { font-family: 'Cormorant Garamond', serif; font-size: 1.3rem; color: var(--text-dark); margin-bottom: 1.2rem; }
         .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.2rem; margin-bottom: 1.2rem; }
-        .form-group { text-align: left; }
+        .form-group { text-align: left; min-width: 0; }
         .form-group.full { grid-column: 1 / -1; }
         .form-group label { display: block; margin-bottom: 0.4rem; color: var(--text-dark); font-weight: 500; font-size: 0.85rem; }
-        .form-group input, .form-group select, .form-group textarea { width: 100%; padding: 0.8rem; border: 2px solid var(--accent); border-radius: 8px; font-family: 'Montserrat', sans-serif; transition: all 0.3s ease; font-size: 0.95rem; background: var(--white); }
+        .form-group input, .form-group select, .form-group textarea { width: 100%; padding: 0.8rem; border: 2px solid var(--accent); border-radius: 8px; font-family: 'Montserrat', sans-serif; transition: all 0.3s ease; font-size: 0.95rem; background: var(--white); box-sizing: border-box; }
         .form-group input:focus, .form-group select:focus, .form-group textarea:focus { outline: none; border-color: var(--primary); box-shadow: 0 0 0 3px rgba(212, 165, 165, 0.1); }
         .form-group textarea { resize: vertical; min-height: 100px; }
+        
+        /* FIX CRITIQUE: Champ date responsive */
+        .form-group input[type="date"] {
+            width: 100%;
+            max-width: 100%;
+            box-sizing: border-box;
+            -webkit-appearance: none;
+            appearance: none;
+            font-size: 0.95rem;
+        }
 
-                      /* SIGNATURE - SOLUTION QUI FONCTIONNE */
-.signature-section { margin-top: 2rem; padding-top: 2rem; border-top: 2px solid var(--accent); }
-.signature-section h4 { font-family: 'Cormorant Garamond', serif; font-size: 1.3rem; color: var(--text-dark); margin-bottom: 0.5rem; }
-.signature-info { color: var(--text-light); font-size: 0.9rem; margin-bottom: 1rem; font-style: italic; }
+        /* SIGNATURE */
+        .signature-section { margin-top: 2rem; padding-top: 2rem; border-top: 2px solid var(--accent); }
+        .signature-section h4 { font-family: 'Cormorant Garamond', serif; font-size: 1.3rem; color: var(--text-dark); margin-bottom: 0.5rem; }
+        .signature-info { color: var(--text-light); font-size: 0.9rem; margin-bottom: 1rem; font-style: italic; }
 
-.signature-box {
-    position: relative;
-    background: var(--white);
-    border: 2px dashed var(--accent);
-    border-radius: 12px;
-    overflow: hidden;
-    margin-bottom: 1rem;
-    touch-action: none;
-    -webkit-touch-callout: none;
-    cursor: crosshair;
-    height: 150px;
-    width: 100%;
-}
+        .signature-box {
+            position: relative;
+            background: var(--white);
+            border: 2px dashed var(--accent);
+            border-radius: 12px;
+            overflow: hidden;
+            margin-bottom: 1rem;
+            touch-action: none;
+            -webkit-touch-callout: none;
+            cursor: crosshair;
+            height: 150px;
+            width: 100%;
+        }
 
-.signature-box.active {
-    border-style: solid;
-    border-color: var(--primary);
-}
-
-.signature-svg {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-}
-
-.signature-svg path {
-    fill: none;
-    stroke: #2c2c2c;
-    stroke-width: 2.5;
-    stroke-linecap: round;
-    stroke-linejoin: round;
-}
-
-.signature-hint {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    color: var(--text-light);
-    font-size: 1rem;
-    pointer-events: none;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 0.5rem;
-    opacity: 0.5;
-    transition: opacity 0.3s;
-    text-align: center;
-}
-
-.signature-hint.hidden {
-    opacity: 0;
-}
-
-.signature-hint i {
-    font-size: 2rem;
-}
-
-.signature-actions { display: flex; justify-content: flex-end; margin-bottom: 1.5rem; }
-.btn-clear-signature { background: transparent; border: 1px solid var(--text-light); color: var(--text-light); padding: 0.4rem 0.8rem; border-radius: 50px; cursor: pointer; font-size: 0.8rem; display: flex; align-items: center; gap: 0.3rem; transition: all 0.3s ease; }
-.btn-clear-signature:hover { border-color: #e74c3c; color: #e74c3c; }
-
-.signature-checkbox { display: flex; align-items: flex-start; gap: 0.8rem; margin: 1.5rem 0; }
-.signature-checkbox input[type="checkbox"] { width: 20px; height: 20px; margin-top: 0.2rem; accent-color: var(--primary); cursor: pointer; }
-.signature-checkbox label { font-size: 0.9rem; color: var(--text-dark); line-height: 1.5; cursor: pointer; }
-.signature-checkbox a { color: var(--primary); text-decoration: underline; }
+        .signature-box.active { border-style: solid; border-color: var(--primary); }
+        .signature-svg { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }
+        .signature-svg path { fill: none; stroke: #2c2c2c; stroke-width: 2.5; stroke-linecap: round; stroke-linejoin: round; }
+        .signature-hint { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); color: var(--text-light); font-size: 1rem; pointer-events: none; display: flex; flex-direction: column; align-items: center; gap: 0.5rem; opacity: 0.5; transition: opacity 0.3s; text-align: center; }
+        .signature-hint.hidden { opacity: 0; }
+        .signature-hint i { font-size: 2rem; }
+        .signature-actions { display: flex; justify-content: flex-end; margin-bottom: 1.5rem; }
+        .btn-clear-signature { background: transparent; border: 1px solid var(--text-light); color: var(--text-light); padding: 0.4rem 0.8rem; border-radius: 50px; cursor: pointer; font-size: 0.8rem; display: flex; align-items: center; gap: 0.3rem; transition: all 0.3s ease; }
+        .btn-clear-signature:hover { border-color: #e74c3c; color: #e74c3c; }
+        .signature-checkbox { display: flex; align-items: flex-start; gap: 0.8rem; margin: 1.5rem 0; }
+        .signature-checkbox input[type="checkbox"] { width: 20px; height: 20px; margin-top: 0.2rem; accent-color: var(--primary); cursor: pointer; }
+        .signature-checkbox label { font-size: 0.9rem; color: var(--text-dark); line-height: 1.5; cursor: pointer; }
+        .signature-checkbox a { color: var(--primary); text-decoration: underline; }
 
         .btn-submit-devis { width: 100%; padding: 1rem; font-size: 1rem; display: flex; align-items: center; justify-content: center; gap: 0.5rem; background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%); border: none; color: var(--white); border-radius: 50px; cursor: pointer; font-weight: 500; transition: all 0.3s ease; }
         .btn-submit-devis:hover { transform: translateY(-2px); box-shadow: 0 8px 25px rgba(212, 165, 165, 0.4); }
@@ -310,6 +279,7 @@
         /* Animations */
         .fade-in { opacity: 0; transform: translateY(20px); transition: all 0.5s ease; }
         .fade-in.visible { opacity: 1; transform: translateY(0); }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
 
         /* Responsive */
         @media (max-width: 968px) {
@@ -342,37 +312,48 @@
             .product-image { width: 100%; height: 150px; }
             .product-controls { justify-content: center; }
             .remove-btn { margin-left: 0; }
-            .quote-form-signature { padding: 1.5rem 1rem; }
+            .quote-form-signature { padding: 1.5rem 1rem; overflow-x: hidden; width: 100%; }
             .signature-box { height: 120px; }
-            .form-grid { grid-template-columns: 1fr; }
+            
+            /* CORRECTION FORMULAIRE MOBILE */
+            .form-grid { 
+                display: flex; 
+                flex-direction: column; 
+                gap: 1.2rem; 
+                width: 100%; 
+            }
+            .form-group { 
+                width: 100%; 
+                min-width: 0; 
+            }
+            .form-group input[type="date"] {
+                font-size: 16px;
+                width: 100%;
+                max-width: 100%;
+            }
+            
             .map-container { min-height: 280px; }
             .footer-content { grid-template-columns: 1fr; gap: 1.8rem; text-align: center; }
             .social-links { justify-content: center; }
         }
-            /* Fix champ date mobile */
-        @media (max-width: 768px) {
-            input[type="date"] {
-                font-size: 16px;
-                max-width: 100%;
-            }
-        }
-
     </style>
-<base target="_blank">
-    <!-- jsPDF -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.31/jspdf.plugin.autotable.min.js"></script>
-
-<base target="_blank">
+    <base target="_blank">
 </head>
 <body>
     <!-- Modal -->
     <div class="modal-overlay" id="modal">
         <div class="modal-content">
-            <i class="fas fa-check-circle"></i>
-            <h3>Merci pour votre demande !</h3>
-            <p>Nous vous contacterons très rapidement au <strong>0492 85 91 27</strong> pour discuter de votre projet.</p>
-            <button onclick="closeModal()">Fermer</button>
+            <i class="fas fa-check-circle" id="modalIcon"></i>
+            <h3 id="modalTitle">Devis envoyé avec succès !</h3>
+            <p id="modalText">Votre devis a été généré et sauvegardé.</p>
+            <p id="modalPhone" style="margin-top: 1rem; padding: 1rem; background: rgba(212, 165, 165, 0.1); border-radius: 10px; border-left: 3px solid var(--primary);">
+                <i class="fas fa-phone-alt" style="color: var(--primary); margin-right: 0.5rem;"></i>
+                <strong>Nous vous recontacterons très prochainement</strong> au numéro que vous avez fourni pour finaliser votre réservation.
+            </p>
+            <p style="margin-top: 0.8rem; font-size: 0.9rem; color: var(--text-light);">
+                Référence de votre devis : <strong id="modalRef" style="color: var(--primary-dark);"></strong>
+            </p>
+            <button onclick="closeModal()" style="margin-top: 1rem;">Fermer</button>
         </div>
     </div>
 
@@ -738,7 +719,8 @@
                         </div>
                     </div>
                 </div>
-                            <div class="product-item service-option-item" data-id="service-decoration" data-price="100.00" id="serviceDecorationItem">
+                
+                <div class="product-item service-option-item" data-id="service-decoration" data-price="100.00" id="serviceDecorationItem">
                     <div class="product-image">
                         <img src="https://kimi-web-img.moonshot.cn/img/www.valarflowers.com/7694f3d1efe594fcdabada3b81a880d99baac204.jpg" alt="Service décoration" loading="lazy">
                     </div>
@@ -750,7 +732,6 @@
                         <div class="product-price" style="color: var(--primary-dark); font-weight: 700;">+ 100,00 €</div>
                         <p style="font-size: 0.8rem; color: var(--text-light); margin: 0.5rem 0;">Installation complète par nos équipes</p>
 
-                        <!-- Bouton toggle simple -->
                         <button type="button" class="btn-toggle-service" id="btnToggleDecoration" onclick="toggleDecorationService()" style="
                             background: transparent;
                             border: 2px solid var(--accent);
@@ -770,10 +751,8 @@
                             <span>Ajouter ce service</span>
                         </button>
 
-                        <!-- Champ caché pour la quantité (0 ou 1) -->
                         <input type="hidden" id="qty-service-decoration" value="0">
 
-                        <!-- Champ pour préciser la décoration souhaitée (apparaît quand sélectionné) -->
                         <div id="decorationDetails" style="display: none; margin-top: 1rem; padding-top: 1rem; border-top: 1px dashed var(--accent);">
                             <label style="font-size: 0.8rem; color: var(--text-dark); font-weight: 500; display: block; margin-bottom: 0.5rem;">
                                 Décrivez la décoration que vous souhaitez :
@@ -845,34 +824,33 @@
                     </div>
                 </div>
 
-              <!-- Zone de signature - SOLUTION QUI FONCTIONNE -->
-<div class="signature-section">
-    <h4>Signature du devis</h4>
-    <p class="signature-info">En signant, vous acceptez les conditions générales de location et confirmez votre demande de devis.</p>
-    
-    <div class="signature-box" id="signatureBox">
-        <svg class="signature-svg" id="signatureSvg" width="100%" height="150">
-            <!-- Le path sera créé dynamiquement -->
-        </svg>
-        <div class="signature-hint" id="signatureHint">
-            <i class="fas fa-signature"></i>
-            <span>Cliquez ou touchez ici pour signer</span>
-        </div>
-    </div>
-    
-    <div class="signature-actions">
-        <button type="button" class="btn-clear-signature" onclick="clearSignature()">
-            <i class="fas fa-eraser"></i> Effacer la signature
-        </button>
-    </div>
-    
-    <div class="signature-checkbox">
-        <input type="checkbox" id="acceptConditions" name="acceptConditions" required>
-        <label for="acceptConditions">
-            J'accepte les <a href="#" onclick="showConditions(event)">conditions générales de location</a> et certifie l'exactitude des informations fournies. *
-        </label>
-    </div>
-</div>
+                <div class="signature-section">
+                    <h4>Signature du devis</h4>
+                    <p class="signature-info">En signant, vous acceptez les conditions générales de location et confirmez votre demande de devis.</p>
+                    
+                    <div class="signature-box" id="signatureBox">
+                        <svg class="signature-svg" id="signatureSvg" width="100%" height="150">
+                        </svg>
+                        <div class="signature-hint" id="signatureHint">
+                            <i class="fas fa-signature"></i>
+                            <span>Cliquez ou touchez ici pour signer</span>
+                        </div>
+                    </div>
+                    
+                    <div class="signature-actions">
+                        <button type="button" class="btn-clear-signature" onclick="clearSignature()">
+                            <i class="fas fa-eraser"></i> Effacer la signature
+                        </button>
+                    </div>
+                    
+                    <div class="signature-checkbox">
+                        <input type="checkbox" id="acceptConditions" name="acceptConditions" required>
+                        <label for="acceptConditions">
+                            J'accepte les <a href="#" onclick="showConditions(event)">conditions générales de location</a> et certifie l'exactitude des informations fournies. *
+                        </label>
+                    </div>
+                </div>
+                
                 <button type="submit" class="btn-submit-devis" id="submitDevis">
                     <i class="fas fa-file-signature"></i>
                     Valider et envoyer mon devis signé
@@ -1066,7 +1044,7 @@
         </div>
     </footer>
 
-  <script>
+    <script>
         // Header scroll effect
         window.addEventListener('scroll', function() {
             const header = document.getElementById('header');
@@ -1162,6 +1140,8 @@
 
         // Modal functions
         function showModal() {
+            const ref = document.getElementById('quoteRef').textContent;
+            document.getElementById('modalRef').textContent = ref;
             document.getElementById('modal').classList.add('active');
             document.body.style.overflow = 'hidden';
         }
@@ -1208,6 +1188,8 @@
         // ============================================
         
         let cart = {};
+        let decorationServiceActive = false;
+        let hasSignature = false;
 
         // Générer une référence unique
         function generateReference() {
@@ -1241,10 +1223,16 @@
 
         // Réinitialiser un produit
         function resetProduct(productId) {
-            document.getElementById(`qty-${productId}`).value = 0;
-            cart[productId] = 0;
-            document.querySelector(`[data-id="${productId}"]`).classList.remove('selected');
-            updateSummary();
+            if (productId === 'service-decoration') {
+                if (decorationServiceActive) {
+                    toggleDecorationService();
+                }
+            } else {
+                document.getElementById(`qty-${productId}`).value = 0;
+                cart[productId] = 0;
+                document.querySelector(`[data-id="${productId}"]`).classList.remove('selected');
+                updateSummary();
+            }
         }
 
         // Réinitialiser tout le devis
@@ -1257,15 +1245,29 @@
                     item.classList.remove('selected');
                 });
                 cart = {};
+                decorationServiceActive = false;
                 document.getElementById('quoteRef').textContent = generateReference();
                 clearSignature();
                 updateSummary();
+                
+                // Reset service decoration UI
+                const btn = document.getElementById('btnToggleDecoration');
+                const item = document.getElementById('serviceDecorationItem');
+                const details = document.getElementById('decorationDetails');
+                const qtyInput = document.getElementById('qty-service-decoration');
+                
+                btn.innerHTML = '<i class="fas fa-plus-circle"></i><span>Ajouter ce service</span>';
+                btn.style.background = 'transparent';
+                btn.style.color = 'var(--text-light)';
+                btn.style.borderColor = 'var(--accent)';
+                item.classList.remove('selected');
+                details.style.display = 'none';
+                qtyInput.value = '0';
+                document.getElementById('decorationDescription').value = '';
             }
         }
 
-                // Gestion du service de décoration (toggle ON/OFF)
-        let decorationServiceActive = false;
-
+        // Gestion du service de décoration (toggle ON/OFF)
         function toggleDecorationService() {
             decorationServiceActive = !decorationServiceActive;
             const btn = document.getElementById('btnToggleDecoration');
@@ -1298,18 +1300,6 @@
 
             updateSummary();
         }
-
-        // Override resetProduct pour le service de décoration
-        const originalResetProduct = resetProduct;
-        resetProduct = function(productId) {
-            if (productId === 'service-decoration') {
-                if (decorationServiceActive) {
-                    toggleDecorationService();
-                }
-            } else {
-                originalResetProduct(productId);
-            }
-        };
 
         // Mettre à jour le récapitulatif
         function updateSummary() {
@@ -1374,7 +1364,7 @@ Pour toute question: 0492 85 91 27`);
         }
 
         // ============================================
-        // SYSTÈME DE SIGNATURE - SOLUTION QUI FONCTIONNE
+        // SYSTÈME DE SIGNATURE
         // ============================================
         
         let isDrawing = false;
@@ -1383,9 +1373,7 @@ Pour toute question: 0492 85 91 27`);
         
         let sigBox, sigSvg, sigPath, sigHint;
         
-        // CORRECTION CRITIQUE: Attendre que tout soit chargé
         window.addEventListener('load', function() {
-            console.log('Page chargée, initialisation signature...');
             initSignature();
         });
         
@@ -1394,7 +1382,6 @@ Pour toute question: 0492 85 91 27`);
             sigSvg = document.getElementById('signatureSvg');
             sigHint = document.getElementById('signatureHint');
             
-            // Créer le path s'il n'existe pas
             sigPath = document.getElementById('sigPath');
             if (!sigPath) {
                 sigPath = document.createElementNS('http://www.w3.org/2000/svg', 'path');
@@ -1407,29 +1394,23 @@ Pour toute question: 0492 85 91 27`);
                 sigSvg.appendChild(sigPath);
             }
             
-            // S'assurer que le SVG a la bonne taille
             const rect = sigBox.getBoundingClientRect();
             sigSvg.setAttribute('width', rect.width);
             sigSvg.setAttribute('height', 150);
             sigSvg.setAttribute('viewBox', `0 0 ${rect.width} 150`);
             
-            // Événements souris
             sigBox.addEventListener('mousedown', startDraw);
             sigBox.addEventListener('mousemove', draw);
             sigBox.addEventListener('mouseup', endDraw);
             sigBox.addEventListener('mouseleave', endDraw);
             
-            // Événements tactiles - CRITICAL: passive: false
             sigBox.addEventListener('touchstart', startDrawTouch, {passive: false});
             sigBox.addEventListener('touchmove', drawTouch, {passive: false});
             sigBox.addEventListener('touchend', endDraw);
-            
-            console.log('Signature prête! Dimensions:', rect.width, 'x', 150);
         }
         
         function getPos(e) {
             const rect = sigSvg.getBoundingClientRect();
-            // Gérer à la fois souris et touch
             const clientX = e.touches ? e.touches[0].clientX : e.clientX;
             const clientY = e.touches ? e.touches[0].clientY : e.clientY;
             return {
@@ -1448,12 +1429,11 @@ Pour toute question: 0492 85 91 27`);
             sigHint.classList.add('hidden');
             sigBox.classList.add('active');
             hasSig = true;
-            hasSignature = true; // Pour compatibilité avec le reste du code
-            console.log('Dessin commencé');
+            hasSignature = true;
         }
         
         function startDrawTouch(e) {
-            e.preventDefault(); // Empêche le scroll
+            e.preventDefault();
             startDraw(e);
         }
         
@@ -1467,7 +1447,7 @@ Pour toute question: 0492 85 91 27`);
         
         function drawTouch(e) {
             if (!isDrawing) return;
-            e.preventDefault(); // Empêche le scroll sur mobile
+            e.preventDefault();
             const p = getPos(e);
             points.push(p);
             drawPath();
@@ -1494,19 +1474,16 @@ Pour toute question: 0492 85 91 27`);
             if (sigBox) sigBox.classList.remove('active');
             hasSig = false;
             hasSignature = false;
-            console.log('Signature effacée');
         }
         
         function getSignatureImage() {
             if (!hasSig || !sigSvg) return null;
             
-            // Récupérer la signature comme image PNG
             const svgData = new XMLSerializer().serializeToString(sigSvg);
             const canvas = document.createElement('canvas');
             const ctx = canvas.getContext('2d');
             const img = new Image();
             
-            // Créer une promesse pour attendre le chargement
             return new Promise((resolve) => {
                 img.onload = function() {
                     canvas.width = img.width;
@@ -1520,68 +1497,18 @@ Pour toute question: 0492 85 91 27`);
             });
         }
 
-        // Initialisation au chargement (backup)
+        // ============================================
+        // ENVOI DU FORMULAIRE - VERSION AJAX CORRIGÉE
+        // ============================================
+        
         document.addEventListener('DOMContentLoaded', function() {
-            console.log('DOM chargé');
-            
-            // Initialiser la référence
             const refElement = document.getElementById('quoteRef');
             if (refElement) {
                 refElement.textContent = generateReference();
             }
             
-                    // Gestion du service de décoration (toggle ON/OFF)
-        let decorationServiceActive = false;
-
-        function toggleDecorationService() {
-            decorationServiceActive = !decorationServiceActive;
-            const btn = document.getElementById('btnToggleDecoration');
-            const item = document.getElementById('serviceDecorationItem');
-            const details = document.getElementById('decorationDetails');
-            const qtyInput = document.getElementById('qty-service-decoration');
-
-            if (decorationServiceActive) {
-                // Activer
-                btn.innerHTML = '<i class="fas fa-check"></i><span>Service ajouté</span>';
-                btn.style.background = 'var(--primary)';
-                btn.style.color = 'var(--white)';
-                btn.style.borderColor = 'var(--primary)';
-                item.classList.add('selected');
-                details.style.display = 'block';
-                qtyInput.value = '1';
-                cart['service-decoration'] = 1;
-            } else {
-                // Désactiver
-                btn.innerHTML = '<i class="fas fa-plus-circle"></i><span>Ajouter ce service</span>';
-                btn.style.background = 'transparent';
-                btn.style.color = 'var(--text-light)';
-                btn.style.borderColor = 'var(--accent)';
-                item.classList.remove('selected');
-                details.style.display = 'none';
-                qtyInput.value = '0';
-                cart['service-decoration'] = 0;
-                document.getElementById('decorationDescription').value = '';
-            }
-
             updateSummary();
-        }
-
-        // Override resetProduct pour le service de décoration
-        const originalResetProduct = resetProduct;
-        resetProduct = function(productId) {
-            if (productId === 'service-decoration') {
-                if (decorationServiceActive) {
-                    toggleDecorationService();
-                }
-            } else {
-                originalResetProduct(productId);
-            }
-        };
-
-        // Mettre à jour le récapitulatif initial
-            updateSummary();
-            
-            // Gestionnaire de soumission du formulaire
+          
             const quoteForm = document.getElementById('quoteFormSignature');
             if (quoteForm) {
                 quoteForm.addEventListener('submit', async function(e) {
@@ -1590,47 +1517,191 @@ Pour toute question: 0492 85 91 27`);
                     // Vérifier qu'il y a des articles
                     const hasItems = Object.values(cart).some(qty => qty > 0);
                     if (!hasItems) {
-                        alert('Veuillez sélectionner au moins un article avant de valider votre devis.');
+                        showErrorModal('Veuillez sélectionner au moins un article avant de valider votre devis.');
                         return;
                     }
                     
                     // Vérifier la signature
-                    if (!hasSig) {
-                        alert('Veuillez signer le devis avant de le valider.');
+                    if (!hasSignature) {
+                        showErrorModal('Veuillez signer le devis avant de le valider.');
                         return;
                     }
                     
-                    // Récupérer les données
-                    const formData = new FormData(this);
-                    const reference = document.getElementById('quoteRef').textContent;
+                    // Vérifier les conditions
+                    if (!document.getElementById('acceptConditions').checked) {
+                        showErrorModal('Veuillez accepter les conditions générales de location.');
+                        return;
+                    }
                     
-                    // Convertir la signature en image
-                    const signatureData = await getSignatureImage();
+                    // Récupérer la signature en base64
+                    const signatureImage = await getSignatureImage();
                     
-                    // Simuler l'envoi
-                    console.log('Devis envoyé:', {
-                        reference: reference,
-                        nom: formData.get('nom'),
-                        email: formData.get('email'),
-                        telephone: formData.get('telephone'),
-                        date: formData.get('date'),
-                        adresse: formData.get('adresse'),
-                        message: formData.get('message'),
-                        cart: cart,
-                        signature: signatureData
+                    // Préparer les données
+                    const formData = {
+                        nom: document.getElementById('nomDevis').value,
+                        email: document.getElementById('emailDevis').value,
+                        telephone: document.getElementById('telephoneDevis').value,
+                        dateEvent: document.getElementById('dateDevis').value,
+                        adresse: document.getElementById('adresseDevis').value,
+                        message: document.getElementById('messageDevis').value,
+                        reference: document.getElementById('quoteRef').textContent,
+                        decorationDescription: decorationServiceActive ? document.getElementById('decorationDescription').value : null,
+                        signatureImage: signatureImage,
+                        cart: [],
+                        subtotal: 0,
+                        tva: 0,
+                        total: 0
+                    };
+                    
+                    // Construire le panier
+                    const products = document.querySelectorAll('.product-item');
+                    
+                    products.forEach(product => {
+                        const id = product.dataset.id;
+                        const qty = parseInt(document.getElementById(`qty-${id}`)?.value) || 0;
+                        
+                        if (qty > 0) {
+                            const price = parseFloat(product.dataset.price);
+                            const total = price * qty;
+                            formData.subtotal += total;
+                            
+                            formData.cart.push({
+                                name: product.querySelector('h4').textContent,
+                                qty: qty,
+                                price: price,
+                                total: total
+                            });
+                        }
                     });
                     
-                    // Afficher le modal de confirmation
-                    showModal();
+                    formData.tva = formData.subtotal * 0.21;
+                    formData.total = formData.subtotal + formData.tva;
                     
-                    // Réinitialiser
-                    setTimeout(() => {
-                        resetQuote();
-                        quoteForm.reset();
-                    }, 500);
+                    // Afficher le loader sur le bouton
+                    const submitBtn = document.getElementById('submitDevis');
+                    const originalBtnText = submitBtn.innerHTML;
+                    submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Envoi en cours...';
+                    submitBtn.disabled = true;
+                    
+                    try {
+                        // Envoyer au serveur
+                        const response = await fetch('/api/send-quote', {
+                            method: 'POST',
+                            headers: { 'Content-Type': 'application/json' },
+                            body: JSON.stringify(formData)
+                        });
+                        
+                        const result = await response.json();
+                        
+                        if (result.success) {
+                            // Message de succès DANS le formulaire - PAS de scroll vers le haut
+                            const successDiv = document.createElement('div');
+                            successDiv.id = 'successMessage';
+                            successDiv.innerHTML = `
+                                <div style="
+                                    background: linear-gradient(135deg, #d4edda 0%, #c3e6cb 100%);
+                                    border: 2px solid #28a745;
+                                    border-radius: 12px;
+                                    padding: 1.5rem;
+                                    margin-top: 1.5rem;
+                                    text-align: center;
+                                    animation: fadeIn 0.5s ease;
+                                ">
+                                    <i class="fas fa-check-circle" style="color: #28a745; font-size: 2.5rem; margin-bottom: 0.5rem;"></i>
+                                    <h3 style="color: #155724; margin-bottom: 0.5rem; font-family: 'Cormorant Garamond', serif;">
+                                        Devis effectué avec succès
+                                    </h3>
+                                    <p style="color: #155724; margin: 0;">
+                                        Nous vous recontacterons dans les plus brefs délais.
+                                    </p>
+                                    <p style="color: #155724; font-size: 0.9rem; margin-top: 0.5rem;">
+                                        Référence: <strong>${formData.reference}</strong>
+                                    </p>
+                                </div>
+                            `;
+                            
+                            // Insérer après le bouton
+                            submitBtn.parentNode.insertBefore(successDiv, submitBtn.nextSibling);
+                            
+                            // Scroll doux vers le message (pas vers le haut de page)
+                            successDiv.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                            
+                            // Réinitialiser après 5 secondes
+                            setTimeout(() => {
+                                resetQuote();
+                                quoteForm.reset();
+                                successDiv.remove();
+                                submitBtn.innerHTML = originalBtnText;
+                                submitBtn.disabled = false;
+                            }, 5000);
+                            
+                        } else {
+                            throw new Error(result.error || 'Erreur lors de l\'envoi');
+                        }
+                        
+                    } catch (error) {
+                        console.error('Erreur:', error);
+                        
+                        // Afficher l'erreur dans le formulaire
+                        const errorDiv = document.createElement('div');
+                        errorDiv.innerHTML = `
+                            <div style="
+                                background: #f8d7da;
+                                border: 2px solid #dc3545;
+                                border-radius: 12px;
+                                padding: 1rem;
+                                margin-top: 1rem;
+                                color: #721c24;
+                            ">
+                                <i class="fas fa-exclamation-triangle"></i>
+                                Une erreur est survenue. Veuillez réessayer ou nous contacter au 0492 85 91 27.
+                            </div>
+                        `;
+                        submitBtn.parentNode.insertBefore(errorDiv, submitBtn.nextSibling);
+                        
+                        submitBtn.innerHTML = originalBtnText;
+                        submitBtn.disabled = false;
+                        
+                        setTimeout(() => errorDiv.remove(), 5000);
+                    }
                 });
             }
         });
+
+        // Fonction pour afficher une erreur dans le modal
+        function showErrorModal(message) {
+            const modal = document.getElementById('modal');
+            const icon = document.getElementById('modalIcon');
+            const title = document.getElementById('modalTitle');
+            const text = document.getElementById('modalText');
+            const phone = document.getElementById('modalPhone');
+            
+            icon.className = 'fas fa-exclamation-circle';
+            icon.style.color = '#e74c3c';
+            title.textContent = 'Attention';
+            text.textContent = message;
+            phone.style.display = 'none';
+            
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        // Modifier closeModal pour réinitialiser les styles
+        const originalCloseModal = closeModal;
+        closeModal = function() {
+            document.getElementById('modal').classList.remove('active');
+            document.body.style.overflow = '';
+            
+            setTimeout(() => {
+                const icon = document.getElementById('modalIcon');
+                const phone = document.getElementById('modalPhone');
+                if (icon) {
+                    icon.className = 'fas fa-check-circle';
+                    icon.style.color = '';
+                }
+                if (phone) phone.style.display = 'block';
+            }, 300);
+        };
     </script>
 </body>
 </html>
