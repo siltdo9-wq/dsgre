@@ -160,18 +160,28 @@
         .total-line { display: flex; justify-content: space-between; padding: 0.4rem 0; font-size: 0.9rem; color: var(--text-light); }
         .total-line.final { border-top: 2px solid var(--primary); margin-top: 0.5rem; padding-top: 0.8rem; font-size: 1.2rem; font-weight: 700; color: var(--text-dark); }
 
-        /* Form */
+        /* Form - CORRECTION DATE RESPONSIVE */
         .quote-form-signature { padding: 2rem; background: var(--white); }
         .form-section h4 { font-family: 'Cormorant Garamond', serif; font-size: 1.3rem; color: var(--text-dark); margin-bottom: 1.2rem; }
         .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.2rem; margin-bottom: 1.2rem; }
-        .form-group { text-align: left; }
+        .form-group { text-align: left; min-width: 0; }
         .form-group.full { grid-column: 1 / -1; }
         .form-group label { display: block; margin-bottom: 0.4rem; color: var(--text-dark); font-weight: 500; font-size: 0.85rem; }
-        .form-group input, .form-group select, .form-group textarea { width: 100%; padding: 0.8rem; border: 2px solid var(--accent); border-radius: 8px; font-family: 'Montserrat', sans-serif; transition: all 0.3s ease; font-size: 0.95rem; background: var(--white); }
+        .form-group input, .form-group select, .form-group textarea { width: 100%; padding: 0.8rem; border: 2px solid var(--accent); border-radius: 8px; font-family: 'Montserrat', sans-serif; transition: all 0.3s ease; font-size: 0.95rem; background: var(--white); box-sizing: border-box; }
         .form-group input:focus, .form-group select:focus, .form-group textarea:focus { outline: none; border-color: var(--primary); box-shadow: 0 0 0 3px rgba(212, 165, 165, 0.1); }
         .form-group textarea { resize: vertical; min-height: 100px; }
+        
+        /* FIX CRITIQUE: Champ date responsive */
+        .form-group input[type="date"] {
+            width: 100%;
+            max-width: 100%;
+            box-sizing: border-box;
+            -webkit-appearance: none;
+            appearance: none;
+            font-size: 0.95rem;
+        }
 
-        /* SIGNATURE - SOLUTION QUI FONCTIONNE */
+        /* SIGNATURE */
         .signature-section { margin-top: 2rem; padding-top: 2rem; border-top: 2px solid var(--accent); }
         .signature-section h4 { font-family: 'Cormorant Garamond', serif; font-size: 1.3rem; color: var(--text-dark); margin-bottom: 0.5rem; }
         .signature-info { color: var(--text-light); font-size: 0.9rem; margin-bottom: 1rem; font-style: italic; }
@@ -190,56 +200,15 @@
             width: 100%;
         }
 
-        .signature-box.active {
-            border-style: solid;
-            border-color: var(--primary);
-        }
-
-        .signature-svg {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-        }
-
-        .signature-svg path {
-            fill: none;
-            stroke: #2c2c2c;
-            stroke-width: 2.5;
-            stroke-linecap: round;
-            stroke-linejoin: round;
-        }
-
-        .signature-hint {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            color: var(--text-light);
-            font-size: 1rem;
-            pointer-events: none;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 0.5rem;
-            opacity: 0.5;
-            transition: opacity 0.3s;
-            text-align: center;
-        }
-
-        .signature-hint.hidden {
-            opacity: 0;
-        }
-
-        .signature-hint i {
-            font-size: 2rem;
-        }
-
+        .signature-box.active { border-style: solid; border-color: var(--primary); }
+        .signature-svg { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }
+        .signature-svg path { fill: none; stroke: #2c2c2c; stroke-width: 2.5; stroke-linecap: round; stroke-linejoin: round; }
+        .signature-hint { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); color: var(--text-light); font-size: 1rem; pointer-events: none; display: flex; flex-direction: column; align-items: center; gap: 0.5rem; opacity: 0.5; transition: opacity 0.3s; text-align: center; }
+        .signature-hint.hidden { opacity: 0; }
+        .signature-hint i { font-size: 2rem; }
         .signature-actions { display: flex; justify-content: flex-end; margin-bottom: 1.5rem; }
         .btn-clear-signature { background: transparent; border: 1px solid var(--text-light); color: var(--text-light); padding: 0.4rem 0.8rem; border-radius: 50px; cursor: pointer; font-size: 0.8rem; display: flex; align-items: center; gap: 0.3rem; transition: all 0.3s ease; }
         .btn-clear-signature:hover { border-color: #e74c3c; color: #e74c3c; }
-
         .signature-checkbox { display: flex; align-items: flex-start; gap: 0.8rem; margin: 1.5rem 0; }
         .signature-checkbox input[type="checkbox"] { width: 20px; height: 20px; margin-top: 0.2rem; accent-color: var(--primary); cursor: pointer; }
         .signature-checkbox label { font-size: 0.9rem; color: var(--text-dark); line-height: 1.5; cursor: pointer; }
@@ -310,6 +279,7 @@
         /* Animations */
         .fade-in { opacity: 0; transform: translateY(20px); transition: all 0.5s ease; }
         .fade-in.visible { opacity: 1; transform: translateY(0); }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
 
         /* Responsive */
         @media (max-width: 968px) {
@@ -342,25 +312,31 @@
             .product-image { width: 100%; height: 150px; }
             .product-controls { justify-content: center; }
             .remove-btn { margin-left: 0; }
-            .quote-form-signature { padding: 1.5rem 1rem; }
+            .quote-form-signature { padding: 1.5rem 1rem; overflow-x: hidden; width: 100%; }
             .signature-box { height: 120px; }
-            .form-grid { grid-template-columns: 1fr; }
+            
+            /* CORRECTION FORMULAIRE MOBILE */
+            .form-grid { 
+                display: flex; 
+                flex-direction: column; 
+                gap: 1.2rem; 
+                width: 100%; 
+            }
+            .form-group { 
+                width: 100%; 
+                min-width: 0; 
+            }
+            .form-group input[type="date"] {
+                font-size: 16px;
+                width: 100%;
+                max-width: 100%;
+            }
+            
             .map-container { min-height: 280px; }
             .footer-content { grid-template-columns: 1fr; gap: 1.8rem; text-align: center; }
             .social-links { justify-content: center; }
         }
-        /* Fix champ date mobile */
-        @media (max-width: 768px) {
-            input[type="date"] {
-                font-size: 16px;
-                max-width: 100%;
-            }
-        }
-
     </style>
-    <!-- jsPDF -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.31/jspdf.plugin.autotable.min.js"></script>
     <base target="_blank">
 </head>
 <body>
@@ -756,7 +732,6 @@
                         <div class="product-price" style="color: var(--primary-dark); font-weight: 700;">+ 100,00 €</div>
                         <p style="font-size: 0.8rem; color: var(--text-light); margin: 0.5rem 0;">Installation complète par nos équipes</p>
 
-                        <!-- Bouton toggle simple -->
                         <button type="button" class="btn-toggle-service" id="btnToggleDecoration" onclick="toggleDecorationService()" style="
                             background: transparent;
                             border: 2px solid var(--accent);
@@ -776,10 +751,8 @@
                             <span>Ajouter ce service</span>
                         </button>
 
-                        <!-- Champ caché pour la quantité (0 ou 1) -->
                         <input type="hidden" id="qty-service-decoration" value="0">
 
-                        <!-- Champ pour préciser la décoration souhaitée (apparaît quand sélectionné) -->
                         <div id="decorationDetails" style="display: none; margin-top: 1rem; padding-top: 1rem; border-top: 1px dashed var(--accent);">
                             <label style="font-size: 0.8rem; color: var(--text-dark); font-weight: 500; display: block; margin-bottom: 0.5rem;">
                                 Décrivez la décoration que vous souhaitez :
@@ -851,14 +824,12 @@
                     </div>
                 </div>
 
-                <!-- Zone de signature - SOLUTION QUI FONCTIONNE -->
                 <div class="signature-section">
                     <h4>Signature du devis</h4>
                     <p class="signature-info">En signant, vous acceptez les conditions générales de location et confirmez votre demande de devis.</p>
                     
                     <div class="signature-box" id="signatureBox">
                         <svg class="signature-svg" id="signatureSvg" width="100%" height="150">
-                            <!-- Le path sera créé dynamiquement -->
                         </svg>
                         <div class="signature-hint" id="signatureHint">
                             <i class="fas fa-signature"></i>
@@ -1393,7 +1364,7 @@ Pour toute question: 0492 85 91 27`);
         }
 
         // ============================================
-        // SYSTÈME DE SIGNATURE - SOLUTION QUI FONCTIONNE
+        // SYSTÈME DE SIGNATURE
         // ============================================
         
         let isDrawing = false;
@@ -1402,9 +1373,7 @@ Pour toute question: 0492 85 91 27`);
         
         let sigBox, sigSvg, sigPath, sigHint;
         
-        // CORRECTION CRITIQUE: Attendre que tout soit chargé
         window.addEventListener('load', function() {
-            console.log('Page chargée, initialisation signature...');
             initSignature();
         });
         
@@ -1413,7 +1382,6 @@ Pour toute question: 0492 85 91 27`);
             sigSvg = document.getElementById('signatureSvg');
             sigHint = document.getElementById('signatureHint');
             
-            // Créer le path s'il n'existe pas
             sigPath = document.getElementById('sigPath');
             if (!sigPath) {
                 sigPath = document.createElementNS('http://www.w3.org/2000/svg', 'path');
@@ -1426,29 +1394,23 @@ Pour toute question: 0492 85 91 27`);
                 sigSvg.appendChild(sigPath);
             }
             
-            // S'assurer que le SVG a la bonne taille
             const rect = sigBox.getBoundingClientRect();
             sigSvg.setAttribute('width', rect.width);
             sigSvg.setAttribute('height', 150);
             sigSvg.setAttribute('viewBox', `0 0 ${rect.width} 150`);
             
-            // Événements souris
             sigBox.addEventListener('mousedown', startDraw);
             sigBox.addEventListener('mousemove', draw);
             sigBox.addEventListener('mouseup', endDraw);
             sigBox.addEventListener('mouseleave', endDraw);
             
-            // Événements tactiles - CRITICAL: passive: false
             sigBox.addEventListener('touchstart', startDrawTouch, {passive: false});
             sigBox.addEventListener('touchmove', drawTouch, {passive: false});
             sigBox.addEventListener('touchend', endDraw);
-            
-            console.log('Signature prête! Dimensions:', rect.width, 'x', 150);
         }
         
         function getPos(e) {
             const rect = sigSvg.getBoundingClientRect();
-            // Gérer à la fois souris et touch
             const clientX = e.touches ? e.touches[0].clientX : e.clientX;
             const clientY = e.touches ? e.touches[0].clientY : e.clientY;
             return {
@@ -1467,12 +1429,11 @@ Pour toute question: 0492 85 91 27`);
             sigHint.classList.add('hidden');
             sigBox.classList.add('active');
             hasSig = true;
-            hasSignature = true; // Pour compatibilité avec le reste du code
-            console.log('Dessin commencé');
+            hasSignature = true;
         }
         
         function startDrawTouch(e) {
-            e.preventDefault(); // Empêche le scroll
+            e.preventDefault();
             startDraw(e);
         }
         
@@ -1486,7 +1447,7 @@ Pour toute question: 0492 85 91 27`);
         
         function drawTouch(e) {
             if (!isDrawing) return;
-            e.preventDefault(); // Empêche le scroll sur mobile
+            e.preventDefault();
             const p = getPos(e);
             points.push(p);
             drawPath();
@@ -1513,19 +1474,16 @@ Pour toute question: 0492 85 91 27`);
             if (sigBox) sigBox.classList.remove('active');
             hasSig = false;
             hasSignature = false;
-            console.log('Signature effacée');
         }
         
         function getSignatureImage() {
             if (!hasSig || !sigSvg) return null;
             
-            // Récupérer la signature comme image PNG
             const svgData = new XMLSerializer().serializeToString(sigSvg);
             const canvas = document.createElement('canvas');
             const ctx = canvas.getContext('2d');
             const img = new Image();
             
-            // Créer une promesse pour attendre le chargement
             return new Promise((resolve) => {
                 img.onload = function() {
                     canvas.width = img.width;
@@ -1539,20 +1497,18 @@ Pour toute question: 0492 85 91 27`);
             });
         }
 
-        // Initialisation au chargement (backup)
+        // ============================================
+        // ENVOI DU FORMULAIRE - VERSION AJAX CORRIGÉE
+        // ============================================
+        
         document.addEventListener('DOMContentLoaded', function() {
-            console.log('DOM chargé');
-            
-            // Initialiser la référence
             const refElement = document.getElementById('quoteRef');
             if (refElement) {
                 refElement.textContent = generateReference();
             }
             
-            // Mettre à jour le récapitulatif initial
             updateSummary();
           
-            // Gestionnaire de soumission du formulaire - VERSION MAILTO FONCTIONNELLE
             const quoteForm = document.getElementById('quoteFormSignature');
             if (quoteForm) {
                 quoteForm.addEventListener('submit', async function(e) {
@@ -1577,86 +1533,142 @@ Pour toute question: 0492 85 91 27`);
                         return;
                     }
                     
-                    // Récupérer les données du formulaire
-                    const nom = document.getElementById('nomDevis').value;
-                    const email = document.getElementById('emailDevis').value;
-                    const telephone = document.getElementById('telephoneDevis').value;
-                    const dateEvent = document.getElementById('dateDevis').value;
-                    const adresse = document.getElementById('adresseDevis').value;
-                    const message = document.getElementById('messageDevis').value;
-                    const reference = document.getElementById('quoteRef').textContent;
+                    // Récupérer la signature en base64
+                    const signatureImage = await getSignatureImage();
                     
-                    // Construire le corps du mail avec les articles sélectionnés
-                    let body = `Nouvelle demande de devis - Référence: ${reference}\n\n`;
-                    body += `=== COORDONNÉES ===\n`;
-                    body += `Nom: ${nom}\n`;
-                    body += `Email: ${email}\n`;
-                    body += `Téléphone: ${telephone}\n`;
-                    body += `Date événement: ${dateEvent}\n`;
-                    body += `Adresse: ${adresse}\n\n`;
+                    // Préparer les données
+                    const formData = {
+                        nom: document.getElementById('nomDevis').value,
+                        email: document.getElementById('emailDevis').value,
+                        telephone: document.getElementById('telephoneDevis').value,
+                        dateEvent: document.getElementById('dateDevis').value,
+                        adresse: document.getElementById('adresseDevis').value,
+                        message: document.getElementById('messageDevis').value,
+                        reference: document.getElementById('quoteRef').textContent,
+                        decorationDescription: decorationServiceActive ? document.getElementById('decorationDescription').value : null,
+                        signatureImage: signatureImage,
+                        cart: [],
+                        subtotal: 0,
+                        tva: 0,
+                        total: 0
+                    };
                     
-                    body += `=== ARTICLES SÉLECTIONNÉS ===\n`;
-                    
-                    // Récupérer les produits sélectionnés
+                    // Construire le panier
                     const products = document.querySelectorAll('.product-item');
-                    let subtotal = 0;
                     
                     products.forEach(product => {
                         const id = product.dataset.id;
-                        const qty = parseInt(document.getElementById(`qty-${id}`).value) || 0;
+                        const qty = parseInt(document.getElementById(`qty-${id}`)?.value) || 0;
                         
                         if (qty > 0) {
-                            const name = product.querySelector('h4').textContent;
                             const price = parseFloat(product.dataset.price);
                             const total = price * qty;
-                            subtotal += total;
+                            formData.subtotal += total;
                             
-                            body += `- ${name} (x${qty}) : ${total.toFixed(2).replace('.', ',')} €\n`;
+                            formData.cart.push({
+                                name: product.querySelector('h4').textContent,
+                                qty: qty,
+                                price: price,
+                                total: total
+                            });
                         }
                     });
                     
-                    // Ajouter détails décoration si présent
-                    if (decorationServiceActive) {
-                        const desc = document.getElementById('decorationDescription').value;
-                        body += `\n=== DÉTAILS DÉCORATION ===\n${desc || 'Non spécifié'}\n`;
+                    formData.tva = formData.subtotal * 0.21;
+                    formData.total = formData.subtotal + formData.tva;
+                    
+                    // Afficher le loader sur le bouton
+                    const submitBtn = document.getElementById('submitDevis');
+                    const originalBtnText = submitBtn.innerHTML;
+                    submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Envoi en cours...';
+                    submitBtn.disabled = true;
+                    
+                    try {
+                        // Envoyer au serveur
+                        const response = await fetch('/api/send-quote', {
+                            method: 'POST',
+                            headers: { 'Content-Type': 'application/json' },
+                            body: JSON.stringify(formData)
+                        });
+                        
+                        const result = await response.json();
+                        
+                        if (result.success) {
+                            // Message de succès DANS le formulaire - PAS de scroll vers le haut
+                            const successDiv = document.createElement('div');
+                            successDiv.id = 'successMessage';
+                            successDiv.innerHTML = `
+                                <div style="
+                                    background: linear-gradient(135deg, #d4edda 0%, #c3e6cb 100%);
+                                    border: 2px solid #28a745;
+                                    border-radius: 12px;
+                                    padding: 1.5rem;
+                                    margin-top: 1.5rem;
+                                    text-align: center;
+                                    animation: fadeIn 0.5s ease;
+                                ">
+                                    <i class="fas fa-check-circle" style="color: #28a745; font-size: 2.5rem; margin-bottom: 0.5rem;"></i>
+                                    <h3 style="color: #155724; margin-bottom: 0.5rem; font-family: 'Cormorant Garamond', serif;">
+                                        Devis effectué avec succès
+                                    </h3>
+                                    <p style="color: #155724; margin: 0;">
+                                        Nous vous recontacterons dans les plus brefs délais.
+                                    </p>
+                                    <p style="color: #155724; font-size: 0.9rem; margin-top: 0.5rem;">
+                                        Référence: <strong>${formData.reference}</strong>
+                                    </p>
+                                </div>
+                            `;
+                            
+                            // Insérer après le bouton
+                            submitBtn.parentNode.insertBefore(successDiv, submitBtn.nextSibling);
+                            
+                            // Scroll doux vers le message (pas vers le haut de page)
+                            successDiv.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                            
+                            // Réinitialiser après 5 secondes
+                            setTimeout(() => {
+                                resetQuote();
+                                quoteForm.reset();
+                                successDiv.remove();
+                                submitBtn.innerHTML = originalBtnText;
+                                submitBtn.disabled = false;
+                            }, 5000);
+                            
+                        } else {
+                            throw new Error(result.error || 'Erreur lors de l\'envoi');
+                        }
+                        
+                    } catch (error) {
+                        console.error('Erreur:', error);
+                        
+                        // Afficher l'erreur dans le formulaire
+                        const errorDiv = document.createElement('div');
+                        errorDiv.innerHTML = `
+                            <div style="
+                                background: #f8d7da;
+                                border: 2px solid #dc3545;
+                                border-radius: 12px;
+                                padding: 1rem;
+                                margin-top: 1rem;
+                                color: #721c24;
+                            ">
+                                <i class="fas fa-exclamation-triangle"></i>
+                                Une erreur est survenue. Veuillez réessayer ou nous contacter au 0492 85 91 27.
+                            </div>
+                        `;
+                        submitBtn.parentNode.insertBefore(errorDiv, submitBtn.nextSibling);
+                        
+                        submitBtn.innerHTML = originalBtnText;
+                        submitBtn.disabled = false;
+                        
+                        setTimeout(() => errorDiv.remove(), 5000);
                     }
-                    
-                    // Calculs TVA
-                    const tva = subtotal * 0.21;
-                    const total = subtotal + tva;
-                    
-                    body += `\n=== TOTAL ===\n`;
-                    body += `Sous-total HT: ${subtotal.toFixed(2).replace('.', ',')} €\n`;
-                    body += `TVA 21%: ${tva.toFixed(2).replace('.', ',')} €\n`;
-                    body += `TOTAL TTC: ${total.toFixed(2).replace('.', ',')} €\n\n`;
-                    
-                    if (message) {
-                        body += `=== COMMENTAIRES ===\n${message}\n\n`;
-                    }
-                    
-                    body += `---\nEnvoyé depuis le formulaire de devis Tessa & D Events\n`;
-                    body += `Signature électronique apposée: OUI\n`;
-                    
-                    // Créer le lien mailto
-                    const subject = `Nouveau devis ${reference} - ${nom}`;
-                    const mailtoLink = `mailto:contact@tessaetdevents.be?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-                    
-                    // Ouvrir le client mail
-                    window.location.href = mailtoLink;
-                    
-                    // Afficher le modal de succès
-                    showModal();
-                    
-                    // Réinitialiser après un court délai
-                    setTimeout(() => {
-                        resetQuote();
-                        quoteForm.reset();
-                    }, 1000);
                 });
             }
         });
 
-        // Fonction pour afficher une erreur dans le modal existant
+        // Fonction pour afficher une erreur dans le modal
         function showErrorModal(message) {
             const modal = document.getElementById('modal');
             const icon = document.getElementById('modalIcon');
@@ -1664,7 +1676,6 @@ Pour toute question: 0492 85 91 27`);
             const text = document.getElementById('modalText');
             const phone = document.getElementById('modalPhone');
             
-            // Changer l'icône et les couleurs pour erreur
             icon.className = 'fas fa-exclamation-circle';
             icon.style.color = '#e74c3c';
             title.textContent = 'Attention';
@@ -1675,13 +1686,12 @@ Pour toute question: 0492 85 91 27`);
             document.body.style.overflow = 'hidden';
         }
 
-        // Modifier closeModal pour réinitialiser les styles du modal
+        // Modifier closeModal pour réinitialiser les styles
         const originalCloseModal = closeModal;
         closeModal = function() {
             document.getElementById('modal').classList.remove('active');
             document.body.style.overflow = '';
             
-            // Réinitialiser les styles après fermeture
             setTimeout(() => {
                 const icon = document.getElementById('modalIcon');
                 const phone = document.getElementById('modalPhone');
