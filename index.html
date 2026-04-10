@@ -367,22 +367,22 @@
 <base target="_blank">
 </head>
 <body>
-    <!-- Modal -->
-    <div class="modal-overlay" id="modal">
-        <div class="modal-content">
-            <i class="fas fa-check-circle"></i>
-            <h3>Devis envoyé avec succès !</h3>
-            <p>Votre devis a été généré et sauvegardé.</p>
-            <p style="margin-top: 1rem; padding: 1rem; background: rgba(212, 165, 165, 0.1); border-radius: 10px; border-left: 3px solid var(--primary);">
-                <i class="fas fa-phone-alt" style="color: var(--primary); margin-right: 0.5rem;"></i>
-                <strong>Nous vous recontacterons très prochainement</strong> au numéro que vous avez fourni pour finaliser votre réservation.
-            </p>
-            <p style="margin-top: 0.8rem; font-size: 0.9rem; color: var(--text-light);">
-                Référence de votre devis : <strong id="modalRef" style="color: var(--primary-dark);"></strong>
-            </p>
-            <button onclick="closeModal()" style="margin-top: 1rem;">Fermer</button>
-        </div>
+    <!-- REMPLACER la section Modal existante (lignes ~650-668) par ceci : -->
+<div class="modal-overlay" id="modal">
+    <div class="modal-content">
+        <i class="fas fa-check-circle" id="modalIcon"></i>
+        <h3 id="modalTitle">Devis envoyé avec succès !</h3>
+        <p id="modalText">Votre devis a été généré et sauvegardé.</p>
+        <p id="modalPhone" style="margin-top: 1rem; padding: 1rem; background: rgba(212, 165, 165, 0.1); border-radius: 10px; border-left: 3px solid var(--primary);">
+            <i class="fas fa-phone-alt" style="color: var(--primary); margin-right: 0.5rem;"></i>
+            <strong>Nous vous recontacterons très prochainement</strong> au numéro que vous avez fourni pour finaliser votre réservation.
+        </p>
+        <p style="margin-top: 0.8rem; font-size: 0.9rem; color: var(--text-light);">
+            Référence de votre devis : <strong id="modalRef" style="color: var(--primary-dark);"></strong>
+        </p>
+        <button onclick="closeModal()" style="margin-top: 1rem;">Fermer</button>
     </div>
+</div>
 
     <!-- Top Bar -->
     <div class="top-bar">
@@ -1590,8 +1590,9 @@ Pour toute question: 0492 85 91 27`);
 
         // Mettre à jour le récapitulatif initial
             updateSummary();
-            
-            // Gestionnaire de soumission du formulaire - VERSION MAILTO FONCTIONNELLE
+          // REMPLACER le gestionnaire de soumission du formulaire (vers la fin du script, dans DOMContentLoaded) par ceci :
+
+// Gestionnaire de soumission du formulaire - VERSION MAILTO FONCTIONNELLE
 const quoteForm = document.getElementById('quoteFormSignature');
 if (quoteForm) {
     quoteForm.addEventListener('submit', async function(e) {
@@ -1730,7 +1731,6 @@ closeModal = function() {
         if (phone) phone.style.display = 'block';
     }, 300);
 };
-
             }
         });
     </script>
