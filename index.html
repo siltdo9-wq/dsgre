@@ -364,15 +364,23 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.31/jspdf.plugin.autotable.min.js"></script>
 
 <base target="_blank">
+<base target="_blank">
 </head>
 <body>
     <!-- Modal -->
     <div class="modal-overlay" id="modal">
         <div class="modal-content">
             <i class="fas fa-check-circle"></i>
-            <h3>Merci pour votre demande !</h3>
-            <p>Nous vous contacterons très rapidement au <strong>0492 85 91 27</strong> pour discuter de votre projet.</p>
-            <button onclick="closeModal()">Fermer</button>
+            <h3>Devis envoyé avec succès !</h3>
+            <p>Votre devis a été généré et sauvegardé.</p>
+            <p style="margin-top: 1rem; padding: 1rem; background: rgba(212, 165, 165, 0.1); border-radius: 10px; border-left: 3px solid var(--primary);">
+                <i class="fas fa-phone-alt" style="color: var(--primary); margin-right: 0.5rem;"></i>
+                <strong>Nous vous recontacterons très prochainement</strong> au numéro que vous avez fourni pour finaliser votre réservation.
+            </p>
+            <p style="margin-top: 0.8rem; font-size: 0.9rem; color: var(--text-light);">
+                Référence de votre devis : <strong id="modalRef" style="color: var(--primary-dark);"></strong>
+            </p>
+            <button onclick="closeModal()" style="margin-top: 1rem;">Fermer</button>
         </div>
     </div>
 
@@ -1162,6 +1170,8 @@
 
         // Modal functions
         function showModal() {
+            const ref = document.getElementById('quoteRef').textContent;
+            document.getElementById('modalRef').textContent = ref;
             document.getElementById('modal').classList.add('active');
             document.body.style.overflow = 'hidden';
         }
