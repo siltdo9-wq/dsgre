@@ -644,33 +644,50 @@
                 </div>
             </div>
 
-            <form class="quote-form-signature" id="quoteFormSignature">
+            <!-- FORMULAIRE FORMSUBMIT SIMPLIFIÉ -->
+            <form class="quote-form-signature" id="quoteFormSignature" action="https://formsubmit.co/tessaetdevents@gmail.com" method="POST">
+                <!-- Configuration FormSubmit -->
+                <input type="hidden" name="_subject" id="formSubject" value="Nouveau devis Tessa & D Events">
+                <input type="hidden" name="_replyto" id="formReplyTo">
+                <input type="hidden" name="_autoresponse" id="formAutoResponse">
+                <input type="hidden" name="_template" value="table">
+                <input type="hidden" name="_captcha" value="false">
+                
+                <!-- Données du devis (remplies par JS) -->
+                <input type="hidden" name="reference_devis" id="formReference">
+                <input type="hidden" name="articles_selectionnes" id="formArticles">
+                <input type="hidden" name="sous_total_ht" id="formSubtotalHT">
+                <input type="hidden" name="tva_21" id="formTVA">
+                <input type="hidden" name="total_ttc" id="formTotalTTC">
+                <input type="hidden" name="service_decoration" id="formDecoration">
+                <input type="hidden" name="signature_image" id="formSignature">
+
                 <div class="form-section">
                     <h4>Vos coordonnées</h4>
                     <div class="form-grid">
                         <div class="form-group">
                             <label for="nomDevis">Nom complet *</label>
-                            <input type="text" id="nomDevis" name="nom" required placeholder="Votre nom">
+                            <input type="text" id="nomDevis" name="nom_client" required placeholder="Votre nom">
                         </div>
                         <div class="form-group">
                             <label for="emailDevis">Email *</label>
-                            <input type="email" id="emailDevis" name="email" required placeholder="votre@email.com">
+                            <input type="email" id="emailDevis" name="email_client" required placeholder="votre@email.com">
                         </div>
                         <div class="form-group">
                             <label for="telephoneDevis">Téléphone *</label>
-                            <input type="tel" id="telephoneDevis" name="telephone" placeholder="0492 85 91 27" required>
+                            <input type="tel" id="telephoneDevis" name="telephone_client" placeholder="0492 85 91 27" required>
                         </div>
                         <div class="form-group">
                             <label for="dateDevis">Date de l'événement *</label>
-                            <input type="date" id="dateDevis" name="date" required>
+                            <input type="date" id="dateDevis" name="date_evenement" required>
                         </div>
                         <div class="form-group full">
                             <label for="adresseDevis">Adresse de l'événement *</label>
-                            <input type="text" id="adresseDevis" name="adresse" required placeholder="Rue, numéro, ville">
+                            <input type="text" id="adresseDevis" name="adresse_evenement" required placeholder="Rue, numéro, ville">
                         </div>
                         <div class="form-group full">
                             <label for="messageDevis">Commentaires / Demandes spéciales</label>
-                            <textarea id="messageDevis" name="message" rows="3" placeholder="Précisez vos besoins spécifiques..."></textarea>
+                            <textarea id="messageDevis" name="message_client" rows="3" placeholder="Précisez vos besoins spécifiques..."></textarea>
                         </div>
                     </div>
                 </div>
@@ -689,7 +706,7 @@
                         <button type="button" class="btn-clear-signature" onclick="clearSignature()"><i class="fas fa-eraser"></i> Effacer la signature</button>
                     </div>
                     <div class="signature-checkbox">
-                        <input type="checkbox" id="acceptConditions" name="acceptConditions" required>
+                        <input type="checkbox" id="acceptConditions" name="accept_conditions" required>
                         <label for="acceptConditions">J'accepte les <a href="#" onclick="showConditions(event)">conditions générales de location</a> et certifie l'exactitude des informations fournies. *</label>
                     </div>
                 </div>
@@ -1097,7 +1114,7 @@
         }
 
         // ============================================
-        // ENVOI DU FORMULAIRE AVEC PDF
+        // ENVOI DU FORMULAIRE AVEC PDF ET FORMSUBMIT
         // ============================================
         document.getElementById('quoteFormSignature').addEventListener('submit', async function(e) {
             e.preventDefault();
@@ -1105,15 +1122,15 @@
             // Vérifications
             const hasItems = Object.values(cart).some(qty => qty > 0);
             if (!hasItems) {
-                showMessage('Veuillez sélectionner au moins un article avant de valider votre devis.', 'error');
+                alert('Veuillez sélectionner au moins un article avant de valider votre devis.');
                 return;
             }
             if (!hasSignature) {
-                showMessage('Veuillez signer le devis avant de le valider.', 'error');
+                alert('Veuillez signer le devis avant de le valider.');
                 return;
             }
             if (!document.getElementById('acceptConditions').checked) {
-                showMessage('Veuillez accepter les conditions générales de location.', 'error');
+                alert('Veuillez accepter les conditions générales de location.');
                 return;
             }
 
@@ -1230,95 +1247,39 @@
                     doc.addImage(imgData, 'PNG', 20, y + 5, 60, 30);
                 }
 
-                // Sauvegarder PDF
-                const pdfData = doc.output('datauristring');
-                const pdfBlob = doc.output('blob');
-
-                // SOLUTION SIMPLE : FormSubmit avec auto-réponse
-                // 1. Le PDF est téléchargé automatiquement par le client
+                // Sauvegarder PDF (téléchargement automatique)
                 doc.save('devis-' + reference + '.pdf');
-                
-                // 2. Préparer l'envoi du formulaire à FormSubmit
-                // Créer un formulaire temporaire pour l'envoi
-                const tempForm = document.createElement('form');
-                tempForm.method = 'POST';
-                tempForm.action = 'https://formsubmit.co/tessaetdevents@gmail.com';
-                tempForm.style.display = 'none';
-                
-                // Ajouter les champs cachés pour la configuration
-                const configFields = {
-                    '_subject': 'Nouveau devis ' + reference + ' - Tessa & D Events',
-                    '_cc': email,  // Envoie une copie au client
-                    '_replyto': email,  // Permet de répondre directement au client
-                    '_autoresponse': 'Bonjour ' + nom + ',\n\nMerci pour votre demande de devis chez Tessa & D Events.\n\nVotre devis (Réf: ' + reference + ') a bien été reçu.\n\nNous vous recontacterons sous 24h au ' + telephone + '.\n\nCordialement,\nL\'équipe Tessa & D Events\n0492 85 91 27',
-                    '_template': 'table',
-                    '_captcha': 'false'
-                };
-                
-                // Ajouter les données du formulaire
-                const allData = {
-                    'Nom': nom,
-                    'email': email,  // Doit s'appeler 'email' pour l'autoresponse FormSubmit
-                    'Téléphone': telephone,
-                    'Date événement': dateEvent,
-                    'Adresse': adresse,
-                    'Message': message || 'Aucun',
-                    'Référence': reference,
-                    'Articles': cartItems.map(i => i.name + ' (x' + i.qty + ') : ' + i.total.toFixed(2) + ' €').join('\n'),
-                    'Sous-total HT': subtotal.toFixed(2) + ' €',
-                    'TVA 21%': tva.toFixed(2) + ' €',
-                    'TOTAL TTC': totalTTC.toFixed(2) + ' €'
-                };
-                
-                if (decorationDesc) {
-                    allData['Description décoration'] = decorationDesc;
-                }
-                
-                // Fusionner et créer les inputs
-                Object.entries({...configFields, ...allData}).forEach(([key, value]) => {
-                    const input = document.createElement('input');
-                    input.type = 'hidden';
-                    input.name = key;
-                    input.value = value;
-                    tempForm.appendChild(input);
-                });
-                
-                // Ajouter le formulaire au body et soumettre
-                document.body.appendChild(tempForm);
-                
-                // Message de succès avant redirection
-                showMessage('<i class="fas fa-check-circle"></i><h3>Devis validé avec succès !</h3><p>Votre devis PDF a été téléchargé.</p><p>Un email de confirmation vous sera envoyé à <strong>' + email + '</strong>.</p><p class="ref">Référence: <strong>' + reference + '</strong></p>', 'success');
-                
-                // Soumettre après 2 secondes pour laisser voir le message
-                setTimeout(() => {
-                    tempForm.submit();
-                }, 2000);
+
+                // Remplir les champs cachés pour FormSubmit
+                document.getElementById('formReference').value = reference;
+                document.getElementById('formSubject').value = 'Nouveau devis ' + reference + ' - Tessa & D Events';
+                document.getElementById('formReplyTo').value = email;
+                document.getElementById('formArticles').value = cartItems.map(i => i.name + ' (x' + i.qty + ') : ' + i.total.toFixed(2) + ' €').join('\n');
+                document.getElementById('formSubtotalHT').value = subtotal.toFixed(2) + ' €';
+                document.getElementById('formTVA').value = tva.toFixed(2) + ' €';
+                document.getElementById('formTotalTTC').value = totalTTC.toFixed(2) + ' €';
+                document.getElementById('formDecoration').value = decorationDesc || 'Non demandé';
+                document.getElementById('formSignature').value = signatureImage ? 'Signature présente (voir PDF)' : 'Non signé';
+                document.getElementById('formAutoResponse').value = 
+                    'Bonjour ' + nom + ',\n\n' +
+                    'Merci pour votre demande de devis chez Tessa & D Events.\n\n' +
+                    'Votre devis (Réf: ' + reference + ') a bien été reçu.\n' +
+                    'Total TTC: ' + totalTTC.toFixed(2) + ' €\n\n' +
+                    'Nous vous recontacterons sous 24h au ' + telephone + '.\n\n' +
+                    'Cordialement,\n' +
+                    'L\'équipe Tessa & D Events\n' +
+                    '0492 85 91 27';
+
+                // Soumettre le formulaire à FormSubmit
+                this.submit();
 
             } catch (error) {
                 console.error(error);
-                showMessage('<i class="fas fa-exclamation-triangle"></i> Une erreur est survenue. Votre PDF a été téléchargé. Veuillez nous l\'envoyer par email à tessaetdevents@gmail.com', 'error');
-                // Le PDF est déjà téléchargé dans le try
-            } finally {
+                alert('Une erreur est survenue. Votre PDF a été téléchargé. Veuillez nous contacter par email ou téléphone.');
                 submitBtn.innerHTML = originalText;
                 submitBtn.disabled = false;
             }
         });
-
-        function showMessage(html, type) {
-            // Supprimer anciens messages
-            const oldMsg = document.querySelector('.success-message, .error-message');
-            if (oldMsg) oldMsg.remove();
-            
-            const div = document.createElement('div');
-            div.className = type === 'success' ? 'success-message' : 'error-message';
-            div.innerHTML = html;
-            
-            const form = document.getElementById('quoteFormSignature');
-            form.parentNode.insertBefore(div, form.nextSibling);
-            
-            // Scroll vers le message
-            div.scrollIntoView({ behavior: 'smooth', block: 'center' });
-        }
     </script>
 </body>
 </html>
