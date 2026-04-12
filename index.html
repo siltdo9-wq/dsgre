@@ -131,7 +131,40 @@
         .product-controls { display: flex; align-items: center; gap: 0.5rem; }
         .qty-btn { width: 36px; height: 36px; border-radius: 10px; border: 2px solid var(--accent); background: var(--white); color: var(--primary); cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.3s ease; font-size: 0.8rem; }
         .qty-btn:hover { background: var(--primary); color: var(--white); border-color: var(--primary); }
-        .qty-input { width: 60px; height: 36px; text-align: center; border: 2px solid var(--accent); border-radius: 10px; font-family: 'Montserrat', sans-serif; font-weight: 600; font-size: 1rem; color: var(--text-dark); background: var(--white); }
+        
+        /* CHAMP QUANTITÉ MODIFIÉ - ÉDITABLE DIRECTEMENT */
+        .qty-input { 
+            width: 70px; 
+            height: 36px; 
+            text-align: center; 
+            border: 2px solid var(--accent); 
+            border-radius: 10px; 
+            font-family: 'Montserrat', sans-serif; 
+            font-weight: 600; 
+            font-size: 1rem; 
+            color: var(--text-dark); 
+            background: var(--white);
+            cursor: text;
+            transition: all 0.3s ease;
+        }
+        .qty-input:hover {
+            border-color: var(--primary);
+        }
+        .qty-input:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(212, 165, 165, 0.1);
+        }
+        /* Supprimer les flèches du input number */
+        .qty-input::-webkit-outer-spin-button,
+        .qty-input::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+        .qty-input[type=number] {
+            -moz-appearance: textfield;
+        }
+        
         .remove-btn { width: 36px; height: 36px; border-radius: 50%; border: none; background: transparent; color: var(--text-light); cursor: pointer; display: flex; align-items: center; justify-content: center; margin-left: auto; transition: all 0.3s ease; font-size: 1.1rem; }
         .remove-btn:hover { color: #e74c3c; transform: scale(1.1); }
 
@@ -527,6 +560,7 @@
             </div>
 
             <div class="products-list" id="productsList">
+                <!-- Chaise Chiavari Or -->
                 <div class="product-item" data-id="chiavari-or" data-price="4.50">
                     <div class="product-image">
                         <img src="https://images.unsplash.com/photo-1478146059778-26028b07395a?w=200" alt="Chaise Chiavari Or" loading="lazy">
@@ -539,13 +573,14 @@
                         <div class="product-price">4,50 € / unité</div>
                         <div class="product-controls">
                             <button type="button" class="qty-btn minus" onclick="updateQuantity('chiavari-or', -1)"><i class="fas fa-minus"></i></button>
-                            <input type="number" class="qty-input" id="qty-chiavari-or" value="0" min="0" readonly>
+                            <input type="number" class="qty-input" id="qty-chiavari-or" value="0" min="0" onchange="validateAndUpdateQuantity('chiavari-or', this.value)">
                             <button type="button" class="qty-btn plus" onclick="updateQuantity('chiavari-or', 1)"><i class="fas fa-plus"></i></button>
                             <button type="button" class="remove-btn" onclick="resetProduct('chiavari-or')"><i class="fas fa-minus-circle"></i></button>
                         </div>
                     </div>
                 </div>
 
+                <!-- Chaise Chiavari Transparente -->
                 <div class="product-item" data-id="chiavari-transparente" data-price="5.00">
                     <div class="product-image">
                         <img src="https://images.unsplash.com/photo-1478146059778-26028b07395a?w=200" alt="Chaise Chiavari Transparente" loading="lazy">
@@ -558,13 +593,14 @@
                         <div class="product-price">5,00 € / unité</div>
                         <div class="product-controls">
                             <button type="button" class="qty-btn minus" onclick="updateQuantity('chiavari-transparente', -1)"><i class="fas fa-minus"></i></button>
-                            <input type="number" class="qty-input" id="qty-chiavari-transparente" value="0" min="0" readonly>
+                            <input type="number" class="qty-input" id="qty-chiavari-transparente" value="0" min="0" onchange="validateAndUpdateQuantity('chiavari-transparente', this.value)">
                             <button type="button" class="qty-btn plus" onclick="updateQuantity('chiavari-transparente', 1)"><i class="fas fa-plus"></i></button>
                             <button type="button" class="remove-btn" onclick="resetProduct('chiavari-transparente')"><i class="fas fa-minus-circle"></i></button>
                         </div>
                     </div>
                 </div>
 
+                <!-- Table ronde -->
                 <div class="product-item" data-id="table-ronde" data-price="12.00">
                     <div class="product-image">
                         <img src="https://images.unsplash.com/photo-1519741497674-611481863552?w=200" alt="Table ronde" loading="lazy">
@@ -577,13 +613,14 @@
                         <div class="product-price">12,00 € / unité</div>
                         <div class="product-controls">
                             <button type="button" class="qty-btn minus" onclick="updateQuantity('table-ronde', -1)"><i class="fas fa-minus"></i></button>
-                            <input type="number" class="qty-input" id="qty-table-ronde" value="0" min="0" readonly>
+                            <input type="number" class="qty-input" id="qty-table-ronde" value="0" min="0" onchange="validateAndUpdateQuantity('table-ronde', this.value)">
                             <button type="button" class="qty-btn plus" onclick="updateQuantity('table-ronde', 1)"><i class="fas fa-plus"></i></button>
                             <button type="button" class="remove-btn" onclick="resetProduct('table-ronde')"><i class="fas fa-minus-circle"></i></button>
                         </div>
                     </div>
                 </div>
 
+                <!-- Mange-debout -->
                 <div class="product-item" data-id="mange-debout" data-price="12.00">
                     <div class="product-image">
                         <img src="https://images.unsplash.com/photo-1465495976277-4387d4b0b4c6?w=200" alt="Mange-debout" loading="lazy">
@@ -596,13 +633,14 @@
                         <div class="product-price">12,00 € / unité</div>
                         <div class="product-controls">
                             <button type="button" class="qty-btn minus" onclick="updateQuantity('mange-debout', -1)"><i class="fas fa-minus"></i></button>
-                            <input type="number" class="qty-input" id="qty-mange-debout" value="0" min="0" readonly>
+                            <input type="number" class="qty-input" id="qty-mange-debout" value="0" min="0" onchange="validateAndUpdateQuantity('mange-debout', this.value)">
                             <button type="button" class="qty-btn plus" onclick="updateQuantity('mange-debout', 1)"><i class="fas fa-plus"></i></button>
                             <button type="button" class="remove-btn" onclick="resetProduct('mange-debout')"><i class="fas fa-minus-circle"></i></button>
                         </div>
                     </div>
                 </div>
 
+                <!-- Arche florale -->
                 <div class="product-item" data-id="arche-florale" data-price="350.00">
                     <div class="product-image">
                         <img src="https://images.unsplash.com/photo-1519225421980-715cb0215aed?w=200" alt="Arche florale" loading="lazy">
@@ -615,13 +653,14 @@
                         <div class="product-price">350,00 € / unité</div>
                         <div class="product-controls">
                             <button type="button" class="qty-btn minus" onclick="updateQuantity('arche-florale', -1)"><i class="fas fa-minus"></i></button>
-                            <input type="number" class="qty-input" id="qty-arche-florale" value="0" min="0" readonly>
+                            <input type="number" class="qty-input" id="qty-arche-florale" value="0" min="0" onchange="validateAndUpdateQuantity('arche-florale', this.value)">
                             <button type="button" class="qty-btn plus" onclick="updateQuantity('arche-florale', 1)"><i class="fas fa-plus"></i></button>
                             <button type="button" class="remove-btn" onclick="resetProduct('arche-florale')"><i class="fas fa-minus-circle"></i></button>
                         </div>
                     </div>
                 </div>
 
+                <!-- Centre de table -->
                 <div class="product-item" data-id="centre-table" data-price="45.00">
                     <div class="product-image">
                         <img src="https://images.unsplash.com/photo-1522673607200-164d1b6ce486?w=200" alt="Centre de table" loading="lazy">
@@ -634,13 +673,14 @@
                         <div class="product-price">45,00 € / unité</div>
                         <div class="product-controls">
                             <button type="button" class="qty-btn minus" onclick="updateQuantity('centre-table', -1)"><i class="fas fa-minus"></i></button>
-                            <input type="number" class="qty-input" id="qty-centre-table" value="0" min="0" readonly>
+                            <input type="number" class="qty-input" id="qty-centre-table" value="0" min="0" onchange="validateAndUpdateQuantity('centre-table', this.value)">
                             <button type="button" class="qty-btn plus" onclick="updateQuantity('centre-table', 1)"><i class="fas fa-plus"></i></button>
                             <button type="button" class="remove-btn" onclick="resetProduct('centre-table')"><i class="fas fa-minus-circle"></i></button>
                         </div>
                     </div>
                 </div>
                 
+                <!-- Service décoration -->
                 <div class="product-item service-option-item" data-id="service-decoration" data-price="100.00" id="serviceDecorationItem">
                     <div class="product-image">
                         <img src="https://images.unsplash.com/photo-1519225421980-715cb0215aed?w=200" alt="Service décoration" loading="lazy">
@@ -917,7 +957,7 @@
         });
 
         // ============================================
-        // SYSTÈME DE DEVIS
+        // SYSTÈME DE DEVIS - QUANTITÉ ÉDITABLE
         // ============================================
         let cart = {};
         let decorationServiceActive = false;
@@ -933,15 +973,37 @@
             return day + month + year.toString().slice(-2) + '-' + random;
         }
 
+        // Fonction pour les boutons + et -
         function updateQuantity(productId, change) {
             const input = document.getElementById('qty-' + productId);
             const currentQty = parseInt(input.value) || 0;
             const newQty = Math.max(0, currentQty + change);
             input.value = newQty;
-            cart[productId] = newQty;
+            syncQuantity(productId, newQty);
+        }
+
+        // Fonction pour la saisie directe dans le champ
+        function validateAndUpdateQuantity(productId, value) {
+            let qty = parseInt(value) || 0;
+            // Empêcher les négatifs
+            if (qty < 0) qty = 0;
+            // Limiter à 9999 (raisonnable pour un mariage)
+            if (qty > 9999) qty = 9999;
+            
+            const input = document.getElementById('qty-' + productId);
+            input.value = qty;
+            syncQuantity(productId, qty);
+        }
+
+        // Synchronise la quantité avec le panier et l'interface
+        function syncQuantity(productId, qty) {
+            cart[productId] = qty;
             const productItem = document.querySelector('[data-id="' + productId + '"]');
-            if (newQty > 0) productItem.classList.add('selected');
-            else productItem.classList.remove('selected');
+            if (qty > 0) {
+                productItem.classList.add('selected');
+            } else {
+                productItem.classList.remove('selected');
+            }
             updateSummary();
         }
 
