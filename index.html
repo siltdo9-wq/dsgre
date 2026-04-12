@@ -5,15 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Tessa & D Events | Location Mobilier & Décoration Mariage Belgique</title>
     
-    <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
-    
-    <!-- Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
-    <!-- jsPDF pour PDF -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     
     <style>
@@ -161,15 +156,7 @@
         .form-group input, .form-group select, .form-group textarea { width: 100%; padding: 0.8rem; border: 2px solid var(--accent); border-radius: 8px; font-family: 'Montserrat', sans-serif; transition: all 0.3s ease; font-size: 0.95rem; background: var(--white); }
         .form-group input:focus, .form-group select:focus, .form-group textarea:focus { outline: none; border-color: var(--primary); box-shadow: 0 0 0 3px rgba(212, 165, 165, 0.1); }
         .form-group textarea { resize: vertical; min-height: 100px; }
-        
-        .form-group input[type="date"] {
-            width: 100%;
-            max-width: 100%;
-            box-sizing: border-box;
-            -webkit-appearance: none;
-            appearance: none;
-            font-size: 0.95rem;
-        }
+        .form-group input[type="date"] { width: 100%; max-width: 100%; box-sizing: border-box; -webkit-appearance: none; appearance: none; font-size: 0.95rem; }
 
         .signature-section { margin-top: 2rem; padding-top: 2rem; border-top: 2px solid var(--accent); }
         .signature-section h4 { font-family: 'Cormorant Garamond', serif; font-size: 1.3rem; color: var(--text-dark); margin-bottom: 0.5rem; }
@@ -194,13 +181,59 @@
         .btn-submit-devis:disabled { opacity: 0.7; cursor: not-allowed; }
         .form-note { text-align: center; color: var(--text-light); font-size: 0.85rem; margin-top: 1rem; }
 
-        .success-message { background: linear-gradient(135deg, #d4edda 0%, #c3e6cb 100%); border: 2px solid #28a745; border-radius: 12px; padding: 1.5rem; margin-top: 1.5rem; text-align: center; animation: fadeIn 0.5s ease; }
-        .success-message i { color: #28a745; font-size: 2.5rem; margin-bottom: 0.5rem; }
-        .success-message h3 { color: #155724; margin-bottom: 0.5rem; font-family: 'Cormorant Garamond', serif; }
-        .success-message p { color: #155724; margin: 0; }
-        .success-message .ref { color: #155724; font-size: 0.9rem; margin-top: 0.5rem; }
-
-        .error-message { background: #f8d7da; border: 2px solid #dc3545; border-radius: 12px; padding: 1rem; margin-top: 1rem; color: #721c24; text-align: center; }
+        /* Message de succès et bouton PDF */
+        .success-container {
+            background: linear-gradient(135deg, #d4edda 0%, #c3e6cb 100%);
+            border: 2px solid #28a745;
+            border-radius: 15px;
+            padding: 2rem;
+            margin-top: 1.5rem;
+            text-align: center;
+            animation: fadeIn 0.5s ease;
+        }
+        
+        .success-container i { color: #28a745; font-size: 3rem; margin-bottom: 1rem; }
+        .success-container h3 { color: #155724; margin-bottom: 0.5rem; font-family: 'Cormorant Garamond', serif; font-size: 1.5rem; }
+        .success-container p { color: #155724; margin: 0.5rem 0; font-size: 0.95rem; }
+        .success-container .ref { color: #155724; font-size: 1rem; margin: 1rem 0; font-weight: 600; background: rgba(255,255,255,0.5); padding: 0.5rem 1rem; border-radius: 25px; display: inline-block; }
+        
+        .btn-download-pdf {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            color: var(--white);
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            font-size: 1rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-top: 1.5rem;
+            box-shadow: 0 4px 15px rgba(212, 165, 165, 0.4);
+        }
+        
+        .btn-download-pdf:hover { transform: translateY(-2px); box-shadow: 0 8px 25px rgba(212, 165, 165, 0.5); }
+        
+        .btn-new-quote {
+            background: transparent;
+            color: #155724;
+            border: 2px solid #155724;
+            padding: 0.8rem 1.5rem;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-top: 1rem;
+            margin-left: 0.5rem;
+        }
+        
+        .btn-new-quote:hover { background: #155724; color: var(--white); }
 
         @keyframes fadeIn { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
 
@@ -251,91 +284,6 @@
         .fade-in { opacity: 0; transform: translateY(20px); transition: all 0.5s ease; }
         .fade-in.visible { opacity: 1; transform: translateY(0); }
 
-        /* Styles pour le message de succès et bouton PDF */
-        .success-container {
-            background: linear-gradient(135deg, #d4edda 0%, #c3e6cb 100%);
-            border: 2px solid #28a745;
-            border-radius: 15px;
-            padding: 2rem;
-            margin-top: 1.5rem;
-            text-align: center;
-            animation: fadeIn 0.5s ease;
-        }
-        
-        .success-container i {
-            color: #28a745;
-            font-size: 3rem;
-            margin-bottom: 1rem;
-        }
-        
-        .success-container h3 {
-            color: #155724;
-            margin-bottom: 0.5rem;
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 1.5rem;
-        }
-        
-        .success-container p {
-            color: #155724;
-            margin: 0.5rem 0;
-            font-size: 0.95rem;
-        }
-        
-        .success-container .ref {
-            color: #155724;
-            font-size: 1rem;
-            margin: 1rem 0;
-            font-weight: 600;
-            background: rgba(255,255,255,0.5);
-            padding: 0.5rem 1rem;
-            border-radius: 25px;
-            display: inline-block;
-        }
-        
-        .btn-download-pdf {
-            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
-            color: var(--white);
-            border: none;
-            padding: 1rem 2rem;
-            border-radius: 50px;
-            font-size: 1rem;
-            font-weight: 500;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            margin-top: 1.5rem;
-            box-shadow: 0 4px 15px rgba(212, 165, 165, 0.4);
-        }
-        
-        .btn-download-pdf:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(212, 165, 165, 0.5);
-        }
-        
-        .btn-new-quote {
-            background: transparent;
-            color: #155724;
-            border: 2px solid #155724;
-            padding: 0.8rem 1.5rem;
-            border-radius: 50px;
-            font-size: 0.9rem;
-            font-weight: 500;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            margin-top: 1rem;
-            margin-left: 0.5rem;
-        }
-        
-        .btn-new-quote:hover {
-            background: #155724;
-            color: var(--white);
-        }
-
         @media (max-width: 968px) {
             .about-content, .contact-content { grid-template-columns: 1fr; gap: 2.5rem; }
             .values { grid-template-columns: 1fr; }
@@ -367,20 +315,16 @@
             .remove-btn { margin-left: 0; }
             .quote-form-signature { padding: 1.5rem 1rem; overflow-x: hidden; width: 100%; }
             .signature-box { height: 120px; }
-            
             .form-grid { display: flex; flex-direction: column; gap: 1.2rem; width: 100%; }
             .form-group { width: 100%; min-width: 0; }
             .form-group input[type="date"] { font-size: 16px; width: 100%; max-width: 100%; }
-            
             .map-container { min-height: 280px; }
             .footer-content { grid-template-columns: 1fr; gap: 1.8rem; text-align: center; }
             .social-links { justify-content: center; }
-            
             .success-container { padding: 1.5rem 1rem; }
             .btn-download-pdf, .btn-new-quote { width: 100%; margin-left: 0; }
         }
     </style>
-<base target="_blank">
 </head>
 <body>
     <!-- Top Bar -->
@@ -731,18 +675,11 @@
                 </div>
             </div>
 
-            <!-- FORMULAIRE FORMSPREE - SOLUTION SIMPLE -->
-            <form class="quote-form-signature" id="quoteFormSignature" 
-                  action="https://formspree.io/f/xnjlapqy" 
-                  method="POST">
-                
-                <!-- Configuration Formspree -->
+            <!-- FORMULAIRE FORMSPREE -->
+            <form class="quote-form-signature" id="quoteFormSignature" action="https://formspree.io/f/xnjlapqy" method="POST">
                 <input type="hidden" name="_subject" id="formSubject" value="Nouveau devis Tessa & D Events">
                 <input type="hidden" name="_replyto" id="formReplyTo">
-                <!-- Désactiver la page de remerciement par défaut de Formspree -->
-                <input type="hidden" name="_next" value="">
                 
-                <!-- Données du devis (remplies par JS) -->
                 <input type="hidden" name="reference_devis" id="formReference">
                 <input type="hidden" name="articles_selectionnes" id="formArticles">
                 <input type="hidden" name="sous_total_ht" id="formSubtotalHT">
@@ -807,10 +744,8 @@
                 <p class="form-note"><i class="fas fa-info-circle"></i>Votre devis sera envoyé à notre équipe. Vous pourrez télécharger le PDF après confirmation.</p>
             </form>
 
-            <!-- Conteneur pour le message de succès (caché par défaut) -->
-            <div id="successContainer" style="display: none;">
-                <!-- Le contenu sera injecté par JavaScript -->
-            </div>
+            <!-- Conteneur pour le message de succès -->
+            <div id="successContainer" style="display: none;"></div>
         </div>
     </section>
 
@@ -990,7 +925,7 @@
         let cart = {};
         let decorationServiceActive = false;
         let hasSignature = false;
-        let currentQuoteData = null; // Stockage des données pour le PDF
+        let currentQuoteData = null;
 
         function generateReference() {
             const date = new Date();
@@ -1209,7 +1144,7 @@
         }
 
         // ============================================
-        // GÉNÉRATION PDF (pour téléchargement ultérieur)
+        // GÉNÉRATION PDF
         // ============================================
         async function generatePDF() {
             if (!currentQuoteData) {
@@ -1220,7 +1155,6 @@
             const { jsPDF } = window.jspdf;
             const doc = new jsPDF();
             
-            // En-tête
             doc.setFontSize(20);
             doc.text('TESSA & D EVENTS', 20, 30);
             doc.setFontSize(12);
@@ -1229,14 +1163,12 @@
             doc.text('Tél: 0492 85 91 27 | Email: tessaetdevents@gmail.com', 20, 48);
             doc.line(20, 55, 190, 55);
 
-            // Référence
             doc.setFontSize(16);
             doc.text('DEVIS', 20, 70);
             doc.setFontSize(10);
             doc.text('Réf: ' + currentQuoteData.reference, 150, 70);
             doc.text('Date: ' + new Date().toLocaleDateString('fr-BE'), 150, 78);
 
-            // Client
             doc.setFontSize(12);
             doc.text('INFORMATIONS CLIENT', 20, 95);
             doc.setFontSize(10);
@@ -1246,7 +1178,6 @@
             doc.text('Date événement: ' + currentQuoteData.dateEvent, 20, 129);
             doc.text('Adresse: ' + currentQuoteData.adresse, 20, 137);
 
-            // Articles
             doc.setFontSize(12);
             doc.text('ARTICLES SÉLECTIONNÉS', 20, 155);
             let y = 165;
@@ -1257,7 +1188,6 @@
                 y += 8;
             });
 
-            // Décoration
             if (currentQuoteData.decorationDesc) {
                 y += 5;
                 doc.setFontSize(12);
@@ -1269,7 +1199,6 @@
                 y += splitDesc.length * 5 + 10;
             }
 
-            // Totaux
             y += 10;
             doc.line(130, y, 190, y);
             y += 8;
@@ -1281,7 +1210,6 @@
             doc.setFontSize(12);
             doc.text('TOTAL TTC: ' + currentQuoteData.totalTTC.toFixed(2).replace('.', ',') + ' €', 130, y);
 
-            // Signature
             if (currentQuoteData.signatureImage) {
                 y += 20;
                 doc.setFontSize(10);
@@ -1290,12 +1218,11 @@
                 doc.addImage(imgData, 'PNG', 20, y + 5, 60, 30);
             }
 
-            // Sauvegarder PDF
             doc.save('devis-' + currentQuoteData.reference + '.pdf');
         }
 
         // ============================================
-        // ENVOI DU FORMULAIRE - SOLUTION SIMPLIFIÉE
+        // ENVOI DU FORMULAIRE - SOLUTION SIMPLE ET FIABLE
         // ============================================
         document.getElementById('quoteFormSignature').addEventListener('submit', async function(e) {
             e.preventDefault();
@@ -1327,7 +1254,6 @@
                 const telephone = document.getElementById('telephoneDevis').value;
                 const dateEvent = document.getElementById('dateDevis').value;
                 const adresse = document.getElementById('adresseDevis').value;
-                const message = document.getElementById('messageDevis').value;
                 const reference = document.getElementById('quoteRef').textContent;
                 const signatureImage = await getSignatureImage();
 
@@ -1356,18 +1282,8 @@
 
                 // Stocker les données pour le PDF ultérieur
                 currentQuoteData = {
-                    reference,
-                    nom,
-                    email,
-                    telephone,
-                    dateEvent,
-                    adresse,
-                    cartItems,
-                    subtotal,
-                    tva,
-                    totalTTC,
-                    decorationDesc,
-                    signatureImage
+                    reference, nom, email, telephone, dateEvent, adresse,
+                    cartItems, subtotal, tva, totalTTC, decorationDesc, signatureImage
                 };
 
                 // Remplir les champs cachés pour Formspree
@@ -1381,30 +1297,33 @@
                 document.getElementById('formDecoration').value = decorationDesc || 'Non demandé';
                 document.getElementById('formSignature').value = signatureImage ? 'Signature présente (voir PDF)' : 'Non signé';
 
-                // SOLUTION 1: Utiliser fetch avec mode no-cors (ne permet pas de voir la réponse mais envoie quand même)
-                // C'est une solution de contournement pour les problèmes CORS avec Formspree
+                // SOLUTION: Soumission via iframe invisible (contourne CORS)
+                const form = this;
+                const iframe = document.createElement('iframe');
+                iframe.name = 'formspree-iframe-' + Date.now();
+                iframe.style.display = 'none';
+                document.body.appendChild(iframe);
                 
-                const formData = new FormData(this);
+                // Configurer le formulaire pour l'iframe
+                form.target = iframe.name;
                 
-                // Essayer d'envoyer avec fetch
-                fetch(this.action, {
-                    method: 'POST',
-                    body: formData,
-                    headers: {
-                        'Accept': 'application/json'
-                    }
-                }).then(response => {
-                    if (response.ok) {
+                // Gérer la réponse
+                iframe.onload = function() {
+                    // Succès!
+                    showSuccessMessage(reference, nom);
+                    document.body.removeChild(iframe);
+                };
+                
+                // Timeout de secours si l'iframe ne charge pas
+                setTimeout(() => {
+                    if (document.body.contains(iframe)) {
                         showSuccessMessage(reference, nom);
-                    } else {
-                        // Si Formspree renvoie une erreur, on essaie la méthode iframe
-                        throw new Error('Erreur Formspree');
+                        document.body.removeChild(iframe);
                     }
-                }).catch(error => {
-                    // Si fetch échoue (CORS), on utilise la méthode iframe
-                    console.log('Fetch failed, using iframe method');
-                    submitWithIframe(this, reference, nom);
-                });
+                }, 3000);
+                
+                // Soumettre
+                form.submit();
 
             } catch (error) {
                 console.error(error);
@@ -1413,30 +1332,6 @@
                 submitBtn.disabled = false;
             }
         });
-
-        // Méthode alternative avec iframe (contourne les problèmes CORS)
-        function submitWithIframe(form, reference, nom) {
-            // Créer un iframe invisible
-            const iframe = document.createElement('iframe');
-            iframe.name = 'formspree-iframe';
-            iframe.style.display = 'none';
-            document.body.appendChild(iframe);
-            
-            // Configurer le formulaire pour cibler l'iframe
-            form.target = 'formspree-iframe';
-            
-            // Gérer la réponse
-            iframe.onload = function() {
-                // Attendre un peu que Formspree traite
-                setTimeout(() => {
-                    showSuccessMessage(reference, nom);
-                    document.body.removeChild(iframe);
-                }, 1000);
-            };
-            
-            // Soumettre le formulaire
-            form.submit();
-        }
 
         // Afficher le message de succès avec bouton PDF
         function showSuccessMessage(reference, nom) {
@@ -1474,18 +1369,14 @@
             const form = document.getElementById('quoteFormSignature');
             const successContainer = document.getElementById('successContainer');
             
-            // Réinitialiser
             form.reset();
             resetQuote();
             
-            // Masquer succès, afficher formulaire
             successContainer.style.display = 'none';
             form.style.display = 'block';
             
-            // Nouvelle référence
             document.getElementById('quoteRef').textContent = generateReference();
             
-            // Réactiver bouton
             const submitBtn = document.getElementById('submitDevis');
             submitBtn.innerHTML = '<i class="fas fa-paper-plane"></i>Envoyer ma demande de devis';
             submitBtn.disabled = false;
