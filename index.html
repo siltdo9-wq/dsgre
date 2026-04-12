@@ -674,13 +674,9 @@
                 </div>
             </div>
 
-            <!-- FORMULAIRE FORMSPREE - SOLUTION FIABLE -->
-            <form class="quote-form-signature" id="quoteFormSignature" action="https://formspree.io/f/xnjlapqy" method="POST">
-                <!-- Configuration Formspree -->
-                <input type="hidden" name="_subject" id="formSubject" value="Nouveau devis Tessa & D Events">
-                <input type="hidden" name="_replyto" id="formReplyTo">
-                
-                <!-- Données du devis -->
+            <!-- FORMULAIRE FORMSPREE AVEC AJAX - RESTE SUR LA PAGE -->
+            <form class="quote-form-signature" id="quoteFormSignature">
+                <!-- Données du devis cachées -->
                 <input type="hidden" name="reference_devis" id="formReference">
                 <input type="hidden" name="articles_selectionnes" id="formArticles">
                 <input type="hidden" name="sous_total_ht" id="formSubtotalHT">
@@ -1223,96 +1219,114 @@
         }
 
         // ============================================
-// ENVOI FORMSPREE - FONCTION CORRIGÉE
-// ============================================
-document.getElementById('quoteFormSignature').addEventListener('submit', async function(e) {
-    e.preventDefault();
-    
-    // Vérifications
-    const hasItems = Object.values(cart).some(qty => qty > 0);
-    if (!hasItems) {
-        alert('Veuillez sélectionner au moins un article avant de valider votre devis.');
-        return;
-    }
-    if (!hasSignature) {
-        alert('Veuillez signer le devis avant de le valider.');
-        return;
-    }
-    if (!document.getElementById('acceptConditions').checked) {
-        alert('Veuillez accepter les conditions générales de location.');
-        return;
-    }
-
-    const submitBtn = document.getElementById('submitDevis');
-    const originalText = submitBtn.innerHTML;
-    submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Envoi en cours...';
-    submitBtn.disabled = true;
-
-    try {
-        // Récupérer les données
-        const nom = document.getElementById('nomDevis').value;
-        const email = document.getElementById('emailDevis').value;
-        const telephone = document.getElementById('telephoneDevis').value;
-        const dateEvent = document.getElementById('dateDevis').value;
-        const adresse = document.getElementById('adresseDevis').value;
-        const reference = document.getElementById('quoteRef').textContent;
-        const signatureImage = await getSignatureImage();
-
-        // Mettre à jour les champs cachés
-        document.getElementById('formSubject').value = 'Nouveau devis ' + reference + ' - ' + nom;
-        document.getElementById('formReplyTo').value = email;
-        document.getElementById('formReference').value = reference;
-
-        // Construire le panier
-        let cartItems = [];
-        let subtotal = 0;
-        let articlesText = [];
-        
-        document.querySelectorAll('.product-item').forEach(product => {
-            const id = product.dataset.id;
-            const qtyInput = document.getElementById('qty-' + id);
-            const qty = qtyInput ? parseInt(qtyInput.value) || 0 : 0;
+        // ENVOI FORMSPREE EN AJAX - RESTE SUR LA PAGE
+        // ============================================
+        document.getElementById('quoteFormSignature').addEventListener('submit', async function(e) {
+            e.preventDefault();
             
-            if (qty > 0) {
-                const price = parseFloat(product.dataset.price);
-                const total = price * qty;
-                subtotal += total;
-                const name = product.querySelector('h4').textContent;
-                cartItems.push({ name, qty, price, total });
-                articlesText.push(name + ' (x' + qty + ') : ' + total.toFixed(2).replace('.', ',') + ' €');
+            // Vérifications
+            const hasItems = Object.values(cart).some(qty => qty > 0);
+            if (!hasItems) {
+                alert('Veuillez sélectionner au moins un article avant de valider votre devis.');
+                return;
+            }
+            if (!hasSignature) {
+                alert('Veuillez signer le devis avant de le valider.');
+                return;
+            }
+            if (!document.getElementById('acceptConditions').checked) {
+                alert('Veuillez accepter les conditions générales de location.');
+                return;
+            }
+
+            const submitBtn = document.getElementById('submitDevis');
+            const originalText = submitBtn.innerHTML;
+            submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Envoi en cours...';
+            submitBtn.disabled = true;
+
+            try {
+                // Récupérer les données
+                const nom = document.getElementById('nomDevis').value;
+                const email = document.getElementById('emailDevis').value;
+                const telephone = document.getElementById('telephoneDevis').value;
+                const dateEvent = document.getElementById('dateDevis').value;
+                const adresse = document.getElementById('adresseDevis').value;
+                const reference = document.getElementById('quoteRef').textContent;
+                const signatureImage = await getSignatureImage();
+
+                // Construire le panier
+                let cartItems = [];
+                let subtotal = 0;
+                let articlesText = [];
+                
+                document.querySelectorAll('.product-item').forEach(product => {
+                    const id = product.dataset.id;
+                    const qtyInput = document.getElementById('qty-' + id);
+                    const qty = qtyInput ? parseInt(qtyInput.value) || 0 : 0;
+                    
+                    if (qty > 0) {
+                        const price = parseFloat(product.dataset.price);
+                        const total = price * qty;
+                        subtotal += total;
+                        const name = product.querySelector('h4').textContent;
+                        cartItems.push({ name, qty, price, total });
+                        articlesText.push(name + ' (x' + qty + ') : ' + total.toFixed(2).replace('.', ',') + ' €');
+                    }
+                });
+
+                const tva = subtotal * 0.21;
+                const totalTTC = subtotal + tva;
+                const decorationDesc = decorationServiceActive ? document.getElementById('decorationDescription').value : '';
+
+                // Préparer les données pour Formspree
+                const formData = new FormData();
+                formData.append('_subject', 'Nouveau devis ' + reference + ' - ' + nom);
+                formData.append('_replyto', email);
+                formData.append('reference_devis', reference);
+                formData.append('nom_client', nom);
+                formData.append('email_client', email);
+                formData.append('telephone_client', telephone);
+                formData.append('date_evenement', dateEvent);
+                formData.append('adresse_evenement', adresse);
+                formData.append('message_client', document.getElementById('messageDevis').value);
+                formData.append('articles_selectionnes', articlesText.join('\n'));
+                formData.append('sous_total_ht', subtotal.toFixed(2).replace('.', ',') + ' €');
+                formData.append('tva_21', tva.toFixed(2).replace('.', ',') + ' €');
+                formData.append('total_ttc', totalTTC.toFixed(2).replace('.', ',') + ' €');
+                formData.append('service_decoration_desc', decorationDesc || 'Non demandé');
+                formData.append('signature_data', signatureImage ? 'Signature présente (voir PDF généré)' : 'Non signé');
+
+                // Envoi AJAX à Formspree
+                const response = await fetch('https://formspree.io/f/xnjlapqy', {
+                    method: 'POST',
+                    body: formData,
+                    headers: {
+                        'Accept': 'application/json'
+                    }
+                });
+
+                if (response.ok) {
+                    // Stocker pour PDF
+                    currentQuoteData = {
+                        reference, nom, email, telephone, dateEvent, adresse,
+                        cartItems, subtotal, tva, totalTTC, decorationDesc, signatureImage
+                    };
+                    
+                    // Afficher le message de succès
+                    showSuccessMessage(reference, nom);
+                } else {
+                    throw new Error('Erreur lors de l\'envoi');
+                }
+
+            } catch (error) {
+                console.error('Erreur:', error);
+                alert('Une erreur est survenue lors de l\'envoi. Veuillez réessayer ou nous contacter au 0492 85 91 27.');
+                submitBtn.innerHTML = originalText;
+                submitBtn.disabled = false;
             }
         });
 
-        const tva = subtotal * 0.21;
-        const totalTTC = subtotal + tva;
-        const decorationDesc = decorationServiceActive ? document.getElementById('decorationDescription').value : '';
-
-        // Remplir les champs cachés
-        document.getElementById('formArticles').value = articlesText.join('\n');
-        document.getElementById('formSubtotalHT').value = subtotal.toFixed(2).replace('.', ',') + ' €';
-        document.getElementById('formTVA').value = tva.toFixed(2).replace('.', ',') + ' €';
-        document.getElementById('formTotalTTC').value = totalTTC.toFixed(2).replace('.', ',') + ' €';
-        document.getElementById('formDecoration').value = decorationDesc || 'Non demandé';
-        document.getElementById('formSignature').value = signatureImage ? 'Signature présente (voir PDF généré)' : 'Non signé';
-
-        // Stocker pour PDF
-        currentQuoteData = {
-            reference, nom, email, telephone, dateEvent, adresse,
-            cartItems, subtotal, tva, totalTTC, decorationDesc, signatureImage
-        };
-
-        // Soumission native du formulaire à Formspree
-        this.submit();
-
-    } catch (error) {
-        console.error('Erreur:', error);
-        alert('Une erreur est survenue. Contactez-nous au 0492 85 91 27.\nDétails: ' + error.message);
-        submitBtn.innerHTML = originalText;
-        submitBtn.disabled = false;
-    }
-});
-
-   // Afficher le message de succès
+        // Afficher le message de succès
         function showSuccessMessage(reference, nom) {
             const form = document.getElementById('quoteFormSignature');
             const successContainer = document.getElementById('successContainer');
