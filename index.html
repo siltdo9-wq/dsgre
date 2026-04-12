@@ -152,7 +152,6 @@
         .total-line { display: flex; justify-content: space-between; padding: 0.4rem 0; font-size: 0.9rem; color: var(--text-light); }
         .total-line.final { border-top: 2px solid var(--primary); margin-top: 0.5rem; padding-top: 0.8rem; font-size: 1.2rem; font-weight: 700; color: var(--text-dark); }
 
-        /* FORM - CORRECTION DATE */
         .quote-form-signature { padding: 2rem; background: var(--white); }
         .form-section h4 { font-family: 'Cormorant Garamond', serif; font-size: 1.3rem; color: var(--text-dark); margin-bottom: 1.2rem; }
         .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.2rem; margin-bottom: 1.2rem; }
@@ -163,7 +162,6 @@
         .form-group input:focus, .form-group select:focus, .form-group textarea:focus { outline: none; border-color: var(--primary); box-shadow: 0 0 0 3px rgba(212, 165, 165, 0.1); }
         .form-group textarea { resize: vertical; min-height: 100px; }
         
-        /* FIX: Champ date responsive */
         .form-group input[type="date"] {
             width: 100%;
             max-width: 100%;
@@ -644,14 +642,14 @@
                 </div>
             </div>
 
-            <!-- FORMULAIRE FORMSUBMIT SIMPLIFIÉ -->
-            <form class="quote-form-signature" id="quoteFormSignature" action="https://formsubmit.co/tessaetdevents@gmail.com" method="POST">
-                <!-- Configuration FormSubmit -->
+            <!-- FORMULAIRE FORMSPREE AVEC TON ID -->
+            <form class="quote-form-signature" id="quoteFormSignature" 
+                  action="https://formspree.io/f/xnjlapqy" 
+                  method="POST">
+                
+                <!-- Configuration Formspree -->
                 <input type="hidden" name="_subject" id="formSubject" value="Nouveau devis Tessa & D Events">
                 <input type="hidden" name="_replyto" id="formReplyTo">
-                <input type="hidden" name="_autoresponse" id="formAutoResponse">
-                <input type="hidden" name="_template" value="table">
-                <input type="hidden" name="_captcha" value="false">
                 
                 <!-- Données du devis (remplies par JS) -->
                 <input type="hidden" name="reference_devis" id="formReference">
@@ -659,8 +657,8 @@
                 <input type="hidden" name="sous_total_ht" id="formSubtotalHT">
                 <input type="hidden" name="tva_21" id="formTVA">
                 <input type="hidden" name="total_ttc" id="formTotalTTC">
-                <input type="hidden" name="service_decoration" id="formDecoration">
-                <input type="hidden" name="signature_image" id="formSignature">
+                <input type="hidden" name="service_decoration_desc" id="formDecoration">
+                <input type="hidden" name="signature_data" id="formSignature">
 
                 <div class="form-section">
                     <h4>Vos coordonnées</h4>
@@ -1114,7 +1112,7 @@
         }
 
         // ============================================
-        // ENVOI DU FORMULAIRE AVEC PDF ET FORMSUBMIT
+        // ENVOI DU FORMULAIRE AVEC PDF ET FORMSPREE
         // ============================================
         document.getElementById('quoteFormSignature').addEventListener('submit', async function(e) {
             e.preventDefault();
@@ -1250,9 +1248,9 @@
                 // Sauvegarder PDF (téléchargement automatique)
                 doc.save('devis-' + reference + '.pdf');
 
-                // Remplir les champs cachés pour FormSubmit
+                // Remplir les champs cachés pour Formspree
                 document.getElementById('formReference').value = reference;
-                document.getElementById('formSubject').value = 'Nouveau devis ' + reference + ' - Tessa & D Events';
+                document.getElementById('formSubject').value = 'Nouveau devis ' + reference + ' - ' + nom;
                 document.getElementById('formReplyTo').value = email;
                 document.getElementById('formArticles').value = cartItems.map(i => i.name + ' (x' + i.qty + ') : ' + i.total.toFixed(2) + ' €').join('\n');
                 document.getElementById('formSubtotalHT').value = subtotal.toFixed(2) + ' €';
@@ -1260,17 +1258,8 @@
                 document.getElementById('formTotalTTC').value = totalTTC.toFixed(2) + ' €';
                 document.getElementById('formDecoration').value = decorationDesc || 'Non demandé';
                 document.getElementById('formSignature').value = signatureImage ? 'Signature présente (voir PDF)' : 'Non signé';
-                document.getElementById('formAutoResponse').value = 
-                    'Bonjour ' + nom + ',\n\n' +
-                    'Merci pour votre demande de devis chez Tessa & D Events.\n\n' +
-                    'Votre devis (Réf: ' + reference + ') a bien été reçu.\n' +
-                    'Total TTC: ' + totalTTC.toFixed(2) + ' €\n\n' +
-                    'Nous vous recontacterons sous 24h au ' + telephone + '.\n\n' +
-                    'Cordialement,\n' +
-                    'L\'équipe Tessa & D Events\n' +
-                    '0492 85 91 27';
 
-                // Soumettre le formulaire à FormSubmit
+                // Soumettre le formulaire à Formspree
                 this.submit();
 
             } catch (error) {
