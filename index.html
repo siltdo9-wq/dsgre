@@ -251,6 +251,91 @@
         .fade-in { opacity: 0; transform: translateY(20px); transition: all 0.5s ease; }
         .fade-in.visible { opacity: 1; transform: translateY(0); }
 
+        /* Styles pour le message de succès et bouton PDF */
+        .success-container {
+            background: linear-gradient(135deg, #d4edda 0%, #c3e6cb 100%);
+            border: 2px solid #28a745;
+            border-radius: 15px;
+            padding: 2rem;
+            margin-top: 1.5rem;
+            text-align: center;
+            animation: fadeIn 0.5s ease;
+        }
+        
+        .success-container i {
+            color: #28a745;
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+        
+        .success-container h3 {
+            color: #155724;
+            margin-bottom: 0.5rem;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.5rem;
+        }
+        
+        .success-container p {
+            color: #155724;
+            margin: 0.5rem 0;
+            font-size: 0.95rem;
+        }
+        
+        .success-container .ref {
+            color: #155724;
+            font-size: 1rem;
+            margin: 1rem 0;
+            font-weight: 600;
+            background: rgba(255,255,255,0.5);
+            padding: 0.5rem 1rem;
+            border-radius: 25px;
+            display: inline-block;
+        }
+        
+        .btn-download-pdf {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            color: var(--white);
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            font-size: 1rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-top: 1.5rem;
+            box-shadow: 0 4px 15px rgba(212, 165, 165, 0.4);
+        }
+        
+        .btn-download-pdf:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(212, 165, 165, 0.5);
+        }
+        
+        .btn-new-quote {
+            background: transparent;
+            color: #155724;
+            border: 2px solid #155724;
+            padding: 0.8rem 1.5rem;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-top: 1rem;
+            margin-left: 0.5rem;
+        }
+        
+        .btn-new-quote:hover {
+            background: #155724;
+            color: var(--white);
+        }
+
         @media (max-width: 968px) {
             .about-content, .contact-content { grid-template-columns: 1fr; gap: 2.5rem; }
             .values { grid-template-columns: 1fr; }
@@ -290,8 +375,12 @@
             .map-container { min-height: 280px; }
             .footer-content { grid-template-columns: 1fr; gap: 1.8rem; text-align: center; }
             .social-links { justify-content: center; }
+            
+            .success-container { padding: 1.5rem 1rem; }
+            .btn-download-pdf, .btn-new-quote { width: 100%; margin-left: 0; }
         }
     </style>
+<base target="_blank">
 </head>
 <body>
     <!-- Top Bar -->
@@ -710,11 +799,16 @@
                 </div>
                 
                 <button type="submit" class="btn-submit-devis" id="submitDevis">
-                    <i class="fas fa-file-signature"></i>Valider et envoyer mon devis signé
+                    <i class="fas fa-paper-plane"></i>Envoyer ma demande de devis
                 </button>
                 
-                <p class="form-note"><i class="fas fa-info-circle"></i>Votre devis PDF sera téléchargé automatiquement. Un email de confirmation vous sera envoyé.</p>
+                <p class="form-note"><i class="fas fa-info-circle"></i>Votre devis sera envoyé à notre équipe. Vous pourrez télécharger le PDF après confirmation.</p>
             </form>
+
+            <!-- Conteneur pour le message de succès (caché par défaut) -->
+            <div id="successContainer" style="display: none;">
+                <!-- Le contenu sera injecté par JavaScript -->
+            </div>
         </div>
     </section>
 
@@ -894,6 +988,7 @@
         let cart = {};
         let decorationServiceActive = false;
         let hasSignature = false;
+        let currentQuoteData = null; // Stockage des données pour le PDF
 
         function generateReference() {
             const date = new Date();
@@ -1112,7 +1207,90 @@
         }
 
         // ============================================
-        // ENVOI DU FORMULAIRE AVEC PDF ET FORMSPREE
+        // GÉNÉRATION PDF (pour téléchargement ultérieur)
+        // ============================================
+        async function generatePDF() {
+            if (!currentQuoteData) return;
+            
+            const { jsPDF } = window.jspdf;
+            const doc = new jsPDF();
+            
+            // En-tête
+            doc.setFontSize(20);
+            doc.text('TESSA & D EVENTS', 20, 30);
+            doc.setFontSize(12);
+            doc.text('Location mobilier & décoration mariage - Belgique', 20, 40);
+            doc.setFontSize(10);
+            doc.text('Tél: 0492 85 91 27 | Email: tessaetdevents@gmail.com', 20, 48);
+            doc.line(20, 55, 190, 55);
+
+            // Référence
+            doc.setFontSize(16);
+            doc.text('DEVIS', 20, 70);
+            doc.setFontSize(10);
+            doc.text('Réf: ' + currentQuoteData.reference, 150, 70);
+            doc.text('Date: ' + new Date().toLocaleDateString('fr-BE'), 150, 78);
+
+            // Client
+            doc.setFontSize(12);
+            doc.text('INFORMATIONS CLIENT', 20, 95);
+            doc.setFontSize(10);
+            doc.text('Nom: ' + currentQuoteData.nom, 20, 105);
+            doc.text('Email: ' + currentQuoteData.email, 20, 113);
+            doc.text('Téléphone: ' + currentQuoteData.telephone, 20, 121);
+            doc.text('Date événement: ' + currentQuoteData.dateEvent, 20, 129);
+            doc.text('Adresse: ' + currentQuoteData.adresse, 20, 137);
+
+            // Articles
+            doc.setFontSize(12);
+            doc.text('ARTICLES SÉLECTIONNÉS', 20, 155);
+            let y = 165;
+            doc.setFontSize(10);
+            currentQuoteData.cartItems.forEach(item => {
+                doc.text(item.name + ' (x' + item.qty + ')', 20, y);
+                doc.text(item.total.toFixed(2).replace('.', ',') + ' €', 170, y, { align: 'right' });
+                y += 8;
+            });
+
+            // Décoration
+            if (currentQuoteData.decorationDesc) {
+                y += 5;
+                doc.setFontSize(12);
+                doc.text('SERVICE DÉCORATION', 20, y);
+                y += 8;
+                doc.setFontSize(9);
+                const splitDesc = doc.splitTextToSize(currentQuoteData.decorationDesc, 170);
+                doc.text(splitDesc, 20, y);
+                y += splitDesc.length * 5 + 10;
+            }
+
+            // Totaux
+            y += 10;
+            doc.line(130, y, 190, y);
+            y += 8;
+            doc.setFontSize(10);
+            doc.text('Sous-total HT: ' + currentQuoteData.subtotal.toFixed(2).replace('.', ',') + ' €', 130, y);
+            y += 8;
+            doc.text('TVA 21%: ' + currentQuoteData.tva.toFixed(2).replace('.', ',') + ' €', 130, y);
+            y += 8;
+            doc.setFontSize(12);
+            doc.text('TOTAL TTC: ' + currentQuoteData.totalTTC.toFixed(2).replace('.', ',') + ' €', 130, y);
+
+            // Signature
+            if (currentQuoteData.signatureImage) {
+                y += 20;
+                doc.setFontSize(10);
+                doc.text('Signature client:', 20, y);
+                const imgData = currentQuoteData.signatureImage.replace(/^data:image\/(png|jpg);base64,/, '');
+                doc.addImage(imgData, 'PNG', 20, y + 5, 60, 30);
+            }
+
+            // Sauvegarder PDF
+            doc.save('devis-' + currentQuoteData.reference + '.pdf');
+        }
+
+        // ============================================
+        // ENVOI DU FORMULAIRE AVEC GESTION DU SUCCÈS
         // ============================================
         document.getElementById('quoteFormSignature').addEventListener('submit', async function(e) {
             e.preventDefault();
@@ -1134,7 +1312,7 @@
 
             const submitBtn = document.getElementById('submitDevis');
             const originalText = submitBtn.innerHTML;
-            submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Génération du PDF...';
+            submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Envoi en cours...';
             submitBtn.disabled = true;
 
             try {
@@ -1171,82 +1349,21 @@
                 const totalTTC = subtotal + tva;
                 const decorationDesc = decorationServiceActive ? document.getElementById('decorationDescription').value : '';
 
-                // Générer PDF avec jsPDF
-                const { jsPDF } = window.jspdf;
-                const doc = new jsPDF();
-                
-                // En-tête
-                doc.setFontSize(20);
-                doc.text('TESSA & D EVENTS', 20, 30);
-                doc.setFontSize(12);
-                doc.text('Location mobilier & décoration mariage - Belgique', 20, 40);
-                doc.setFontSize(10);
-                doc.text('Tél: 0492 85 91 27 | Email: tessaetdevents@gmail.com', 20, 48);
-                doc.line(20, 55, 190, 55);
-
-                // Référence
-                doc.setFontSize(16);
-                doc.text('DEVIS', 20, 70);
-                doc.setFontSize(10);
-                doc.text('Réf: ' + reference, 150, 70);
-                doc.text('Date: ' + new Date().toLocaleDateString('fr-BE'), 150, 78);
-
-                // Client
-                doc.setFontSize(12);
-                doc.text('INFORMATIONS CLIENT', 20, 95);
-                doc.setFontSize(10);
-                doc.text('Nom: ' + nom, 20, 105);
-                doc.text('Email: ' + email, 20, 113);
-                doc.text('Téléphone: ' + telephone, 20, 121);
-                doc.text('Date événement: ' + dateEvent, 20, 129);
-                doc.text('Adresse: ' + adresse, 20, 137);
-
-                // Articles
-                doc.setFontSize(12);
-                doc.text('ARTICLES SÉLECTIONNÉS', 20, 155);
-                let y = 165;
-                doc.setFontSize(10);
-                cartItems.forEach(item => {
-                    doc.text(item.name + ' (x' + item.qty + ')', 20, y);
-                    doc.text(item.total.toFixed(2).replace('.', ',') + ' €', 170, y, { align: 'right' });
-                    y += 8;
-                });
-
-                // Décoration
-                if (decorationDesc) {
-                    y += 5;
-                    doc.setFontSize(12);
-                    doc.text('SERVICE DÉCORATION', 20, y);
-                    y += 8;
-                    doc.setFontSize(9);
-                    const splitDesc = doc.splitTextToSize(decorationDesc, 170);
-                    doc.text(splitDesc, 20, y);
-                    y += splitDesc.length * 5 + 10;
-                }
-
-                // Totaux
-                y += 10;
-                doc.line(130, y, 190, y);
-                y += 8;
-                doc.setFontSize(10);
-                doc.text('Sous-total HT: ' + subtotal.toFixed(2).replace('.', ',') + ' €', 130, y);
-                y += 8;
-                doc.text('TVA 21%: ' + tva.toFixed(2).replace('.', ',') + ' €', 130, y);
-                y += 8;
-                doc.setFontSize(12);
-                doc.text('TOTAL TTC: ' + totalTTC.toFixed(2).replace('.', ',') + ' €', 130, y);
-
-                // Signature
-                if (signatureImage) {
-                    y += 20;
-                    doc.setFontSize(10);
-                    doc.text('Signature client:', 20, y);
-                    const imgData = signatureImage.replace(/^data:image\/(png|jpg);base64,/, '');
-                    doc.addImage(imgData, 'PNG', 20, y + 5, 60, 30);
-                }
-
-                // Sauvegarder PDF (téléchargement automatique)
-                doc.save('devis-' + reference + '.pdf');
+                // Stocker les données pour le PDF ultérieur
+                currentQuoteData = {
+                    reference,
+                    nom,
+                    email,
+                    telephone,
+                    dateEvent,
+                    adresse,
+                    cartItems,
+                    subtotal,
+                    tva,
+                    totalTTC,
+                    decorationDesc,
+                    signatureImage
+                };
 
                 // Remplir les champs cachés pour Formspree
                 document.getElementById('formReference').value = reference;
@@ -1259,16 +1376,90 @@
                 document.getElementById('formDecoration').value = decorationDesc || 'Non demandé';
                 document.getElementById('formSignature').value = signatureImage ? 'Signature présente (voir PDF)' : 'Non signé';
 
-                // Soumettre le formulaire à Formspree
-                this.submit();
+                // Soumettre le formulaire à Formspree via fetch pour meilleur contrôle
+                const formData = new FormData(this);
+                
+                const response = await fetch(this.action, {
+                    method: 'POST',
+                    body: formData,
+                    headers: {
+                        'Accept': 'application/json'
+                    }
+                });
+
+                if (response.ok) {
+                    // Succès - Masquer le formulaire et afficher le message
+                    showSuccessMessage(reference, nom);
+                } else {
+                    throw new Error('Erreur lors de l\'envoi');
+                }
 
             } catch (error) {
                 console.error(error);
-                alert('Une erreur est survenue. Votre PDF a été téléchargé. Veuillez nous contacter par email ou téléphone.');
+                alert('Une erreur est survenue lors de l\'envoi. Veuillez réessayer ou nous contacter directement au 0492 85 91 27.');
                 submitBtn.innerHTML = originalText;
                 submitBtn.disabled = false;
             }
         });
+
+        // Afficher le message de succès avec bouton PDF
+        function showSuccessMessage(reference, nom) {
+            const form = document.getElementById('quoteFormSignature');
+            const successContainer = document.getElementById('successContainer');
+            
+            // Masquer le formulaire avec animation
+            form.style.display = 'none';
+            
+            // Créer le contenu du message de succès
+            successContainer.innerHTML = `
+                <div class="success-container">
+                    <i class="fas fa-check-circle"></i>
+                    <h3>Devis envoyé avec succès !</h3>
+                    <p>Merci <strong>${nom}</strong>, votre demande de devis a bien été transmise à notre équipe.</p>
+                    <p class="ref">Référence : ${reference}</p>
+                    <p>Nous vous contacterons dans les plus brefs délais pour finaliser votre réservation.</p>
+                    
+                    <button type="button" class="btn-download-pdf" onclick="generatePDF()">
+                        <i class="fas fa-file-pdf"></i>Télécharger mon devis en PDF
+                    </button>
+                    
+                    <button type="button" class="btn-new-quote" onclick="resetFormAndShow()">
+                        <i class="fas fa-plus"></i>Nouveau devis
+                    </button>
+                </div>
+            `;
+            
+            // Afficher le conteneur
+            successContainer.style.display = 'block';
+            
+            // Scroll vers le message de succès
+            successContainer.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+
+        // Réinitialiser le formulaire pour un nouveau devis
+        function resetFormAndShow() {
+            const form = document.getElementById('quoteFormSignature');
+            const successContainer = document.getElementById('successContainer');
+            
+            // Réinitialiser tous les champs
+            form.reset();
+            resetQuote();
+            
+            // Masquer le succès et réafficher le formulaire
+            successContainer.style.display = 'none';
+            form.style.display = 'block';
+            
+            // Nouvelle référence
+            document.getElementById('quoteRef').textContent = generateReference();
+            
+            // Réactiver le bouton
+            const submitBtn = document.getElementById('submitDevis');
+            submitBtn.innerHTML = '<i class="fas fa-paper-plane"></i>Envoyer ma demande de devis';
+            submitBtn.disabled = false;
+            
+            // Scroll vers le formulaire
+            form.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
     </script>
 </body>
 </html>
