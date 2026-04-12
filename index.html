@@ -1223,120 +1223,96 @@
         }
 
         // ============================================
-        // ENVOI FORMSPREE - SOLUTION FIABLE AVEC FETCH
-        // ============================================
-        document.getElementById('quoteFormSignature').addEventListener('submit', async function(e) {
-            e.preventDefault();
+// ENVOI FORMSPREE - FONCTION CORRIGÉE
+// ============================================
+document.getElementById('quoteFormSignature').addEventListener('submit', async function(e) {
+    e.preventDefault();
+    
+    // Vérifications
+    const hasItems = Object.values(cart).some(qty => qty > 0);
+    if (!hasItems) {
+        alert('Veuillez sélectionner au moins un article avant de valider votre devis.');
+        return;
+    }
+    if (!hasSignature) {
+        alert('Veuillez signer le devis avant de le valider.');
+        return;
+    }
+    if (!document.getElementById('acceptConditions').checked) {
+        alert('Veuillez accepter les conditions générales de location.');
+        return;
+    }
+
+    const submitBtn = document.getElementById('submitDevis');
+    const originalText = submitBtn.innerHTML;
+    submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Envoi en cours...';
+    submitBtn.disabled = true;
+
+    try {
+        // Récupérer les données
+        const nom = document.getElementById('nomDevis').value;
+        const email = document.getElementById('emailDevis').value;
+        const telephone = document.getElementById('telephoneDevis').value;
+        const dateEvent = document.getElementById('dateDevis').value;
+        const adresse = document.getElementById('adresseDevis').value;
+        const reference = document.getElementById('quoteRef').textContent;
+        const signatureImage = await getSignatureImage();
+
+        // Mettre à jour les champs cachés
+        document.getElementById('formSubject').value = 'Nouveau devis ' + reference + ' - ' + nom;
+        document.getElementById('formReplyTo').value = email;
+        document.getElementById('formReference').value = reference;
+
+        // Construire le panier
+        let cartItems = [];
+        let subtotal = 0;
+        let articlesText = [];
+        
+        document.querySelectorAll('.product-item').forEach(product => {
+            const id = product.dataset.id;
+            const qtyInput = document.getElementById('qty-' + id);
+            const qty = qtyInput ? parseInt(qtyInput.value) || 0 : 0;
             
-            // Vérifications
-            const hasItems = Object.values(cart).some(qty => qty > 0);
-            if (!hasItems) {
-                alert('Veuillez sélectionner au moins un article avant de valider votre devis.');
-                return;
-            }
-            if (!hasSignature) {
-                alert('Veuillez signer le devis avant de le valider.');
-                return;
-            }
-            if (!document.getElementById('acceptConditions').checked) {
-                alert('Veuillez accepter les conditions générales de location.');
-                return;
-            }
-
-            const submitBtn = document.getElementById('submitDevis');
-            const originalText = submitBtn.innerHTML;
-            submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Envoi en cours...';
-            submitBtn.disabled = true;
-
-            try {
-                // Récupérer les données
-                const nom = document.getElementById('nomDevis').value;
-                const email = document.getElementById('emailDevis').value;
-                const telephone = document.getElementById('telephoneDevis').value;
-                const dateEvent = document.getElementById('dateDevis').value;
-                const adresse = document.getElementById('adresseDevis').value;
-                const reference = document.getElementById('quoteRef').textContent;
-                const signatureImage = await getSignatureImage();
-
-                // Construire le panier
-                let cartItems = [];
-                let subtotal = 0;
-                document.querySelectorAll('.product-item').forEach(product => {
-                    const id = product.dataset.id;
-                    const qty = parseInt(document.getElementById('qty-' + id)?.value) || 0;
-                    if (qty > 0) {
-                        const price = parseFloat(product.dataset.price);
-                        const total = price * qty;
-                        subtotal += total;
-                        cartItems.push({
-                            name: product.querySelector('h4').textContent,
-                            qty: qty,
-                            price: price,
-                            total: total
-                        });
-                    }
-                });
-
-                const tva = subtotal * 0.21;
-                const totalTTC = subtotal + tva;
-                const decorationDesc = decorationServiceActive ? document.getElementById('decorationDescription').value : '';
-
-                // Stocker pour PDF
-                currentQuoteData = {
-                    reference, nom, email, telephone, dateEvent, adresse,
-                    cartItems, subtotal, tva, totalTTC, decorationDesc, signatureImage
-                };
-
-                // Préparer les données pour Formspree
-                const formData = new FormData();
-                formData.append('_subject', 'Nouveau devis ' + reference + ' - ' + nom);
-                formData.append('_replyto', email);
-                formData.append('reference_devis', reference);
-                formData.append('nom_client', nom);
-                formData.append('email_client', email);
-                formData.append('telephone_client', telephone);
-                formData.append('date_evenement', dateEvent);
-                formData.append('adresse_evenement', adresse);
-                formData.append('articles_selectionnes', cartItems.map(i => i.name + ' (x' + i.qty + ') : ' + i.total.toFixed(2) + ' €').join('\n'));
-                formData.append('sous_total_ht', subtotal.toFixed(2) + ' €');
-                formData.append('tva_21', tva.toFixed(2) + ' €');
-                formData.append('total_ttc', totalTTC.toFixed(2) + ' €');
-                formData.append('service_decoration_desc', decorationDesc || 'Non demandé');
-                formData.append('signature_data', signatureImage ? 'Signature présente (voir PDF)' : 'Non signé');
-                formData.append('message_client', document.getElementById('messageDevis').value);
-
-                // ENVOI A FORMSPREE
-                const response = await fetch('https://formspree.io/f/xnjlapqy', {
-                    method: 'POST',
-                    body: formData,
-                    headers: {
-                        'Accept': 'application/json'
-                    }
-                });
-
-                // Vérifier la réponse
-                if (response.ok) {
-                    const result = await response.json();
-                    console.log('Succès:', result);
-                    showSuccessMessage(reference, nom);
-                } else {
-                    const error = await response.text();
-                    console.error('Erreur Formspree:', error);
-                    throw new Error('Erreur lors de l\'envoi à Formspree');
-                }
-
-            } catch (error) {
-                console.error('Erreur:', error);
-                
-                // Message d'erreur plus informatif
-                alert('Une erreur est survenue lors de l\'envoi. Vérifiez votre connexion internet ou contactez-nous directement au 0492 85 91 27.\n\nDétails: ' + error.message);
-                
-                submitBtn.innerHTML = originalText;
-                submitBtn.disabled = false;
+            if (qty > 0) {
+                const price = parseFloat(product.dataset.price);
+                const total = price * qty;
+                subtotal += total;
+                const name = product.querySelector('h4').textContent;
+                cartItems.push({ name, qty, price, total });
+                articlesText.push(name + ' (x' + qty + ') : ' + total.toFixed(2).replace('.', ',') + ' €');
             }
         });
 
-        // Afficher le message de succès
+        const tva = subtotal * 0.21;
+        const totalTTC = subtotal + tva;
+        const decorationDesc = decorationServiceActive ? document.getElementById('decorationDescription').value : '';
+
+        // Remplir les champs cachés
+        document.getElementById('formArticles').value = articlesText.join('\n');
+        document.getElementById('formSubtotalHT').value = subtotal.toFixed(2).replace('.', ',') + ' €';
+        document.getElementById('formTVA').value = tva.toFixed(2).replace('.', ',') + ' €';
+        document.getElementById('formTotalTTC').value = totalTTC.toFixed(2).replace('.', ',') + ' €';
+        document.getElementById('formDecoration').value = decorationDesc || 'Non demandé';
+        document.getElementById('formSignature').value = signatureImage ? 'Signature présente (voir PDF généré)' : 'Non signé';
+
+        // Stocker pour PDF
+        currentQuoteData = {
+            reference, nom, email, telephone, dateEvent, adresse,
+            cartItems, subtotal, tva, totalTTC, decorationDesc, signatureImage
+        };
+
+        // Soumission native du formulaire à Formspree
+        this.submit();
+
+    } catch (error) {
+        console.error('Erreur:', error);
+        alert('Une erreur est survenue. Contactez-nous au 0492 85 91 27.\nDétails: ' + error.message);
+        submitBtn.innerHTML = originalText;
+        submitBtn.disabled = false;
+    }
+});
+
+   // Afficher le message de succès
         function showSuccessMessage(reference, nom) {
             const form = document.getElementById('quoteFormSignature');
             const successContainer = document.getElementById('successContainer');
