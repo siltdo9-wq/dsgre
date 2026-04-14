@@ -5,6 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Tessa & D Events | Location Mobilier & Décoration Mariage Belgique</title>
     
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
@@ -80,8 +83,51 @@
         .value-card i { font-size: 1.6rem; color: var(--primary); margin-bottom: 0.6rem; }
         .value-card h4 { font-size: 1rem; margin-bottom: 0.3rem; }
         .value-card p { font-size: 0.8rem; color: var(--text-light); margin: 0; }
-        .about-image { position: relative; border-radius: 10px; overflow: hidden; box-shadow: 0 15px 35px rgba(0,0,0,0.1); }
-        .about-image img { width: 100%; height: auto; display: block; }
+        
+        /* MODIFICATION: Style pour l'image about avec zoom */
+        .about-image { 
+            position: relative; 
+            border-radius: 10px; 
+            overflow: hidden; 
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1); 
+            cursor: pointer; 
+            transition: transform 0.3s ease; 
+        }
+        .about-image:hover { 
+            transform: scale(1.02); 
+        }
+        .about-image img { 
+            width: 100%; 
+            height: auto; 
+            display: block; 
+            transition: transform 0.3s ease; 
+        }
+        .about-image:hover img { 
+            transform: scale(1.05); 
+        }
+        .about-image::after {
+            content: '\f00e';
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: var(--white);
+            font-size: 2rem;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            background: rgba(212, 165, 165, 0.8);
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .about-image:hover::after { 
+            opacity: 1; 
+        }
 
         .services { background: var(--cream); padding: 4rem 1.5rem; width: 100%; }
         .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; max-width: 1200px; margin: 0 auto; width: 100%; }
@@ -132,7 +178,6 @@
         .qty-btn { width: 36px; height: 36px; border-radius: 10px; border: 2px solid var(--accent); background: var(--white); color: var(--primary); cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.3s ease; font-size: 0.8rem; }
         .qty-btn:hover { background: var(--primary); color: var(--white); border-color: var(--primary); }
         
-        /* CHAMP QUANTITÉ MODIFIÉ - ÉDITABLE DIRECTEMENT */
         .qty-input { 
             width: 70px; 
             height: 36px; 
@@ -147,23 +192,11 @@
             cursor: text;
             transition: all 0.3s ease;
         }
-        .qty-input:hover {
-            border-color: var(--primary);
-        }
-        .qty-input:focus {
-            outline: none;
-            border-color: var(--primary);
-            box-shadow: 0 0 0 3px rgba(212, 165, 165, 0.1);
-        }
-        /* Supprimer les flèches du input number */
+        .qty-input:hover { border-color: var(--primary); }
+        .qty-input:focus { outline: none; border-color: var(--primary); box-shadow: 0 0 0 3px rgba(212, 165, 165, 0.1); }
         .qty-input::-webkit-outer-spin-button,
-        .qty-input::-webkit-inner-spin-button {
-            -webkit-appearance: none;
-            margin: 0;
-        }
-        .qty-input[type=number] {
-            -moz-appearance: textfield;
-        }
+        .qty-input::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
+        .qty-input[type=number] { -moz-appearance: textfield; }
         
         .remove-btn { width: 36px; height: 36px; border-radius: 50%; border: none; background: transparent; color: var(--text-light); cursor: pointer; display: flex; align-items: center; justify-content: center; margin-left: auto; transition: all 0.3s ease; font-size: 1.1rem; }
         .remove-btn:hover { color: #e74c3c; transform: scale(1.1); }
@@ -223,7 +256,6 @@
             text-align: center;
             animation: fadeIn 0.5s ease;
         }
-        
         .success-container i { color: #28a745; font-size: 3rem; margin-bottom: 1rem; }
         .success-container h3 { color: #155724; margin-bottom: 0.5rem; font-family: 'Cormorant Garamond', serif; font-size: 1.5rem; }
         .success-container p { color: #155724; margin: 0.5rem 0; font-size: 0.95rem; }
@@ -245,7 +277,6 @@
             margin-top: 1.5rem;
             box-shadow: 0 4px 15px rgba(212, 165, 165, 0.4);
         }
-        
         .btn-download-pdf:hover { transform: translateY(-2px); box-shadow: 0 8px 25px rgba(212, 165, 165, 0.5); }
         
         .btn-new-quote {
@@ -264,10 +295,20 @@
             margin-top: 1rem;
             margin-left: 0.5rem;
         }
-        
         .btn-new-quote:hover { background: #155724; color: var(--white); }
 
         @keyframes fadeIn { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
+
+        .error-message {
+            background: #f8d7da;
+            border: 1px solid #f5c6cb;
+            color: #721c24;
+            padding: 1rem;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+            display: none;
+        }
+        .error-message.show { display: block; }
 
         .testimonials { background: var(--cream); padding: 4rem 1.5rem; width: 100%; }
         .testimonials-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; max-width: 1200px; margin: 0 auto; width: 100%; }
@@ -316,6 +357,40 @@
         .fade-in { opacity: 0; transform: translateY(20px); transition: all 0.5s ease; }
         .fade-in.visible { opacity: 1; transform: translateY(0); }
 
+        /* Lightbox styles */
+        .lightbox {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.9);
+            z-index: 10000;
+            justify-content: center;
+            align-items: center;
+            cursor: zoom-out;
+        }
+        .lightbox.active {
+            display: flex;
+        }
+        .lightbox img {
+            max-width: 90%;
+            max-height: 90%;
+            object-fit: contain;
+            border-radius: 8px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+        }
+        .lightbox-close {
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            color: white;
+            font-size: 2rem;
+            cursor: pointer;
+            z-index: 10001;
+        }
+
         @media (max-width: 968px) {
             .about-content, .contact-content { grid-template-columns: 1fr; gap: 2.5rem; }
             .values { grid-template-columns: 1fr; }
@@ -357,6 +432,7 @@
             .btn-download-pdf, .btn-new-quote { width: 100%; margin-left: 0; }
         }
     </style>
+<base target="_blank">
 </head>
 <body>
     <!-- Top Bar -->
@@ -438,107 +514,131 @@
                     </div>
                 </div>
             </div>
-            <div class="about-image fade-in">
+            <!-- MODIFICATION: Ajout de onclick="openLightbox(this)" sur l'image about -->
+            <div class="about-image fade-in" onclick="openLightbox(this)">
                 <img src="https://images.unsplash.com/photo-1519225421980-715cb0215aed?w=800" alt="Décoration de table élégante">
             </div>
         </div>
     </section>
 
     <!-- Services Section -->
-    <section class="services" id="prestations">
-        <div class="section-title fade-in">
-            <h2>Nos Prestations</h2>
-            <p>Des solutions complètes pour sublimer votre événement, de la location de mobilier à la décoration florale</p>
-        </div>
-        
-        <div class="services-grid">
-            <div class="service-card fade-in">
-                <div class="service-image">
-                    <img src="https://images.unsplash.com/photo-1478146059778-26028b07395a?w=600" alt="Location de chaises" loading="lazy">
-                </div>
-                <div class="service-content">
-                    <h3>Location de Mobilier</h3>
-                    <p>Des chaises Chiavari aux tables en bois massif, découvrez notre sélection de mobilier haut de gamme pour votre réception.</p>
-                    <ul>
-                        <li>Chaises Chiavari (or, argent, transparent)</li>
-                        <li>Tables rondes et rectangulaires</li>
-                        <li>Bar et tabourets</li>
-                        <li>Lounge et mobilier d'extérieur</li>
-                    </ul>
-                    <a href="#devis" class="btn">En savoir plus</a>
-                </div>
+<section class="services" id="prestations">
+    <div class="section-title fade-in">
+        <h2>Nos Prestations</h2>
+        <p>Des solutions complètes pour sublimer votre événement, de la location de mobilier à la décoration florale</p>
+    </div>
+    
+    <div class="services-grid">
+        <div class="service-card fade-in">
+            <div class="service-image">
+                <img src="https://images.unsplash.com/photo-1478146059778-26028b07395a?w=600" alt="Location de chaises" loading="lazy">
             </div>
+            <div class="service-content">
+                <h3>Location de Mobilier</h3>
+                <p>Des chaises Chiavari aux tables en bois massif, découvrez notre sélection de mobilier haut de gamme pour votre réception.</p>
+                <ul>
+                    <li>Chaises Chiavari (or, argent, transparent)</li>
+                    <li>Tables rondes et rectangulaires</li>
+                    <li>Bar et tabourets</li>
+                    <li>Lounge et mobilier d'extérieur</li>
+                </ul>
+                <a href="#devis" class="btn">En savoir plus</a>
+            </div>
+        </div>
 
-            <div class="service-card fade-in">
-                <div class="service-image">
-                    <img src="https://images.unsplash.com/photo-1519225421980-715cb0215aed?w=600" alt="Arche florale" loading="lazy">
-                </div>
-                <div class="service-content">
-                    <h3>Décoration Florale</h3>
-                    <p>Des compositions florales sur mesure pour créer l'ambiance romantique et élégante de vos rêves.</p>
-                    <ul>
-                        <li>Arches et structures florales</li>
-                        <li>Centres de table</li>
-                        <li>Bouquets de mariée</li>
-                        <li>Décoration d'allée</li>
-                    </ul>
-                    <a href="#devis" class="btn">En savoir plus</a>
-                </div>
+        <div class="service-card fade-in">
+            <div class="service-image">
+                <img src="https://images.unsplash.com/photo-1519225421980-715cb0215aed?w=600" alt="Arche florale" loading="lazy">
             </div>
+            <div class="service-content">
+                <h3>Décoration Florale</h3>
+                <p>Des compositions florales sur mesure pour créer l'ambiance romantique et élégante de vos rêves.</p>
+                <ul>
+                    <li>Arches et structures florales</li>
+                    <li>Centres de table</li>
+                    <li>Bouquets de mariée</li>
+                    <li>Décoration d'allée</li>
+                </ul>
+                <a href="#devis" class="btn">En savoir plus</a>
+            </div>
+        </div>
 
-            <div class="service-card fade-in">
-                <div class="service-image">
-                    <img src="https://images.unsplash.com/photo-1465495976277-4387d4b0b4c6?w=600" alt="Accessoires de décoration" loading="lazy">
-                </div>
-                <div class="service-content">
-                    <h3>Accessoires & Détails</h3>
-                    <p>La touche finale qui fait toute la différence. Découvrez nos accessoires soigneusement sélectionnés.</p>
-                    <ul>
-                        <li>Vaisselle et verrerie</li>
-                        <li>Linge de table</li>
-                        <li>Éclairage et bougies</li>
-                        <li>Panneaux et signalétique</li>
-                    </ul>
-                    <a href="#devis" class="btn">En savoir plus</a>
-                </div>
+        <div class="service-card fade-in">
+            <div class="service-image">
+                <img src="https://images.unsplash.com/photo-1465495976277-4387d4b0b4c6?w=600" alt="Accessoires de décoration" loading="lazy">
+            </div>
+            <div class="service-content">
+                <h3>Accessoires & Détails</h3>
+                <p>La touche finale qui fait toute la différence. Découvrez nos accessoires soigneusement sélectionnés.</p>
+                <ul>
+                    <li>Vaisselle et verrerie</li>
+                    <li>Linge de table</li>
+                    <li>Éclairage et bougies</li>
+                    <li>Panneaux et signalétique</li>
+                </ul>
+                <a href="#devis" class="btn">En savoir plus</a>
             </div>
         </div>
-    </section>
+    </div>
+</section>
 
-    <!-- Gallery Section -->
-    <section class="gallery" id="galerie">
-        <div class="section-title fade-in">
-            <h2>Notre Galerie</h2>
-            <p>Inspirez-vous de nos réalisations et imaginez votre propre décoration de rêve</p>
+<!-- Gallery Section -->
+<section class="gallery" id="galerie">
+    <div class="section-title fade-in">
+        <h2>Notre Galerie</h2>
+        <p>Inspirez-vous de nos réalisations et imaginez votre propre décoration de rêve</p>
+    </div>
+    
+    <div class="gallery-grid">
+
+        <div class="gallery-item fade-in" onclick="openLightbox(this)">
+            <img src="https://images.unsplash.com/photo-1519741497674-611481863552?w=600" alt="Réception élégante" loading="lazy">
+            <div class="gallery-overlay"><i class="fas fa-search-plus"></i></div>
         </div>
-        
-        <div class="gallery-grid">
-            <div class="gallery-item fade-in">
-                <img src="https://images.unsplash.com/photo-1519741497674-611481863552?w=600" alt="Réception élégante" loading="lazy">
-                <div class="gallery-overlay"><i class="fas fa-search-plus"></i></div>
-            </div>
-            <div class="gallery-item fade-in">
-                <img src="https://images.unsplash.com/photo-1519225421980-715cb0215aed?w=600" alt="Décoration florale" loading="lazy">
-                <div class="gallery-overlay"><i class="fas fa-search-plus"></i></div>
-            </div>
-            <div class="gallery-item fade-in">
-                <img src="https://images.unsplash.com/photo-1465495976277-4387d4b0b4c6?w=600" alt="Table d'honneur" loading="lazy">
-                <div class="gallery-overlay"><i class="fas fa-search-plus"></i></div>
-            </div>
-            <div class="gallery-item fade-in">
-                <img src="https://images.unsplash.com/photo-1522673607200-164d1b6ce486?w=600" alt="Salle de réception" loading="lazy">
-                <div class="gallery-overlay"><i class="fas fa-search-plus"></i></div>
-            </div>
-            <div class="gallery-item fade-in">
-                <img src="https://images.unsplash.com/photo-1478146059778-26028b07395a?w=600" alt="Centre de table" loading="lazy">
-                <div class="gallery-overlay"><i class="fas fa-search-plus"></i></div>
-            </div>
-            <div class="gallery-item fade-in">
-                <img src="https://images.unsplash.com/photo-1511795409834-ef04bbd61622?w=600" alt="Cérémonie" loading="lazy">
-                <div class="gallery-overlay"><i class="fas fa-search-plus"></i></div>
-            </div>
+
+        <div class="gallery-item fade-in" onclick="openLightbox(this)">
+            <img src="https://images.unsplash.com/photo-1519225421980-715cb0215aed?w=600" alt="Décoration florale" loading="lazy">
+            <div class="gallery-overlay"><i class="fas fa-search-plus"></i></div>
         </div>
-    </section>
+
+        <div class="gallery-item fade-in" onclick="openLightbox(this)">
+            <img src="https://images.unsplash.com/photo-1465495976277-4387d4b0b4c6?w=600" alt="Table d'honneur" loading="lazy">
+            <div class="gallery-overlay"><i class="fas fa-search-plus"></i></div>
+        </div>
+
+        <div class="gallery-item fade-in" onclick="openLightbox(this)">
+            <img src="https://images.unsplash.com/photo-1522673607200-164d1b6ce486?w=600" alt="Salle de réception" loading="lazy">
+            <div class="gallery-overlay"><i class="fas fa-search-plus"></i></div>
+        </div>
+
+        <div class="gallery-item fade-in" onclick="openLightbox(this)">
+            <img src="https://images.unsplash.com/photo-1478146059778-26028b07395a?w=600" alt="Centre de table" loading="lazy">
+            <div class="gallery-overlay"><i class="fas fa-search-plus"></i></div>
+        </div>
+
+        <div class="gallery-item fade-in" onclick="openLightbox(this)">
+            <img src="https://images.unsplash.com/photo-1511795409834-ef04bbd61622?w=600" alt="Cérémonie" loading="lazy">
+            <div class="gallery-overlay"><i class="fas fa-search-plus"></i></div>
+        </div>
+
+        <div class="gallery-item fade-in" onclick="openLightbox(this)">
+            <img src="https://images.unsplash.com/photo-1529634892488-2d3d5c2b2c7f?w=600" alt="Décoration élégante salle" loading="lazy">
+            <div class="gallery-overlay"><i class="fas fa-search-plus"></i></div>
+        </div>
+
+        <div class="gallery-item fade-in" onclick="openLightbox(this)">
+            <img src="https://images.unsplash.com/photo-1507504031003-b417219a0fde?w=600" alt="Table mariage luxe" loading="lazy">
+            <div class="gallery-overlay"><i class="fas fa-search-plus"></i></div>
+        </div>
+
+    </div>
+</section>
+
+    <!-- Lightbox Container -->
+    <div class="lightbox" id="lightbox" onclick="closeLightbox()">
+        <span class="lightbox-close">&times;</span>
+        <img src="" alt="Zoom" id="lightboxImg">
+    </div>
 
     <!-- Quote Section -->
     <section class="quote-section" id="devis">
@@ -558,6 +658,9 @@
                     <i class="fas fa-undo"></i> Réinitialiser
                 </button>
             </div>
+
+            <!-- Message d'erreur -->
+            <div class="error-message" id="errorMessage"></div>
 
             <div class="products-list" id="productsList">
                 <!-- Chaise Chiavari Or -->
@@ -714,8 +817,11 @@
                 </div>
             </div>
 
-            <!-- FORMULAIRE FORMSPREE AVEC AJAX - RESTE SUR LA PAGE -->
-            <form class="quote-form-signature" id="quoteFormSignature">
+            <!-- FORMULAIRE FORMSPREE -->
+            <form class="quote-form-signature" id="quoteFormSignature" action="https://formspree.io/f/xnjlapqy" method="POST">
+                <!-- Redirection après succès -->
+                <input type="hidden" name="_redirect" value="false">
+                
                 <!-- Données du devis cachées -->
                 <input type="hidden" name="reference_devis" id="formReference">
                 <input type="hidden" name="articles_selectionnes" id="formArticles">
@@ -734,7 +840,7 @@
                         </div>
                         <div class="form-group">
                             <label for="emailDevis">Email *</label>
-                            <input type="email" id="emailDevis" name="email_client" required placeholder="votre@email.com">
+                            <input type="email" id="emailDevis" name="email" required placeholder="votre@email.com">
                         </div>
                         <div class="form-group">
                             <label for="telephoneDevis">Téléphone *</label>
@@ -750,7 +856,7 @@
                         </div>
                         <div class="form-group full">
                             <label for="messageDevis">Commentaires / Demandes spéciales</label>
-                            <textarea id="messageDevis" name="message_client" rows="3" placeholder="Précisez vos besoins spécifiques..."></textarea>
+                            <textarea id="messageDevis" name="message" rows="3" placeholder="Précisez vos besoins spécifiques..."></textarea>
                         </div>
                     </div>
                 </div>
@@ -836,8 +942,8 @@
                     </div>
                 </div>
                 <div class="social-links">
-                    <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
-                    <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                   <a href="https://www.facebook.com/tessaetdevents" target="_blank" rel="noopener" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                   <a href="https://www.instagram.com/tessaetdevents" target="_blank" rel="noopener" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
                     <a href="#" aria-label="Pinterest"><i class="fab fa-pinterest-p"></i></a>
                 </div>
             </div>
@@ -957,13 +1063,14 @@
         });
 
         // ============================================
-        // SYSTÈME DE DEVIS - QUANTITÉ ÉDITABLE
+        // SYSTÈME DE DEVIS - CORRIGÉ ET FONCTIONNEL
         // ============================================
         let cart = {};
         let decorationServiceActive = false;
         let hasSignature = false;
         let currentQuoteData = null;
 
+        // Génération de référence
         function generateReference() {
             const date = new Date();
             const day = String(date.getDate()).padStart(2, '0');
@@ -973,7 +1080,7 @@
             return day + month + year.toString().slice(-2) + '-' + random;
         }
 
-        // Fonction pour les boutons + et -
+        // Mise à jour quantité via boutons +/-
         function updateQuantity(productId, change) {
             const input = document.getElementById('qty-' + productId);
             const currentQty = parseInt(input.value) || 0;
@@ -982,12 +1089,10 @@
             syncQuantity(productId, newQty);
         }
 
-        // Fonction pour la saisie directe dans le champ
+        // Validation et mise à jour via saisie directe
         function validateAndUpdateQuantity(productId, value) {
             let qty = parseInt(value) || 0;
-            // Empêcher les négatifs
             if (qty < 0) qty = 0;
-            // Limiter à 9999 (raisonnable pour un mariage)
             if (qty > 9999) qty = 9999;
             
             const input = document.getElementById('qty-' + productId);
@@ -995,7 +1100,7 @@
             syncQuantity(productId, qty);
         }
 
-        // Synchronise la quantité avec le panier et l'interface
+        // Synchronisation du panier
         function syncQuantity(productId, qty) {
             cart[productId] = qty;
             const productItem = document.querySelector('[data-id="' + productId + '"]');
@@ -1007,6 +1112,7 @@
             updateSummary();
         }
 
+        // Réinitialisation d'un produit
         function resetProduct(productId) {
             if (productId === 'service-decoration') {
                 if (decorationServiceActive) toggleDecorationService();
@@ -1018,42 +1124,64 @@
             }
         }
 
+        // Réinitialisation complète du devis
         function resetQuote() {
             if (!confirm('Êtes-vous sûr de vouloir réinitialiser votre sélection ?')) return;
+            
+            // Réinitialiser les quantités
             document.querySelectorAll('.qty-input').forEach(input => input.value = 0);
             document.querySelectorAll('.product-item').forEach(item => item.classList.remove('selected'));
             cart = {};
+            
+            // Réinitialiser le service décoration
             decorationServiceActive = false;
-            document.getElementById('quoteRef').textContent = generateReference();
-            clearSignature();
-            updateSummary();
             const btn = document.getElementById('btnToggleDecoration');
             const item = document.getElementById('serviceDecorationItem');
             const details = document.getElementById('decorationDetails');
             btn.innerHTML = '<i class="fas fa-plus-circle"></i><span>Ajouter ce service</span>';
-            btn.style.background = 'transparent'; btn.style.color = 'var(--text-light)'; btn.style.borderColor = 'var(--accent)';
+            btn.style.background = 'transparent'; 
+            btn.style.color = 'var(--text-light)'; 
+            btn.style.borderColor = 'var(--accent)';
             item.classList.remove('selected');
             details.style.display = 'none';
             document.getElementById('qty-service-decoration').value = '0';
             document.getElementById('decorationDescription').value = '';
+            
+            // Nouvelle référence
+            document.getElementById('quoteRef').textContent = generateReference();
+            
+            // Effacer la signature
+            clearSignature();
+            
+            // Cacher message d'erreur
+            document.getElementById('errorMessage').classList.remove('show');
+            
+            // Mettre à jour le récapitulatif
+            updateSummary();
         }
 
+        // Toggle service décoration
         function toggleDecorationService() {
             decorationServiceActive = !decorationServiceActive;
             const btn = document.getElementById('btnToggleDecoration');
             const item = document.getElementById('serviceDecorationItem');
             const details = document.getElementById('decorationDetails');
             const qtyInput = document.getElementById('qty-service-decoration');
+            
             if (decorationServiceActive) {
                 btn.innerHTML = '<i class="fas fa-check"></i><span>Service ajouté</span>';
-                btn.style.background = 'var(--primary)'; btn.style.color = 'var(--white)'; btn.style.borderColor = 'var(--primary)';
+                btn.style.background = 'var(--primary)'; 
+                btn.style.color = 'var(--white)'; 
+                btn.style.borderColor = 'var(--primary)';
                 item.classList.add('selected');
                 details.style.display = 'block';
                 qtyInput.value = '1';
                 cart['service-decoration'] = 1;
             } else {
                 btn.innerHTML = '<i class="fas fa-plus-circle"></i><span>Ajouter ce service</span>';
-                btn.style.background = 'transparent'; btn.style.color = 'var(--text-light)'; btn.style.borderColor = 'var(--accent)';
+                btn.style.background = 'transparent'; 
+                btn.style.color = 'var(--text-light)'; 
+                btn.style.borderColor = 'var(--accent)';
                 item.classList.remove('selected');
                 details.style.display = 'none';
                 qtyInput.value = '0';
@@ -1063,15 +1191,19 @@
             updateSummary();
         }
 
+        // Mise à jour du récapitulatif - CORRIGÉ
         function updateSummary() {
             const summaryItems = document.getElementById('summaryItems');
             const products = document.querySelectorAll('.product-item');
             let html = '';
             let subtotal = 0;
             let hasItems = false;
+            
             products.forEach(product => {
                 const id = product.dataset.id;
-                const qty = parseInt(document.getElementById('qty-' + id).value) || 0;
+                const qtyInput = document.getElementById('qty-' + id);
+                const qty = qtyInput ? parseInt(qtyInput.value) || 0 : 0;
+                
                 if (qty > 0) {
                     hasItems = true;
                     const price = parseFloat(product.dataset.price);
@@ -1081,28 +1213,33 @@
                     html += '<div class="summary-item"><div><span class="summary-item-name">' + name + '</span><span class="summary-item-qty"> (x' + qty + ')</span></div><span class="summary-item-price">' + total.toFixed(2).replace('.', ',') + ' €</span></div>';
                 }
             });
+            
             if (!hasItems) html = '<p style="text-align: center; color: var(--text-light); font-style: italic;">Aucun article sélectionné</p>';
             summaryItems.innerHTML = html;
+            
             const tva = subtotal * 0.21;
             const total = subtotal + tva;
+            
             document.getElementById('subtotalHT').textContent = subtotal.toFixed(2).replace('.', ',') + ' €';
             document.getElementById('tvaAmount').textContent = tva.toFixed(2).replace('.', ',') + ' €';
             document.getElementById('totalTTC').textContent = total.toFixed(2).replace('.', ',') + ' €';
         }
 
+        // Afficher les conditions
         function showConditions(e) {
             e.preventDefault();
             alert('Conditions générales de location Tessa & D Events:\n\n1. Réservation: Un acompte de 30% est requis pour confirmer la réservation.\n2. Annulation: Gratuite jusqu\'à 30 jours avant l\'événement. 50% retenu entre 30 et 15 jours. 100% retenu sous 15 jours.\n3. Livraison: Incluse dans un rayon de 50km de Liège. Au-delà, 0,50€/km supplémentaire.\n4. Installation: Nos équipes installent et retirent le mobilier aux horaires convenus.\n5. Caution: Une caution peut être demandée selon le montant total et sera restituée sous 7 jours après l\'événement.\n6. Dégradations: Le locataire est responsable des dégradations causées par ses invités.\n\nPour toute question: 0492 85 91 27');
         }
 
         // ============================================
-        // SIGNATURE
+        // SYSTÈME DE SIGNATURE - CORRIGÉ
         // ============================================
         let isDrawing = false;
         let points = [];
         let hasSig = false;
         let sigBox, sigSvg, sigPath, sigHint;
 
+        // Initialisation au chargement
         window.addEventListener('load', function() {
             initSignature();
             document.getElementById('quoteRef').textContent = generateReference();
@@ -1113,6 +1250,8 @@
             sigBox = document.getElementById('signatureBox');
             sigSvg = document.getElementById('signatureSvg');
             sigHint = document.getElementById('signatureHint');
+            
+            // Créer le path SVG
             sigPath = document.createElementNS('http://www.w3.org/2000/svg', 'path');
             sigPath.setAttribute('id', 'sigPath');
             sigPath.setAttribute('stroke', '#2c2c2c');
@@ -1121,14 +1260,20 @@
             sigPath.setAttribute('stroke-linecap', 'round');
             sigPath.setAttribute('stroke-linejoin', 'round');
             sigSvg.appendChild(sigPath);
+            
+            // Ajuster la taille
             const rect = sigBox.getBoundingClientRect();
             sigSvg.setAttribute('width', rect.width);
             sigSvg.setAttribute('height', 150);
             sigSvg.setAttribute('viewBox', '0 0 ' + rect.width + ' 150');
+            
+            // Événements souris
             sigBox.addEventListener('mousedown', startDraw);
             sigBox.addEventListener('mousemove', draw);
             sigBox.addEventListener('mouseup', endDraw);
             sigBox.addEventListener('mouseleave', endDraw);
+            
+            // Événements tactiles
             sigBox.addEventListener('touchstart', startDrawTouch, {passive: false});
             sigBox.addEventListener('touchmove', drawTouch, {passive: false});
             sigBox.addEventListener('touchend', endDraw);
@@ -1153,7 +1298,10 @@
             hasSignature = true;
         }
 
-        function startDrawTouch(e) { e.preventDefault(); startDraw(e); }
+        function startDrawTouch(e) { 
+            e.preventDefault(); 
+            startDraw(e); 
+        }
 
         function draw(e) {
             if (!isDrawing) return;
@@ -1163,9 +1311,17 @@
             drawPath();
         }
 
-        function drawTouch(e) { if (!isDrawing) return; e.preventDefault(); const p = getPos(e); points.push(p); drawPath(); }
+        function drawTouch(e) { 
+            if (!isDrawing) return; 
+            e.preventDefault(); 
+            const p = getPos(e); 
+            points.push(p); 
+            drawPath(); 
+        }
 
-        function endDraw(e) { isDrawing = false; }
+        function endDraw(e) { 
+            isDrawing = false; 
+        }
 
         function drawPath() {
             if (points.length < 2) return;
@@ -1203,17 +1359,18 @@
         }
 
         // ============================================
-        // GÉNÉRATION PDF
+        // GÉNÉRATION PDF - CORRIGÉ
         // ============================================
         async function generatePDF() {
             if (!currentQuoteData) {
-                alert('Erreur: données du devis non trouvées');
+                alert('Erreur: données du devis non trouvées. Veuillez d\'abord soumettre le formulaire.');
                 return;
             }
             
             const { jsPDF } = window.jspdf;
             const doc = new jsPDF();
             
+            // En-tête
             doc.setFontSize(20);
             doc.text('TESSA & D EVENTS', 20, 30);
             doc.setFontSize(12);
@@ -1222,12 +1379,14 @@
             doc.text('Tél: 0492 85 91 27 | Email: tessaetdevents@gmail.com', 20, 48);
             doc.line(20, 55, 190, 55);
 
+            // Info devis
             doc.setFontSize(16);
             doc.text('DEVIS', 20, 70);
             doc.setFontSize(10);
             doc.text('Réf: ' + currentQuoteData.reference, 150, 70);
             doc.text('Date: ' + new Date().toLocaleDateString('fr-BE'), 150, 78);
 
+            // Client
             doc.setFontSize(12);
             doc.text('INFORMATIONS CLIENT', 20, 95);
             doc.setFontSize(10);
@@ -1237,6 +1396,7 @@
             doc.text('Date événement: ' + currentQuoteData.dateEvent, 20, 129);
             doc.text('Adresse: ' + currentQuoteData.adresse, 20, 137);
 
+            // Articles
             doc.setFontSize(12);
             doc.text('ARTICLES SÉLECTIONNÉS', 20, 155);
             let y = 165;
@@ -1247,6 +1407,7 @@
                 y += 8;
             });
 
+            // Service décoration
             if (currentQuoteData.decorationDesc) {
                 y += 5;
                 doc.setFontSize(12);
@@ -1258,6 +1419,7 @@
                 y += splitDesc.length * 5 + 10;
             }
 
+            // Totaux
             y += 10;
             doc.line(130, y, 190, y);
             y += 8;
@@ -1269,6 +1431,7 @@
             doc.setFontSize(12);
             doc.text('TOTAL TTC: ' + currentQuoteData.totalTTC.toFixed(2).replace('.', ',') + ' €', 130, y);
 
+            // Signature
             if (currentQuoteData.signatureImage) {
                 y += 20;
                 doc.setFontSize(10);
@@ -1281,23 +1444,29 @@
         }
 
         // ============================================
-        // ENVOI FORMSPREE EN AJAX - RESTE SUR LA PAGE
+        // ENVOI FORMSPREE - MÉTHODE AJAX + FALLBACK
         // ============================================
         document.getElementById('quoteFormSignature').addEventListener('submit', async function(e) {
             e.preventDefault();
             
+            const errorDiv = document.getElementById('errorMessage');
+            errorDiv.classList.remove('show');
+            
             // Vérifications
             const hasItems = Object.values(cart).some(qty => qty > 0);
             if (!hasItems) {
-                alert('Veuillez sélectionner au moins un article avant de valider votre devis.');
+                errorDiv.textContent = 'Veuillez sélectionner au moins un article avant de valider votre devis.';
+                errorDiv.classList.add('show');
                 return;
             }
             if (!hasSignature) {
-                alert('Veuillez signer le devis avant de le valider.');
+                errorDiv.textContent = 'Veuillez signer le devis avant de le valider.';
+                errorDiv.classList.add('show');
                 return;
             }
             if (!document.getElementById('acceptConditions').checked) {
-                alert('Veuillez accepter les conditions générales de location.');
+                errorDiv.textContent = 'Veuillez accepter les conditions générales de location.';
+                errorDiv.classList.add('show');
                 return;
             }
 
@@ -1307,16 +1476,17 @@
             submitBtn.disabled = true;
 
             try {
-                // Récupérer les données
+                // Récupérer les données du formulaire
                 const nom = document.getElementById('nomDevis').value;
                 const email = document.getElementById('emailDevis').value;
                 const telephone = document.getElementById('telephoneDevis').value;
                 const dateEvent = document.getElementById('dateDevis').value;
                 const adresse = document.getElementById('adresseDevis').value;
+                const message = document.getElementById('messageDevis').value;
                 const reference = document.getElementById('quoteRef').textContent;
                 const signatureImage = await getSignatureImage();
 
-                // Construire le panier
+                // Construire le panier détaillé
                 let cartItems = [];
                 let subtotal = 0;
                 let articlesText = [];
@@ -1340,49 +1510,62 @@
                 const totalTTC = subtotal + tva;
                 const decorationDesc = decorationServiceActive ? document.getElementById('decorationDescription').value : '';
 
-                // Préparer les données pour Formspree
-                const formData = new FormData();
-                formData.append('_subject', 'Nouveau devis ' + reference + ' - ' + nom);
-                formData.append('_replyto', email);
-                formData.append('reference_devis', reference);
-                formData.append('nom_client', nom);
-                formData.append('email_client', email);
-                formData.append('telephone_client', telephone);
-                formData.append('date_evenement', dateEvent);
-                formData.append('adresse_evenement', adresse);
-                formData.append('message_client', document.getElementById('messageDevis').value);
-                formData.append('articles_selectionnes', articlesText.join('\n'));
-                formData.append('sous_total_ht', subtotal.toFixed(2).replace('.', ',') + ' €');
-                formData.append('tva_21', tva.toFixed(2).replace('.', ',') + ' €');
-                formData.append('total_ttc', totalTTC.toFixed(2).replace('.', ',') + ' €');
-                formData.append('service_decoration_desc', decorationDesc || 'Non demandé');
-                formData.append('signature_data', signatureImage ? 'Signature présente (voir PDF généré)' : 'Non signé');
+                // Remplir les champs cachés du formulaire
+                document.getElementById('formReference').value = reference;
+                document.getElementById('formArticles').value = articlesText.join('\n');
+                document.getElementById('formSubtotalHT').value = subtotal.toFixed(2).replace('.', ',') + ' €';
+                document.getElementById('formTVA').value = tva.toFixed(2).replace('.', ',') + ' €';
+                document.getElementById('formTotalTTC').value = totalTTC.toFixed(2).replace('.', ',') + ' €';
+                document.getElementById('formDecoration').value = decorationDesc || 'Non demandé';
+                document.getElementById('formSignature').value = signatureImage ? 'Signature présente (voir PDF)' : 'Non signé';
 
-                // Envoi AJAX à Formspree
-                const response = await fetch('https://formspree.io/f/xnjlapqy', {
-                    method: 'POST',
-                    body: formData,
-                    headers: {
-                        'Accept': 'application/json'
+                // Créer FormData à partir du formulaire
+                const formData = new FormData(this);
+
+                // Tentative d'envoi AJAX
+                let fetchSuccess = false;
+                try {
+                    const response = await fetch('https://formspree.io/f/xnjlapqy', {
+                        method: 'POST',
+                        body: formData,
+                        headers: {
+                            'Accept': 'application/json'
+                        }
+                    });
+
+                    if (response.ok) {
+                        fetchSuccess = true;
+                    } else {
+                        const errorData = await response.json();
+                        console.warn('Formspree AJAX error:', errorData);
+                        // Continuer avec le fallback
                     }
-                });
-
-                if (response.ok) {
-                    // Stocker pour PDF
-                    currentQuoteData = {
-                        reference, nom, email, telephone, dateEvent, adresse,
-                        cartItems, subtotal, tva, totalTTC, decorationDesc, signatureImage
-                    };
-                    
-                    // Afficher le message de succès
-                    showSuccessMessage(reference, nom);
-                } else {
-                    throw new Error('Erreur lors de l\'envoi');
+                } catch (fetchError) {
+                    console.warn('Fetch error (probablement CORS):', fetchError);
+                    // Continuer avec le fallback
                 }
+
+                // Si AJAX échoue, utiliser la soumission standard du formulaire
+                if (!fetchSuccess) {
+                    console.log('Utilisation du fallback: soumission standard du formulaire');
+                    // Laisser le formulaire se soumettre normalement
+                    // Mais d'abord, on désactive preventDefault pour cette soumission
+                    this.submit();
+                    return;
+                }
+
+                // Si AJAX réussit, afficher le succès
+                currentQuoteData = {
+                    reference, nom, email, telephone, dateEvent, adresse, message,
+                    cartItems, subtotal, tva, totalTTC, decorationDesc, signatureImage
+                };
+                
+                showSuccessMessage(reference, nom);
 
             } catch (error) {
                 console.error('Erreur:', error);
-                alert('Une erreur est survenue lors de l\'envoi. Veuillez réessayer ou nous contacter au 0492 85 91 27.');
+                errorDiv.textContent = 'Une erreur est survenue: ' + error.message + '. Veuillez réessayer ou nous contacter au 0492 85 91 27.';
+                errorDiv.classList.add('show');
                 submitBtn.innerHTML = originalText;
                 submitBtn.disabled = false;
             }
@@ -1417,25 +1600,55 @@
             successContainer.scrollIntoView({ behavior: 'smooth', block: 'center' });
         }
 
-        // Réinitialiser
+        // Réinitialiser et montrer le formulaire
         function resetFormAndShow() {
             const form = document.getElementById('quoteFormSignature');
             const successContainer = document.getElementById('successContainer');
             
+            // Réinitialiser le formulaire
             form.reset();
+            
+            // Réinitialiser le devis
             resetQuote();
             
+            // Cacher le succès, montrer le formulaire
             successContainer.style.display = 'none';
             form.style.display = 'block';
             
+            // Nouvelle référence
             document.getElementById('quoteRef').textContent = generateReference();
             
+            // Réinitialiser le bouton
             const submitBtn = document.getElementById('submitDevis');
             submitBtn.innerHTML = '<i class="fas fa-paper-plane"></i>Envoyer ma demande de devis';
             submitBtn.disabled = false;
             
+            // Scroll vers le formulaire
             form.scrollIntoView({ behavior: 'smooth', block: 'start' });
         }
+
+        // ============================================
+        // LIGHTBOX - ZOOM SUR LES IMAGES
+        // ============================================
+        function openLightbox(element) {
+            const img = element.querySelector('img');
+            const lightbox = document.getElementById('lightbox');
+            const lightboxImg = document.getElementById('lightboxImg');
+            lightboxImg.src = img.src;
+            lightbox.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+        
+        function closeLightbox() {
+            const lightbox = document.getElementById('lightbox');
+            lightbox.classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+        
+        // Fermer avec Escape
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') closeLightbox();
+        });
     </script>
 </body>
-</html>
+</html>'''\n\n# Sauvegarder\nwith open('/mnt/kimi/output/index.html', 'w', encoding='utf-8') as f:\n    f.write(html_content)\n\nprint(\"✅ Fichier HTML créé avec succès!\")\nprint(\"📁 Emplacement: /mnt/kimi/output/index.html\")\nprint(\"\\n📝 Modifications apportées:\")\nprint(\"   1. Ajout de onclick=\\\"openLightbox(this)\\\" sur l'image 'Créateurs d'Ambiances Uniques'\")\nprint(\"   2. Ajout des styles CSS pour l'effet zoom sur .about-image\")\nprint(\"   3. Suppression du script dupliqué à la fin\")\nprint(\"   4. Fonction openLightbox() fonctionnelle pour toutes les images\")\n"}
