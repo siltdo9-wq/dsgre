@@ -431,7 +431,218 @@
             .success-container { padding: 1.5rem 1rem; }
             .btn-download-pdf, .btn-new-quote { width: 100%; margin-left: 0; }
         }
-    </style>
+    
+/* ============================================
+   STYLES DES CARTES CATÉGORIES AVEC PHOTOS
+   ============================================ */
+
+/* Grille des catégories */
+.products-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5rem;
+    padding: 1.5rem;
+}
+
+/* Carte de catégorie */
+.category-card {
+    background: var(--white);
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+    transition: all 0.4s ease;
+    border: 2px solid transparent;
+}
+
+.category-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 40px rgba(212, 165, 165, 0.2);
+    border-color: var(--primary);
+}
+
+/* Visuel de la catégorie (photo + overlay) */
+.category-visual {
+    position: relative;
+    height: 220px;
+    overflow: hidden;
+    cursor: pointer;
+}
+
+.category-visual img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.6s ease;
+}
+
+.category-card:hover .category-visual img {
+    transform: scale(1.1);
+}
+
+/* Overlay sur la photo */
+.category-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: linear-gradient(to top, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.4) 60%, transparent 100%);
+    padding: 2rem 1.5rem 1.5rem;
+    color: var(--white);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.category-overlay h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.4rem;
+    margin: 0 0 0.5rem 0;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.category-overlay h3 i {
+    color: var(--primary);
+}
+
+/* Produit par défaut affiché */
+.category-default-product {
+    font-size: 0.9rem;
+    opacity: 0.9;
+    margin: 0 0 1rem 0;
+    font-style: italic;
+}
+
+/* Bouton d'expansion */
+.btn-expand-category {
+    background: var(--primary);
+    color: var(--white);
+    border: 2px solid var(--primary);
+    padding: 0.6rem 1.5rem;
+    border-radius: 50px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.85rem;
+    font-weight: 500;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: all 0.3s ease;
+}
+
+.btn-expand-category:hover {
+    background: transparent;
+    color: var(--white);
+    transform: translateY(-2px);
+}
+
+.btn-expand-category i {
+    transition: transform 0.3s ease;
+}
+
+.btn-expand-category i.open {
+    transform: rotate(180deg);
+}
+
+/* Conteneur des produits (caché par défaut) */
+.category-products {
+    padding: 1.5rem;
+    background: var(--cream);
+    animation: slideDown 0.4s ease;
+}
+
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Sous-catégories */
+.subcategory {
+    margin-bottom: 1.5rem;
+}
+
+.subcategory:last-child {
+    margin-bottom: 0;
+}
+
+.subcategory-title {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--primary-dark);
+    margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px dashed var(--accent);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.subcategory-title i {
+    font-size: 0.9rem;
+}
+
+/* Style des produits dans les catégories */
+.category-products .product-item {
+    background: var(--white);
+    border: 2px solid transparent;
+    margin-bottom: 0.8rem;
+}
+
+.category-products .product-item:hover {
+    border-color: var(--accent);
+}
+
+/* Service décoration en bas */
+.service-option-item {
+    grid-column: 1 / -1;
+    margin-top: 1rem;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .products-list {
+        grid-template-columns: 1fr;
+        padding: 1rem;
+        gap: 1rem;
+    }
+
+    .category-visual {
+        height: 180px;
+    }
+
+    .category-overlay {
+        padding: 1.5rem 1rem 1rem;
+    }
+
+    .category-overlay h3 {
+        font-size: 1.2rem;
+    }
+
+    .category-products {
+        padding: 1rem;
+    }
+
+    .service-option-item {
+        grid-column: 1;
+    }
+}
+
+@media (min-width: 769px) and (max-width: 1024px) {
+    .products-list {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+</style>
+<base target="_blank">
 <base target="_blank">
 </head>
 <body>
@@ -663,95 +874,836 @@
             <div class="error-message" id="errorMessage"></div>
 
             <div class="products-list" id="productsList">
-                <!-- Chaise Chiavari Or -->
-                <div class="product-item" data-id="chiavari-or" data-price="4.50">
+
+
+    <!-- ============================================ -->
+    <!-- CATÉGORIE 1: MOBILIER -->
+    <!-- ============================================ -->
+    <div class="category-card" data-category="mobilier">
+        <div class="category-visual" onclick="toggleCategory('mobilier')">
+            <img src="https://images.unsplash.com/photo-1478146059778-26028b07395a?w=400" alt="Mobilier" loading="lazy">
+            <div class="category-overlay">
+                <h3><i class="fas fa-chair"></i> Mobilier</h3>
+                <p class="category-default-product">Chaise Chiavari Or</p>
+                <button type="button" class="btn-expand-category">
+                    <span>Voir les produits</span>
+                    <i class="fas fa-chevron-down" id="arrow-mobilier"></i>
+                </button>
+            </div>
+        </div>
+
+        <div class="category-products" id="content-mobilier" style="display: none;">
+
+            <!-- Sous-catégorie: Chaises invités -->
+            <div class="subcategory">
+                <h4 class="subcategory-title"><i class="fas fa-users"></i> Chaises invités</h4>
+
+                <div class="product-item" data-id="chaise-chiavari-or" data-price="4.50">
                     <div class="product-image">
                         <img src="https://images.unsplash.com/photo-1478146059778-26028b07395a?w=200" alt="Chaise Chiavari Or" loading="lazy">
                     </div>
                     <div class="product-details">
                         <div class="product-header">
                             <h4>Chaise Chiavari Or</h4>
-                            <span class="product-category">Mobilier</span>
+                            <span class="product-category">Chaises</span>
                         </div>
                         <div class="product-price">4,50 € / unité</div>
                         <div class="product-controls">
-                            <button type="button" class="qty-btn minus" onclick="updateQuantity('chiavari-or', -1)"><i class="fas fa-minus"></i></button>
-                            <input type="number" class="qty-input" id="qty-chiavari-or" value="0" min="0" onchange="validateAndUpdateQuantity('chiavari-or', this.value)">
-                            <button type="button" class="qty-btn plus" onclick="updateQuantity('chiavari-or', 1)"><i class="fas fa-plus"></i></button>
-                            <button type="button" class="remove-btn" onclick="resetProduct('chiavari-or')"><i class="fas fa-minus-circle"></i></button>
+                            <button type="button" class="qty-btn minus" onclick="updateQuantity('chaise-chiavari-or', -1)"><i class="fas fa-minus"></i></button>
+                            <input type="number" class="qty-input" id="qty-chaise-chiavari-or" value="0" min="0" onchange="validateAndUpdateQuantity('chaise-chiavari-or', this.value)">
+                            <button type="button" class="qty-btn plus" onclick="updateQuantity('chaise-chiavari-or', 1)"><i class="fas fa-plus"></i></button>
+                            <button type="button" class="remove-btn" onclick="resetProduct('chaise-chiavari-or')"><i class="fas fa-minus-circle"></i></button>
                         </div>
                     </div>
                 </div>
 
-                <!-- Chaise Chiavari Transparente -->
-                <div class="product-item" data-id="chiavari-transparente" data-price="5.00">
+                <div class="product-item" data-id="chaise-chiavari-argent" data-price="4.50">
+                    <div class="product-image">
+                        <img src="https://images.unsplash.com/photo-1478146059778-26028b07395a?w=200" alt="Chaise Chiavari Argent" loading="lazy">
+                    </div>
+                    <div class="product-details">
+                        <div class="product-header">
+                            <h4>Chaise Chiavari Argent</h4>
+                            <span class="product-category">Chaises</span>
+                        </div>
+                        <div class="product-price">4,50 € / unité</div>
+                        <div class="product-controls">
+                            <button type="button" class="qty-btn minus" onclick="updateQuantity('chaise-chiavari-argent', -1)"><i class="fas fa-minus"></i></button>
+                            <input type="number" class="qty-input" id="qty-chaise-chiavari-argent" value="0" min="0" onchange="validateAndUpdateQuantity('chaise-chiavari-argent', this.value)">
+                            <button type="button" class="qty-btn plus" onclick="updateQuantity('chaise-chiavari-argent', 1)"><i class="fas fa-plus"></i></button>
+                            <button type="button" class="remove-btn" onclick="resetProduct('chaise-chiavari-argent')"><i class="fas fa-minus-circle"></i></button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="product-item" data-id="chaise-chiavari-transparente" data-price="5.00">
                     <div class="product-image">
                         <img src="https://images.unsplash.com/photo-1478146059778-26028b07395a?w=200" alt="Chaise Chiavari Transparente" loading="lazy">
                     </div>
                     <div class="product-details">
                         <div class="product-header">
                             <h4>Chaise Chiavari Transparente</h4>
-                            <span class="product-category">Mobilier</span>
+                            <span class="product-category">Chaises</span>
                         </div>
                         <div class="product-price">5,00 € / unité</div>
                         <div class="product-controls">
-                            <button type="button" class="qty-btn minus" onclick="updateQuantity('chiavari-transparente', -1)"><i class="fas fa-minus"></i></button>
-                            <input type="number" class="qty-input" id="qty-chiavari-transparente" value="0" min="0" onchange="validateAndUpdateQuantity('chiavari-transparente', this.value)">
-                            <button type="button" class="qty-btn plus" onclick="updateQuantity('chiavari-transparente', 1)"><i class="fas fa-plus"></i></button>
-                            <button type="button" class="remove-btn" onclick="resetProduct('chiavari-transparente')"><i class="fas fa-minus-circle"></i></button>
+                            <button type="button" class="qty-btn minus" onclick="updateQuantity('chaise-chiavari-transparente', -1)"><i class="fas fa-minus"></i></button>
+                            <input type="number" class="qty-input" id="qty-chaise-chiavari-transparente" value="0" min="0" onchange="validateAndUpdateQuantity('chaise-chiavari-transparente', this.value)">
+                            <button type="button" class="qty-btn plus" onclick="updateQuantity('chaise-chiavari-transparente', 1)"><i class="fas fa-plus"></i></button>
+                            <button type="button" class="remove-btn" onclick="resetProduct('chaise-chiavari-transparente')"><i class="fas fa-minus-circle"></i></button>
                         </div>
                     </div>
                 </div>
 
-                <!-- Table ronde -->
-                <div class="product-item" data-id="table-ronde" data-price="12.00">
+                <div class="product-item" data-id="chaise-napoleon" data-price="6.00">
                     <div class="product-image">
-                        <img src="https://images.unsplash.com/photo-1519741497674-611481863552?w=200" alt="Table ronde" loading="lazy">
+                        <img src="https://images.unsplash.com/photo-1478146059778-26028b07395a?w=200" alt="Chaise Napoléon" loading="lazy">
                     </div>
                     <div class="product-details">
                         <div class="product-header">
-                            <h4>Table ronde</h4>
-                            <span class="product-category">Mobilier</span>
+                            <h4>Chaise Napoléon III</h4>
+                            <span class="product-category">Chaises</span>
                         </div>
-                        <div class="product-price">12,00 € / unité</div>
+                        <div class="product-price">6,00 € / unité</div>
                         <div class="product-controls">
-                            <button type="button" class="qty-btn minus" onclick="updateQuantity('table-ronde', -1)"><i class="fas fa-minus"></i></button>
-                            <input type="number" class="qty-input" id="qty-table-ronde" value="0" min="0" onchange="validateAndUpdateQuantity('table-ronde', this.value)">
-                            <button type="button" class="qty-btn plus" onclick="updateQuantity('table-ronde', 1)"><i class="fas fa-plus"></i></button>
-                            <button type="button" class="remove-btn" onclick="resetProduct('table-ronde')"><i class="fas fa-minus-circle"></i></button>
+                            <button type="button" class="qty-btn minus" onclick="updateQuantity('chaise-napoleon', -1)"><i class="fas fa-minus"></i></button>
+                            <input type="number" class="qty-input" id="qty-chaise-napoleon" value="0" min="0" onchange="validateAndUpdateQuantity('chaise-napoleon', this.value)">
+                            <button type="button" class="qty-btn plus" onclick="updateQuantity('chaise-napoleon', 1)"><i class="fas fa-plus"></i></button>
+                            <button type="button" class="remove-btn" onclick="resetProduct('chaise-napoleon')"><i class="fas fa-minus-circle"></i></button>
                         </div>
                     </div>
                 </div>
+            </div>
 
-                <!-- Mange-debout -->
-                <div class="product-item" data-id="mange-debout" data-price="12.00">
+            <!-- Sous-catégorie: Tables rondes -->
+            <div class="subcategory">
+                <h4 class="subcategory-title"><i class="fas fa-circle"></i> Tables rondes</h4>
+
+                <div class="product-item" data-id="table-ronde-8" data-price="12.00">
                     <div class="product-image">
-                        <img src="https://images.unsplash.com/photo-1465495976277-4387d4b0b4c6?w=200" alt="Mange-debout" loading="lazy">
+                        <img src="https://images.unsplash.com/photo-1519741497674-611481863552?w=200" alt="Table ronde 8 pers" loading="lazy">
                     </div>
                     <div class="product-details">
                         <div class="product-header">
-                            <h4>Mange-debout + housse</h4>
-                            <span class="product-category">Mobilier</span>
+                            <h4>Table ronde Ø150cm (8 pers)</h4>
+                            <span class="product-category">Tables rondes</span>
                         </div>
                         <div class="product-price">12,00 € / unité</div>
                         <div class="product-controls">
-                            <button type="button" class="qty-btn minus" onclick="updateQuantity('mange-debout', -1)"><i class="fas fa-minus"></i></button>
-                            <input type="number" class="qty-input" id="qty-mange-debout" value="0" min="0" onchange="validateAndUpdateQuantity('mange-debout', this.value)">
-                            <button type="button" class="qty-btn plus" onclick="updateQuantity('mange-debout', 1)"><i class="fas fa-plus"></i></button>
-                            <button type="button" class="remove-btn" onclick="resetProduct('mange-debout')"><i class="fas fa-minus-circle"></i></button>
+                            <button type="button" class="qty-btn minus" onclick="updateQuantity('table-ronde-8', -1)"><i class="fas fa-minus"></i></button>
+                            <input type="number" class="qty-input" id="qty-table-ronde-8" value="0" min="0" onchange="validateAndUpdateQuantity('table-ronde-8', this.value)">
+                            <button type="button" class="qty-btn plus" onclick="updateQuantity('table-ronde-8', 1)"><i class="fas fa-plus"></i></button>
+                            <button type="button" class="remove-btn" onclick="resetProduct('table-ronde-8')"><i class="fas fa-minus-circle"></i></button>
                         </div>
                     </div>
                 </div>
 
-                <!-- Arche florale -->
+                <div class="product-item" data-id="table-ronde-10" data-price="15.00">
+                    <div class="product-image">
+                        <img src="https://images.unsplash.com/photo-1519741497674-611481863552?w=200" alt="Table ronde 10 pers" loading="lazy">
+                    </div>
+                    <div class="product-details">
+                        <div class="product-header">
+                            <h4>Table ronde Ø180cm (10 pers)</h4>
+                            <span class="product-category">Tables rondes</span>
+                        </div>
+                        <div class="product-price">15,00 € / unité</div>
+                        <div class="product-controls">
+                            <button type="button" class="qty-btn minus" onclick="updateQuantity('table-ronde-10', -1)"><i class="fas fa-minus"></i></button>
+                            <input type="number" class="qty-input" id="qty-table-ronde-10" value="0" min="0" onchange="validateAndUpdateQuantity('table-ronde-10', this.value)">
+                            <button type="button" class="qty-btn plus" onclick="updateQuantity('table-ronde-10', 1)"><i class="fas fa-plus"></i></button>
+                            <button type="button" class="remove-btn" onclick="resetProduct('table-ronde-10')"><i class="fas fa-minus-circle"></i></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sous-catégorie: Tables rectangulaires -->
+            <div class="subcategory">
+                <h4 class="subcategory-title"><i class="fas fa-square"></i> Tables rectangulaires</h4>
+
+                <div class="product-item" data-id="table-rect-200" data-price="14.00">
+                    <div class="product-image">
+                        <img src="https://images.unsplash.com/photo-1465495976277-4387d4b0b4c6?w=200" alt="Table rectangulaire 200cm" loading="lazy">
+                    </div>
+                    <div class="product-details">
+                        <div class="product-header">
+                            <h4>Table rectangulaire 200cm (8 pers)</h4>
+                            <span class="product-category">Tables rect.</span>
+                        </div>
+                        <div class="product-price">14,00 € / unité</div>
+                        <div class="product-controls">
+                            <button type="button" class="qty-btn minus" onclick="updateQuantity('table-rect-200', -1)"><i class="fas fa-minus"></i></button>
+                            <input type="number" class="qty-input" id="qty-table-rect-200" value="0" min="0" onchange="validateAndUpdateQuantity('table-rect-200', this.value)">
+                            <button type="button" class="qty-btn plus" onclick="updateQuantity('table-rect-200', 1)"><i class="fas fa-plus"></i></button>
+                            <button type="button" class="remove-btn" onclick="resetProduct('table-rect-200')"><i class="fas fa-minus-circle"></i></button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="product-item" data-id="table-rect-240" data-price="16.00">
+                    <div class="product-image">
+                        <img src="https://images.unsplash.com/photo-1465495976277-4387d4b0b4c6?w=200" alt="Table rectangulaire 240cm" loading="lazy">
+                    </div>
+                    <div class="product-details">
+                        <div class="product-header">
+                            <h4>Table rectangulaire 240cm (10 pers)</h4>
+                            <span class="product-category">Tables rect.</span>
+                        </div>
+                        <div class="product-price">16,00 € / unité</div>
+                        <div class="product-controls">
+                            <button type="button" class="qty-btn minus" onclick="updateQuantity('table-rect-240', -1)"><i class="fas fa-minus"></i></button>
+                            <input type="number" class="qty-input" id="qty-table-rect-240" value="0" min="0" onchange="validateAndUpdateQuantity('table-rect-240', this.value)">
+                            <button type="button" class="qty-btn plus" onclick="updateQuantity('table-rect-240', 1)"><i class="fas fa-plus"></i></button>
+                            <button type="button" class="remove-btn" onclick="resetProduct('table-rect-240')"><i class="fas fa-minus-circle"></i></button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="product-item" data-id="table-rect-300" data-price="20.00">
+                    <div class="product-image">
+                        <img src="https://images.unsplash.com/photo-1465495976277-4387d4b0b4c6?w=200" alt="Table rectangulaire 300cm" loading="lazy">
+                    </div>
+                    <div class="product-details">
+                        <div class="product-header">
+                            <h4>Table rectangulaire 300cm (12 pers)</h4>
+                            <span class="product-category">Tables rect.</span>
+                        </div>
+                        <div class="product-price">20,00 € / unité</div>
+                        <div class="product-controls">
+                            <button type="button" class="qty-btn minus" onclick="updateQuantity('table-rect-300', -1)"><i class="fas fa-minus"></i></button>
+                            <input type="number" class="qty-input" id="qty-table-rect-300" value="0" min="0" onchange="validateAndUpdateQuantity('table-rect-300', this.value)">
+                            <button type="button" class="qty-btn plus" onclick="updateQuantity('table-rect-300', 1)"><i class="fas fa-plus"></i></button>
+                            <button type="button" class="remove-btn" onclick="resetProduct('table-rect-300')"><i class="fas fa-minus-circle"></i></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ============================================ -->
+    <!-- CATÉGORIE 2: LINGE DE TABLE -->
+    <!-- ============================================ -->
+    <div class="category-card" data-category="linge">
+        <div class="category-visual" onclick="toggleCategory('linge')">
+            <img src="https://images.unsplash.com/photo-1519225421980-715cb0215aed?w=400" alt="Linge de table" loading="lazy">
+            <div class="category-overlay">
+                <h3><i class="fas fa-scroll"></i> Linge de table</h3>
+                <p class="category-default-product">Nappe ronde Ø300cm</p>
+                <button type="button" class="btn-expand-category">
+                    <span>Voir les produits</span>
+                    <i class="fas fa-chevron-down" id="arrow-linge"></i>
+                </button>
+            </div>
+        </div>
+
+        <div class="category-products" id="content-linge" style="display: none;">
+
+            <!-- Sous-catégorie: Nappes rondes -->
+            <div class="subcategory">
+                <h4 class="subcategory-title"><i class="fas fa-circle"></i> Nappes rondes</h4>
+
+                <div class="product-item" data-id="nappe-ronde-blanche" data-price="8.00">
+                    <div class="product-image">
+                        <img src="https://images.unsplash.com/photo-1519225421980-715cb0215aed?w=200" alt="Nappe ronde blanche" loading="lazy">
+                    </div>
+                    <div class="product-details">
+                        <div class="product-header">
+                            <h4>Nappe ronde Ø300cm - Blanche</h4>
+                            <span class="product-category">Nappes rondes</span>
+                        </div>
+                        <div class="product-price">8,00 € / unité</div>
+                        <div class="product-controls">
+                            <button type="button" class="qty-btn minus" onclick="updateQuantity('nappe-ronde-blanche', -1)"><i class="fas fa-minus"></i></button>
+                            <input type="number" class="qty-input" id="qty-nappe-ronde-blanche" value="0" min="0" onchange="validateAndUpdateQuantity('nappe-ronde-blanche', this.value)">
+                            <button type="button" class="qty-btn plus" onclick="updateQuantity('nappe-ronde-blanche', 1)"><i class="fas fa-plus"></i></button>
+                            <button type="button" class="remove-btn" onclick="resetProduct('nappe-ronde-blanche')"><i class="fas fa-minus-circle"></i></button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="product-item" data-id="nappe-ronde-ivoire" data-price="8.00">
+                    <div class="product-image">
+                        <img src="https://images.unsplash.com/photo-1519225421980-715cb0215aed?w=200" alt="Nappe ronde ivoire" loading="lazy">
+                    </div>
+                    <div class="product-details">
+                        <div class="product-header">
+                            <h4>Nappe ronde Ø300cm - Ivoire</h4>
+                            <span class="product-category">Nappes rondes</span>
+                        </div>
+                        <div class="product-price">8,00 € / unité</div>
+                        <div class="product-controls">
+                            <button type="button" class="qty-btn minus" onclick="updateQuantity('nappe-ronde-ivoire', -1)"><i class="fas fa-minus"></i></button>
+                            <input type="number" class="qty-input" id="qty-nappe-ronde-ivoire" value="0" min="0" onchange="validateAndUpdateQuantity('nappe-ronde-ivoire', this.value)">
+                            <button type="button" class="qty-btn plus" onclick="updateQuantity('nappe-ronde-ivoire', 1)"><i class="fas fa-plus"></i></button>
+                            <button type="button" class="remove-btn" onclick="resetProduct('nappe-ronde-ivoire')"><i class="fas fa-minus-circle"></i></button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="product-item" data-id="nappe-ronde-doree" data-price="10.00">
+                    <div class="product-image">
+                        <img src="https://images.unsplash.com/photo-1519225421980-715cb0215aed?w=200" alt="Nappe ronde dorée" loading="lazy">
+                    </div>
+                    <div class="product-details">
+                        <div class="product-header">
+                            <h4>Nappe ronde Ø300cm - Dorée pailletée</h4>
+                            <span class="product-category">Nappes rondes</span>
+                        </div>
+                        <div class="product-price">10,00 € / unité</div>
+                        <div class="product-controls">
+                            <button type="button" class="qty-btn minus" onclick="updateQuantity('nappe-ronde-doree', -1)"><i class="fas fa-minus"></i></button>
+                            <input type="number" class="qty-input" id="qty-nappe-ronde-doree" value="0" min="0" onchange="validateAndUpdateQuantity('nappe-ronde-doree', this.value)">
+                            <button type="button" class="qty-btn plus" onclick="updateQuantity('nappe-ronde-doree', 1)"><i class="fas fa-plus"></i></button>
+                            <button type="button" class="remove-btn" onclick="resetProduct('nappe-ronde-doree')"><i class="fas fa-minus-circle"></i></button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="product-item" data-id="nappe-ronde-noire" data-price="8.00">
+                    <div class="product-image">
+                        <img src="https://images.unsplash.com/photo-1519225421980-715cb0215aed?w=200" alt="Nappe ronde noire" loading="lazy">
+                    </div>
+                    <div class="product-details">
+                        <div class="product-header">
+                            <h4>Nappe ronde Ø300cm - Noire élégante</h4>
+                            <span class="product-category">Nappes rondes</span>
+                        </div>
+                        <div class="product-price">8,00 € / unité</div>
+                        <div class="product-controls">
+                            <button type="button" class="qty-btn minus" onclick="updateQuantity('nappe-ronde-noire', -1)"><i class="fas fa-minus"></i></button>
+                            <input type="number" class="qty-input" id="qty-nappe-ronde-noire" value="0" min="0" onchange="validateAndUpdateQuantity('nappe-ronde-noire', this.value)">
+                            <button type="button" class="qty-btn plus" onclick="updateQuantity('nappe-ronde-noire', 1)"><i class="fas fa-plus"></i></button>
+                            <button type="button" class="remove-btn" onclick="resetProduct('nappe-ronde-noire')"><i class="fas fa-minus-circle"></i></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sous-catégorie: Nappes rectangulaires -->
+            <div class="subcategory">
+                <h4 class="subcategory-title"><i class="fas fa-square"></i> Nappes rectangulaires</h4>
+
+                <div class="product-item" data-id="nappe-rect-blanche" data-price="9.00">
+                    <div class="product-image">
+                        <img src="https://images.unsplash.com/photo-1519225421980-715cb0215aed?w=200" alt="Nappe rectangulaire blanche" loading="lazy">
+                    </div>
+                    <div class="product-details">
+                        <div class="product-header">
+                            <h4>Nappe rect. 300x150cm - Blanche</h4>
+                            <span class="product-category">Nappes rect.</span>
+                        </div>
+                        <div class="product-price">9,00 € / unité</div>
+                        <div class="product-controls">
+                            <button type="button" class="qty-btn minus" onclick="updateQuantity('nappe-rect-blanche', -1)"><i class="fas fa-minus"></i></button>
+                            <input type="number" class="qty-input" id="qty-nappe-rect-blanche" value="0" min="0" onchange="validateAndUpdateQuantity('nappe-rect-blanche', this.value)">
+                            <button type="button" class="qty-btn plus" onclick="updateQuantity('nappe-rect-blanche', 1)"><i class="fas fa-plus"></i></button>
+                            <button type="button" class="remove-btn" onclick="resetProduct('nappe-rect-blanche')"><i class="fas fa-minus-circle"></i></button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="product-item" data-id="nappe-rect-ivoire" data-price="9.00">
+                    <div class="product-image">
+                        <img src="https://images.unsplash.com/photo-1519225421980-715cb0215aed?w=200" alt="Nappe rectangulaire ivoire" loading="lazy">
+                    </div>
+                    <div class="product-details">
+                        <div class="product-header">
+                            <h4>Nappe rect. 300x150cm - Ivoire</h4>
+                            <span class="product-category">Nappes rect.</span>
+                        </div>
+                        <div class="product-price">9,00 € / unité</div>
+                        <div class="product-controls">
+                            <button type="button" class="qty-btn minus" onclick="updateQuantity('nappe-rect-ivoire', -1)"><i class="fas fa-minus"></i></button>
+                            <input type="number" class="qty-input" id="qty-nappe-rect-ivoire" value="0" min="0" onchange="validateAndUpdateQuantity('nappe-rect-ivoire', this.value)">
+                            <button type="button" class="qty-btn plus" onclick="updateQuantity('nappe-rect-ivoire', 1)"><i class="fas fa-plus"></i></button>
+                            <button type="button" class="remove-btn" onclick="resetProduct('nappe-rect-ivoire')"><i class="fas fa-minus-circle"></i></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sous-catégorie: Serviettes -->
+            <div class="subcategory">
+                <h4 class="subcategory-title"><i class="fas fa-leaf"></i> Serviettes</h4>
+
+                <div class="product-item" data-id="serviette-blanche" data-price="1.50">
+                    <div class="product-image">
+                        <img src="https://images.unsplash.com/photo-1519225421980-715cb0215aed?w=200" alt="Serviette blanche" loading="lazy">
+                    </div>
+                    <div class="product-details">
+                        <div class="product-header">
+                            <h4>Serviette tissu - Blanche</h4>
+                            <span class="product-category">Serviettes</span>
+                        </div>
+                        <div class="product-price">1,50 € / unité</div>
+                        <div class="product-controls">
+                            <button type="button" class="qty-btn minus" onclick="updateQuantity('serviette-blanche', -1)"><i class="fas fa-minus"></i></button>
+                            <input type="number" class="qty-input" id="qty-serviette-blanche" value="0" min="0" onchange="validateAndUpdateQuantity('serviette-blanche', this.value)">
+                            <button type="button" class="qty-btn plus" onclick="updateQuantity('serviette-blanche', 1)"><i class="fas fa-plus"></i></button>
+                            <button type="button" class="remove-btn" onclick="resetProduct('serviette-blanche')"><i class="fas fa-minus-circle"></i></button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="product-item" data-id="serviette-ivoire" data-price="1.50">
+                    <div class="product-image">
+                        <img src="https://images.unsplash.com/photo-1519225421980-715cb0215aed?w=200" alt="Serviette ivoire" loading="lazy">
+                    </div>
+                    <div class="product-details">
+                        <div class="product-header">
+                            <h4>Serviette tissu - Ivoire</h4>
+                            <span class="product-category">Serviettes</span>
+                        </div>
+                        <div class="product-price">1,50 € / unité</div>
+                        <div class="product-controls">
+                            <button type="button" class="qty-btn minus" onclick="updateQuantity('serviette-ivoire', -1)"><i class="fas fa-minus"></i></button>
+                            <input type="number" class="qty-input" id="qty-serviette-ivoire" value="0" min="0" onchange="validateAndUpdateQuantity('serviette-ivoire', this.value)">
+                            <button type="button" class="qty-btn plus" onclick="updateQuantity('serviette-ivoire', 1)"><i class="fas fa-plus"></i></button>
+                            <button type="button" class="remove-btn" onclick="resetProduct('serviette-ivoire')"><i class="fas fa-minus-circle"></i></button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="product-item" data-id="serviette-doree" data-price="2.00">
+                    <div class="product-image">
+                        <img src="https://images.unsplash.com/photo-1519225421980-715cb0215aed?w=200" alt="Serviette dorée" loading="lazy">
+                    </div>
+                    <div class="product-details">
+                        <div class="product-header">
+                            <h4>Serviette tissu - Dorée</h4>
+                            <span class="product-category">Serviettes</span>
+                        </div>
+                        <div class="product-price">2,00 € / unité</div>
+                        <div class="product-controls">
+                            <button type="button" class="qty-btn minus" onclick="updateQuantity('serviette-doree', -1)"><i class="fas fa-minus"></i></button>
+                            <input type="number" class="qty-input" id="qty-serviette-doree" value="0" min="0" onchange="validateAndUpdateQuantity('serviette-doree', this.value)">
+                            <button type="button" class="qty-btn plus" onclick="updateQuantity('serviette-doree', 1)"><i class="fas fa-plus"></i></button>
+                            <button type="button" class="remove-btn" onclick="resetProduct('serviette-doree')"><i class="fas fa-minus-circle"></i></button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="product-item" data-id="serviette-porte-nom" data-price="3.50">
+                    <div class="product-image">
+                        <img src="https://images.unsplash.com/photo-1519225421980-715cb0215aed?w=200" alt="Serviette avec porte-nom" loading="lazy">
+                    </div>
+                    <div class="product-details">
+                        <div class="product-header">
+                            <h4>Serviette + porte-nom personnalisé</h4>
+                            <span class="product-category">Serviettes</span>
+                        </div>
+                        <div class="product-price">3,50 € / unité</div>
+                        <div class="product-controls">
+                            <button type="button" class="qty-btn minus" onclick="updateQuantity('serviette-porte-nom', -1)"><i class="fas fa-minus"></i></button>
+                            <input type="number" class="qty-input" id="qty-serviette-porte-nom" value="0" min="0" onchange="validateAndUpdateQuantity('serviette-porte-nom', this.value)">
+                            <button type="button" class="qty-btn plus" onclick="updateQuantity('serviette-porte-nom', 1)"><i class="fas fa-plus"></i></button>
+                            <button type="button" class="remove-btn" onclick="resetProduct('serviette-porte-nom')"><i class="fas fa-minus-circle"></i></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ============================================ -->
+    <!-- CATÉGORIE 3: ART DE LA TABLE -->
+    <!-- ============================================ -->
+    <div class="category-card" data-category="art-table">
+        <div class="category-visual" onclick="toggleCategory('art-table')">
+            <img src="https://images.unsplash.com/photo-1510812431401-41d2bd2722f3?w=400" alt="Art de la table" loading="lazy">
+            <div class="category-overlay">
+                <h3><i class="fas fa-utensils"></i> Art de la table</h3>
+                <p class="category-default-product">Assiette de présentation</p>
+                <button type="button" class="btn-expand-category">
+                    <span>Voir les produits</span>
+                    <i class="fas fa-chevron-down" id="arrow-art-table"></i>
+                </button>
+            </div>
+        </div>
+
+        <div class="category-products" id="content-art-table" style="display: none;">
+
+            <!-- Sous-catégorie: Assiettes -->
+            <div class="subcategory">
+                <h4 class="subcategory-title"><i class="fas fa-circle"></i> Assiettes</h4>
+
+                <div class="product-item" data-id="assiette-presentation" data-price="1.20">
+                    <div class="product-image">
+                        <img src="https://images.unsplash.com/photo-1519225421980-715cb0215aed?w=200" alt="Assiette de présentation" loading="lazy">
+                    </div>
+                    <div class="product-details">
+                        <div class="product-header">
+                            <h4>Assiette de présentation Ø32cm</h4>
+                            <span class="product-category">Assiettes</span>
+                        </div>
+                        <div class="product-price">1,20 € / unité</div>
+                        <div class="product-controls">
+                            <button type="button" class="qty-btn minus" onclick="updateQuantity('assiette-presentation', -1)"><i class="fas fa-minus"></i></button>
+                            <input type="number" class="qty-input" id="qty-assiette-presentation" value="0" min="0" onchange="validateAndUpdateQuantity('assiette-presentation', this.value)">
+                            <button type="button" class="qty-btn plus" onclick="updateQuantity('assiette-presentation', 1)"><i class="fas fa-plus"></i></button>
+                            <button type="button" class="remove-btn" onclick="resetProduct('assiette-presentation')"><i class="fas fa-minus-circle"></i></button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="product-item" data-id="assiette-creuse" data-price="1.00">
+                    <div class="product-image">
+                        <img src="https://images.unsplash.com/photo-1519225421980-715cb0215aed?w=200" alt="Assiette creuse" loading="lazy">
+                    </div>
+                    <div class="product-details">
+                        <div class="product-header">
+                            <h4>Assiette creuse Ø24cm</h4>
+                            <span class="product-category">Assiettes</span>
+                        </div>
+                        <div class="product-price">1,00 € / unité</div>
+                        <div class="product-controls">
+                            <button type="button" class="qty-btn minus" onclick="updateQuantity('assiette-creuse', -1)"><i class="fas fa-minus"></i></button>
+                            <input type="number" class="qty-input" id="qty-assiette-creuse" value="0" min="0" onchange="validateAndUpdateQuantity('assiette-creuse', this.value)">
+                            <button type="button" class="qty-btn plus" onclick="updateQuantity('assiette-creuse', 1)"><i class="fas fa-plus"></i></button>
+                            <button type="button" class="remove-btn" onclick="resetProduct('assiette-creuse')"><i class="fas fa-minus-circle"></i></button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="product-item" data-id="assiette-dessert" data-price="0.80">
+                    <div class="product-image">
+                        <img src="https://images.unsplash.com/photo-1519225421980-715cb0215aed?w=200" alt="Assiette dessert" loading="lazy">
+                    </div>
+                    <div class="product-details">
+                        <div class="product-header">
+                            <h4>Assiette dessert Ø20cm</h4>
+                            <span class="product-category">Assiettes</span>
+                        </div>
+                        <div class="product-price">0,80 € / unité</div>
+                        <div class="product-controls">
+                            <button type="button" class="qty-btn minus" onclick="updateQuantity('assiette-dessert', -1)"><i class="fas fa-minus"></i></button>
+                            <input type="number" class="qty-input" id="qty-assiette-dessert" value="0" min="0" onchange="validateAndUpdateQuantity('assiette-dessert', this.value)">
+                            <button type="button" class="qty-btn plus" onclick="updateQuantity('assiette-dessert', 1)"><i class="fas fa-plus"></i></button>
+                            <button type="button" class="remove-btn" onclick="resetProduct('assiette-dessert')"><i class="fas fa-minus-circle"></i></button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="product-item" data-id="assiette-doree" data-price="2.50">
+                    <div class="product-image">
+                        <img src="https://images.unsplash.com/photo-1519225421980-715cb0215aed?w=200" alt="Assiette dorée" loading="lazy">
+                    </div>
+                    <div class="product-details">
+                        <div class="product-header">
+                            <h4>Assiette dorée premium</h4>
+                            <span class="product-category">Assiettes</span>
+                        </div>
+                        <div class="product-price">2,50 € / unité</div>
+                        <div class="product-controls">
+                            <button type="button" class="qty-btn minus" onclick="updateQuantity('assiette-doree', -1)"><i class="fas fa-minus"></i></button>
+                            <input type="number" class="qty-input" id="qty-assiette-doree" value="0" min="0" onchange="validateAndUpdateQuantity('assiette-doree', this.value)">
+                            <button type="button" class="qty-btn plus" onclick="updateQuantity('assiette-doree', 1)"><i class="fas fa-plus"></i></button>
+                            <button type="button" class="remove-btn" onclick="resetProduct('assiette-doree')"><i class="fas fa-minus-circle"></i></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sous-catégorie: Verres -->
+            <div class="subcategory">
+                <h4 class="subcategory-title"><i class="fas fa-wine-glass"></i> Verres</h4>
+
+                <div class="product-item" data-id="verre-vin" data-price="0.60">
+                    <div class="product-image">
+                        <img src="https://images.unsplash.com/photo-1510812431401-41d2bd2722f3?w=200" alt="Verre à vin" loading="lazy">
+                    </div>
+                    <div class="product-details">
+                        <div class="product-header">
+                            <h4>Verre à vin 25cl</h4>
+                            <span class="product-category">Verres</span>
+                        </div>
+                        <div class="product-price">0,60 € / unité</div>
+                        <div class="product-controls">
+                            <button type="button" class="qty-btn minus" onclick="updateQuantity('verre-vin', -1)"><i class="fas fa-minus"></i></button>
+                            <input type="number" class="qty-input" id="qty-verre-vin" value="0" min="0" onchange="validateAndUpdateQuantity('verre-vin', this.value)">
+                            <button type="button" class="qty-btn plus" onclick="updateQuantity('verre-vin', 1)"><i class="fas fa-plus"></i></button>
+                            <button type="button" class="remove-btn" onclick="resetProduct('verre-vin')"><i class="fas fa-minus-circle"></i></button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="product-item" data-id="verre-eau" data-price="0.50">
+                    <div class="product-image">
+                        <img src="https://images.unsplash.com/photo-1510812431401-41d2bd2722f3?w=200" alt="Verre à eau" loading="lazy">
+                    </div>
+                    <div class="product-details">
+                        <div class="product-header">
+                            <h4>Verre à eau 30cl</h4>
+                            <span class="product-category">Verres</span>
+                        </div>
+                        <div class="product-price">0,50 € / unité</div>
+                        <div class="product-controls">
+                            <button type="button" class="qty-btn minus" onclick="updateQuantity('verre-eau', -1)"><i class="fas fa-minus"></i></button>
+                            <input type="number" class="qty-input" id="qty-verre-eau" value="0" min="0" onchange="validateAndUpdateQuantity('verre-eau', this.value)">
+                            <button type="button" class="qty-btn plus" onclick="updateQuantity('verre-eau', 1)"><i class="fas fa-plus"></i></button>
+                            <button type="button" class="remove-btn" onclick="resetProduct('verre-eau')"><i class="fas fa-minus-circle"></i></button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="product-item" data-id="coupe-champagne" data-price="0.80">
+                    <div class="product-image">
+                        <img src="https://images.unsplash.com/photo-1510812431401-41d2bd2722f3?w=200" alt="Coupe champagne" loading="lazy">
+                    </div>
+                    <div class="product-details">
+                        <div class="product-header">
+                            <h4>Coupe à champagne</h4>
+                            <span class="product-category">Verres</span>
+                        </div>
+                        <div class="product-price">0,80 € / unité</div>
+                        <div class="product-controls">
+                            <button type="button" class="qty-btn minus" onclick="updateQuantity('coupe-champagne', -1)"><i class="fas fa-minus"></i></button>
+                            <input type="number" class="qty-input" id="qty-coupe-champagne" value="0" min="0" onchange="validateAndUpdateQuantity('coupe-champagne', this.value)">
+                            <button type="button" class="qty-btn plus" onclick="updateQuantity('coupe-champagne', 1)"><i class="fas fa-plus"></i></button>
+                            <button type="button" class="remove-btn" onclick="resetProduct('coupe-champagne')"><i class="fas fa-minus-circle"></i></button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="product-item" data-id="flute-champagne" data-price="0.70">
+                    <div class="product-image">
+                        <img src="https://images.unsplash.com/photo-1510812431401-41d2bd2722f3?w=200" alt="Flûte champagne" loading="lazy">
+                    </div>
+                    <div class="product-details">
+                        <div class="product-header">
+                            <h4>Flûte à champagne</h4>
+                            <span class="product-category">Verres</span>
+                        </div>
+                        <div class="product-price">0,70 € / unité</div>
+                        <div class="product-controls">
+                            <button type="button" class="qty-btn minus" onclick="updateQuantity('flute-champagne', -1)"><i class="fas fa-minus"></i></button>
+                            <input type="number" class="qty-input" id="qty-flute-champagne" value="0" min="0" onchange="validateAndUpdateQuantity('flute-champagne', this.value)">
+                            <button type="button" class="qty-btn plus" onclick="updateQuantity('flute-champagne', 1)"><i class="fas fa-plus"></i></button>
+                            <button type="button" class="remove-btn" onclick="resetProduct('flute-champagne')"><i class="fas fa-minus-circle"></i></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sous-catégorie: Couverts -->
+            <div class="subcategory">
+                <h4 class="subcategory-title"><i class="fas fa-utensil-spoon"></i> Couverts</h4>
+
+                <div class="product-item" data-id="couverts-inox" data-price="1.20">
+                    <div class="product-image">
+                        <img src="https://images.unsplash.com/photo-1519225421980-715cb0215aed?w=200" alt="Couverts inox" loading="lazy">
+                    </div>
+                    <div class="product-details">
+                        <div class="product-header">
+                            <h4>Couverts inox (4 pièces)</h4>
+                            <span class="product-category">Couverts</span>
+                        </div>
+                        <div class="product-price">1,20 € / unité</div>
+                        <div class="product-controls">
+                            <button type="button" class="qty-btn minus" onclick="updateQuantity('couverts-inox', -1)"><i class="fas fa-minus"></i></button>
+                            <input type="number" class="qty-input" id="qty-couverts-inox" value="0" min="0" onchange="validateAndUpdateQuantity('couverts-inox', this.value)">
+                            <button type="button" class="qty-btn plus" onclick="updateQuantity('couverts-inox', 1)"><i class="fas fa-plus"></i></button>
+                            <button type="button" class="remove-btn" onclick="resetProduct('couverts-inox')"><i class="fas fa-minus-circle"></i></button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="product-item" data-id="couverts-dores" data-price="2.00">
+                    <div class="product-image">
+                        <img src="https://images.unsplash.com/photo-1519225421980-715cb0215aed?w=200" alt="Couverts dorés" loading="lazy">
+                    </div>
+                    <div class="product-details">
+                        <div class="product-header">
+                            <h4>Couverts dorés premium (4 pièces)</h4>
+                            <span class="product-category">Couverts</span>
+                        </div>
+                        <div class="product-price">2,00 € / unité</div>
+                        <div class="product-controls">
+                            <button type="button" class="qty-btn minus" onclick="updateQuantity('couverts-dores', -1)"><i class="fas fa-minus"></i></button>
+                            <input type="number" class="qty-input" id="qty-couverts-dores" value="0" min="0" onchange="validateAndUpdateQuantity('couverts-dores', this.value)">
+                            <button type="button" class="qty-btn plus" onclick="updateQuantity('couverts-dores', 1)"><i class="fas fa-plus"></i></button>
+                            <button type="button" class="remove-btn" onclick="resetProduct('couverts-dores')"><i class="fas fa-minus-circle"></i></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- ============================================ -->
+    <!-- CATÉGORIE 4: DÉCORATION -->
+    <!-- ============================================ -->
+    <div class="category-card" data-category="decoration">
+        <div class="category-visual" onclick="toggleCategory('decoration')">
+            <img src="https://images.unsplash.com/photo-1522673607200-164d1b6ce486?w=400" alt="Décoration" loading="lazy">
+            <div class="category-overlay">
+                <h3><i class="fas fa-spa"></i> Décoration</h3>
+                <p class="category-default-product">Centre de table classique</p>
+                <button type="button" class="btn-expand-category">
+                    <span>Voir les produits</span>
+                    <i class="fas fa-chevron-down" id="arrow-decoration"></i>
+                </button>
+            </div>
+        </div>
+
+        <div class="category-products" id="content-decoration" style="display: none;">
+
+            <!-- Sous-catégorie: Centres de table -->
+            <div class="subcategory">
+                <h4 class="subcategory-title"><i class="fas fa-flower"></i> Centres de table</h4>
+
+                <div class="product-item" data-id="centre-table-classique" data-price="45.00">
+                    <div class="product-image">
+                        <img src="https://images.unsplash.com/photo-1522673607200-164d1b6ce486?w=200" alt="Centre de table classique" loading="lazy">
+                    </div>
+                    <div class="product-details">
+                        <div class="product-header">
+                            <h4>Centre de table classique</h4>
+                            <span class="product-category">Centres de table</span>
+                        </div>
+                        <div class="product-price">45,00 € / unité</div>
+                        <div class="product-controls">
+                            <button type="button" class="qty-btn minus" onclick="updateQuantity('centre-table-classique', -1)"><i class="fas fa-minus"></i></button>
+                            <input type="number" class="qty-input" id="qty-centre-table-classique" value="0" min="0" onchange="validateAndUpdateQuantity('centre-table-classique', this.value)">
+                            <button type="button" class="qty-btn plus" onclick="updateQuantity('centre-table-classique', 1)"><i class="fas fa-plus"></i></button>
+                            <button type="button" class="remove-btn" onclick="resetProduct('centre-table-classique')"><i class="fas fa-minus-circle"></i></button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="product-item" data-id="centre-table-romantique" data-price="55.00">
+                    <div class="product-image">
+                        <img src="https://images.unsplash.com/photo-1522673607200-164d1b6ce486?w=200" alt="Centre de table romantique" loading="lazy">
+                    </div>
+                    <div class="product-details">
+                        <div class="product-header">
+                            <h4>Centre de table romantique (roses)</h4>
+                            <span class="product-category">Centres de table</span>
+                        </div>
+                        <div class="product-price">55,00 € / unité</div>
+                        <div class="product-controls">
+                            <button type="button" class="qty-btn minus" onclick="updateQuantity('centre-table-romantique', -1)"><i class="fas fa-minus"></i></button>
+                            <input type="number" class="qty-input" id="qty-centre-table-romantique" value="0" min="0" onchange="validateAndUpdateQuantity('centre-table-romantique', this.value)">
+                            <button type="button" class="qty-btn plus" onclick="updateQuantity('centre-table-romantique', 1)"><i class="fas fa-plus"></i></button>
+                            <button type="button" class="remove-btn" onclick="resetProduct('centre-table-romantique')"><i class="fas fa-minus-circle"></i></button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="product-item" data-id="centre-table-champetre" data-price="40.00">
+                    <div class="product-image">
+                        <img src="https://images.unsplash.com/photo-1522673607200-164d1b6ce486?w=200" alt="Centre de table champêtre" loading="lazy">
+                    </div>
+                    <div class="product-details">
+                        <div class="product-header">
+                            <h4>Centre de table champêtre</h4>
+                            <span class="product-category">Centres de table</span>
+                        </div>
+                        <div class="product-price">40,00 € / unité</div>
+                        <div class="product-controls">
+                            <button type="button" class="qty-btn minus" onclick="updateQuantity('centre-table-champetre', -1)"><i class="fas fa-minus"></i></button>
+                            <input type="number" class="qty-input" id="qty-centre-table-champetre" value="0" min="0" onchange="validateAndUpdateQuantity('centre-table-champetre', this.value)">
+                            <button type="button" class="qty-btn plus" onclick="updateQuantity('centre-table-champetre', 1)"><i class="fas fa-plus"></i></button>
+                            <button type="button" class="remove-btn" onclick="resetProduct('centre-table-champetre')"><i class="fas fa-minus-circle"></i></button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="product-item" data-id="centre-table-luxe" data-price="85.00">
+                    <div class="product-image">
+                        <img src="https://images.unsplash.com/photo-1522673607200-164d1b6ce486?w=200" alt="Centre de table luxe" loading="lazy">
+                    </div>
+                    <div class="product-details">
+                        <div class="product-header">
+                            <h4>Centre de table luxe (orchidées)</h4>
+                            <span class="product-category">Centres de table</span>
+                        </div>
+                        <div class="product-price">85,00 € / unité</div>
+                        <div class="product-controls">
+                            <button type="button" class="qty-btn minus" onclick="updateQuantity('centre-table-luxe', -1)"><i class="fas fa-minus"></i></button>
+                            <input type="number" class="qty-input" id="qty-centre-table-luxe" value="0" min="0" onchange="validateAndUpdateQuantity('centre-table-luxe', this.value)">
+                            <button type="button" class="qty-btn plus" onclick="updateQuantity('centre-table-luxe', 1)"><i class="fas fa-plus"></i></button>
+                            <button type="button" class="remove-btn" onclick="resetProduct('centre-table-luxe')"><i class="fas fa-minus-circle"></i></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sous-catégorie: Bouquets de fleurs -->
+            <div class="subcategory">
+                <h4 class="subcategory-title"><i class="fas fa-leaf"></i> Bouquets de fleurs</h4>
+
+                <div class="product-item" data-id="bouquet-mariee" data-price="120.00">
+                    <div class="product-image">
+                        <img src="https://images.unsplash.com/photo-1519225421980-715cb0215aed?w=200" alt="Bouquet mariée" loading="lazy">
+                    </div>
+                    <div class="product-details">
+                        <div class="product-header">
+                            <h4>Bouquet de la mariée</h4>
+                            <span class="product-category">Bouquets</span>
+                        </div>
+                        <div class="product-price">120,00 € / unité</div>
+                        <div class="product-controls">
+                            <button type="button" class="qty-btn minus" onclick="updateQuantity('bouquet-mariee', -1)"><i class="fas fa-minus"></i></button>
+                            <input type="number" class="qty-input" id="qty-bouquet-mariee" value="0" min="0" onchange="validateAndUpdateQuantity('bouquet-mariee', this.value)">
+                            <button type="button" class="qty-btn plus" onclick="updateQuantity('bouquet-mariee', 1)"><i class="fas fa-plus"></i></button>
+                            <button type="button" class="remove-btn" onclick="resetProduct('bouquet-mariee')"><i class="fas fa-minus-circle"></i></button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="product-item" data-id="bouquet-demoiselles" data-price="45.00">
+                    <div class="product-image">
+                        <img src="https://images.unsplash.com/photo-1519225421980-715cb0215aed?w=200" alt="Bouquet demoiselles" loading="lazy">
+                    </div>
+                    <div class="product-details">
+                        <div class="product-header">
+                            <h4>Bouquet demoiselles d'honneur</h4>
+                            <span class="product-category">Bouquets</span>
+                        </div>
+                        <div class="product-price">45,00 € / unité</div>
+                        <div class="product-controls">
+                            <button type="button" class="qty-btn minus" onclick="updateQuantity('bouquet-demoiselles', -1)"><i class="fas fa-minus"></i></button>
+                            <input type="number" class="qty-input" id="qty-bouquet-demoiselles" value="0" min="0" onchange="validateAndUpdateQuantity('bouquet-demoiselles', this.value)">
+                            <button type="button" class="qty-btn plus" onclick="updateQuantity('bouquet-demoiselles', 1)"><i class="fas fa-plus"></i></button>
+                            <button type="button" class="remove-btn" onclick="resetProduct('bouquet-demoiselles')"><i class="fas fa-minus-circle"></i></button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="product-item" data-id="boutonniere" data-price="8.00">
+                    <div class="product-image">
+                        <img src="https://images.unsplash.com/photo-1519225421980-715cb0215aed?w=200" alt="Boutonnière" loading="lazy">
+                    </div>
+                    <div class="product-details">
+                        <div class="product-header">
+                            <h4>Boutonnière marié/témoins</h4>
+                            <span class="product-category">Bouquets</span>
+                        </div>
+                        <div class="product-price">8,00 € / unité</div>
+                        <div class="product-controls">
+                            <button type="button" class="qty-btn minus" onclick="updateQuantity('boutonniere', -1)"><i class="fas fa-minus"></i></button>
+                            <input type="number" class="qty-input" id="qty-boutonniere" value="0" min="0" onchange="validateAndUpdateQuantity('boutonniere', this.value)">
+                            <button type="button" class="qty-btn plus" onclick="updateQuantity('boutonniere', 1)"><i class="fas fa-plus"></i></button>
+                            <button type="button" class="remove-btn" onclick="resetProduct('boutonniere')"><i class="fas fa-minus-circle"></i></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sous-catégorie: Décoration personnalisée -->
+            <div class="subcategory">
+                <h4 class="subcategory-title"><i class="fas fa-paint-brush"></i> Décoration personnalisée</h4>
+
                 <div class="product-item" data-id="arche-florale" data-price="350.00">
                     <div class="product-image">
                         <img src="https://images.unsplash.com/photo-1519225421980-715cb0215aed?w=200" alt="Arche florale" loading="lazy">
                     </div>
                     <div class="product-details">
                         <div class="product-header">
-                            <h4>Arche florale sur mesure</h4>
-                            <span class="product-category">Décoration</span>
+                            <h4>Arche florale cérémonie</h4>
+                            <span class="product-category">Décoration perso.</span>
                         </div>
                         <div class="product-price">350,00 € / unité</div>
                         <div class="product-controls">
@@ -763,48 +1715,533 @@
                     </div>
                 </div>
 
-                <!-- Centre de table -->
-                <div class="product-item" data-id="centre-table" data-price="45.00">
+                <div class="product-item" data-id="panneau-bienvenue" data-price="75.00">
                     <div class="product-image">
-                        <img src="https://images.unsplash.com/photo-1522673607200-164d1b6ce486?w=200" alt="Centre de table" loading="lazy">
+                        <img src="https://images.unsplash.com/photo-1519225421980-715cb0215aed?w=200" alt="Panneau bienvenue" loading="lazy">
                     </div>
                     <div class="product-details">
                         <div class="product-header">
-                            <h4>Centre de table floral</h4>
-                            <span class="product-category">Décoration</span>
+                            <h4>Panneau de bienvenue personnalisé</h4>
+                            <span class="product-category">Décoration perso.</span>
+                        </div>
+                        <div class="product-price">75,00 € / unité</div>
+                        <div class="product-controls">
+                            <button type="button" class="qty-btn minus" onclick="updateQuantity('panneau-bienvenue', -1)"><i class="fas fa-minus"></i></button>
+                            <input type="number" class="qty-input" id="qty-panneau-bienvenue" value="0" min="0" onchange="validateAndUpdateQuantity('panneau-bienvenue', this.value)">
+                            <button type="button" class="qty-btn plus" onclick="updateQuantity('panneau-bienvenue', 1)"><i class="fas fa-plus"></i></button>
+                            <button type="button" class="remove-btn" onclick="resetProduct('panneau-bienvenue')"><i class="fas fa-minus-circle"></i></button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="product-item" data-id="plan-table" data-price="45.00">
+                    <div class="product-image">
+                        <img src="https://images.unsplash.com/photo-1519225421980-715cb0215aed?w=200" alt="Plan de table" loading="lazy">
+                    </div>
+                    <div class="product-details">
+                        <div class="product-header">
+                            <h4>Plan de table personnalisé</h4>
+                            <span class="product-category">Décoration perso.</span>
                         </div>
                         <div class="product-price">45,00 € / unité</div>
                         <div class="product-controls">
-                            <button type="button" class="qty-btn minus" onclick="updateQuantity('centre-table', -1)"><i class="fas fa-minus"></i></button>
-                            <input type="number" class="qty-input" id="qty-centre-table" value="0" min="0" onchange="validateAndUpdateQuantity('centre-table', this.value)">
-                            <button type="button" class="qty-btn plus" onclick="updateQuantity('centre-table', 1)"><i class="fas fa-plus"></i></button>
-                            <button type="button" class="remove-btn" onclick="resetProduct('centre-table')"><i class="fas fa-minus-circle"></i></button>
+                            <button type="button" class="qty-btn minus" onclick="updateQuantity('plan-table', -1)"><i class="fas fa-minus"></i></button>
+                            <input type="number" class="qty-input" id="qty-plan-table" value="0" min="0" onchange="validateAndUpdateQuantity('plan-table', this.value)">
+                            <button type="button" class="qty-btn plus" onclick="updateQuantity('plan-table', 1)"><i class="fas fa-plus"></i></button>
+                            <button type="button" class="remove-btn" onclick="resetProduct('plan-table')"><i class="fas fa-minus-circle"></i></button>
                         </div>
                     </div>
                 </div>
-                
-                <!-- Service décoration -->
-                <div class="product-item service-option-item" data-id="service-decoration" data-price="100.00" id="serviceDecorationItem">
+            </div>
+        </div>
+    </div>
+
+    <!-- ============================================ -->
+    <!-- CATÉGORIE 5: ESPACES & INSTALLATIONS -->
+    <!-- ============================================ -->
+    <div class="category-card" data-category="espaces">
+        <div class="category-visual" onclick="toggleCategory('espaces')">
+            <img src="https://images.unsplash.com/photo-1519741497674-611481863552?w=400" alt="Espaces & installations" loading="lazy">
+            <div class="category-overlay">
+                <h3><i class="fas fa-home"></i> Espaces & installations</h3>
+                <p class="category-default-product">Table d'honneur décorée</p>
+                <button type="button" class="btn-expand-category">
+                    <span>Voir les produits</span>
+                    <i class="fas fa-chevron-down" id="arrow-espaces"></i>
+                </button>
+            </div>
+        </div>
+
+        <div class="category-products" id="content-espaces" style="display: none;">
+
+            <!-- Sous-catégorie: Coin mariés -->
+            <div class="subcategory">
+                <h4 class="subcategory-title"><i class="fas fa-heart"></i> Coin mariés</h4>
+
+                <div class="product-item" data-id="table-honneur" data-price="85.00">
                     <div class="product-image">
-                        <img src="https://images.unsplash.com/photo-1519225421980-715cb0215aed?w=200" alt="Service décoration" loading="lazy">
+                        <img src="https://images.unsplash.com/photo-1519741497674-611481863552?w=200" alt="Table d'honneur" loading="lazy">
                     </div>
-                    <div class="product-details" style="flex: 1;">
+                    <div class="product-details">
                         <div class="product-header">
-                            <h4><i class="fas fa-paint-brush" style="color: var(--primary); margin-right: 0.5rem;"></i>Service de décoration</h4>
-                            <span class="product-category">Option</span>
+                            <h4>Table d'honneur décorée complète</h4>
+                            <span class="product-category">Coin mariés</span>
                         </div>
-                        <div class="product-price" style="color: var(--primary-dark); font-weight: 700;">+ 100,00 €</div>
-                        <p style="font-size: 0.8rem; color: var(--text-light); margin: 0.5rem 0;">Installation complète par nos équipes</p>
-                        <button type="button" class="btn-toggle-service" id="btnToggleDecoration" onclick="toggleDecorationService()" style="background: transparent; border: 2px solid var(--accent); color: var(--text-light); padding: 0.5rem 1.2rem; border-radius: 50px; cursor: pointer; font-size: 0.85rem; font-weight: 500; transition: all 0.3s ease; display: inline-flex; align-items: center; gap: 0.5rem; margin-top: 0.5rem;">
-                            <i class="fas fa-plus-circle"></i><span>Ajouter ce service</span>
-                        </button>
-                        <input type="hidden" id="qty-service-decoration" value="0">
-                        <div id="decorationDetails" style="display: none; margin-top: 1rem; padding-top: 1rem; border-top: 1px dashed var(--accent);">
-                            <label style="font-size: 0.8rem; color: var(--text-dark); font-weight: 500; display: block; margin-bottom: 0.5rem;">Décrivez la décoration que vous souhaitez :</label>
-                            <textarea id="decorationDescription" rows="2" placeholder="Ex: Style champêtre avec roses blanches..." style="width: 100%; padding: 0.6rem; border: 2px solid var(--accent); border-radius: 8px; font-family: 'Montserrat', sans-serif; font-size: 0.85rem; resize: vertical; min-height: 60px;"></textarea>
+                        <div class="product-price">85,00 € / unité</div>
+                        <div class="product-controls">
+                            <button type="button" class="qty-btn minus" onclick="updateQuantity('table-honneur', -1)"><i class="fas fa-minus"></i></button>
+                            <input type="number" class="qty-input" id="qty-table-honneur" value="0" min="0" onchange="validateAndUpdateQuantity('table-honneur', this.value)">
+                            <button type="button" class="qty-btn plus" onclick="updateQuantity('table-honneur', 1)"><i class="fas fa-plus"></i></button>
+                            <button type="button" class="remove-btn" onclick="resetProduct('table-honneur')"><i class="fas fa-minus-circle"></i></button>
                         </div>
                     </div>
                 </div>
+
+                <div class="product-item" data-id="banquette-maries" data-price="120.00">
+                    <div class="product-image">
+                        <img src="https://images.unsplash.com/photo-1519741497674-611481863552?w=200" alt="Banquette mariés" loading="lazy">
+                    </div>
+                    <div class="product-details">
+                        <div class="product-header">
+                            <h4>Banquette des mariés (2 places)</h4>
+                            <span class="product-category">Coin mariés</span>
+                        </div>
+                        <div class="product-price">120,00 € / unité</div>
+                        <div class="product-controls">
+                            <button type="button" class="qty-btn minus" onclick="updateQuantity('banquette-maries', -1)"><i class="fas fa-minus"></i></button>
+                            <input type="number" class="qty-input" id="qty-banquette-maries" value="0" min="0" onchange="validateAndUpdateQuantity('banquette-maries', this.value)">
+                            <button type="button" class="qty-btn plus" onclick="updateQuantity('banquette-maries', 1)"><i class="fas fa-plus"></i></button>
+                            <button type="button" class="remove-btn" onclick="resetProduct('banquette-maries')"><i class="fas fa-minus-circle"></i></button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="product-item" data-id="dossier-maries" data-price="35.00">
+                    <div class="product-image">
+                        <img src="https://images.unsplash.com/photo-1519741497674-611481863552?w=200" alt="Dossier décoré" loading="lazy">
+                    </div>
+                    <div class="product-details">
+                        <div class="product-header">
+                            <h4>Dossier de chaise décoré "Marié/Mariée"</h4>
+                            <span class="product-category">Coin mariés</span>
+                        </div>
+                        <div class="product-price">35,00 € / la paire</div>
+                        <div class="product-controls">
+                            <button type="button" class="qty-btn minus" onclick="updateQuantity('dossier-maries', -1)"><i class="fas fa-minus"></i></button>
+                            <input type="number" class="qty-input" id="qty-dossier-maries" value="0" min="0" onchange="validateAndUpdateQuantity('dossier-maries', this.value)">
+                            <button type="button" class="qty-btn plus" onclick="updateQuantity('dossier-maries', 1)"><i class="fas fa-plus"></i></button>
+                            <button type="button" class="remove-btn" onclick="resetProduct('dossier-maries')"><i class="fas fa-minus-circle"></i></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sous-catégorie: Tables décorées -->
+            <div class="subcategory">
+                <h4 class="subcategory-title"><i class="fas fa-gem"></i> Tables décorées</h4>
+
+                <div class="product-item" data-id="table-cocktail" data-price="150.00">
+                    <div class="product-image">
+                        <img src="https://images.unsplash.com/photo-1465495976277-4387d4b0b4c6?w=200" alt="Table cocktail" loading="lazy">
+                    </div>
+                    <div class="product-details">
+                        <div class="product-header">
+                            <h4>Table cocktail complète (mobilier + déco)</h4>
+                            <span class="product-category">Tables déco</span>
+                        </div>
+                        <div class="product-price">150,00 € / unité</div>
+                        <div class="product-controls">
+                            <button type="button" class="qty-btn minus" onclick="updateQuantity('table-cocktail', -1)"><i class="fas fa-minus"></i></button>
+                            <input type="number" class="qty-input" id="qty-table-cocktail" value="0" min="0" onchange="validateAndUpdateQuantity('table-cocktail', this.value)">
+                            <button type="button" class="qty-btn plus" onclick="updateQuantity('table-cocktail', 1)"><i class="fas fa-plus"></i></button>
+                            <button type="button" class="remove-btn" onclick="resetProduct('table-cocktail')"><i class="fas fa-minus-circle"></i></button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="product-item" data-id="table-dessert" data-price="200.00">
+                    <div class="product-image">
+                        <img src="https://images.unsplash.com/photo-1465495976277-4387d4b0b4c6?w=200" alt="Table dessert" loading="lazy">
+                    </div>
+                    <div class="product-details">
+                        <div class="product-header">
+                            <h4>Table dessert/buffet décorée</h4>
+                            <span class="product-category">Tables déco</span>
+                        </div>
+                        <div class="product-price">200,00 € / unité</div>
+                        <div class="product-controls">
+                            <button type="button" class="qty-btn minus" onclick="updateQuantity('table-dessert', -1)"><i class="fas fa-minus"></i></button>
+                            <input type="number" class="qty-input" id="qty-table-dessert" value="0" min="0" onchange="validateAndUpdateQuantity('table-dessert', this.value)">
+                            <button type="button" class="qty-btn plus" onclick="updateQuantity('table-dessert', 1)"><i class="fas fa-plus"></i></button>
+                            <button type="button" class="remove-btn" onclick="resetProduct('table-dessert')"><i class="fas fa-minus-circle"></i></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sous-catégorie: Tapis -->
+            <div class="subcategory">
+                <h4 class="subcategory-title"><i class="fas fa-road"></i> Tapis</h4>
+
+                <div class="product-item" data-id="tapis-blanc" data-price="25.00">
+                    <div class="product-image">
+                        <img src="https://images.unsplash.com/photo-1519741497674-611481863552?w=200" alt="Tapis blanc" loading="lazy">
+                    </div>
+                    <div class="product-details">
+                        <div class="product-header">
+                            <h4>Tapis d'allée blanc (10m)</h4>
+                            <span class="product-category">Tapis</span>
+                        </div>
+                        <div class="product-price">25,00 € / unité</div>
+                        <div class="product-controls">
+                            <button type="button" class="qty-btn minus" onclick="updateQuantity('tapis-blanc', -1)"><i class="fas fa-minus"></i></button>
+                            <input type="number" class="qty-input" id="qty-tapis-blanc" value="0" min="0" onchange="validateAndUpdateQuantity('tapis-blanc', this.value)">
+                            <button type="button" class="qty-btn plus" onclick="updateQuantity('tapis-blanc', 1)"><i class="fas fa-plus"></i></button>
+                            <button type="button" class="remove-btn" onclick="resetProduct('tapis-blanc')"><i class="fas fa-minus-circle"></i></button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="product-item" data-id="tapis-rouge" data-price="30.00">
+                    <div class="product-image">
+                        <img src="https://images.unsplash.com/photo-1519741497674-611481863552?w=200" alt="Tapis rouge" loading="lazy">
+                    </div>
+                    <div class="product-details">
+                        <div class="product-header">
+                            <h4>Tapis rouge velours (10m)</h4>
+                            <span class="product-category">Tapis</span>
+                        </div>
+                        <div class="product-price">30,00 € / unité</div>
+                        <div class="product-controls">
+                            <button type="button" class="qty-btn minus" onclick="updateQuantity('tapis-rouge', -1)"><i class="fas fa-minus"></i></button>
+                            <input type="number" class="qty-input" id="qty-tapis-rouge" value="0" min="0" onchange="validateAndUpdateQuantity('tapis-rouge', this.value)">
+                            <button type="button" class="qty-btn plus" onclick="updateQuantity('tapis-rouge', 1)"><i class="fas fa-plus"></i></button>
+                            <button type="button" class="remove-btn" onclick="resetProduct('tapis-rouge')"><i class="fas fa-minus-circle"></i></button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="product-item" data-id="tapis-dore" data-price="35.00">
+                    <div class="product-image">
+                        <img src="https://images.unsplash.com/photo-1519741497674-611481863552?w=200" alt="Tapis doré" loading="lazy">
+                    </div>
+                    <div class="product-details">
+                        <div class="product-header">
+                            <h4>Tapis doré pailleté (10m)</h4>
+                            <span class="product-category">Tapis</span>
+                        </div>
+                        <div class="product-price">35,00 € / unité</div>
+                        <div class="product-controls">
+                            <button type="button" class="qty-btn minus" onclick="updateQuantity('tapis-dore', -1)"><i class="fas fa-minus"></i></button>
+                            <input type="number" class="qty-input" id="qty-tapis-dore" value="0" min="0" onchange="validateAndUpdateQuantity('tapis-dore', this.value)">
+                            <button type="button" class="qty-btn plus" onclick="updateQuantity('tapis-dore', 1)"><i class="fas fa-plus"></i></button>
+                            <button type="button" class="remove-btn" onclick="resetProduct('tapis-dore')"><i class="fas fa-minus-circle"></i></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sous-catégorie: Piste de danse -->
+            <div class="subcategory">
+                <h4 class="subcategory-title"><i class="fas fa-music"></i> Piste de danse lumineuse</h4>
+
+                <div class="product-item" data-id="piste-danse-16" data-price="450.00">
+                    <div class="product-image">
+                        <img src="https://images.unsplash.com/photo-1519741497674-611481863552?w=200" alt="Piste danse 16m²" loading="lazy">
+                    </div>
+                    <div class="product-details">
+                        <div class="product-header">
+                            <h4>Piste de danse LED 4x4m (16m²)</h4>
+                            <span class="product-category">Piste danse</span>
+                        </div>
+                        <div class="product-price">450,00 € / forfait</div>
+                        <div class="product-controls">
+                            <button type="button" class="qty-btn minus" onclick="updateQuantity('piste-danse-16', -1)"><i class="fas fa-minus"></i></button>
+                            <input type="number" class="qty-input" id="qty-piste-danse-16" value="0" min="0" onchange="validateAndUpdateQuantity('piste-danse-16', this.value)">
+                            <button type="button" class="qty-btn plus" onclick="updateQuantity('piste-danse-16', 1)"><i class="fas fa-plus"></i></button>
+                            <button type="button" class="remove-btn" onclick="resetProduct('piste-danse-16')"><i class="fas fa-minus-circle"></i></button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="product-item" data-id="piste-danse-25" data-price="650.00">
+                    <div class="product-image">
+                        <img src="https://images.unsplash.com/photo-1519741497674-611481863552?w=200" alt="Piste danse 25m²" loading="lazy">
+                    </div>
+                    <div class="product-details">
+                        <div class="product-header">
+                            <h4>Piste de danse LED 5x5m (25m²)</h4>
+                            <span class="product-category">Piste danse</span>
+                        </div>
+                        <div class="product-price">650,00 € / forfait</div>
+                        <div class="product-controls">
+                            <button type="button" class="qty-btn minus" onclick="updateQuantity('piste-danse-25', -1)"><i class="fas fa-minus"></i></button>
+                            <input type="number" class="qty-input" id="qty-piste-danse-25" value="0" min="0" onchange="validateAndUpdateQuantity('piste-danse-25', this.value)">
+                            <button type="button" class="qty-btn plus" onclick="updateQuantity('piste-danse-25', 1)"><i class="fas fa-plus"></i></button>
+                            <button type="button" class="remove-btn" onclick="resetProduct('piste-danse-25')"><i class="fas fa-minus-circle"></i></button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="product-item" data-id="piste-danse-36" data-price="850.00">
+                    <div class="product-image">
+                        <img src="https://images.unsplash.com/photo-1519741497674-611481863552?w=200" alt="Piste danse 36m²" loading="lazy">
+                    </div>
+                    <div class="product-details">
+                        <div class="product-header">
+                            <h4>Piste de danse LED 6x6m (36m²)</h4>
+                            <span class="product-category">Piste danse</span>
+                        </div>
+                        <div class="product-price">850,00 € / forfait</div>
+                        <div class="product-controls">
+                            <button type="button" class="qty-btn minus" onclick="updateQuantity('piste-danse-36', -1)"><i class="fas fa-minus"></i></button>
+                            <input type="number" class="qty-input" id="qty-piste-danse-36" value="0" min="0" onchange="validateAndUpdateQuantity('piste-danse-36', this.value)">
+                            <button type="button" class="qty-btn plus" onclick="updateQuantity('piste-danse-36', 1)"><i class="fas fa-plus"></i></button>
+                            <button type="button" class="remove-btn" onclick="resetProduct('piste-danse-36')"><i class="fas fa-minus-circle"></i></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ============================================ -->
+    <!-- CATÉGORIE 6: ACCESSOIRES -->
+    <!-- ============================================ -->
+    <div class="category-card" data-category="accessoires">
+        <div class="category-visual" onclick="toggleCategory('accessoires')">
+            <img src="https://images.unsplash.com/photo-1519741497674-611481863552?w=400" alt="Accessoires" loading="lazy">
+            <div class="category-overlay">
+                <h3><i class="fas fa-star"></i> Accessoires</h3>
+                <p class="category-default-product">Guirlande lumineuse 10m</p>
+                <button type="button" class="btn-expand-category">
+                    <span>Voir les produits</span>
+                    <i class="fas fa-chevron-down" id="arrow-accessoires"></i>
+                </button>
+            </div>
+        </div>
+
+        <div class="category-products" id="content-accessoires" style="display: none;">
+
+            <!-- Sous-catégorie: Éclairage -->
+            <div class="subcategory">
+                <h4 class="subcategory-title"><i class="fas fa-lightbulb"></i> Éclairage</h4>
+
+                <div class="product-item" data-id="guirlande-lumineuse" data-price="15.00">
+                    <div class="product-image">
+                        <img src="https://images.unsplash.com/photo-1519741497674-611481863552?w=200" alt="Guirlande lumineuse" loading="lazy">
+                    </div>
+                    <div class="product-details">
+                        <div class="product-header">
+                            <h4>Guirlande lumineuse 10m</h4>
+                            <span class="product-category">Éclairage</span>
+                        </div>
+                        <div class="product-price">15,00 € / unité</div>
+                        <div class="product-controls">
+                            <button type="button" class="qty-btn minus" onclick="updateQuantity('guirlande-lumineuse', -1)"><i class="fas fa-minus"></i></button>
+                            <input type="number" class="qty-input" id="qty-guirlande-lumineuse" value="0" min="0" onchange="validateAndUpdateQuantity('guirlande-lumineuse', this.value)">
+                            <button type="button" class="qty-btn plus" onclick="updateQuantity('guirlande-lumineuse', 1)"><i class="fas fa-plus"></i></button>
+                            <button type="button" class="remove-btn" onclick="resetProduct('guirlande-lumineuse')"><i class="fas fa-minus-circle"></i></button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="product-item" data-id="lanternes-led" data-price="8.00">
+                    <div class="product-image">
+                        <img src="https://images.unsplash.com/photo-1519741497674-611481863552?w=200" alt="Lanternes LED" loading="lazy">
+                    </div>
+                    <div class="product-details">
+                        <div class="product-header">
+                            <h4>Lanterne LED (lot de 5)</h4>
+                            <span class="product-category">Éclairage</span>
+                        </div>
+                        <div class="product-price">8,00 € / lot</div>
+                        <div class="product-controls">
+                            <button type="button" class="qty-btn minus" onclick="updateQuantity('lanternes-led', -1)"><i class="fas fa-minus"></i></button>
+                            <input type="number" class="qty-input" id="qty-lanternes-led" value="0" min="0" onchange="validateAndUpdateQuantity('lanternes-led', this.value)">
+                            <button type="button" class="qty-btn plus" onclick="updateQuantity('lanternes-led', 1)"><i class="fas fa-plus"></i></button>
+                            <button type="button" class="remove-btn" onclick="resetProduct('lanternes-led')"><i class="fas fa-minus-circle"></i></button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="product-item" data-id="bougies-led" data-price="12.00">
+                    <div class="product-image">
+                        <img src="https://images.unsplash.com/photo-1519741497674-611481863552?w=200" alt="Bougies LED" loading="lazy">
+                    </div>
+                    <div class="product-details">
+                        <div class="product-header">
+                            <h4>Bougies LED (lot de 10)</h4>
+                            <span class="product-category">Éclairage</span>
+                        </div>
+                        <div class="product-price">12,00 € / lot</div>
+                        <div class="product-controls">
+                            <button type="button" class="qty-btn minus" onclick="updateQuantity('bougies-led', -1)"><i class="fas fa-minus"></i></button>
+                            <input type="number" class="qty-input" id="qty-bougies-led" value="0" min="0" onchange="validateAndUpdateQuantity('bougies-led', this.value)">
+                            <button type="button" class="qty-btn plus" onclick="updateQuantity('bougies-led', 1)"><i class="fas fa-plus"></i></button>
+                            <button type="button" class="remove-btn" onclick="resetProduct('bougies-led')"><i class="fas fa-minus-circle"></i></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sous-catégorie: Confettis & pétalons -->
+            <div class="subcategory">
+                <h4 class="subcategory-title"><i class="fas fa-seedling"></i> Confettis & pétalons</h4>
+
+                <div class="product-item" data-id="confettis" data-price="5.00">
+                    <div class="product-image">
+                        <img src="https://images.unsplash.com/photo-1519741497674-611481863552?w=200" alt="Confettis" loading="lazy">
+                    </div>
+                    <div class="product-details">
+                        <div class="product-header">
+                            <h4>Confettis biodégradables (sachet)</h4>
+                            <span class="product-category">Confettis</span>
+                        </div>
+                        <div class="product-price">5,00 € / sachet</div>
+                        <div class="product-controls">
+                            <button type="button" class="qty-btn minus" onclick="updateQuantity('confettis', -1)"><i class="fas fa-minus"></i></button>
+                            <input type="number" class="qty-input" id="qty-confettis" value="0" min="0" onchange="validateAndUpdateQuantity('confettis', this.value)">
+                            <button type="button" class="qty-btn plus" onclick="updateQuantity('confettis', 1)"><i class="fas fa-plus"></i></button>
+                            <button type="button" class="remove-btn" onclick="resetProduct('confettis')"><i class="fas fa-minus-circle"></i></button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="product-item" data-id="petalons-roses" data-price="15.00">
+                    <div class="product-image">
+                        <img src="https://images.unsplash.com/photo-1519741497674-611481863552?w=200" alt="Pétalons roses" loading="lazy">
+                    </div>
+                    <div class="product-details">
+                        <div class="product-header">
+                            <h4>Pétalons de roses (lot de 500)</h4>
+                            <span class="product-category">Pétalons</span>
+                        </div>
+                        <div class="product-price">15,00 € / lot</div>
+                        <div class="product-controls">
+                            <button type="button" class="qty-btn minus" onclick="updateQuantity('petalons-roses', -1)"><i class="fas fa-minus"></i></button>
+                            <input type="number" class="qty-input" id="qty-petalons-roses" value="0" min="0" onchange="validateAndUpdateQuantity('petalons-roses', this.value)">
+                            <button type="button" class="qty-btn plus" onclick="updateQuantity('petalons-roses', 1)"><i class="fas fa-plus"></i></button>
+                            <button type="button" class="remove-btn" onclick="resetProduct('petalons-roses')"><i class="fas fa-minus-circle"></i></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sous-catégorie: Photobooth -->
+            <div class="subcategory">
+                <h4 class="subcategory-title"><i class="fas fa-camera"></i> Photobooth</h4>
+
+                <div class="product-item" data-id="cadre-photo" data-price="25.00">
+                    <div class="product-image">
+                        <img src="https://images.unsplash.com/photo-1519741497674-611481863552?w=200" alt="Cadre photo" loading="lazy">
+                    </div>
+                    <div class="product-details">
+                        <div class="product-header">
+                            <h4>Cadre photo géant personnalisé</h4>
+                            <span class="product-category">Photobooth</span>
+                        </div>
+                        <div class="product-price">25,00 € / unité</div>
+                        <div class="product-controls">
+                            <button type="button" class="qty-btn minus" onclick="updateQuantity('cadre-photo', -1)"><i class="fas fa-minus"></i></button>
+                            <input type="number" class="qty-input" id="qty-cadre-photo" value="0" min="0" onchange="validateAndUpdateQuantity('cadre-photo', this.value)">
+                            <button type="button" class="qty-btn plus" onclick="updateQuantity('cadre-photo', 1)"><i class="fas fa-plus"></i></button>
+                            <button type="button" class="remove-btn" onclick="resetProduct('cadre-photo')"><i class="fas fa-minus-circle"></i></button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="product-item" data-id="accessoires-photo" data-price="20.00">
+                    <div class="product-image">
+                        <img src="https://images.unsplash.com/photo-1519741497674-611481863552?w=200" alt="Accessoires photo" loading="lazy">
+                    </div>
+                    <div class="product-details">
+                        <div class="product-header">
+                            <h4>Accessoires photobooth (boîte de 20)</h4>
+                            <span class="product-category">Photobooth</span>
+                        </div>
+                        <div class="product-price">20,00 € / boîte</div>
+                        <div class="product-controls">
+                            <button type="button" class="qty-btn minus" onclick="updateQuantity('accessoires-photo', -1)"><i class="fas fa-minus"></i></button>
+                            <input type="number" class="qty-input" id="qty-accessoires-photo" value="0" min="0" onchange="validateAndUpdateQuantity('accessoires-photo', this.value)">
+                            <button type="button" class="qty-btn plus" onclick="updateQuantity('accessoires-photo', 1)"><i class="fas fa-plus"></i></button>
+                            <button type="button" class="remove-btn" onclick="resetProduct('accessoires-photo')"><i class="fas fa-minus-circle"></i></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sous-catégorie: Urne & livre d'or -->
+            <div class="subcategory">
+                <h4 class="subcategory-title"><i class="fas fa-book"></i> Urne & livre d'or</h4>
+
+                <div class="product-item" data-id="urne" data-price="30.00">
+                    <div class="product-image">
+                        <img src="https://images.unsplash.com/photo-1519741497674-611481863552?w=200" alt="Urne" loading="lazy">
+                    </div>
+                    <div class="product-details">
+                        <div class="product-header">
+                            <h4>Urne décorée personnalisée</h4>
+                            <span class="product-category">Urne</span>
+                        </div>
+                        <div class="product-price">30,00 € / unité</div>
+                        <div class="product-controls">
+                            <button type="button" class="qty-btn minus" onclick="updateQuantity('urne', -1)"><i class="fas fa-minus"></i></button>
+                            <input type="number" class="qty-input" id="qty-urne" value="0" min="0" onchange="validateAndUpdateQuantity('urne', this.value)">
+                            <button type="button" class="qty-btn plus" onclick="updateQuantity('urne', 1)"><i class="fas fa-plus"></i></button>
+                            <button type="button" class="remove-btn" onclick="resetProduct('urne')"><i class="fas fa-minus-circle"></i></button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="product-item" data-id="livre-or" data-price="25.00">
+                    <div class="product-image">
+                        <img src="https://images.unsplash.com/photo-1519741497674-611481863552?w=200" alt="Livre d'or" loading="lazy">
+                    </div>
+                    <div class="product-details">
+                        <div class="product-header">
+                            <h4>Livre d'or personnalisé + stylo</h4>
+                            <span class="product-category">Livre d'or</span>
+                        </div>
+                        <div class="product-price">25,00 € / unité</div>
+                        <div class="product-controls">
+                            <button type="button" class="qty-btn minus" onclick="updateQuantity('livre-or', -1)"><i class="fas fa-minus"></i></button>
+                            <input type="number" class="qty-input" id="qty-livre-or" value="0" min="0" onchange="validateAndUpdateQuantity('livre-or', this.value)">
+                            <button type="button" class="qty-btn plus" onclick="updateQuantity('livre-or', 1)"><i class="fas fa-plus"></i></button>
+                            <button type="button" class="remove-btn" onclick="resetProduct('livre-or')"><i class="fas fa-minus-circle"></i></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ============================================ -->
+    <!-- SERVICE DÉCORATION (option) -->
+    <!-- ============================================ -->
+    <div class="product-item service-option-item" data-id="service-decoration" data-price="100.00" id="serviceDecorationItem">
+        <div class="product-image">
+            <img src="https://images.unsplash.com/photo-1519225421980-715cb0215aed?w=200" alt="Service décoration" loading="lazy">
+        </div>
+        <div class="product-details" style="flex: 1;">
+            <div class="product-header">
+                <h4><i class="fas fa-paint-brush" style="color: var(--primary); margin-right: 0.5rem;"></i>Service de décoration</h4>
+                <span class="product-category">Option</span>
+            </div>
+            <div class="product-price" style="color: var(--primary-dark); font-weight: 700;">+ 100,00 €</div>
+            <p style="font-size: 0.8rem; color: var(--text-light); margin: 0.5rem 0;">Installation complète par nos équipes</p>
+            <button type="button" class="btn-toggle-service" id="btnToggleDecoration" onclick="toggleDecorationService()" style="background: transparent; border: 2px solid var(--accent); color: var(--text-light); padding: 0.5rem 1.2rem; border-radius: 50px; cursor: pointer; font-size: 0.85rem; font-weight: 500; transition: all 0.3s ease; display: inline-flex; align-items: center; gap: 0.5rem; margin-top: 0.5rem;">
+                <i class="fas fa-plus-circle"></i><span>Ajouter ce service</span>
+            </button>
+            <input type="hidden" id="qty-service-decoration" value="0">
+            <div id="decorationDetails" style="display: none; margin-top: 1rem; padding-top: 1rem; border-top: 1px dashed var(--accent);">
+                <label style="font-size: 0.8rem; color: var(--text-dark); font-weight: 500; display: block; margin-bottom: 0.5rem;">Décrivez la décoration que vous souhaitez :</label>
+                <textarea id="decorationDescription" rows="2" placeholder="Ex: Style champêtre avec roses blanches..." style="width: 100%; padding: 0.6rem; border: 2px solid var(--accent); border-radius: 8px; font-family: 'Montserrat', sans-serif; font-size: 0.85rem; resize: vertical; min-height: 60px;"></textarea>
+            </div>
+        </div>
+    </div>
+
+</div>
             </div>
 
             <div class="quote-summary" id="quoteSummary">
@@ -942,7 +2379,7 @@
                     </div>
                 </div>
                 <div class="social-links">
-                   <a href="https://www.facebook.com/tessaetdevents" target="_blank" rel="noopener" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                   <a href="https://www.facebook.com/share/1CzePcfnTC/?mibextid=wwXIfr" target="_blank" rel="noopener" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
                    <a href="https://www.instagram.com/tessaetdevents" target="_blank" rel="noopener" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
                     <a href="#" aria-label="Pinterest"><i class="fab fa-pinterest-p"></i></a>
                 </div>
@@ -1359,6 +2796,43 @@
         }
 
         // ============================================
+        // FONCTIONS CATÉGORIES
+        // ============================================
+        // Fonction pour ouvrir/fermer les catégories
+function toggleCategory(categoryId) {
+    const content = document.getElementById('content-' + categoryId);
+    const arrow = document.getElementById('arrow-' + categoryId);
+    const card = document.querySelector('[data-category="' + categoryId + '"]');
+
+    if (content.style.display === 'none' || content.style.display === '') {
+        content.style.display = 'block';
+        arrow.classList.add('open');
+        card.style.gridColumn = '1 / -1';
+
+        // Fermer les autres catégories ouvertes (optionnel - pour en avoir une seule à la fois)
+        document.querySelectorAll('.category-products').forEach(el => {
+            if (el.id !== 'content-' + categoryId && el.style.display === 'block') {
+                el.style.display = 'none';
+                const otherArrow = document.getElementById(el.id.replace('content-', 'arrow-'));
+                if (otherArrow) otherArrow.classList.remove('open');
+                const otherCard = document.querySelector('[data-category="' + el.id.replace('content-', '') + '"');
+                if (otherCard) otherCard.style.gridColumn = '';
+            }
+        });
+
+        // Scroll vers la catégorie ouverte
+        setTimeout(() => {
+            card.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }, 100);
+
+    } else {
+        content.style.display = 'none';
+        arrow.classList.remove('open');
+        card.style.gridColumn = '';
+    }
+}
+
+        // ============================================
         // GÉNÉRATION PDF - CORRIGÉ
         // ============================================
         async function generatePDF() {
@@ -1651,4 +3125,4 @@
         });
     </script>
 </body>
-</html>'''\n\n# Sauvegarder\nwith open('/mnt/kimi/output/index.html', 'w', encoding='utf-8') as f:\n    f.write(html_content)\n\nprint(\"✅ Fichier HTML créé avec succès!\")\nprint(\"📁 Emplacement: /mnt/kimi/output/index.html\")\nprint(\"\\n📝 Modifications apportées:\")\nprint(\"   1. Ajout de onclick=\\\"openLightbox(this)\\\" sur l'image 'Créateurs d'Ambiances Uniques'\")\nprint(\"   2. Ajout des styles CSS pour l'effet zoom sur .about-image\")\nprint(\"   3. Suppression du script dupliqué à la fin\")\nprint(\"   4. Fonction openLightbox() fonctionnelle pour toutes les images\")\n"}
+</html>
