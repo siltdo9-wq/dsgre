@@ -1556,6 +1556,11 @@ footer {
   gap: 1rem;
 }
 
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
 /* ── FIXES SUPPLEMENTAIRES MOBILE ──────────── */
 @media(max-width: 480px) {
   :root {
@@ -1920,28 +1925,38 @@ footer {
         </a>
       </div>
 
-      <form id="formContact" class="devis-form sr" action="https://formspree.io/f/xnjlapqy" method="POST">
+      <form id="formContact" class="devis-form sr">
         <h3>📩 Demande de devis</h3>
 
-        <div class="sf-row">
-          <input type="text" name="nom" placeholder="Votre nom *" class="sf-input" required>
-          <input type="email" name="email" placeholder="Votre email *" class="sf-input" required>
+        <div id="formFields">
+          <div class="sf-row">
+            <input type="text" name="nom" placeholder="Votre nom *" class="sf-input" required>
+            <input type="email" name="email" placeholder="Votre email *" class="sf-input" required>
+          </div>
+
+          <input type="text" name="entreprise" placeholder="Entreprise (optionnel)" class="sf-input" style="margin-bottom: 1.25rem;">
+
+          <div class="form-group">
+            <label for="message">Votre projet</label>
+            <textarea id="message" name="message" placeholder="Décrivez votre projet, vos besoins, vos délais..." class="sf-input" required></textarea>
+          </div>
+
+          <button type="submit" class="pay-btn" id="btnSubmit">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <line x1="22" y1="2" x2="11" y2="13"></line>
+              <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+            </svg>
+            Envoyer la demande
+          </button>
         </div>
 
-        <input type="text" name="entreprise" placeholder="Entreprise (optionnel)" class="sf-input" style="margin-bottom: 1.25rem;">
-
-        <div class="form-group">
-          <label for="message">Votre projet</label>
-          <textarea id="message" name="message" placeholder="Décrivez votre projet, vos besoins, vos délais..." class="sf-input" required></textarea>
+        <!-- Message de succès (caché par défaut) -->
+        <div id="successMessage" style="display:none; text-align:center; padding:2rem 1rem;">
+          <div style="font-size:3rem; margin-bottom:1rem;">✅</div>
+          <h3 style="font-family:var(--font-display); font-size:1.25rem; margin-bottom:0.5rem; color:var(--text);">Devis envoyé !</h3>
+          <p style="color:var(--text-2); font-size:0.9375rem;">Je vous recontacte sous 24h.</p>
+          <button type="button" class="btn-o" onclick="resetForm()" style="margin-top:1.5rem;">Nouveau message</button>
         </div>
-
-        <button type="submit" class="pay-btn">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <line x1="22" y1="2" x2="11" y2="13"></line>
-            <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
-          </svg>
-          Envoyer la demande
-        </button>
       </form>
     </div>
   </div>
@@ -1993,8 +2008,72 @@ footer {
 // ═══ INITIALISATION ═════════════════════════════════════════════════════
 // ═══════════════════════════════════════════════════════════════════════
 
+
+function resetForm() {
+  const formContact = document.getElementById('formContact');
+  const formFields = document.getElementById('formFields');
+  const successMessage = document.getElementById('successMessage');
+  const btnSubmit = document.getElementById('btnSubmit');
+
+  if (formContact) formContact.reset();
+  if (formFields) formFields.style.display = 'block';
+  if (successMessage) successMessage.style.display = 'none';
+  if (btnSubmit) {
+    btnSubmit.disabled = false;
+    btnSubmit.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg> Envoyer la demande';
+  }
+}
+
 document.addEventListener('DOMContentLoaded', function() {
   console.log('✅ SDO Web chargé');
+
+  // Formulaire de contact — envoi AJAX via Formspree
+  const formContact = document.getElementById('formContact');
+  const formFields = document.getElementById('formFields');
+  const successMessage = document.getElementById('successMessage');
+  const btnSubmit = document.getElementById('btnSubmit');
+
+  if (formContact) {
+    formContact.addEventListener('submit', function(e) {
+      e.preventDefault();
+
+      // Désactiver le bouton pendant l'envoi
+      if (btnSubmit) {
+        btnSubmit.disabled = true;
+        btnSubmit.innerHTML = '<span style="display:inline-block; animation: spin 1s linear infinite;">⟳</span> Envoi...';
+      }
+
+      const formData = new FormData(formContact);
+
+      fetch('https://formspree.io/f/xnjlapqy', {
+        method: 'POST',
+        body: formData,
+        headers: {
+          'Accept': 'application/json'
+        }
+      })
+      .then(function(response) {
+        if (response.ok) {
+          // Afficher le message de succès
+          if (formFields) formFields.style.display = 'none';
+          if (successMessage) successMessage.style.display = 'block';
+        } else {
+          alert('❌ Une erreur est survenue. Veuillez réessayer.');
+          if (btnSubmit) {
+            btnSubmit.disabled = false;
+            btnSubmit.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg> Envoyer la demande';
+          }
+        }
+      })
+      .catch(function(error) {
+        alert('❌ Erreur de connexion. Vérifiez votre connexion internet.');
+        if (btnSubmit) {
+          btnSubmit.disabled = false;
+          btnSubmit.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg> Envoyer la demande';
+        }
+      });
+    });
+  }
 });
 </script>
 
