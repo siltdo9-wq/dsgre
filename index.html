@@ -1,1155 +1,1897 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-    <meta charset="UTF-8">
-    <link rel="canonical" href="https://chaymassama.be/">
-    <meta name="google-site-verification" content="JpsYykzwaCATkrDPAhGlFVuBeZXdRlqmOCpxk-vb73M" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="robots" content="index, follow">
-    <title>Chaymassama | Photographie & Vidéographie</title>
-    
-    <link rel="icon" href="/favicon.ico" type="image/x-icon">
-    <link rel="icon" type="image/png" sizes="96x96" href="/favicon-96x96.png">
-    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"> 
-
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
- 
-    <meta property="og:image" content="https://chaymassama.be/IMG_6150.jpg">
-    <style>
-        :root {
-            --sky-blue: #B8E3F0;
-            --deep-blue: #1E5F8E;
-            --cloud-white: #FFFFFF;
-            --soft-blue: #E1F4F8;
-            --accent-blue: #4A90B8;
-            --text-dark: #2C3E50;
-            --gold-accent: #FFD700;
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Lato', sans-serif;
-            background: linear-gradient(180deg, #D4F1F9 0%, #B8E3F0 50%, #A8D8EA 100%);
-            color: var(--text-dark);
-            overflow-x: hidden;
-            min-height: 100vh;
-        }
-
-        h1, h2, h3, .brand-name {
-            font-family: 'Playfair Display', serif;
-        }
-
-        @keyframes float {
-            0%, 100% { transform: translateY(0px); }
-            50% { transform: translateY(-20px); }
-        }
-
-        @keyframes drift {
-            from { transform: translateX(-100px); }
-            to { transform: translateX(100vw); }
-        }
-
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-
-        @keyframes pulse-glow {
-            0%, 100% { box-shadow: 0 0 20px rgba(255, 215, 0, 0.3); }
-            50% { box-shadow: 0 0 30px rgba(255, 215, 0, 0.6); }
-        }
-
-        .cloud {
-            position: absolute;
-            background: rgba(255, 255, 255, 0.8);
-            border-radius: 100px;
-            opacity: 0.9;
-            filter: blur(1px);
-            z-index: 0;
-        }
-
-        .cloud::before {
-            content: '';
-            position: absolute;
-            background: rgba(255, 255, 255, 0.8);
-            border-radius: 100px;
-        }
-
-        .cloud1 {
-            width: 120px;
-            height: 40px;
-            top: 10%;
-            animation: drift 25s infinite linear;
-        }
-
-        .cloud1::before {
-            width: 50px;
-            height: 50px;
-            top: -25px;
-            left: 15px;
-        }
-
-        .cloud2 {
-            width: 100px;
-            height: 35px;
-            top: 25%;
-            animation: drift 30s infinite linear;
-            animation-delay: -10s;
-        }
-
-        .cloud2::before {
-            width: 40px;
-            height: 40px;
-            top: -20px;
-            left: 20px;
-        }
-
-        .cloud3 {
-            width: 140px;
-            height: 45px;
-            top: 60%;
-            animation: drift 35s infinite linear;
-            animation-delay: -5s;
-        }
-
-        .cloud3::before {
-            width: 60px;
-            height: 60px;
-            top: -30px;
-            left: 30px;
-        }
-
-        nav {
-            position: fixed;
-            top: 0;
-            width: 100%;
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            box-shadow: 0 2px 20px rgba(30, 95, 142, 0.1);
-            z-index: 1000;
-            padding: 1rem 0;
-        }
-
-        .nav-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 0 2rem;
-        }
-
-        .logo {
-            font-size: 1.8rem;
-            color: var(--deep-blue);
-            font-weight: 700;
-            text-decoration: none;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .nav-links {
-            display: flex;
-            gap: 2rem;
-            list-style: none;
-        }
-
-        .nav-links a {
-            text-decoration: none;
-            color: var(--deep-blue);
-            font-weight: 600;
-            transition: all 0.3s;
-            position: relative;
-        }
-
-        .nav-links a::after {
-            content: '';
-            position: absolute;
-            bottom: -5px;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background: var(--deep-blue);
-            transition: width 0.3s;
-        }
-
-        .nav-links a:hover::after {
-            width: 100%;
-        }
-
-        .hero {
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            padding: 6rem 2rem 4rem;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .hero-content {
-            position: relative;
-            z-index: 10;
-            animation: fadeInUp 1s ease-out;
-        }
-
-        .hero h1 {
-            font-size: 3.5rem;
-            color: var(--deep-blue);
-            margin-bottom: 1rem;
-            font-style: italic;
-            text-shadow: 2px 2px 4px rgba(255,255,255,0.5);
-        }
-
-        .hero-subtitle {
-            font-size: 1.5rem;
-            color: var(--accent-blue);
-            margin-bottom: 2rem;
-            font-weight: 300;
-        }
-
-        .hero-services {
-            display: flex;
-            gap: 2rem;
-            justify-content: center;
-            flex-wrap: wrap;
-            margin: 2rem auto;
-            width: 100%;
-        }
-
-        .service-tag {
-            background: transparent;
-            padding: 0.5rem 1rem;
-            border-radius: 0;
-            box-shadow: none;
-            color: var(--deep-blue);
-            font-weight: 500;
-            border: none;
-            transition: all 0.3s;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            font-size: 1rem;
-        }
-
-        .service-tag:hover {
-            transform: translateY(-2px);
-            color: var(--accent-blue);
-        }
-
-        .ring-icon {
-            color: var(--deep-blue);
-            font-size: 1.2rem;
-        }
-
-        .cta-button {
-            display: inline-block;
-            margin-top: 2rem;
-            padding: 1rem 3rem;
-            background: var(--deep-blue);
-            color: white;
-            text-decoration: none;
-            border-radius: 50px;
-            font-weight: 700;
-            transition: all 0.3s;
-            box-shadow: 0 4px 15px rgba(30, 95, 142, 0.3);
-        }
-
-        .cta-button:hover {
-            background: var(--accent-blue);
-            transform: translateY(-3px);
-            box-shadow: 0 6px 20px rgba(30, 95, 142, 0.4);
-        }
-
-        section {
-            padding: 5rem 2rem;
-            position: relative;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .section-title {
-            text-align: center;
-            font-size: 2.5rem;
-            color: var(--deep-blue);
-            margin-bottom: 3rem;
-            position: relative;
-            display: block;
-            width: fit-content;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        .section-title::after {
-            content: '☁️';
-            position: absolute;
-            bottom: -10px;
-            left: 50%;
-            transform: translateX(-50%);
-            font-size: 1.5rem;
-        }
-
-        /* PORTFOLIO SECTION - NOUVEAU */
-        .portfolio-section {
-            background: rgba(255, 255, 255, 0.4);
-            border-radius: 30px;
-            padding: 4rem 2rem;
-            margin: 3rem auto;
-        }
-
-        .portfolio-subtitle {
-            text-align: center;
-            color: var(--accent-blue);
-            font-size: 1rem;
-            font-style: italic;
-            margin-bottom: 2rem;
-            opacity: 0.8;
-            font-weight: 400;
-            letter-spacing: 0.5px;
-        }
-
-        .portfolio-tabs {
-            display: flex;
-            justify-content: center;
-            gap: 1rem;
-            margin-bottom: 3rem;
-            flex-wrap: wrap;
-        }
-
-        .portfolio-tab {
-            padding: 1rem 2rem;
-            background: rgba(255, 255, 255, 0.9);
-            border: 2px solid transparent;
-            border-radius: 50px;
-            color: var(--deep-blue);
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s;
-            box-shadow: 0 4px 15px rgba(30, 95, 142, 0.1);
-        }
-
-        .portfolio-tab:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 6px 20px rgba(30, 95, 142, 0.2);
-        }
-
-        .portfolio-tab.active {
-            background: var(--deep-blue);
-            color: white;
-            border-color: var(--deep-blue);
-        }
-
-        .portfolio-content {
-            display: none;
-            animation: fadeIn 0.5s ease-out;
-        }
-
-        .portfolio-content.active {
-            display: block;
-        }
-
-        .portfolio-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
-            gap: 2rem;
-        }
-
-        .portfolio-item {
-            position: relative;
-            border-radius: 20px;
-            overflow: hidden;
-            box-shadow: 0 10px 30px rgba(30, 95, 142, 0.15);
-            cursor: pointer;
-            transition: all 0.3s;
-            aspect-ratio: 3/4;
-            background: var(--soft-blue);
-        }
-
-        .portfolio-item:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 20px 40px rgba(30, 95, 142, 0.25);
-        }
-
-        .portfolio-item img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.5s;
-        }
-
-        .portfolio-item:hover img {
-            transform: scale(1.05);
-        }
-
-        .portfolio-overlay {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            background: linear-gradient(to top, rgba(30, 95, 142, 0.9), transparent);
-            padding: 2rem 1.5rem 1.5rem;
-            color: white;
-            opacity: 0;
-            transition: opacity 0.3s;
-        }
-
-        .portfolio-item:hover .portfolio-overlay {
-            opacity: 1;
-        }
-
-        .portfolio-overlay h3 {
-            font-size: 1.3rem;
-            margin-bottom: 0.5rem;
-        }
-
-        .portfolio-overlay p {
-            font-size: 0.9rem;
-            opacity: 0.9;
-        }
-
-        .portfolio-overlay i {
-            position: absolute;
-            top: 1rem;
-            right: 1rem;
-            font-size: 1.5rem;
-            background: rgba(255,255,255,0.2);
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            backdrop-filter: blur(10px);
-        }
-
-        /* LIGHTBOX - NOUVEAU */
-        .lightbox {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.95);
-            z-index: 10000;
-            justify-content: center;
-            align-items: center;
-            padding: 2rem;
-        }
-
-        .lightbox.active {
-            display: flex;
-            animation: fadeIn 0.3s;
-        }
-
-        .lightbox-content {
-            position: relative;
-            max-width: 90%;
-            max-height: 90%;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-
-        .lightbox-img {
-            max-width: 100%;
-            max-height: 80vh;
-            object-fit: contain;
-            border-radius: 10px;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.5);
-        }
-
-        .lightbox-close {
-            position: absolute;
-            top: -50px;
-            right: 0;
-            background: none;
-            border: none;
-            color: white;
-            font-size: 2.5rem;
-            cursor: pointer;
-            transition: transform 0.3s;
-            width: 50px;
-            height: 50px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .lightbox-close:hover {
-            transform: rotate(90deg);
-        }
-
-        .lightbox-nav {
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            background: rgba(255,255,255,0.1);
-            border: none;
-            color: white;
-            font-size: 2rem;
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
-            cursor: pointer;
-            transition: all 0.3s;
-            backdrop-filter: blur(10px);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .lightbox-nav:hover {
-            background: rgba(255,255,255,0.3);
-            transform: translateY(-50%) scale(1.1);
-        }
-
-        .lightbox-prev {
-            left: -80px;
-        }
-
-        .lightbox-next {
-            right: -80px;
-        }
-
-        .lightbox-caption {
-            color: white;
-            text-align: center;
-            margin-top: 1.5rem;
-            font-size: 1.2rem;
-        }
-
-        .lightbox-counter {
-            color: rgba(255,255,255,0.7);
-            font-size: 0.9rem;
-            margin-top: 0.5rem;
-        }
-
-        /* Prestations */
-        .services-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-            margin-top: 3rem;
-        }
-
-        .service-card {
-            background: rgba(255, 255, 255, 0.95);
-            border-radius: 20px;
-            padding: 2.5rem;
-            text-align: center;
-            box-shadow: 0 10px 30px rgba(30, 95, 142, 0.1);
-            transition: all 0.3s;
-            border: 1px solid rgba(255,255,255,0.5);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .service-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 5px;
-            background: linear-gradient(90deg, var(--sky-blue), var(--deep-blue));
-        }
-
-        .service-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 15px 40px rgba(30, 95, 142, 0.2);
-        }
-
-        .service-icon {
-            font-size: 3rem;
-            color: var(--deep-blue);
-            margin-bottom: 1rem;
-        }
-
-        .service-card h3 {
-            color: var(--deep-blue);
-            font-size: 1.5rem;
-            margin-bottom: 1rem;
-        }
-
-        .service-card p {
-            color: var(--text-dark);
-            line-height: 1.6;
-            margin-bottom: 1rem;
-        }
-
-        .features-list {
-            list-style: none;
-            text-align: left;
-            margin-top: 1rem;
-        }
-
-        .features-list li {
-            padding: 0.5rem 0;
-            padding-left: 1.5rem;
-            position: relative;
-        }
-
-        .features-list li::before {
-            content: '✓';
-            position: absolute;
-            left: 0;
-            color: var(--accent-blue);
-            font-weight: bold;
-        }
-
-        /* Tarifs */
-        .pricing-section {
-            background: linear-gradient(180deg, rgba(255,255,255,0.3) 0%, rgba(255,255,255,0.6) 100%);
-            border-radius: 30px;
-            margin: 2rem auto;
-            padding: 4rem 2rem;
-        }
-
-        .pricing-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 2rem;
-            margin-top: 2rem;
-        }
-
-        .pricing-card {
-            background: white;
-            border-radius: 20px;
-            padding: 2rem;
-            box-shadow: 0 5px 20px rgba(30, 95, 142, 0.1);
-            position: relative;
-            border: 2px solid transparent;
-            transition: all 0.3s;
-        }
-
-        .pricing-card.featured {
-            border-color: var(--deep-blue);
-            transform: scale(1.05);
-            box-shadow: 0 10px 30px rgba(30, 95, 142, 0.2);
-        }
-
-        .pricing-card.featured::before {
-            content: 'Recommandé';
-            position: absolute;
-            top: -12px;
-            right: 20px;
-            background: var(--deep-blue);
-            color: white;
-            padding: 0.5rem 1rem;
-            border-radius: 20px;
-            font-size: 0.8rem;
-            font-weight: bold;
-        }
-
-        .pricing-header {
-            text-align: center;
-            margin-bottom: 1.5rem;
-            padding-bottom: 1rem;
-            border-bottom: 2px solid var(--soft-blue);
-        }
-
-        .pricing-title {
-            color: var(--deep-blue);
-            font-size: 1.3rem;
-            margin-bottom: 0.5rem;
-        }
-
-        .price {
-            font-size: 2.5rem;
-            color: var(--deep-blue);
-            font-weight: 700;
-        }
-
-        .price-unit {
-            font-size: 1rem;
-            color: var(--accent-blue);
-            font-weight: 400;
-        }
-
-        .pricing-features {
-            list-style: none;
-            margin: 1.5rem 0;
-        }
-
-        .pricing-features li {
-            padding: 0.8rem 0;
-            border-bottom: 1px solid rgba(184, 227, 240, 0.3);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .pricing-features li:last-child {
-            border-bottom: none;
-        }
-
-        .price-tag {
-            color: var(--deep-blue);
-            font-weight: 700;
-        }
-
-        .photo-pack {
-            background: var(--soft-blue);
-            padding: 0.2rem 0.8rem;
-            border-radius: 15px;
-            font-size: 0.9rem;
-            color: var(--deep-blue);
-            font-weight: 700;
-        }
-
-        .order-section {
-            background: white;
-            border-radius: 30px;
-            box-shadow: 0 10px 40px rgba(30, 95, 142, 0.15);
-            padding: 3rem;
-            margin: 3rem auto;
-            max-width: 800px;
-        }
-
-        .form-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 1.5rem;
-            margin-top: 2rem;
-        }
-
-        .form-group {
-            display: flex;
-            flex-direction: column;
-        }
-
-        .form-group.full-width {
-            grid-column: 1 / -1;
-        }
-
-        label {
-            color: var(--deep-blue);
-            font-weight: 600;
-            margin-bottom: 0.5rem;
-        }
-
-        input, select, textarea {
-            padding: 1rem;
-            border: 2px solid var(--soft-blue);
-            border-radius: 10px;
-            font-family: 'Lato', sans-serif;
-            transition: all 0.3s;
-            background: rgba(255,255,255,0.9);
-        }
-
-        input:focus, select:focus, textarea:focus {
-            outline: none;
-            border-color: var(--deep-blue);
-            box-shadow: 0 0 0 3px rgba(30, 95, 142, 0.1);
-        }
-
-        .radio-group {
-            display: flex;
-            gap: 1rem;
-            flex-wrap: wrap;
-            margin-top: 0.5rem;
-        }
-
-        .radio-label {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            cursor: pointer;
-            padding: 0.5rem 1rem;
-            background: var(--soft-blue);
-            border-radius: 20px;
-            transition: all 0.3s;
-        }
-
-        .radio-label:hover {
-            background: var(--sky-blue);
-        }
-
-        input[type="radio"] {
-            accent-color: var(--deep-blue);
-        }
-
-        .submit-btn {
-            background: var(--deep-blue);
-            color: white;
-            padding: 1rem 3rem;
-            border: none;
-            border-radius: 50px;
-            font-size: 1.1rem;
-            font-weight: 700;
-            cursor: pointer;
-            transition: all 0.3s;
-            width: 100%;
-            margin-top: 1rem;
-        }
-
-        .submit-btn:hover {
-            background: var(--accent-blue);
-            transform: translateY(-2px);
-            box-shadow: 0 5px 20px rgba(30, 95, 142, 0.3);
-        }
-
-        .submit-btn:disabled {
-            opacity: 0.7;
-            cursor: not-allowed;
-        }
-
-        .contact-section {
-            text-align: center;
-            background: rgba(255,255,255,0.4);
-            border-radius: 30px;
-            padding: 4rem 2rem;
-            margin-bottom: 3rem;
-        }
-
-        .social-links {
-            display: flex;
-            justify-content: center;
-            gap: 2rem;
-            margin: 2rem 0;
-            flex-wrap: wrap;
-        }
-
-        .social-btn {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            padding: 1rem 2rem;
-            background: white;
-            border-radius: 50px;
-            text-decoration: none;
-            color: var(--deep-blue);
-            font-weight: 600;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-            transition: all 0.3s;
-        }
-
-        .social-btn:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
-        }
-
-        .social-btn.instagram {
-            background: linear-gradient(45deg, #f09433 0%,#e6683c 25%,#dc2743 50%,#cc2366 75%,#bc1888 100%);
-            color: white;
-        }
-
-        .social-btn.youtube {
-            background: #FF0000;
-            color: white;
-        }
-
-        .contact-info {
-            margin-top: 2rem;
-            font-size: 1.2rem;
-        }
-
-        .phone-number {
-            font-size: 2rem;
-            color: var(--deep-blue);
-            font-weight: 700;
-            margin-top: 1rem;
-            display: inline-block;
-            padding: 1rem 2rem;
-            background: white;
-            border-radius: 15px;
-            box-shadow: 0 4px 15px rgba(30, 95, 142, 0.2);
-            text-decoration: none;
-            transition: all 0.3s;
-        }
-
-        .phone-number:hover {
-            background: var(--deep-blue);
-            color: white;
-            transform: scale(1.05);
-        }
-
-        .location-badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            background: var(--deep-blue);
-            color: white;
-            padding: 0.8rem 1.5rem;
-            border-radius: 50px;
-            margin-top: 1.5rem;
-            font-weight: 600;
-        }
-
-        .promo-banner {
-            background: linear-gradient(135deg, rgba(255, 215, 0, 0.1) 0%, rgba(255, 255, 255, 0.95) 100%);
-            border: 2px solid rgba(255, 215, 0, 0.3);
-            border-radius: 20px;
-            padding: 1.5rem;
-            margin: 3rem auto;
-            max-width: 800px;
-            text-align: center;
-            position: relative;
-            overflow: hidden;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.05);
-            transition: all 0.3s ease;
-        }
-
-        .promo-banner:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 30px rgba(255, 215, 0, 0.2);
-            border-color: rgba(255, 215, 0, 0.6);
-        }
-
-        .promo-banner::before {
-            content: '✨';
-            position: absolute;
-            top: 10px;
-            right: 20px;
-            font-size: 1.5rem;
-            opacity: 0.6;
-            animation: float 3s ease-in-out infinite;
-        }
-
-        .promo-content {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 1rem;
-            flex-wrap: wrap;
-        }
-
-        .promo-text {
-            color: var(--text-dark);
-            font-size: 0.95rem;
-            font-weight: 600;
-        }
-
-        .promo-link {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            background: linear-gradient(135deg, #FFD700 0%, #FFA500 100%);
-            color: #2C3E50;
-            padding: 0.8rem 1.5rem;
-            border-radius: 25px;
-            text-decoration: none;
-            font-weight: 700;
-            font-size: 0.9rem;
-            box-shadow: 0 4px 15px rgba(255, 215, 0, 0.3);
-            transition: all 0.3s;
-            border: 2px solid rgba(255, 255, 255, 0.5);
-        }
-
-        .promo-link:hover {
-            transform: scale(1.05);
-            box-shadow: 0 6px 20px rgba(255, 215, 0, 0.5);
-            animation: pulse-glow 2s infinite;
-        }
-
-        footer {
-            background: var(--deep-blue);
-            color: white;
-            text-align: center;
-            padding: 2rem;
-            margin-top: 4rem;
-        }
-
-        .footer-content {
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .footer-brand {
-            font-size: 1.5rem;
-            font-family: 'Playfair Display', serif;
-            margin-bottom: 1rem;
-        }
-
-        .footer-location {
-            margin-top: 1rem;
-            padding: 1rem;
-            background: rgba(255,255,255,0.1);
-            border-radius: 15px;
-            display: inline-block;
-        }
-
-        .footer-box {
-            background: rgba(255, 223, 0, 0.1);
-            border: 2px solid #FFD700;
-            border-radius: 20px;
-            padding: 2rem 3rem;
-            max-width: 600px;
-            margin: 0 auto;
-            text-align: center;
-            box-shadow: 0 4px 20px rgba(255, 215, 0, 0.2);
-        }
-
-        .freecash-btn {
-            display: inline-block;
-            margin: 0.5rem 0;
-            padding: 0.8rem 1.5rem;
-            background: #FFD700;
-            color: var(--deep-blue);
-            font-weight: 700;
-            border-radius: 50px;
-            text-decoration: none;
-            transition: all 0.3s;
-        }
-
-        .freecash-btn:hover {
-            background: #FFC107;
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(255, 215, 0, 0.3);
-        }
-
-        .success-message {
-            display: none;
-            background: #d4edda;
-            color: #155724;
-            padding: 1.5rem;
-            border-radius: 15px;
-            margin-top: 1rem;
-            border: 2px solid #c3e6cb;
-        }
-
-        .success-message.show {
-            display: block;
-            animation: fadeInUp 0.5s ease-out;
-        }
-
-        @media (max-width: 768px) {
-            .nav-links {
-                display: none;
-            }
-            
-            .hero h1 {
-                font-size: 2rem;
-            }
-            
-            .form-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .pricing-card.featured {
-                transform: scale(1);
-            }
-            
-            .social-links {
-                flex-direction: column;
-                align-items: center;
-            }
-
-            .portfolio-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .portfolio-item {
-                aspect-ratio: 4/5;
-            }
-
-            .lightbox-nav {
-                width: 40px;
-                height: 40px;
-                font-size: 1.2rem;
-            }
-
-            .lightbox-prev {
-                left: 10px;
-            }
-
-            .lightbox-next {
-                right: 10px;
-            }
-
-            .portfolio-tabs {
-                gap: 0.5rem;
-            }
-
-            .portfolio-tab {
-                padding: 0.8rem 1.2rem;
-                font-size: 0.9rem;
-            }
-        }
-
-        .estimate-box {
-            background: var(--soft-blue);
-            padding: 1.5rem;
-            border-radius: 15px;
-            margin-top: 1rem;
-            text-align: center;
-            font-size: 1.2rem;
-            border: 2px dashed var(--accent-blue);
-        }
-
-        .estimate-price {
-            font-size: 2rem;
-            color: var(--deep-blue);
-            font-weight: 700;
-        }
-
-        .highlight-price {
-            color: #e74c3c;
-            font-size: 1.1em;
-        }
-
-        .video-tier {
-            background: rgba(255,255,255,0.5);
-            padding: 1rem;
-            margin: 0.5rem 0;
-            border-radius: 10px;
-            border-left: 3px solid var(--accent-blue);
-        }
-
-        .video-tier.simple {
-            border-left-color: #27ae60;
-        }
-
-        .video-tier.complex {
-            border-left-color: #e67e22;
-        }
-
-        .video-tier.premium {
-            border-left-color: var(--deep-blue);
-        }
-    
-        /* Alignement parfait des champs Durée et Type d'événement */
-        #duration, #eventType {
-            height: 48px;
-            box-sizing: border-box;
-        }
-
-        .form-group label {
-            margin-bottom: 0.5rem;
-            display: block;
-        }
-    
-        /* Alignement parfait des champs côte à côte */
-        .form-grid > .form-group {
-            align-self: start;
-        }
-
-        #duration, #eventType {
-            min-height: 48px;
-            padding: 0.75rem;
-            font-size: 1rem;
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SDO Web – Création de Sites Internet Belgique | Freelance Bruxelles</title>
+<meta name="description" content="SDO Web, développeur web freelance en Belgique. Sites internet modernes, rapides et optimisés SEO. Devis gratuit sous 24h. À partir de 300€.">
+<meta name="keywords" content="création site internet, développeur web freelance, création site Belgique, création site Bruxelles, site vitrine Belgique, e-commerce Belgique, prix site internet">
+<meta name="author" content="Silvio De Oliveira – SDO Web">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://sdo-web.be">
+<!-- FAVICON -->
+<link rel="icon" href="/favicon.ico" type="image/x-icon">
+<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+  
+<meta property="og:title" content="SDO Web – Création de Sites Internet en Belgique">
+<meta property="og:description" content="Développeur web freelance en Belgique. Sites vitrines, landing pages et e-commerce à partir de 300€. Livraison en 48h.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://sdo-web.be">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"LocalBusiness","name":"SDO Web","url":"https://sdo-web.be","areaServed":["Belgique","Bruxelles","Wallonie"],"priceRange":"€€","contactPoint":{"@type":"ContactPoint","email":"contact.sdo.web12@gmail.com"}}</script>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+<style>
+/* ── VARIABLES ─────────────────────────────── */
+:root {
+  --bg:    #0c0c0e;
+  --bg-2:  #121215;
+  --card:  #18181c;
+  --card-2:#1e1e23;
+  --b0:    rgba(255,255,255,0.04);
+  --b1:    rgba(255,255,255,0.08);
+  --b2:    rgba(255,255,255,0.15);
+  --text:  #fafafa;
+  --text-2:#a1a1aa;
+  --text-3:#71717a;
+  --accent:#fbbf24;
+  --accent-2:#f59e0b;
+  --accent-dim: rgba(251,191,36,0.08);
+  --accent-med: rgba(251,191,36,0.15);
+  --accent-glow: rgba(251,191,36,0.12);
+  --success: #22c55e;
+  --error:   #ef4444;
+  --r:       12px;
+  --r-sm:    8px;
+  --ease:    cubic-bezier(0.16, 1, 0.3, 1);
+  --font-display: 'Space Grotesk', system-ui, sans-serif;
+  --font-body:    'Inter', system-ui, sans-serif;
+  --max-width: 1200px;
+  --content-padding: 4vw;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { 
+  font-size: 16px; 
+  overflow-x: clip;
+}
+body {
+  font-family: var(--font-body);
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+  overflow-x: clip;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  width: 100%;
+  max-width: 100vw;
+}
+a { text-decoration: none; color: inherit; }
+ul { list-style: none; }
+
+/* ── NAV ───────────────────────────────────── */
+nav {
+  position: fixed; 
+  top: 0; 
+  left: 0; 
+  right: 0; 
+  z-index: 1000;
+  display: flex; 
+  align-items: center; 
+  justify-content: space-between;
+  padding: 0.75rem 4vw;
+  transition: background 0.3s var(--ease), backdrop-filter 0.3s var(--ease);
+  height: 60px;
+  width: 100%;
+  max-width: 100vw;
+}
+nav.scrolled {
+  background: rgba(12,12,14,0.95);
+  backdrop-filter: blur(20px) saturate(180%);
+  border-bottom: 1px solid var(--b0);
+}
+.logo {
+  font-family: var(--font-display);
+  font-size: 1.75rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--text);
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  flex-shrink: 0;
+  white-space: nowrap;
+  z-index: 1001;
+  max-width: 100%;
+}
+.logo span {
+  color: var(--accent);
+  font-weight: 600;
+}
+.nav-links { 
+  display: none;
+}
+.nav-cta {
+  display: none;
+}
+.burger { 
+  display: flex;
+  flex-direction: column; 
+  gap: 4px; 
+  cursor: pointer; 
+  z-index: 1001; 
+  padding: 0.5rem;
+  width: 40px;
+  height: 40px;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.burger span { 
+  display: block; 
+  width: 22px; 
+  height: 2px; 
+  background: var(--text); 
+  border-radius: 2px; 
+  transition: all 0.3s var(--ease); 
+}
+.burger.open span:nth-child(1) { transform: rotate(45deg) translate(4px,4px); }
+.burger.open span:nth-child(2) { opacity: 0; }
+.burger.open span:nth-child(3) { transform: rotate(-45deg) translate(4px,-4px); }
+.drawer {
+  position: fixed; 
+  top: 0; 
+  right: -100%; 
+  width: 280px; 
+  height: 100vh;
+  background: var(--bg-2);
+  border-left: 1px solid var(--b0);
+  z-index: 999;
+  padding: 5rem 1.5rem 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  transition: right 0.3s var(--ease);
+  max-width: 100vw;
+}
+.drawer.open { right: 0; }
+.drawer a {
+  font-size: 1rem;
+  font-weight: 500;
+  padding: 0.875rem 0;
+  border-bottom: 1px solid var(--b0);
+  color: var(--text);
+  transition: all 0.2s;
+  display: block;
+  font-family: var(--font-display);
+}
+.drawer a:hover { color: var(--accent); padding-left: 0.5rem; }
+.drawer .d-cta {
+  margin-top: 1.5rem;
+  background: var(--accent);
+  color: var(--bg);
+  text-align: center;
+  padding: 0.875rem;
+  border-radius: var(--r);
+  font-weight: 600;
+  font-size: 0.9375rem;
+  border: none;
+}
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.8);
+  backdrop-filter: blur(4px);
+  z-index: 998;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s var(--ease);
+  width: 100vw;
+  height: 100vh;
+}
+.overlay.open { opacity: 1; visibility: visible; }
+
+/* ── HERO ──────────────────────────────────── */
+.hero {
+  min-height: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 6rem var(--content-padding) 3rem;
+  position: relative;
+  width: 100%;
+  max-width: 100vw;
+}
+.hero-in {
+  max-width: 800px;
+  margin: 0 auto;
+  text-align: center;
+  width: 100%;
+  padding: 0 1rem;
+  position: relative;
+  z-index: 1;}
+.hero-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  width: 100%;
+  height: 100%;
+
+  pointer-events: none;
+}
+.hero-bg::before {
+  content: '';
+  position: absolute;
+  top: 30%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: min(600px, 90vw);
+  height: min(600px, 90vw);
+  background: radial-gradient(circle, var(--accent-dim) 0%, transparent 60%);
+  opacity: 0.5;
+}
+.pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: var(--accent-dim);
+  border: 1px solid var(--accent-med);
+  color: var(--accent);
+  padding: 0.375rem 0.875rem;
+  border-radius: 100px;
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  margin-bottom: 1.25rem;
+  max-width: 100%;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.pill::before {
+  content: '';
+  width: 5px;
+  height: 5px;
+  background: var(--accent);
+  border-radius: 50%;
+  animation: pulse 2s infinite;
+  flex-shrink: 0;
+}
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+h1 {
+  font-family: var(--font-display);
+  font-size: clamp(1.75rem, 7vw, 3rem);
+  font-weight: 700;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  margin-bottom: 1rem;
+  color: var(--text);
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  max-width: 100%;
+}
+h1 em {
+  font-style: normal;
+  color: var(--accent);
+}
+.hero-desc {
+  font-size: clamp(0.9375rem, 3vw, 1.125rem);
+  color: var(--text-2);
+  max-width: 600px;
+  line-height: 1.6;
+  margin: 0 auto 1.5rem;
+  font-weight: 400;
+  padding: 0 0.5rem;
+  word-wrap: break-word;
+}
+.hero-btns {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  margin-bottom: 2rem;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  max-width: 100%;
+  padding: 0 0.5rem;
+}
+.btn-p {
+  background: var(--text);
+  color: var(--bg);
+  padding: 0.875rem 1.5rem;
+  border-radius: 100px;
+  font-size: 0.9375rem;
+  font-weight: 600;
+  font-family: var(--font-body);
+  transition: all 0.3s var(--ease);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+  max-width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.btn-p:hover {
+  background: var(--accent);
+  transform: translateY(-2px);
+  box-shadow: 0 10px 40px -10px var(--accent-glow);
+}
+.btn-o {
+  background: transparent;
+  color: var(--text);
+  padding: 0.875rem 1.5rem;
+  border-radius: 100px;
+  font-size: 0.9375rem;
+  font-weight: 500;
+  font-family: var(--font-body);
+  border: 1px solid var(--b1);
+  transition: all 0.3s var(--ease);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  cursor: pointer;
+  width: 100%;
+  max-width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.btn-o:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+  background: var(--accent-dim);
+  transform: translateY(-2px);
+}
+.btn-ig-pill {
+  background: linear-gradient(135deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+  color: #fff;
+  padding: 0.875rem 1.5rem;
+  border-radius: 100px;
+  font-size: 0.9375rem;
+  font-weight: 600;
+  font-family: var(--font-body);
+  transition: all 0.3s var(--ease);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+  max-width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.btn-ig-pill:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 30px -10px rgba(220, 39, 67, 0.4);
+  filter: brightness(1.1);
+}
+.hero-stats {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--b0);
+  max-width: 600px;
+  margin: 0 auto;
+  width: 100%;
+}
+@media(min-width: 768px) {
+  .hero-stats {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2rem;
+  }
+  .hero-btns {
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+  .btn-p, .btn-o, .btn-ig-pill {
+    width: auto;
+    max-width: none;
+  }
+}
+.stn {
+  font-family: var(--font-display);
+  font-size: clamp(1.5rem, 5vw, 1.75rem);
+  font-weight: 700;
+  color: var(--text);
+  line-height: 1;
+  letter-spacing: -0.02em;
+}
+.stn span {
+  color: var(--accent);
+  font-size: clamp(1rem, 3vw, 1.25rem);
+}
+.stt {
+  font-size: 0.75rem;
+  color: var(--text-3);
+  margin-top: 0.25rem;
+  font-weight: 500;
+}
+
+/* ── SHARED ────────────────────────────────── */
+section { 
+  padding: 4rem var(--content-padding);
+  width: 100%;
+  max-width: 100vw;
+}
+@media(min-width: 768px) {
+  section { padding: 5rem var(--content-padding); }
+}
+.wrap { 
+  max-width: var(--max-width); 
+  margin: 0 auto; 
+  width: 100%;
+  padding: 0 var(--content-padding);
+  box-sizing: border-box;
+}
+.tag {
+  display: inline-block;
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 0.75rem;
+  padding: 0.375rem 0.875rem;
+  background: var(--accent-dim);
+  border-radius: 100px;
+  border: 1px solid var(--accent-med);
+  max-width: 100%;
+}
+h2 {
+  font-family: var(--font-display);
+  font-size: clamp(1.25rem, 4vw, 2.25rem);
+  font-weight: 700;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  margin-bottom: 0.5rem;
+  word-wrap: break-word;
+  max-width: 100%;
+}
+.sh {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  margin-bottom: 1.5rem;
+  text-align: center;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+  width: 100%;
+  padding: 0 0.5rem;
+}
+.sub {
+  color: var(--text-2);
+  font-size: clamp(0.875rem, 2.5vw, 0.9375rem);
+  line-height: 1.6;
+  max-width: 500px;
+  margin: 0 auto;
+  word-wrap: break-word;
+  padding: 0 0.5rem;
+}
+
+/* ── STRIP ─────────────────────────────────── */
+.strip {
+  background: var(--bg-2);
+  border-top: 1px solid var(--b0);
+  border-bottom: 1px solid var(--b0);
+  padding: 1rem 4vw;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+  width: 100%;
+  max-width: 100vw;
+}
+.strip-lbl {
+  font-size: 0.6875rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-3);
+  font-weight: 600;
+}
+.strip-tags {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.75rem 1.25rem;
+  max-width: 100%;
+}
+.strip-tag {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--text-2);
+  white-space: nowrap;
+}
+
+/* ── SERVICES ──────────────────────────────── */
+#services { background: var(--bg-2); }
+.svc-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.75rem;
+  width: 100%;
+}
+@media(min-width: 768px) {
+  .svc-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+  }
+}
+.svc {
+  background: var(--card);
+  padding: 1rem;
+  border-radius: var(--r-sm);
+  border: 1px solid var(--b0);
+  transition: all 0.3s var(--ease);
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+.svc:hover {
+  border-color: var(--b1);
+  background: var(--card-2);
+}
+.svc-ico {
+  font-size: 1.5rem;
+  margin-bottom: 0.5rem;
+  display: block;
+}
+.svc h3 {
+  font-family: var(--font-display);
+  font-size: clamp(0.875rem, 2.5vw, 0.9375rem);
+  font-weight: 600;
+  margin-bottom: 0.375rem;
+  color: var(--text);
+  letter-spacing: -0.01em;
+  word-wrap: break-word;
+}
+.svc p {
+  font-size: 0.8125rem;
+  color: var(--text-2);
+  line-height: 1.5;
+  margin-bottom: 0.75rem;
+  display: none;
+  word-wrap: break-word;
+}
+@media(min-width: 768px) {
+  .svc {
+    padding: 1.5rem;
+  }
+  .svc p {
+    display: block;
+    font-size: 0.875rem;
+  }
+  .svc h3 {
+    font-size: 1.125rem;
+  }
+}
+.svc-price {
+  display: inline-flex;
+  align-self: flex-start;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--accent);
+  padding: 0.375rem 0.75rem;
+  background: var(--accent-dim);
+  border-radius: 100px;
+  letter-spacing: 0.02em;
+  border: 1px solid var(--accent-med);
+  margin-top: auto;
+  white-space: nowrap;
+  max-width: 100%;
+}
+
+/* ── PORTFOLIO ─────────────────────────────── */
+#portfolio { background: var(--bg); }
+.port-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+  max-width: 1000px;
+  margin: 0 auto;
+  width: 100%;
+}
+@media(min-width: 768px) {
+  .port-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media(min-width: 1024px) {
+  .port-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+.port-card {
+  border-radius: var(--r-sm);
+  overflow: hidden;
+  background: var(--card);
+  border: 1px solid var(--b0);
+  transition: all 0.3s var(--ease);
+  display: block;
+  min-width: 0;
+}
+.port-card:hover {
+  border-color: var(--b1);
+  transform: translateY(-4px);
+}
+.port-thumb {
+  height: 180px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  background: var(--bg-2);
+  width: 100%;
+}
+.port-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.port-body {
+  padding: 1rem;
+  word-wrap: break-word;
+}
+.port-tag {
+  font-size: 0.625rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--accent);
+  background: var(--accent-dim);
+  padding: 0.25rem 0.625rem;
+  border-radius: 100px;
+  display: inline-block;
+  margin-bottom: 0.5rem;
+  border: 1px solid var(--accent-med);
+}
+.port-body h3 {
+  font-size: 1rem;
+  font-weight: 600;
+  margin-bottom: 0.375rem;
+  font-family: var(--font-display);
+  letter-spacing: -0.01em;
+  word-wrap: break-word;
+}
+.port-body p {
+  font-size: 0.8125rem;
+  color: var(--text-2);
+  line-height: 1.5;
+  display: none;
+  word-wrap: break-word;
+}
+@media(min-width: 768px) {
+  .port-thumb {
+    height: 200px;
+  }
+  .port-body p {
+    display: block;
+  }
+}
+@media(min-width: 1024px) {
+  .port-thumb {
+    height: 220px;
+  }
+}
+.port-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  margin-top: 0.5rem;
+  font-size: 0.8125rem;
+  font-weight: 500;
+  color: var(--accent);
+  white-space: nowrap;
+}
+.port-card.fc {
+  display: none;
+}
+
+/* ── PRICING ───────────────────────────────── */
+#pricing { background: var(--bg-2); }
+.price-hd { text-align: left; margin-bottom: 1.5rem; }
+.price-hd h2 { text-align: left; }
+.price-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+  margin-bottom: 1.5rem;
+  max-width: 1000px;
+  margin-left: auto;
+  margin-right: auto;
+  width: 100%;
+}
+@media(min-width: 768px) {
+  .price-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+  }
+}
+.pc {
+  background: var(--card);
+  border: 1px solid var(--b0);
+  border-radius: var(--r-sm);
+  padding: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+.pc.star {
+  border-color: var(--accent);
+  background: var(--bg);
+}
+.pbadge {
+  font-size: 0.625rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--bg);
+  background: var(--accent);
+  padding: 0.375rem 0.75rem;
+  border-radius: 100px;
+  display: inline-flex;
+  align-self: flex-start;
+  margin-bottom: 0.75rem;
+  align-items: center;
+  gap: 0.25rem;
+  white-space: nowrap;
+}
+.pbadge::before {
+  content: '★';
+}
+.pc h3 {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--text-3);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-bottom: 0.5rem;
+}
+.pval {
+  font-family: var(--font-display);
+  font-size: clamp(1.5rem, 4vw, 1.75rem);
+  font-weight: 700;
+  line-height: 1;
+  margin-bottom: 0.25rem;
+  letter-spacing: -0.02em;
+  word-wrap: break-word;
+}
+.pper {
+  font-size: 0.8125rem;
+  color: var(--text-3);
+  margin-bottom: 0.75rem;
+}
+.pc > p {
+  font-size: 0.875rem;
+  color: var(--text-2);
+  line-height: 1.6;
+  margin-bottom: 0.75rem;
+  word-wrap: break-word;
+}
+.pfs {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+.pf {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.5rem;
+  font-size: 0.8125rem;
+  color: var(--text-2);
+  word-wrap: break-word;
+}
+.pf::before {
+  content: '—';
+  color: var(--accent);
+  font-weight: 600;
+  flex-shrink: 0;
+}
+.pc .btn-p, .pc .btn-o {
+  width: 100%;
+  justify-content: center;
+  margin-top: auto;
+  padding: 0.75rem;
+  font-size: 0.875rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+@media(min-width: 768px) {
+  .pval {
+    font-size: 2rem;
+  }
+}
+.maint {
+  background: var(--card);
+  border: 1px solid var(--b0);
+  border-radius: var(--r-sm);
+  padding: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  width: 100%;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+@media(min-width: 768px) {
+  .maint {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.5rem 2rem;
+  }
+}
+.maint h4 {
+  font-size: 1rem;
+  font-weight: 600;
+  margin-bottom: 0.25rem;
+  font-family: var(--font-display);
+}
+.maint p {
+  font-size: 0.8125rem;
+  color: var(--text-2);
+  word-wrap: break-word;
+}
+.maint-price {
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--accent);
+}
+.maint-per {
+  font-size: 0.75rem;
+  color: var(--text-3);
+}
+
+/* ── FAQ ───────────────────────────────────── */
+#faq { background: var(--bg); padding: 2rem 4vw; width: 100%; max-width: 100vw; }
+.faq-layout {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  max-width: 800px;
+  margin: 0 auto;
+  width: 100%;
+}
+@media(min-width: 768px) {
+  .faq-layout {
+    flex-direction: row;
+    gap: 3rem;
+    max-width: 1000px;
+  }
+  .faq-layout > div:first-child {
+    width: 300px;
+    flex-shrink: 0;
+    text-align: left;
+  }
+}
+.faq-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  width: 100%;
+}
+.faq-item {
+  background: var(--card);
+  border: 1px solid var(--b0);
+  border-radius: var(--r-sm);
+  overflow: hidden;
+  transition: all 0.3s var(--ease);
+  width: 100%;
+}
+.faq-item.open {
+  border-color: var(--accent-med);
+  background: var(--card-2);
+}
+.faq-q {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+  cursor: pointer;
+  font-size: clamp(0.875rem, 2.5vw, 0.9375rem);
+  font-weight: 500;
+  color: var(--text);
+  transition: color 0.2s;
+  gap: 0.75rem;
+  line-height: 1.4;
+  font-family: var(--font-display);
+  word-wrap: break-word;
+}
+.faq-q:hover {
+  color: var(--accent);
+}
+.faq-ico {
+  width: 24px;
+  height: 24px;
+  flex-shrink: 0;
+  border-radius: 50%;
+  border: 1px solid var(--b1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.875rem;
+  transition: all 0.3s var(--ease);
+  color: var(--text-3);
+  font-weight: 300;
+}
+.faq-item.open .faq-ico {
+  background: var(--accent-dim);
+  border-color: var(--accent);
+  color: var(--accent);
+  transform: rotate(45deg);
+}
+.faq-a {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s var(--ease), padding 0.3s var(--ease);
+  font-size: 0.8125rem;
+  color: var(--text-2);
+  line-height: 1.7;
+  word-wrap: break-word;
+}
+.faq-item.open .faq-a {
+  max-height: 200px;
+  padding: 0 1rem 1rem;
+}
+@media(min-width: 768px) {
+  #faq { padding: 3rem 5vw; }
+  .faq-q {
+    padding: 1.25rem;
+    font-size: 1rem;
+  }
+  .faq-item.open .faq-a {
+    padding: 0 1.25rem 1.25rem;
+  }
+}
+
+/* ── CONTACT ───────────────────────────────── */
+#contact { 
+  background: var(--bg-2); 
+  padding: 4rem 4vw;
+  width: 100%;
+  max-width: 100vw;
+}
+.contact-layout {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  max-width: 1000px;
+  margin: 0 auto;
+  width: 100%;
+}
+@media(min-width: 768px) {
+  .contact-layout {
+    flex-direction: row;
+    gap: 3rem;
+  }
+}
+.contact-info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  width: 100%;
+}
+@media(min-width: 768px) {
+  .contact-info {
+    width: 320px;
+    flex-shrink: 0;
+  }
+}
+.cc {
+  background: var(--card);
+  border: 1px solid var(--b0);
+  border-radius: var(--r-sm);
+  padding: 0.875rem 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  transition: all 0.3s var(--ease);
+  max-width: 100%;
+  word-wrap: break-word;
+}
+.cc-ico {
+  width: 36px;
+  height: 36px;
+  flex-shrink: 0;
+  border-radius: 8px;
+  background: var(--accent-dim);
+  border: 1px solid var(--accent-med);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+}
+.cc-lbl {
+  font-size: 0.625rem;
+  font-weight: 600;
+  color: var(--text-3);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin-bottom: 0.125rem;
+}
+.cc-val {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--text);
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+}
+
+/* Formulaire Devis Fusionné */
+.devis-form {
+  background: var(--card);
+  border: 1px solid var(--b0);
+  border-radius: var(--r);
+  padding: 1.5rem;
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+@media(min-width: 768px) {
+  .devis-form {
+    flex: 1;
+    padding: 2rem;
+  }
+}
+.devis-form h3 {
+  font-family: var(--font-display);
+  font-size: clamp(1.125rem, 3vw, 1.25rem);
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  color: var(--text);
+  word-wrap: break-word;
+}
+.devis-form > p {
+  font-size: 0.875rem;
+  color: var(--text-2);
+  margin-bottom: 1.5rem;
+  word-wrap: break-word;
+}
+.form-group {
+  margin-bottom: 1.25rem;
+  width: 100%;
+}
+.form-group label {
+  display: block;
+  font-size: 0.875rem;
+  color: var(--text-2);
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+  word-wrap: break-word;
+}
+.sf-input, .sf-select {
+  width: 100%;
+  background: var(--bg);
+  border: 1px solid var(--b0);
+  border-radius: var(--r-sm);
+  color: var(--text);
+  font-family: var(--font-body);
+  font-size: 0.9375rem;
+  padding: 0.875rem 1rem;
+  transition: all 0.2s;
+  box-sizing: border-box;
+  max-width: 100%;
+}
+.sf-input:focus, .sf-select:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 2px var(--accent-glow);
+}
+.sf-input::placeholder {
+  color: var(--text-3);
+}
+textarea.sf-input {
+  min-height: 100px;
+  resize: vertical;
+}
+.sf-row {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0.75rem;
+  margin-bottom: 1.25rem;
+  width: 100%;
+}
+@media(min-width: 640px) {
+  .sf-row {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+/* Calculateur dans le formulaire */
+.calc-section {
+  background: var(--bg);
+  border: 1px solid var(--b0);
+  border-radius: var(--r-sm);
+  padding: 1.25rem;
+  margin: 1.5rem 0;
+  width: 100%;
+  box-sizing: border-box;
+}
+.calc-title {
+  font-family: var(--font-display);
+  font-size: 1rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  color: var(--text);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  word-wrap: break-word;
+}
+.calc-title::before {
+  content: '🧮';
+}
+.pages-control {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+  width: 100%;
+}
+.pages-btn {
+  width: 44px;
+  height: 44px;
+  background: var(--card);
+  border: 1px solid var(--b1);
+  border-radius: var(--r-sm);
+  color: var(--text);
+  cursor: pointer;
+  font-size: 1.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s;
+  flex-shrink: 0;
+}
+.pages-btn:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+.pages-input {
+  flex: 1;
+  text-align: center;
+  font-weight: 600;
+  background: var(--bg-2);
+  min-width: 0;
+}
+.pages-hint {
+  font-size: 0.75rem;
+  color: var(--text-3);
+  margin-top: 0.5rem;
+  word-wrap: break-word;
+}
+.options-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0.75rem;
+  width: 100%;
+}
+@media(min-width: 640px) {
+  .options-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+.option-item {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 1rem;
+  background: var(--card);
+  border: 1px solid var(--b0);
+  border-radius: var(--r-sm);
+  cursor: pointer;
+  transition: all 0.2s;
+  min-width: 0;
+}
+.option-item:hover {
+  border-color: var(--b1);
+}
+.option-item input[type="checkbox"] {
+  width: 18px;
+  height: 18px;
+  accent-color: var(--accent);
+  flex-shrink: 0;
+}
+.option-item span:first-of-type {
+  flex: 1;
+  font-size: 0.875rem;
+  color: var(--text);
+  word-wrap: break-word;
+  min-width: 0;
+}
+.option-price {
+  color: var(--accent);
+  font-weight: 600;
+  font-size: 0.875rem;
+  flex-shrink: 0;
+  white-space: nowrap;
+}
+/* Total Box */
+.total-box {
+  background: linear-gradient(135deg, var(--accent-dim) 0%, rgba(251,191,36,0.03) 100%);
+  border: 2px solid var(--accent-med);
+  border-radius: var(--r);
+  padding: 1.5rem;
+  margin: 1.5rem 0;
+  text-align: center;
+  width: 100%;
+  box-sizing: border-box;
+}
+.total-label {
+  font-size: 0.875rem;
+  color: var(--text-2);
+  margin-bottom: 0.5rem;
+  word-wrap: break-word;
+}
+.total-amount {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 6vw, 2.5rem);
+  font-weight: 700;
+  color: var(--accent);
+  line-height: 1;
+  transition: transform 0.15s ease;
+  word-wrap: break-word;
+}
+.total-currency {
+  font-size: 1rem;
+  color: var(--accent-2);
+  margin-left: 0.25rem;
+}
+.total-acompte {
+  margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--b0);
+  font-size: 0.875rem;
+  color: var(--text-2);
+  word-wrap: break-word;
+}
+.acompte-amount {
+  font-family: var(--font-display);
+  font-size: clamp(1.25rem, 4vw, 1.5rem);
+  font-weight: 600;
+  color: var(--text);
+  margin-left: 0.5rem;
+}
+/* Bouton Paiement */
+.pay-btn {
+  width: 100%;
+  background: var(--accent);
+  color: var(--bg);
+  padding: 1rem;
+  border-radius: var(--r-sm);
+  font-size: 1rem;
+  font-weight: 600;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  transition: all 0.2s;
+  margin-top: 1rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.pay-btn:hover {
+  filter: brightness(1.1);
+  transform: translateY(-2px);
+  box-shadow: 0 10px 30px -10px var(--accent-glow);
+}
+.pay-btn svg {
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+}
+.security-note {
+  text-align: center;
+  font-size: 0.75rem;
+  color: var(--text-3);
+  margin-top: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  word-wrap: break-word;
+}
+/* Info supplémentaire pour options */
+.options-info {
+  background: var(--accent-dim);
+  border: 1px solid var(--accent-med);
+  border-radius: var(--r-sm);
+  padding: 1rem;
+  margin: 1rem 0;
+  font-size: 0.8125rem;
+  color: var(--text-2);
+  display: flex;
+  align-items: flex-start;
+  gap: 0.5rem;
+  word-wrap: break-word;
+  width: 100%;
+  box-sizing: border-box;
+}
+.options-info::before {
+  content: '💡';
+  flex-shrink: 0;
+}
+
+/* ── FOOTER ────────────────────────────────── */
+footer {
+  background: var(--bg);
+  border-top: 1px solid var(--b0);
+  padding: 3rem 4vw;
+  width: 100%;
+  max-width: 100vw;
+}
+.footer-content {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 1.5rem;
+  width: 100%;
+}
+.footer-brand {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  max-width: 100%;
+}
+.footer-logo {
+  font-family: var(--font-display);
+  font-size: clamp(1.25rem, 4vw, 1.5rem);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--text);
+  word-wrap: break-word;
+}
+.footer-logo span { color: var(--accent); }
+.footer-desc {
+  font-size: 0.875rem;
+  color: var(--text-3);
+  margin: 0;
+  word-wrap: break-word;
+}
+.footer-social {
+  display: flex;
+  gap: 1rem;
+  max-width: 100%;
+}
+/* NOUVEAU BOUTON INSTAGRAM PRO */
+.footer-ig-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  background: linear-gradient(135deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+  color: #fff;
+  padding: 0.875rem 1.5rem;
+  border-radius: 100px;
+  font-size: 0.9375rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 0.3s var(--ease);
+  box-shadow: 0 4px 15px rgba(220, 39, 67, 0.3);
+}
+.footer-ig-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(220, 39, 67, 0.4);
+  filter: brightness(1.1);
+}
+.footer-ig-btn svg {
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+}
+.footer-ig-text {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  line-height: 1.2;
+}
+.footer-ig-label {
+  font-size: 0.625rem;
+  font-weight: 500;
+  opacity: 0.9;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+.footer-ig-handle {
+  font-size: 1rem;
+  font-weight: 700;
+}
+.footer-copy {
+  font-size: 0.75rem;
+  color: var(--text-3);
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--b0);
+  width: 100%;
+  max-width: 400px;
+  word-wrap: break-word;
+}
+@media(min-width: 768px) {
+  footer { padding: 4rem 4vw; }
+  .footer-content {
+    gap: 2rem;
+  }
+}
+
+/* ── SCROLL REVEAL ─────────────────────────── */
+.sr {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s var(--ease), transform 0.6s var(--ease);
+}
+.sr.visible {
+  opacity: 1;
+  transform: none;
+}
+
+
+/* ── HERO DROPDOWN ───────────────────────── */
+.dropdown-item:hover {
+  background: var(--accent-dim);
+  color: var(--accent);
+}
+
+/* ── SERVICES COMPACTS ─────────────────────── */
+.svc {
+  padding: 0.875rem 1rem;
+  min-height: auto;
+}
+.svc-ico {
+  font-size: 1.25rem;
+  margin-bottom: 0.375rem;
+}
+.svc h3 {
+  font-size: 0.875rem;
+  margin-bottom: 0.5rem;
+}
+.svc-price {
+  font-size: 0.6875rem;
+  padding: 0.25rem 0.625rem;
+}
+@media(min-width: 768px) {
+  .svc {
+    padding: 1rem;
+  }
+  .svc h3 {
+    font-size: 1rem;
+  }
+  .svc-price {
+    font-size: 0.75rem;
+  }
+}
+
+/* ── PORTFOLIO COMPACT ───────────────────── */
+.port-body p {
+  display: none !important;
+}
+.port-thumb {
+  height: 160px;
+}
+@media(min-width: 768px) {
+  .port-thumb {
+    height: 180px;
+  }
+}
+@media(min-width: 1024px) {
+  .port-thumb {
+    height: 200px;
+  }
+}
+
+/* ── PRICING COMPACT ───────────────────────── */
+.pc > p {
+  display: none;
+}
+.pfs {
+  display: none;
+}
+.pc {
+  padding: 1rem;
+}
+.pval {
+  margin-bottom: 0.75rem;
+}
+@media(min-width: 768px) {
+  .pc {
+    padding: 1.25rem;
+  }
+}
+
+/* ── FAQ COMPACT ─────────────────────────── */
+#faq {
+  padding: 2rem 4vw;
+}
+
+/* ── CONTACT COMPACT ─────────────────────── */
+#contact {
+  padding: 3rem 4vw;
+}
+
+/* ── FORM COMPACT ────────────────────────── */
+.devis-form h3 {
+  font-size: 1.125rem;
+}
+.devis-form > p {
+  display: none;
+}
+.options-info {
+  display: none;
+}
+.calc-title::before {
+  content: '⚙️';
+}
+.pages-hint {
+  font-size: 0.6875rem;
+}
+
+/* ── FOOTER COMPACT ──────────────────────── */
+footer {
+  padding: 2rem 4vw;
+}
+.footer-content {
+  gap: 1rem;
+}
+
+/* ── FIXES SUPPLEMENTAIRES MOBILE ──────────── */
+@media(max-width: 480px) {
+  :root {
+    --content-padding: 3vw;
+  }
+  
+  .hero {
+    padding: 5rem 3vw 2rem;
+  }
+  
+  .hero-in {
+    padding: 0 0.5rem;
+  position: relative;
+  z-index: 1;}
+  
+  section {
+    padding: 3rem 3vw;
+  }
+  
+  .strip {
+    padding: 1rem 3vw;
+  }
+  
+  .svc-grid {
+    gap: 0.5rem;
+  }
+  
+  .svc {
+    padding: 0.875rem;
+  }
+  
+  .port-grid {
+    gap: 1rem;
+  }
+  
+  .price-grid {
+    gap: 1rem;
+  }
+  
+  .pc {
+    padding: 1rem;
+  }
+  
+  .devis-form {
+    padding: 1rem;
+  }
+  
+  .calc-section {
+    padding: 1rem;
+  }
+  
+  .option-item {
+    padding: 0.875rem;
+  }
+  
+  .total-box {
+    padding: 1.25rem 1rem;
+  }
+  
+  .pay-btn {
+    padding: 0.875rem;
+    font-size: 0.9375rem;
+  }
+  
+  .footer-ig-btn {
+    padding: 0.75rem 1.25rem;
+  }
+  
+  .footer-ig-handle {
+    font-size: 0.9375rem;
+  }
+}
+
+/* ── MODAL DEVIS PDF ───────────────────────── */
+#devisModal {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.95);
+  backdrop-filter: blur(10px);
+  z-index: 2000;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  overflow-y: auto;
+}
+
+#devisModal::-webkit-scrollbar { 
+  width: 8px; 
+}
+#devisModal::-webkit-scrollbar-track { 
+  background: var(--bg); 
+}
+#devisModal::-webkit-scrollbar-thumb { 
+  background: var(--b1); 
+  border-radius: 4px; 
+}
+
+.devis-modal-content {
+  background: var(--card);
+  border: 1px solid var(--b1);
+  border-radius: var(--r);
+  max-width: 900px;
+  width: 100%;
+  max-height: 90vh;
+  overflow-y: auto;
+  position: relative;
+  animation: modalSlideIn 0.3s var(--ease);
+}
+
+@keyframes modalSlideIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.devis-modal-header {
+  padding: 1.5rem;
+  border-bottom: 1px solid var(--b0);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: sticky;
+  top: 0;
+  background: var(--card);
+  z-index: 10;
+}
+
+.devis-modal-header h3 {
+  font-family: var(--font-display);
+  font-size: 1.25rem;
+  margin-bottom: 0.25rem;
+}
+
+.devis-modal-header p {
+  font-size: 0.875rem;
+  color: var(--text-2);
+}
+
+.devis-close-btn {
+  background: none;
+  border: none;
+  color: var(--text-2);
+  font-size: 1.75rem;
+  cursor: pointer;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  transition: all 0.2s;
+}
+
+.devis-close-btn:hover {
+  background: var(--b0);
+  color: var(--text);
+}
+
+.devis-modal-body {
+  padding: 1.5rem;
+}
+
+#pdfPreview {
+  background: #fff;
+  color: #000;
+  padding: 2rem;
+  border-radius: 8px;
+  font-family: 'Inter', Arial, sans-serif;
+  font-size: 12px;
+  line-height: 1.6;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+}
+
+.signature-section {
+  margin-top: 1.5rem;
+  padding: 1.5rem;
+  background: var(--bg);
+  border-radius: var(--r-sm);
+  border: 1px solid var(--b0);
+}
+
+.signature-section label {
+  display: block;
+  font-size: 0.875rem;
+  font-weight: 600;
+  margin-bottom: 0.75rem;
+  color: var(--text);
+}
+
+#signatureCanvas {
+  background: #fff;
+  border: 2px dashed var(--b2);
+  border-radius: var(--r-sm);
+  width: 100%;
+  cursor: crosshair;
+  touch-action: none;
+  display: block;
+}
+
+.signature-controls {
+  display: flex;
+  gap: 0.75rem;
+  margin-top: 0.75rem;
+  align-items: center;
+}
+
+.signature-hint {
+  font-size: 0.75rem;
+  color: var(--text-3);
+}
+
+.devis-checkbox {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  margin-top: 1.5rem;
+  cursor: pointer;
+}
+
+.devis-checkbox input {
+  width: 20px;
+  height: 20px;
+  accent-color: var(--accent);
+  margin-top: 2px;
+  flex-shrink: 0;
+}
+
+.devis-checkbox span {
+  font-size: 0.875rem;
+  color: var(--text-2);
+  line-height: 1.5;
+}
+
+.devis-modal-footer {
+  padding: 1.5rem;
+  border-top: 1px solid var(--b0);
+  display: flex;
+  gap: 1rem;
+  justify-content: flex-end;
+  flex-wrap: wrap;
+  position: sticky;
+  bottom: 0;
+  background: var(--card);
+  z-index: 10;
+}
+
+.btn-modal-secondary {
+  background: none;
+  border: 1px solid var(--b1);
+  color: var(--text);
+  padding: 0.875rem 1.5rem;
+  border-radius: var(--r-sm);
+  font-size: 0.9375rem;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.btn-modal-secondary:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.btn-modal-download {
+  background: var(--card-2);
+  border: 1px solid var(--b1);
+  color: var(--text);
+  padding: 0.875rem 1.5rem;
+  border-radius: var(--r-sm);
+  font-size: 0.9375rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: all 0.2s;
+}
+
+.btn-modal-download:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.btn-modal-primary {
+  background: var(--accent);
+  color: var(--bg);
+  border: none;
+  padding: 0.875rem 1.5rem;
+  border-radius: var(--r-sm);
+  font-size: 0.9375rem;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: all 0.2s;
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+.btn-modal-primary.active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.btn-modal-primary:hover {
+  filter: brightness(1.1);
+  transform: translateY(-2px);
+  box-shadow: 0 10px 30px -10px var(--accent-glow);
+}
+
+@media(max-width: 640px) {
+  .devis-modal-footer {
+    flex-direction: column;
+  }
+  
+  .devis-modal-footer button {
+    width: 100%;
+    justify-content: center;
+  }
+  
+  #pdfPreview {
+    padding: 1rem;
+    font-size: 11px;
+  }
+  
+  #signatureCanvas {
+    height: 100px;
+  }
+}
 </style>
+
 <base target="_blank">
 <base target="_blank">
 <base target="_blank">
@@ -1157,847 +1899,1233 @@
 </head>
 <body>
 
-    <div class="cloud cloud1"></div>
-    <div class="cloud cloud2"></div>
-    <div class="cloud cloud3"></div>
+<!-- NAV -->
 
-    <nav>
-        <div class="nav-container">
-            <a href="/" class="logo">
-                <i class="fas fa-cloud"></i>
-                Chaymassama
-            </a>
-            <ul class="nav-links">
-                <li><a href="#portfolio">Portfolio</a></li>
-                <li><a href="#prestations">Prestations</a></li>
-                <li><a href="#tarifs">Tarifs</a></li>
-                <li><a href="#commander">Commander</a></li>
-                <li><a href="#contact">Contact</a></li>
-            </ul>
-        </div>
-    </nav>
+<nav id="nav">
+  <a href="#hero" class="logo">SDO<span>Web</span></a>
+  <div class="burger" id="burger" aria-label="Menu" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </div>
+</nav>
 
-    <section class="hero">
-        <div class="hero-content">
-            <h1>Chaymassama</h1>
-            <p class="hero-subtitle">Photographie & Vidéographie Artistique</p>
-            
-            <div class="hero-services">
-                <div class="service-tag">
-                    <i class="fas fa-ring ring-icon"></i> Mariages
-                </div>
-                <div class="service-tag">
-                    <i class="fas fa-running"></i> Sport
-                </div>
-                <div class="service-tag">
-                    <i class="fas fa-glass-cheers"></i> Fêtes & Soirées
-                </div>
-                <div class="service-tag">
-                    <i class="fas fa-video"></i> Montage Intégré
-                </div>
-            </div>
+<div class="overlay" id="overlay"></div>
+<div class="drawer" id="drawer">
+  <a href="#services" class="dl">Services</a>
+  <a href="#portfolio" class="dl">Réalisations</a>
+  <a href="#pricing" class="dl">Tarifs</a>
+  <a href="#faq" class="dl">FAQ</a>
+  <a href="#contact" class="dl">Contact & Devis</a>
+</div>
 
-            <p style="font-size: 1.2rem; color: var(--text-dark); max-width: 600px; margin: 2rem auto; line-height: 1.6;">
-                Capturez vos moments précieux avec une touche de rêve. <br>
-                Photos et vidéos professionnelles avec montage inclus.
-            </p>
+<!-- HERO -->
 
-            <a href="#portfolio" class="cta-button">Voir mon Portfolio</a>
-        </div>
-    </section>
+<section class="hero" id="hero">
+  <div class="hero-bg" aria-hidden="true"></div>
+  <div class="hero-in">
+    <div class="pill">Développeur web freelance — Belgique</div>
+    <h1>Sites web pros,<br><em>livré en 48h.</em></h1>
+    <p class="hero-desc">Design soigné, SEO inclus, prix clairs. Belgique.</p>
 
-    <!-- PORTFOLIO -->
-    <section id="portfolio" class="portfolio-section">
-        <h2 class="section-title">Portfolio</h2>
-        
-        <p class="portfolio-subtitle">
-            <i class="fas fa-images" style="margin-right: 8px;"></i>
-            Un aperçu de mon univers — bien plus de créations disponibles sur demande
-        </p>
-
-        <div class="portfolio-tabs">
-            <button class="portfolio-tab active" onclick="showCategory('mariage', event)">
-                <i class="fas fa-ring"></i> Mariage
-            </button>
-            <button class="portfolio-tab" onclick="showCategory('sport', event)">
-                <i class="fas fa-running"></i> Sport
-            </button>
-            <button class="portfolio-tab" onclick="showCategory('evenements', event)">
-                <i class="fas fa-glass-cheers"></i> Événements
-            </button>
-        </div>
-
-        <!-- MARIAGE -->
-        <div id="mariage" class="portfolio-content active">
-            <div class="portfolio-grid">
-                <div class="portfolio-item" onclick="openLightbox(0)">
-                    <img src="mariage1.webp" alt="Photographe mariage Belgique couple">
-                    <div class="portfolio-overlay">
-                        <i class="fas fa-expand"></i>
-                        <h3>Mariage</h3>
-                        <p>Couple</p>
-                    </div>
-                </div>
-                <div class="portfolio-item" onclick="openLightbox(1)">
-                    <img src="mariage2.webp" alt="Photographe mariage Belgique discours">
-                    <div class="portfolio-overlay">
-                        <i class="fas fa-expand"></i>
-                        <h3>Mariage</h3>
-                        <p>discours</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- SPORT -->
-        <div id="sport" class="portfolio-content">
-            <div class="portfolio-grid">
-                <div class="portfolio-item" onclick="openLightbox(2)">
-                    <img src="sport1.webp" alt="Photographe sport Belgique combat de kickboxing">
-                    <div class="portfolio-overlay">
-                        <i class="fas fa-expand"></i>
-                        <h3>combat de kickboxing</h3>
-                        <p>moment fort du combat</p>
-                    </div>
-                </div>
-                <div class="portfolio-item" onclick="openLightbox(3)">
-                    <img src="sport2.webp" alt="Photographe sport Belgique combat boxe anfglaise">
-                    <div class="portfolio-overlay">
-                        <i class="fas fa-expand"></i>
-                        <h3>Combat de Boxe anglaise</h3>
-                        <p>moment fort du combat</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- EVENEMENTS -->
-        <div id="evenements" class="portfolio-content">
-            <div class="portfolio-grid">
-                <div class="portfolio-item" onclick="openLightbox(4)">
-                    <img src="event1.webp" alt="Photographe événement Belgique food truck">
-                    <div class="portfolio-overlay">
-                        <i class="fas fa-expand"></i>
-                        <h3>Food Truck</h3>
-                        <p>Événement culinaire</p>
-                    </div>
-                </div>
-                <div class="portfolio-item" onclick="openLightbox(5)">
-                    <img src="event2.webp" alt="Photographe événement Belgique portrait shooting portrait">
-                    <div class="portfolio-overlay">
-                        <i class="fas fa-expand"></i>
-                        <h3>shooting</h3>
-                        <p>portrait</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- PRESTATIONS -->
-    <section id="prestations">
-        <h2 class="section-title">Nos Prestations</h2>
-        
-        <div class="services-grid">
-            <div class="service-card">
-                <div class="service-icon">
-                    <i class="fas fa-camera"></i>
-                </div>
-                <h3>Photographie</h3>
-                <p>Des clichés uniques et naturels pour immortaliser vos événements les plus précieux.</p>
-                <ul class="features-list">
-                    <li>Photos HD retouchées</li>
-                    <li>Galerie privée en ligne</li>
-                    <li>Livraison rapide 48h-7 jours</li>
-                    <li>Droits d'utilisation inclus</li>
-                    <li>À partir de 4€/photo en pack</li>
-                </ul>
-            </div>
-
-            <div class="service-card">
-                <div class="service-icon">
-                    <i class="fas fa-video"></i>
-                </div>
-                <h3>Vidéographie</h3>
-                <p>Des films dynamiques et émotionnels avec montage professionnel intégré.</p>
-                <ul class="features-list">
-                    <li>Captation multi-caméras</li>
-                    <li>Montage colorimétrie inclus</li>
-                    <li>Musique libre de droits</li>
-                    <li>Format 4K disponible</li>
-                    <li>Tarifs basés sur 50€/heure de travail</li>
-                </ul>
-            </div>
-
-            <div class="service-card">
-                <div class="service-icon">
-                    <i class="fas fa-magic"></i>
-                </div>
-                <h3>Pack Complet</h3>
-                <p>Combinez photo et vidéo pour une couverture totale de votre événement.</p>
-                <ul class="features-list">
-                    <li>Photographe + Vidéaste</li>
-                    <li>Coordination parfaite</li>
-                    <li>Teaser réseaux sociaux offert</li>
-                    <li>Album photo + Film long</li>
-                    <li>Remise spéciale pack</li>
-                </ul>
-            </div>
-        </div>
-    </section>
-
-    <!-- TARIFS -->
-    <section id="tarifs" class="pricing-section">
-        <h2 class="section-title">Nos Tarifs</h2>
-        <p style="text-align: center; color: var(--text-dark); margin-bottom: 2rem; font-size: 1.1rem;">
-            Des prix transparents basés sur le temps de déplacement et de shooting
-        </p>
-
-        <div class="pricing-grid">
-            <div class="pricing-card">
-                <div class="pricing-header">
-                    <h3 class="pricing-title">Formule Photo</h3>
-                    <div class="price">200€<span class="price-unit">à partir de</span></div>
-                </div>
-                <ul class="pricing-features">
-                    <li style="display: flex; justify-content: space-between; align-items: center;">
-                        <span style="flex: 1; text-align: left;">Shooting</span>
-                        <span style="flex: 1; text-align: center; font-weight: 600;">2h</span>
-                        <span class="price-tag" style="flex: 1; text-align: right;">200€</span>
-                    </li>
-                    <li style="display: flex; justify-content: space-between; align-items: center;">
-                        <span style="flex: 1; text-align: left;">Shooting</span>
-                        <span style="flex: 1; text-align: center; font-weight: 600;">4h</span>
-                        <span class="price-tag" style="flex: 1; text-align: right;">400€</span>
-                    </li>
-                    <li style="display: flex; justify-content: space-between; align-items: center;">
-                        <span style="flex: 1; text-align: left;">Shooting</span>
-                        <span style="flex: 1; text-align: center; font-weight: 600;">6h</span>
-                        <span class="price-tag" style="flex: 1; text-align: right;">600€</span>
-                    </li>
-                    <li style="display: flex; justify-content: space-between; align-items: center;">
-                        <span style="flex: 1; text-align: left;">Shooting</span>
-                        <span style="flex: 1; text-align: center; font-weight: 600;">8h</span>
-                        <span class="price-tag" style="flex: 1; text-align: right;">800€</span>
-                    </li>
-                    <li style="display: flex; justify-content: space-between; align-items: center;">
-                        <span style="flex: 1; text-align: left;">Shooting</span>
-                        <span style="flex: 1; text-align: center; font-weight: 600;">10h</span>
-                        <span class="price-tag" style="flex: 1; text-align: right;">1000€</span>
-                    </li>
-                    <li style="display: flex; justify-content: space-between; align-items: center;">
-                        <span style="flex: 1; text-align: left;">Shooting</span>
-                        <span style="flex: 1; text-align: center; font-weight: 600;">12h</span>
-                        <span class="price-tag" style="flex: 1; text-align: right;">1200€</span>
-                    </li>
-                    <li>
-                        <span>Déplacement (30 min de Liège)</span>
-                        <span class="price-tag">+15€</span>
-                    </li>
-                    <li>
-                        <span>Déplacement (1h de Liège)</span>
-                        <span class="price-tag">+30€</span>
-                    </li>
-                </ul>
-                <p style="font-size: 0.9rem; color: var(--accent-blue); margin-top: 1rem;">
-                    <i class="fas fa-info-circle"></i> Portrait, event, sport... Retouches incluses, livraison HD
-                </p>
-            </div>
-
-            <div class="pricing-card featured">
-                <div class="pricing-header">
-                    <h3 class="pricing-title">Formule Vidéo</h3>
-                    <div class="price">300€<span class="price-unit">à partir de</span></div>
-                </div>
-                
-                <div class="video-tier simple">
-                    <strong>2h Tournage + Montage</strong><br>
-                    <span style="color: #27ae60; font-weight: 600;">300€ - 500€</span><br>
-                    <small>• Reel Instagram basique: 300-350€<br>
-                    • Color grading & storytelling: 400-500€</small>
-                </div>
-
-                <div class="video-tier complex">
-                    <strong>4h Tournage + Montage</strong><br>
-                    <span style="color: #e67e22; font-weight: 600;">500€ - 900€</span><br>
-                    <small>• 6-10h de montage • 1 à 3 vidéos finales<br>
-                    • 500-650€ particulier • 700-900€ entreprise</small>
-                </div>
-
-                <div class="video-tier premium">
-                    <strong>8h Tournage + Montage</strong><br>
-                    <span style="color: var(--deep-blue); font-weight: 600;">900€ - 1800€</span><br>
-                    <small>• Journée complète • Gros volume de rush<br>
-                    • 1 vidéo principale + reels éventuels</small>
-                </div>
-
-                <ul class="pricing-features" style="margin-top: 1rem;">
-                    <li>
-                        <span>Montage professionnel</span>
-                        <span class="photo-pack">Inclus</span>
-                    </li>
-                    <li>
-                        <span>Étalonnage colorimétrique</span>
-                        <span class="photo-pack">Inclus</span>
-                    </li>
-                    <li>
-                        <span>Sound design</span>
-                        <span class="photo-pack">Inclus</span>
-                    </li>
-                    <li>
-                        <span>Déplacement (30 min de Liège)</span>
-                        <span class="price-tag">+15€</span>
-                    </li>
-                    <li>
-                        <span>Déplacement (1h de Liège)</span>
-                        <span class="price-tag">+30€</span>
-                    </li>
-                </ul>
-            </div>
-
-            <div class="pricing-card">
-                <div class="pricing-header" style="margin-bottom: 1.5rem;">
-                    <h3 class="pricing-title" style="margin-bottom: 0.8rem;">Mariages & Events</h3>
-                    <div class="price">Sur devis</div>
-                </div>
-                <ul class="pricing-features">
-                    <li>
-                        <span>Photo - Cérémonie (2-3h)</span>
-                        <span class="price-tag">250€</span>
-                    </li>
-                    <li>
-                        <span>Photo - Demi-journée (4-5h)</span>
-                        <span class="price-tag">400€</span>
-                    </li>
-                    <li>
-                        <span>Photo - 6h</span>
-                        <span class="price-tag">600€</span>
-                    </li>
-                    <li>
-                        <span>Photo - 8h</span>
-                        <span class="price-tag">750€</span>
-                    </li>
-                    <li>
-                        <span>Photo - 10h</span>
-                        <span class="price-tag">900€</span>
-                    </li>
-                    <li>
-                        <span>Photo - Journée complète (12h)</span>
-                        <span class="price-tag">1000€</span>
-                    </li>
-                    <li>
-                        <span>Vidéo Mariage</span>
-                        <span class="price-tag">Sur devis</span>
-                    </li>
-                    <li>
-                        <span>Photo + Vidéo</span>
-                        <span class="price-tag">Sur devis</span>
-                    </li>
-                    <li>
-                        <span>Livre photo</span>
-                        <span class="price-tag">+150€</span>
-                    </li>
-                    <li>
-                        <span>Drone aérien</span>
-                        <span class="price-tag">+200€</span>
-                    </li>
-                    <li>
-                        <span>2<sup>e</sup> photographe</span>
-                        <span class="price-tag highlight-price">600€</span>
-                    </li>
-                </ul>
-                <p style="font-size: 0.9rem; color: var(--accent-blue); margin-top: 1rem;">
-                    <i class="fas fa-gift"></i> Forfait sur mesure selon vos besoins
-                </p>
-            </div>
-        </div>
-    </section>
-
-    <!-- COMMANDER -->
-    <section id="commander" class="order-section">
-        <h2 class="section-title" style="margin-bottom: 1rem;">Commander votre Shooting</h2>
-        <p style="text-align: center; color: var(--text-dark); margin-bottom: 2rem;">
-            Remplissez le formulaire ci-dessous pour recevoir votre devis personnalisé sous 24 h.
-        </p>
-
-        <form id="bookingForm" action="https://formspree.io/f/xjgeqqqq" method="POST">
-            <div class="form-grid">
-                <div class="form-group">
-                    <label for="name">Nom & Prénom *</label>
-                    <input type="text" id="name" name="name" required placeholder="Votre nom">
-                </div>
-
-                <div class="form-group">
-                    <label for="email">Email *</label>
-                    <input type="email" id="email" name="email" required placeholder="votre@email.com">
-                </div>
-
-                <div class="form-group">
-                    <label for="phone">Téléphone *</label>
-                    <input type="tel" id="phone" name="phone" required placeholder="0486 77 91 96">
-                </div>
-
-                <div class="form-group">
-                    <label for="date">Date de l'événement *</label>
-                    <input type="date" id="date" name="date" required>
-                </div>
-
-                <div class="form-group full-width">
-                    <label>Type de prestation *</label>
-                    <div class="radio-group">
-                        <label class="radio-label">
-                            <input type="radio" name="type" value="photo" checked>
-                            <span>Photo uniquement</span>
-                        </label>
-                        <label class="radio-label">
-                            <input type="radio" name="type" value="video">
-                            <span>Vidéo uniquement</span>
-                        </label>
-                        <label class="radio-label">
-                            <input type="radio" name="type" value="both">
-                            <span>Photo + Vidéo</span>
-                        </label>
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <label for="duration">Durée du shooting *</label>
-                    <select id="duration" name="duration" required onchange="calculateEstimate()">
-                        <option value="2">2 heures</option>
-                        <option value="4" selected>4 heures</option>
-                        <option value="6">6 heures</option>
-                        <option value="8">8 heures</option>
-                        <option value="10">10 heures</option>
-                        <option value="12">12 heures (journée complète)</option>
-                    </select>
-                </div>
-
-                <div class="form-group" id="eventTypeGroup" style="display: block;">
-                    <label for="eventType">Type d'événement *</label>
-                    <select id="eventType" name="eventType" onchange="calculateEstimate()">
-                        <option value="mariage" selected>Mariage</option>
-                        <option value="normal">Standard (portrait, event, sport...)</option>
-                    </select>
-                </div>
-
-                
-
-                <div class="form-group">
-                    <label for="travel">Temps de déplacement *</label>
-                    <select id="travel" name="travel" required onchange="calculateEstimate()">
-                        <option value="0">Liège centre (inclus)</option>
-                        <option value="15">30 min de Liège (+15€)</option>
-                        <option value="30">1h de Liège (+30€)</option>
-                        <option value="60">1h30 de Liège (+45€)</option>
-                        <option value="90">2h de Liège (+60€)</option>
-                        <option value="120">2h30+ de Liège (+75€)</option>
-                    </select>
-                </div>
-
-                <div class="form-group full-width">
-                    <label for="complexity">Niveau de montage (Vidéo uniquement)</label>
-                    <select id="complexity" name="complexity" onchange="calculateEstimate()">
-                        <option value="simple">Simple (Reel Instagram basique)</option>
-                        <option value="standard" selected>Standard (Color grading, transitions propres)</option>
-                        <option value="complexe">Complexe (Storytelling avancé, multi-caméras)</option>
-                    </select>
-                </div>
-
-                <div class="form-group full-width">
-                    <label for="details">Détails de votre projet</label>
-                    <textarea id="details" name="details" rows="4" placeholder="Décrivez votre événement, le lieu, vos attentes particulières..."></textarea>
-                </div>
-
-                <input type="hidden" name="_replyto" value="chaymassama@gmail.com">
-                <input type="hidden" name="_subject" value="Nouvelle demande de devis - Chaymassama">
-
-                <div class="form-group full-width">
-                    <div class="estimate-box">
-                        <p id="estimateLabel">Estimation du devis :</p>
-                        <div class="estimate-price" id="estimatePrice">150€ - 300€</div>
-                        <p id="estimateNote" style="font-size: 0.9rem; color: var(--accent-blue); margin-top: 0.5rem;">
-                            * Prix indicatif, devis final sous 24 h
-                        </p>
-                    </div>
-                </div>
-
-                <div class="form-group full-width">
-                    <button type="submit" class="submit-btn" id="submitBtn">
-                        <i class="fas fa-paper-plane"></i> Envoyer ma demande
-                    </button>
-                </div>
-
-                <div class="form-group full-width">
-                    <div class="success-message" id="successMessage">
-                        <i class="fas fa-check-circle"></i> <strong>Merci !</strong> Votre demande a bien été envoyée à chaymassama@gmail.com. Je vous contacterai rapidement au 0486 77 91 96.
-                    </div>
-                </div>
-            </div>
-        </form>
-    </section>
-
-    <!-- PROMO -->
-    <div class="promo-banner">
-        <div class="promo-content">
-            <span><i class="fas fa-gift" style="color: #FFD700;"></i> Vous appréciez mon travail ?</span>
-            <a href="https://freecash.com/r/chaymassama" target="_blank" class="promo-link" rel="noopener noreferrer">
-                <i class="fas fa-coins"></i> Me soutenir via Freecash
-            </a>
-        </div>
-        <p style="font-size: 0.8rem; color: var(--accent-blue); margin-top: 0.8rem; font-style: italic;">
-            Gagnez des récompenses en testant des apps et soutenez mon activité créative gratuitement
-        </p>
+    <!-- Bouton principal avec dropdown -->
+    <div class="hero-btns" style="position:relative; display:inline-block;">
+      <button class="btn-p" id="heroMainBtn" style="position:relative; z-index:10;">
+        🚀 Démarrer →
+      </button>
+      <div id="heroDropdown" style="display:none; position:absolute; top:100%; left:0; right:0; margin-top:0.5rem; background:var(--card); border:1px solid var(--b1); border-radius:var(--r-sm); padding:0.5rem; z-index:100; box-shadow:0 10px 40px rgba(0,0,0,0.3);">
+        <a href="#contact" class="dropdown-item" style="display:flex; align-items:center; gap:0.75rem; padding:0.75rem 1rem; border-radius:var(--r-sm); color:var(--text); font-size:0.9375rem; font-weight:500; transition:all 0.2s; white-space:nowrap;">
+          <span style="font-size:1.25rem;">📝</span> Devis en ligne
+        </a>
+        <a href="#portfolio" class="dropdown-item" style="display:flex; align-items:center; gap:0.75rem; padding:0.75rem 1rem; border-radius:var(--r-sm); color:var(--text); font-size:0.9375rem; font-weight:500; transition:all 0.2s; white-space:nowrap;">
+          <span style="font-size:1.25rem;">👁</span> Voir réalisations
+        </a>
+        <a href="https://www.instagram.com/sdo_web" target="_blank" rel="noopener noreferrer" class="dropdown-item" style="display:flex; align-items:center; gap:0.75rem; padding:0.75rem 1rem; border-radius:var(--r-sm); color:var(--text); font-size:0.9375rem; font-weight:500; transition:all 0.2s; white-space:nowrap;">
+          <span style="font-size:1.25rem;">📸</span> Instagram @sdo_web
+        </a>
+      </div>
     </div>
 
-    <!-- CONTACT -->
-    <section id="contact" class="contact-section">
-        <h2 class="section-title">Contact & Partenariats</h2>
-        
-        <p style="font-size: 1.2rem; max-width: 600px; margin: 0 auto 2rem; line-height: 1.6;">
-            Vous êtes une entreprise, un influenceur ou souhaitez collaborer ? 
-            Je suis ouvert à tous les partenariats créatifs.
-        </p>
+    <div class="hero-stats" style="margin-top:2rem;">
+      <div><div class="stn" data-count="6">0</div><div class="stt">Sites livrés</div></div>
+      <div><div class="stn">48<span>h</span></div><div class="stt">Délai</div></div>
+      <div><div class="stn">300<span>€</span></div><div class="stt">À partir de</div></div>
+    </div>
+  </div>
+</section>
 
-        <div class="social-links">
-            <a href="mailto:Chaymassama@gmail.com" class="social-btn" style="background: #EA4335; color: white;">
-                <i class="fas fa-envelope"></i>
-                Chaymassama@gmail.com
-            </a>
-            
-            <a href="https://instagram.com/Chaymassama" target="_blank" class="social-btn instagram">
-                <i class="fab fa-instagram"></i>
-                @Chaymassama
-            </a>
-            
-            <a href="https://youtube.com/@Chaymassama" target="_blank" class="social-btn youtube">
-                <i class="fab fa-youtube"></i>
-                Chaymassama
-            </a>
-        </div>
 
-        <div class="contact-info">
-            <p style="margin-bottom: 0.5rem;">
-                <i class="fas fa-handshake" style="color: var(--deep-blue);"></i> 
-                Pour toute collaboration ou partenariat :
-            </p>
-            <a href="tel:+32486779196" class="phone-number" title="Cliquez pour appeler">
-                <i class="fas fa-phone-alt"></i> 0486 77 91 96
-            </a>
-            <p style="font-size: 0.9rem; color: var(--accent-blue); margin-top: 0.5rem;">
-                <i class="fas fa-mobile-alt"></i> Cliquez pour appeler directement
-            </p>
-        </div>
 
-        <div style="margin-top: 3rem; padding: 2rem; background: white; border-radius: 20px; display: inline-block; box-shadow: 0 5px 20px rgba(0,0,0,0.1);">
-            <h3 style="color: var(--deep-blue); margin-bottom: 1rem;">📍 Zone d'intervention</h3>
-            <p>Basé à Liège - Disponible dans toute la Belgique et à l'international</p>
-            <div class="location-badge">
-                <i class="fas fa-map-marker-alt"></i> Basé à Liège
-            </div>
-        </div>
-    </section>
+<!-- SERVICES -->
 
-    <!-- FOOTER -->
-    <footer>
-        <div class="footer-box">
-            <div class="footer-brand">
-                <i class="fas fa-cloud"></i> Chaymassama 💛
-            </div>
-            <p>Photographie & Vidéographie avec passion depuis 2020</p>
-            <div class="footer-location">
-                <i class="fas fa-map-marker-alt"></i> Basé à Liège - Déplacements possibles partout en Belgique et Europe
-            </div>
-            <a href="https://freecash.com/r/chaymassama" target="_blank" class="freecash-btn">
-                💛 Soutenir via Freecash
-            </a>
-            <p style="margin-top: 0.5rem; font-size: 0.9rem;">
-                © 2024 Chaymassama - Tous droits réservés | 
-                <a href="#">Mentions légales</a>
-            </p>
-        </div>
-    </footer>
+<section id="services">
+  <div class="wrap">
+    <div class="sh">
+      <h2>Services</h2>
+    </div>
+    <div class="svc-grid">
+      <div class="svc sr">
+        <span class="svc-ico">🌐</span>
+        <h3>Site vitrine</h3>
+        <span class="svc-price">600 €</span>
+      </div>
+      <div class="svc sr">
+        <span class="svc-ico">🎯</span>
+        <h3>Landing page</h3>
+        <span class="svc-price">300 €</span>
+      </div>
+      <div class="svc sr">
+        <span class="svc-ico">🛒</span>
+        <h3>E-commerce</h3>
+        <span class="svc-price">1 200 €</span>
+      </div>
+      <div class="svc sr">
+        <span class="svc-ico">🔄</span>
+        <h3>Refonte</h3>
+        <span class="svc-price">500 €</span>
+      </div>
+      <div class="svc sr">
+        <span class="svc-ico">🔍</span>
+        <h3>SEO</h3>
+        <span class="svc-price">200 €</span>
+      </div>
+      <div class="svc sr">
+        <span class="svc-ico">⚙️</span>
+        <h3>Automatisation</h3>
+        <span class="svc-price">Sur devis</span>
+      </div>
+    </div>
+  </div>
+</section>
 
-    <!-- LIGHTBOX -->
-    <div id="lightbox" class="lightbox" onclick="closeLightbox(event)">
-        <div class="lightbox-content">
-            <button class="lightbox-close" onclick="closeLightbox(event)">&times;</button>
-            <img id="lightbox-img" class="lightbox-img" src="" alt="">
-            <div id="lightbox-caption" class="lightbox-caption"></div>
-            <div id="lightbox-counter" class="lightbox-counter"></div>
-            <button class="lightbox-nav lightbox-prev" onclick="changeImage(-1)">&#10094;</button>
-            <button class="lightbox-nav lightbox-next" onclick="changeImage(1)">&#10095;</button>
+<!-- PORTFOLIO -->
+
+<section id="portfolio">
+  <div class="wrap">
+    <div class="sh">
+      <div>
+        <div class="tag">Réalisations</div>
+        <h2>Projets récents</h2>
+      </div>
+    </div>
+    <div class="port-grid">
+      <a href="https://chaymassama.be" target="_blank" rel="noopener noreferrer" class="port-card sr">
+        <div class="port-thumb">
+          <img src="chaymassama2026-03-17 153041.PNG" alt="Chaymassama">
         </div>
+        <div class="port-body">
+          <span class="port-tag">Site vitrine</span>
+          <h3>Chaymassama</h3>
+          <p>Photographe & Vidéaste — Design aérien avec animations.</p>
+          <span style="display: block; color: var(--accent); font-size: 0.75rem; margin-top: 0.25rem;">chaymassama.be</span>
+          <span class="port-link">Voir le site →</span>
+        </div>
+      </a>
+      
+      <a href="https://creafida.be" target="_blank" rel="noopener noreferrer" class="port-card sr">
+        <div class="port-thumb">
+          <img src="creafida 2026-03-17 153204.PNG" alt="Creafida">
+        </div>
+        <div class="port-body">
+          <span class="port-tag">Site vitrine</span>
+          <h3>Creafida</h3>
+          <p>Atelier de couture — 20+ ans d'expérience.</p>
+          <span style="display: block; color: var(--accent); font-size: 0.75rem; margin-top: 0.25rem;">creafida.be</span>
+          <span class="port-link">Voir le site →</span>
+        </div>
+      </a>
+      <!-- TESSA & D EVENTS -->
+      <a href="https://siltdo9-wq.github.io/Tessa-D-Events-/" target="_blank" rel="noopener noreferrer" class="port-card sr">
+        <div class="port-thumb">
+          <img src="Tessaetdevents.jpg" alt="tessaetdevents">
+        </div>
+        <div class="port-body">
+          <span class="port-tag">Site vitrine</span>
+          <h3>Tessa & D Events</h3>
+          <p>Location de mobilier & décoration de mariage en Belgique — Design élégant et romantique.</p>
+          <span style="display: block; color: #fbbf24; font-size: 0.75rem; margin-top: 0.25rem; font-weight: 500;">🚧 Site en construction — visitable ↗</span>
+          <span class="port-link">Voir le site ↗</span>
+        </div>
+      </a>
+
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+
+<section id="pricing">
+  <div class="wrap">
+    <div class="sh">
+      <div>
+        <div class="tag">Tarifs</div>
+        <h2>Tarifs transparents</h2>
+      </div>
+      <p class="sub">Des prix clairs, sans surprises. Configurez votre devis personnalisé dans la section contact.</p>
     </div>
 
-    <!-- SCRIPT JS -->
-    <script>
-        // Données images portfolio
-        const portfolioImages = [
-            { src: 'mariage1.webp', caption: 'Mariage - Couple', category: 'Mariage' },
-            { src: 'mariage2.webp', caption: 'Mariage - discours', category: 'Mariage' },
-            { src: 'sport1.webp', caption: 'combat de kickboxing', category: 'Sport' },
-            { src: 'sport2.webp', caption: 'Combat de Boxe', category: 'Sport' },
-            { src: 'event1.webp', caption: 'Food Truck', category: 'Événements' },
-            { src: 'event2.webp', caption: 'portrait', category: 'Événements' }
-        ];
+    <div class="price-grid">
+      <div class="pc sr">
+        <h3>Landing Page</h3>
+        <div class="pval">300 € – 500 €</div>
+        <div class="pper">Page unique · 48h</div>
+        <p>Idéale pour lancer un produit ou capturer des leads.</p>
+        <div class="pfs">
+          <span class="pf">Design responsive</span>
+          <span class="pf">Formulaire de contact</span>
+          <span class="pf">SEO de base</span>
+        </div>
+        <a href="#contact" class="btn-o">Configurer mon devis →</a>
+      </div>
+      
+      <div class="pc star sr">
+        <div class="pbadge">Populaire</div>
+        <h3>Site Vitrine</h3>
+        <div class="pval">900 € – 1 200 €</div>
+        <div class="pper">3-5 pages · 5-7 jours</div>
+        <p>Solution complète pour votre présence en ligne.</p>
+        <div class="pfs">
+          <span class="pf">Design premium sur mesure</span>
+          <span class="pf">SEO avancé</span>
+          <span class="pf">Support 30 jours</span>
+        </div>
+        <a href="#contact" class="btn-p">Configurer mon devis →</a>
+      </div>
+      
+      <div class="pc sr">
+        <h3>E-commerce</h3>
+        <div class="pval">1 200 € – 2&nbsp;000 €</div>
+        <div class="pper">Boutique complète · 2 sem.</div>
+        <p>Boutique prête à vendre avec paiement sécurisé.</p>
+        <div class="pfs">
+          <span class="pf">Catalogue illimité</span>
+          <span class="pf">Stripe & PayPal</span>
+          <span class="pf">Gestion des stocks</span>
+        </div>
+        <a href="#contact" class="btn-o">Configurer mon devis →</a>
+      </div>
+    </div>
 
-        let currentImageIndex = 0;
+    <div class="maint sr">
+      <div>
+        <h4>Maintenance mensuelle</h4>
+        <p>Hébergement, sauvegardes, mises à jour de sécurité et support technique.</p>
+      </div>
+      <div style="text-align: center;">
+        <div class="maint-price">80 €</div>
+        <div class="maint-per">/mois</div>
+      </div>
+    </div>
+  </div>
+</section>
 
-        // Onglets portfolio
-        function showCategory(category, event) {
-            document.querySelectorAll('.portfolio-tab').forEach(tab => tab.classList.remove('active'));
-            event.currentTarget.classList.add('active');
-            document.querySelectorAll('.portfolio-content').forEach(content => content.classList.remove('active'));
-            document.getElementById(category).classList.add('active');
+<!-- FAQ -->
+
+<section id="faq">
+  <div class="wrap">
+    <div class="faq-layout">
+      <div>
+        <div class="tag">FAQ</div>
+        <h2>Questions</h2>
+        <a href="#contact" class="btn-p" style="font-size:0.875rem;padding:0.75rem 1.5rem; margin-top:1rem;">Contact</a>
+      </div>
+      <div class="faq-list">
+        <div class="faq-item open">
+          <div class="faq-q" tabindex="0">
+            Combien coûte un site ?
+            <span class="faq-ico">+</span>
+          </div>
+          <div class="faq-a">À partir de 300 €. Devis personnalisé sur demande.</div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q" tabindex="0">
+            Quel est le délai ?
+            <span class="faq-ico">+</span>
+          </div>
+          <div class="faq-a">48h à 2 semaines selon le projet.</div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q" tabindex="0">
+            Le SEO est-il inclus ?
+            <span class="faq-ico">+</span>
+          </div>
+          <div class="faq-a">Oui, dans tous les sites.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+
+<section id="contact">
+  <div class="wrap">
+    <div class="contact-layout">
+      <div class="contact-info">
+        <div style="margin-bottom:0.5rem">
+          <div class="tag">Contact</div>
+          <h2>Parlez-moi de votre projet</h2>
+          <p class="sub">Configurez votre devis personnalisé et payez votre acompte en ligne.</p>
+        </div>
+        
+        <a href="#" class="cc" onclick="copyEmail('contact.sdo.web12@gmail.com', 'général'); return false;">
+          <div class="cc-ico">📧</div>
+          <div>
+            <div class="cc-lbl">Email général</div>
+            <div class="cc-val">contact.sdo.web12@gmail.com</div>
+          </div>
+        </a>
+        
+        <a href="#" class="cc" onclick="copyEmail('devis.sdo.web@gmail.com', 'devis'); return false;">
+          <div class="cc-ico">📋</div>
+          <div>
+            <div class="cc-lbl">Devis</div>
+            <div class="cc-val">devis.sdo.web@gmail.com</div>
+          </div>
+        </a>
+        
+        <a href="https://www.instagram.com/sdo_web" target="_blank" class="cc">
+          <div class="cc-ico" style="background:rgba(228,64,95,0.1);border-color:rgba(228,64,95,0.2)">📱</div>
+          <div>
+            <div class="cc-lbl">Instagram</div>
+            <div class="cc-val" style="color:#E4405F">@sdo_web</div>
+          </div>
+        </a>
+      </div>
+
+      <!-- FORMULAIRE FUSIONNÉ AVEC CALCULATEUR -->
+      <form id="formDevis" class="devis-form sr" onsubmit="return false;">
+        <h3>📝 Configurez votre devis</h3>
+        <p>Remplissez les informations ci-dessous et personnalisez votre projet.</p>
+        
+        <!-- Infos client -->
+        <div class="sf-row">
+          <input type="text" id="clientNom" name="nom" placeholder="Votre nom *" class="sf-input" required>
+          <input type="email" id="clientEmail" name="email" placeholder="Votre email *" class="sf-input" required>
+        </div>
+        
+        <input type="text" id="clientEntreprise" name="entreprise" placeholder="Nom de votre entreprise (optionnel)" class="sf-input" style="margin-bottom: 1.25rem;">
+        
+        <!-- Type de projet -->
+        <div class="form-group">
+          <label for="typeSite">Type de projet *</label>
+          <select id="typeSite" name="typeSite" class="sf-select" required>
+            <option value="landing" data-name="Landing Page" data-base="400" data-acompte="200">Landing Page — 400€ (acompte 200€)</option>
+            <option value="vitrine" data-name="Site Vitrine" data-base="1050" data-acompte="525" selected>Site Vitrine — 1 050€ (acompte 525€)</option>
+            <option value="ecommerce" data-name="E-commerce" data-base="1600" data-acompte="800">E-commerce — 1 600€ (acompte 800€)</option>
+            <option value="refonte" data-name="Refonte" data-base="500" data-acompte="250">Refonte — 500€ (acompte 250€)</option>
+            <option value="seo" data-name="SEO" data-base="200" data-acompte="100">SEO — 200€ (acompte 100€)</option>
+            <option value="maintenance" data-name="Maintenance" data-base="80" data-acompte="40">Maintenance — 80€/mois (acompte 40€)</option>
+          </select>
+        </div>
+
+        <!-- Calculateur -->
+        <div class="calc-section">
+          <div class="calc-title">Personnalisation</div>
+          
+          <!-- Pages -->
+          <div class="form-group" style="margin-bottom: 1rem;">
+            <label>Pages supplémentaires</label>
+            <div class="pages-control">
+              <button type="button" class="pages-btn" onclick="adjustPages(-1)">−</button>
+              <input type="number" id="pages" value="0" min="0" max="20" readonly class="sf-input pages-input">
+              <button type="button" class="pages-btn" onclick="adjustPages(1)">+</button>
+            </div>
+            <div class="pages-hint">+80€ par page supplémentaire (à régler après validation)</div>
+          </div>
+
+          <!-- Options -->
+          <label style="display: block; font-size: 0.875rem; color: var(--text-2); margin-bottom: 0.75rem; font-weight: 500;">Options additionnelles (à régler après validation)</label>
+          <div class="options-grid">
+            <label class="option-item">
+              <input type="checkbox" value="150" data-name="Blog">
+              <span>Blog intégré</span>
+              <span class="option-price">+150€</span>
+            </label>
+            <label class="option-item">
+              <input type="checkbox" value="150" data-name="SEO avancé">
+              <span>SEO avancé</span>
+              <span class="option-price">+150€</span>
+            </label>
+            <label class="option-item">
+              <input type="checkbox" value="80" data-name="Galerie">
+              <span>Galerie images</span>
+              <span class="option-price">+80€</span>
+            </label>
+            <label class="option-item">
+              <input type="checkbox" value="200" data-name="Réservation">
+              <span>Réservation en ligne</span>
+              <span class="option-price">+200€</span>
+            </label>
+            <label class="option-item">
+              <input type="checkbox" value="250" data-name="Paiement en ligne">
+              <span>Paiement en ligne</span>
+              <span class="option-price">+250€</span>
+            </label>
+            <label class="option-item">
+              <input type="checkbox" value="100" data-name="Optimisation vitesse">
+              <span>Optimisation vitesse</span>
+              <span class="option-price">+100€</span>
+            </label>
+          </div>
+        </div>
+
+        <!-- Info options -->
+        <div class="options-info">
+          Les options et pages supplémentaires seront ajoutées au solde final après validation du devis détaillé.
+        </div>
+
+        <!-- Description projet -->
+        <div class="form-group">
+          <label for="description">Description de votre projet</label>
+          <textarea id="description" name="description" placeholder="Décrivez votre projet, vos besoins spécifiques, vos délais..." class="sf-input"></textarea>
+        </div>
+
+        <!-- Total -->
+        <div class="total-box">
+          <div class="total-label">Estimation totale TTC</div>
+          <div id="prixTotal" class="total-amount">1 050<span class="total-currency">€</span></div>
+          
+          <div class="total-acompte">
+            Acompte à payer maintenant :
+            <span id="prixAcompte" class="acompte-amount">525 €</span>
+          </div>
+          
+          <div style="margin-top: 0.75rem; font-size: 0.75rem; color: var(--text-3);">
+            Solde à régler à la livraison : <span id="prixSolde">525 €</span>
+          </div>
+        </div>
+
+        <!-- Bouton Paiement -->
+        <button type="button" id="btnPayerAcompte" class="pay-btn">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <rect x="1" y="4" width="22" height="16" rx="2" ry="2"></rect>
+            <line x1="1" y1="10" x2="23" y2="10"></line>
+          </svg>
+          Payer l'acompte sécurisé
+        </button>
+        
+        <div class="security-note">
+          <span>🔒</span>
+          Paiement sécurisé par Stripe · Devis valable 30 jours
+        </div>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+
+<footer>
+  <div class="footer-content">
+    <div class="footer-brand">
+      <strong class="footer-logo">SDO<span>Web</span></strong>
+    </div>
+
+    <div class="footer-social">
+      <a href="https://www.instagram.com/sdo_web" target="_blank" rel="noopener noreferrer" class="footer-ig-btn">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+          <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+          <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+        </svg>
+        <span class="footer-ig-text">
+          <span class="footer-ig-label">Suivez-moi sur</span>
+          <span class="footer-ig-handle">@sdo_web</span>
+        </span>
+      </a>
+    </div>
+
+    <div class="footer-copy">
+      © 2024 SDO Web
+    </div>
+  </div>
+</footer>
+
+<!-- ═══════════════════════════════════════════════════════════════════════ -->
+<!-- ═══ MODAL DEVIS PDF + SIGNATURE ═══════════════════════════════════════ -->
+<!-- ═══════════════════════════════════════════════════════════════════════ -->
+
+<div id="devisModal">
+  <div class="devis-modal-content">
+    <!-- Header -->
+    <div class="devis-modal-header">
+      <div>
+        <h3>📄 Devis à signer</h3>
+        <p>Signez électroniquement avant de procéder au paiement</p>
+      </div>
+      <button class="devis-close-btn" onclick="closeDevisModal()">×</button>
+    </div>
+
+    <!-- Body -->
+    <div class="devis-modal-body">
+      <!-- Zone PDF -->
+      <div id="pdfPreview">
+        <!-- Le contenu PDF sera injecté ici -->
+      </div>
+
+      <!-- Signature -->
+      <div class="signature-section">
+        <label>✍️ Signature électronique</label>
+        <canvas id="signatureCanvas" width="600" height="120"></canvas>
+        <div class="signature-controls">
+          <button type="button" class="btn-modal-secondary" onclick="clearSignature()" style="padding: 0.5rem 1rem; font-size: 0.875rem;">
+            Effacer
+          </button>
+          <span class="signature-hint">
+            Signez dans le cadre ci-dessus avec votre souris ou doigt
+          </span>
+        </div>
+      </div>
+
+      <!-- Checkbox validation -->
+      <label class="devis-checkbox">
+        <input type="checkbox" id="acceptDevis">
+        <span>
+          Je confirme avoir lu et accepté le devis ci-dessus. Je comprends que l'acompte versé engage le début du projet et que le solde sera dû à la livraison.
+        </span>
+      </label>
+    </div>
+
+    <!-- Footer -->
+    <div class="devis-modal-footer">
+      <button class="btn-modal-secondary" onclick="closeDevisModal()">
+        Annuler
+      </button>
+      <button class="btn-modal-download" onclick="downloadPDF()">
+        📥 Télécharger PDF
+      </button>
+      <button class="btn-modal-primary" id="btnConfirmPay" onclick="confirmAndPay()">
+        Procéder au paiement →
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════════════════ -->
+<!-- ═══ LIBRAIRIES & SCRIPTS ══════════════════════════════════════════════ -->
+<!-- ═══════════════════════════════════════════════════════════════════════ -->
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+<script>
+// ═══════════════════════════════════════════════════════════════════════
+// ═══ TES LIENS STRIPE (DÉJÀ CONFIGURÉS) ═════════════════════════════════
+// ═══════════════════════════════════════════════════════════════════════
+
+const STRIPE_LINKS = {
+  landing:     'https://buy.stripe.com/3cI4gy6m43Ng9cnc2Wew801',     // 200€
+  vitrine:     'https://buy.stripe.com/8x23cu9ygbfI9cnd70ew802',     // 525€
+  ecommerce:   'https://buy.stripe.com/aFa3cu25OfvYdsD3wqew803',     // 800€
+  refonte:     'https://buy.stripe.com/dRm00icKscjMfAL4Auew805',     // 250€
+  seo:         'https://buy.stripe.com/fZucN4aCk5Vo3S38QKew806',     // 100€
+  maintenance: 'https://buy.stripe.com/aFaaEW11K3NggEPd70ew807'      // 40€
+};
+
+// ═══════════════════════════════════════════════════════════════════════
+// ═══ VARIABLES GLOBALES ═════════════════════════════════════════════════
+// ═══════════════════════════════════════════════════════════════════════
+
+let signatureData = null;
+let currentDevisData = null;
+
+// ═══════════════════════════════════════════════════════════════════════
+// ═══ FONCTIONS DU CALCULATEUR ═══════════════════════════════════════════
+// ═══════════════════════════════════════════════════════════════════════
+
+function calculateDevis() {
+  const typeSiteSelect = document.getElementById('typeSite');
+  const pagesInput = document.getElementById('pages');
+  const prixTotalEl = document.getElementById('prixTotal');
+  const prixAcompteEl = document.getElementById('prixAcompte');
+  const prixSoldeEl = document.getElementById('prixSolde');
+  
+  if (!typeSiteSelect || !pagesInput || !prixTotalEl || !prixAcompteEl) {
+    return { total: 0, acompte: 0, typeKey: '' };
+  }
+  
+  const selectedOption = typeSiteSelect.options[typeSiteSelect.selectedIndex];
+  const basePrice = parseInt(selectedOption.dataset.base) || 0;
+  const acomptePrice = parseInt(selectedOption.dataset.acompte) || 0;
+  const typeName = selectedOption.dataset.name || 'Service';
+  const typeKey = typeSiteSelect.value;
+  
+  const pages = parseInt(pagesInput.value) || 0;
+  const pagesPrice = pages * 80;
+
+  let optionsPrice = 0;
+  const selectedOptions = [];
+  
+  document.querySelectorAll('#formDevis input[type="checkbox"]:checked').forEach(cb => {
+    const val = parseInt(cb.value) || 0;
+    optionsPrice += val;
+    selectedOptions.push(cb.dataset.name);
+  });
+
+  const extrasPrice = pagesPrice + optionsPrice;
+  const total = basePrice + extrasPrice;
+  const solde = total - acomptePrice;
+
+  prixTotalEl.style.transform = 'scale(1.05)';
+  setTimeout(() => prixTotalEl.style.transform = 'scale(1)', 150);
+  
+  prixTotalEl.innerHTML = new Intl.NumberFormat('fr-FR').format(total) + '<span class="total-currency">€</span>';
+  prixAcompteEl.textContent = new Intl.NumberFormat('fr-FR').format(acomptePrice) + ' €';
+  if (prixSoldeEl) {
+    prixSoldeEl.textContent = new Intl.NumberFormat('fr-FR').format(solde) + ' €';
+  }
+
+  return { 
+    total, 
+    acompte: acomptePrice, 
+    solde,
+    typeKey, 
+    typeName, 
+    selectedOptions, 
+    pages,
+    extrasPrice,
+    basePrice
+  };
+}
+
+function adjustPages(delta) {
+  const input = document.getElementById('pages');
+  if (!input) return;
+  
+  let value = parseInt(input.value) || 0;
+  value = Math.max(0, Math.min(20, value + delta));
+  input.value = value;
+  
+  calculateDevis();
+}
+
+// ═══════════════════════════════════════════════════════════════════════
+// ═══ SYSTÈME DE SIGNATURE ═══════════════════════════════════════════════
+// ═══════════════════════════════════════════════════════════════════════
+
+function initSignatureCanvas() {
+  const canvas = document.getElementById('signatureCanvas');
+  if (!canvas) return;
+  
+  const ctx = canvas.getContext('2d');
+  let isDrawing = false;
+  let lastX = 0;
+  let lastY = 0;
+
+  // Redimensionner le canvas pour l'affichage
+  function resizeCanvas() {
+    const rect = canvas.getBoundingClientRect();
+    const scale = window.devicePixelRatio || 1;
+    canvas.width = rect.width * scale;
+    canvas.height = rect.height * scale;
+    ctx.scale(scale, scale);
+    canvas.style.width = rect.width + 'px';
+    canvas.style.height = rect.height + 'px';
+  }
+  
+  // Appeler resize une fois
+  resizeCanvas();
+  window.addEventListener('resize', resizeCanvas);
+
+  function getPos(e) {
+    const rect = canvas.getBoundingClientRect();
+    const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+    const clientY = e.touches ? e.touches[0].clientY : e.clientY;
+    return {
+      x: clientX - rect.left,
+      y: clientY - rect.top
+    };
+  }
+
+  function start(e) {
+    isDrawing = true;
+    const pos = getPos(e);
+    lastX = pos.x;
+    lastY = pos.y;
+    e.preventDefault();
+  }
+
+  function draw(e) {
+    if (!isDrawing) return;
+    const pos = getPos(e);
+    
+    ctx.beginPath();
+    ctx.moveTo(lastX, lastY);
+    ctx.lineTo(pos.x, pos.y);
+    ctx.strokeStyle = '#000';
+    ctx.lineWidth = 2;
+    ctx.lineCap = 'round';
+    ctx.lineJoin = 'round';
+    ctx.stroke();
+    
+    lastX = pos.x;
+    lastY = pos.y;
+    e.preventDefault();
+  }
+
+  function stop() {
+    isDrawing = false;
+    signatureData = canvas.toDataURL('image/png');
+    checkCanProceed();
+  }
+
+  // Events souris
+  canvas.addEventListener('mousedown', start);
+  canvas.addEventListener('mousemove', draw);
+  canvas.addEventListener('mouseup', stop);
+  canvas.addEventListener('mouseout', stop);
+  
+  // Events tactile
+  canvas.addEventListener('touchstart', start, {passive: false});
+  canvas.addEventListener('touchmove', draw, {passive: false});
+  canvas.addEventListener('touchend', stop);
+}
+
+function clearSignature() {
+  const canvas = document.getElementById('signatureCanvas');
+  if (!canvas) return;
+  const ctx = canvas.getContext('2d');
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  signatureData = null;
+  checkCanProceed();
+}
+
+function checkCanProceed() {
+  const checkbox = document.getElementById('acceptDevis');
+  const btn = document.getElementById('btnConfirmPay');
+  const canProceed = checkbox && checkbox.checked && signatureData;
+  
+  if (btn) {
+    if (canProceed) {
+      btn.classList.add('active');
+    } else {
+      btn.classList.remove('active');
+    }
+  }
+}
+
+// ═══════════════════════════════════════════════════════════════════════
+// ═══ GÉNÉRATION DU PDF ══════════════════════════════════════════════════
+// ═══════════════════════════════════════════════════════════════════════
+
+function generatePDFContent(data) {
+  const date = new Date().toLocaleDateString('fr-FR');
+  const devisNum = 'DEV-' + Date.now().toString().slice(-6);
+  
+  const optionsList = data.selectedOptions.length > 0 
+    ? data.selectedOptions.map(opt => `• ${opt}`).join('<br>')
+    : 'Aucune option sélectionnée';
+
+  const pagesSupp = data.pages > 0 
+    ? `<tr>
+        <td style="padding:0.75rem; border:1px solid #ddd;">${data.pages} page(s) supplémentaire(s)</td>
+        <td style="text-align:right; padding:0.75rem; border:1px solid #ddd;">${(data.pages * 80).toLocaleString('fr-FR')} €</td>
+      </tr>` 
+    : '';
+
+  const optionsRows = data.selectedOptions.map(opt => `
+    <tr>
+      <td style="padding:0.75rem; border:1px solid #ddd;">${opt}</td>
+      <td style="text-align:right; padding:0.75rem; border:1px solid #ddd;">Option incluse</td>
+    </tr>
+  `).join('');
+
+  return `
+    <div style="max-width:700px; margin:0 auto;">
+      <div style="display:flex; justify-content:space-between; margin-bottom:2rem; border-bottom:2px solid #333; padding-bottom:1rem;">
+        <div>
+          <h1 style="font-size:24px; margin:0; color:#1a1a1a; font-weight:700;">SDO Web</h1>
+          <p style="margin:0.25rem 0; color:#666; font-size:11px;">Développeur Web Freelance</p>
+          <p style="margin:0; color:#666; font-size:11px;">Belgique</p>
+          <p style="margin:0.25rem 0 0 0; color:#666; font-size:11px;">contact.sdo.web12@gmail.com</p>
+        </div>
+        <div style="text-align:right;">
+          <h2 style="font-size:20px; margin:0; color:#f59e0b; font-weight:700;">DEVIS</h2>
+          <p style="margin:0.25rem 0; color:#666; font-size:11px;">N° ${devisNum}</p>
+          <p style="margin:0; color:#666; font-size:11px;">Date: ${date}</p>
+          <p style="margin:0.25rem 0 0 0; color:#666; font-size:11px;">Valable 30 jours</p>
+        </div>
+      </div>
+
+      <div style="margin-bottom:1.5rem; background:#f9f9f9; padding:1rem; border-radius:4px;">
+        <h3 style="font-size:12px; color:#333; margin:0 0 0.5rem 0; text-transform:uppercase; letter-spacing:0.05em;">Client</h3>
+        <p style="margin:0.25rem 0; font-weight:600; font-size:13px;">${data.nom}</p>
+        <p style="margin:0.25rem 0; color:#666; font-size:11px;">${data.email}</p>
+        ${data.entreprise ? `<p style="margin:0.25rem 0; color:#666; font-size:11px;">${data.entreprise}</p>` : ''}
+      </div>
+
+      <div style="margin-bottom:1.5rem;">
+        <h3 style="font-size:12px; color:#333; margin:0 0 0.5rem 0; text-transform:uppercase; letter-spacing:0.05em;">Projet</h3>
+        <p style="margin:0.25rem 0; font-size:12px;"><strong>Type:</strong> ${data.typeName}</p>
+        <p style="margin:0.25rem 0; font-size:12px;"><strong>Pages supplémentaires:</strong> ${data.pages}</p>
+      </div>
+
+      ${data.selectedOptions.length > 0 ? `
+      <div style="margin-bottom:1.5rem;">
+        <h3 style="font-size:12px; color:#333; margin:0 0 0.5rem 0; text-transform:uppercase; letter-spacing:0.05em;">Options sélectionnées</h3>
+        <p style="margin:0.25rem 0; font-size:11px; color:#555;">${optionsList}</p>
+      </div>
+      ` : ''}
+
+      <table style="width:100%; border-collapse:collapse; margin:1.5rem 0; font-size:11px;">
+        <tr style="background:#f5f5f5;">
+          <th style="text-align:left; padding:0.75rem; border:1px solid #ddd; font-weight:600;">Description</th>
+          <th style="text-align:right; padding:0.75rem; border:1px solid #ddd; font-weight:600;">Prix TTC</th>
+        </tr>
+        <tr>
+          <td style="padding:0.75rem; border:1px solid #ddd;">${data.typeName} (prix de base)</td>
+          <td style="text-align:right; padding:0.75rem; border:1px solid #ddd;">${data.basePrice.toLocaleString('fr-FR')} €</td>
+        </tr>
+        ${pagesSupp}
+        ${optionsRows}
+        <tr style="background:#f5f5f5; font-weight:bold;">
+          <td style="padding:0.75rem; border:1px solid #ddd; font-size:12px;">TOTAL TTC</td>
+          <td style="text-align:right; padding:0.75rem; border:1px solid #ddd; font-size:14px; color:#f59e0b;">${data.total.toLocaleString('fr-FR')} €</td>
+        </tr>
+      </table>
+
+      <div style="background:#fef3c7; border:2px solid #f59e0b; padding:1rem; border-radius:4px; margin:1.5rem 0;">
+        <p style="margin:0; font-weight:bold; color:#92400e; font-size:13px;">💰 ACOMPTE À PAYER MAINTENANT: ${data.acompte.toLocaleString('fr-FR')} €</p>
+        <p style="margin:0.25rem 0 0 0; font-size:10px; color:#92400e;">Solde à régler à la livraison: ${data.solde.toLocaleString('fr-FR')} €</p>
+      </div>
+
+      <div style="margin-top:2rem; padding-top:1rem; border-top:1px solid #ddd; font-size:10px; color:#666; line-height:1.6;">
+        <p style="margin:0.25rem 0;"><strong>Conditions générales:</strong></p>
+        <p style="margin:0.15rem 0;">• Ce devis est valable 30 jours à compter de sa date d'émission</p>
+        <p style="margin:0.15rem 0;">• L'acompte de ${data.acompte.toLocaleString('fr-FR')} € engage le début du projet</p>
+        <p style="margin:0.15rem 0;">• Le solde de ${data.solde.toLocaleString('fr-FR')} € est dû à la livraison finale</p>
+        <p style="margin:0.15rem 0;">• Délai de livraison: selon type de projet convenu</p>
+        <p style="margin:0.15rem 0;">• Paiement sécurisé via Stripe</p>
+        <p style="margin:0.15rem 0;">• TVA non applicable, article 293 B du CGI (auto-entrepreneur)</p>
+      </div>
+
+      <div style="margin-top:3rem; display:flex; justify-content:space-between; align-items:flex-end;">
+        <div style="width:45%;">
+          <p style="margin:0 0 0.5rem 0; font-size:10px; color:#666; text-transform:uppercase; letter-spacing:0.05em;">Signature du client</p>
+          <div style="border-bottom:1px solid #333; height:50px; display:flex; align-items:flex-end; padding-bottom:5px;">
+            ${signatureData ? `<img src="${signatureData}" style="max-height:45px; max-width:100%;">` : '<span style="color:#999; font-size:10px;">Signature requise</span>'}
+          </div>
+          <p style="margin:0.25rem 0 0 0; font-size:9px; color:#666;">Date: ${date}</p>
+        </div>
+        <div style="width:45%; text-align:right;">
+          <p style="margin:0 0 0.5rem 0; font-size:10px; color:#666; text-transform:uppercase; letter-spacing:0.05em;">Pour SDO Web</p>
+          <div style="border-bottom:1px solid #333; height:50px;"></div>
+          <p style="margin:0.25rem 0 0 0; font-size:9px; color:#666;">Silvio De Oliveira</p>
+        </div>
+      </div>
+    </div>
+  `;
+}
+
+// ═══════════════════════════════════════════════════════════════════════
+// ═══ GESTION DU MODAL ═══════════════════════════════════════════════════
+// ═══════════════════════════════════════════════════════════════════════
+
+function openDevisModal() {
+  const nom = document.getElementById('clientNom').value.trim();
+  const email = document.getElementById('clientEmail').value.trim();
+  const entreprise = document.getElementById('clientEntreprise').value.trim();
+  
+  if (!nom || !email) {
+    alert('Veuillez remplir votre nom et email avant de procéder au paiement.');
+    if (!nom) document.getElementById('clientNom').focus();
+    else document.getElementById('clientEmail').focus();
+    return;
+  }
+
+  // Validation email simple
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  if (!emailRegex.test(email)) {
+    alert('Veuillez entrer une adresse email valide.');
+    document.getElementById('clientEmail').focus();
+    return;
+  }
+
+  const result = calculateDevis();
+  currentDevisData = {
+    ...result,
+    nom,
+    email,
+    entreprise,
+    date: new Date().toLocaleDateString('fr-FR'),
+    devisNum: 'DEV-' + Date.now().toString().slice(-6)
+  };
+
+  const pdfPreview = document.getElementById('pdfPreview');
+  pdfPreview.innerHTML = generatePDFContent(currentDevisData);
+  
+  const modal = document.getElementById('devisModal');
+  modal.style.display = 'flex';
+  document.body.style.overflow = 'hidden';
+  
+  // Reset
+  clearSignature();
+  const checkbox = document.getElementById('acceptDevis');
+  if (checkbox) checkbox.checked = false;
+  checkCanProceed();
+  
+  // Init canvas après affichage
+  setTimeout(initSignatureCanvas, 100);
+}
+
+function closeDevisModal() {
+  const modal = document.getElementById('devisModal');
+  modal.style.display = 'none';
+  document.body.style.overflow = '';
+}
+
+function downloadPDF() {
+  if (!currentDevisData) return;
+  
+  const { jsPDF } = window.jspdf;
+  const doc = new jsPDF();
+  
+  // Configuration
+  doc.setFont('helvetica');
+  
+  // En-tête
+  doc.setFontSize(20);
+  doc.setTextColor(26, 26, 26);
+  doc.text('SDO Web', 20, 20);
+  
+  doc.setFontSize(10);
+  doc.setTextColor(102, 102, 102);
+  doc.text('Développeur Web Freelance', 20, 27);
+  doc.text('Belgique', 20, 32);
+  doc.text('contact.sdo.web12@gmail.com', 20, 37);
+  
+  // Numéro devis
+  doc.setFontSize(16);
+  doc.setTextColor(245, 158, 11);
+  doc.text('DEVIS', 160, 20);
+  
+  doc.setFontSize(9);
+  doc.setTextColor(102, 102, 102);
+  doc.text(`N° ${currentDevisData.devisNum}`, 160, 27);
+  doc.text(`Date: ${currentDevisData.date}`, 160, 32);
+  doc.text('Valable 30 jours', 160, 37);
+  
+  // Ligne séparatrice
+  doc.setDrawColor(200, 200, 200);
+  doc.line(20, 45, 190, 45);
+  
+  // Client
+  doc.setFontSize(11);
+  doc.setTextColor(51, 51, 51);
+  doc.text('CLIENT', 20, 55);
+  
+  doc.setFontSize(10);
+  doc.setTextColor(26, 26, 26);
+  doc.text(currentDevisData.nom, 20, 62);
+  
+  doc.setFontSize(9);
+  doc.setTextColor(102, 102, 102);
+  doc.text(currentDevisData.email, 20, 67);
+  if (currentDevisData.entreprise) {
+    doc.text(currentDevisData.entreprise, 20, 72);
+  }
+  
+  // Projet
+  doc.setFontSize(11);
+  doc.setTextColor(51, 51, 51);
+  doc.text('PROJET', 20, 85);
+  
+  doc.setFontSize(10);
+  doc.setTextColor(26, 26, 26);
+  doc.text(`Type: ${currentDevisData.typeName}`, 20, 92);
+  doc.text(`Pages supplémentaires: ${currentDevisData.pages}`, 20, 98);
+  
+  // Tableau des prix
+  let y = 115;
+  
+  doc.setFillColor(245, 245, 245);
+  doc.rect(20, y - 5, 170, 8, 'F');
+  
+  doc.setFontSize(9);
+  doc.setTextColor(51, 51, 51);
+  doc.text('Description', 25, y);
+  doc.text('Prix TTC', 165, y, { align: 'right' });
+  
+  y += 10;
+  
+  doc.setTextColor(26, 26, 26);
+  doc.text(`${currentDevisData.typeName} (prix de base)`, 25, y);
+  doc.text(`${currentDevisData.basePrice.toLocaleString('fr-FR')} €`, 165, y, { align: 'right' });
+  
+  if (currentDevisData.pages > 0) {
+    y += 7;
+    doc.text(`${currentDevisData.pages} page(s) supplémentaire(s)`, 25, y);
+    doc.text(`${(currentDevisData.pages * 80).toLocaleString('fr-FR')} €`, 165, y, { align: 'right' });
+  }
+  
+  currentDevisData.selectedOptions.forEach(opt => {
+    y += 7;
+    doc.text(opt, 25, y);
+    doc.text('Option incluse', 165, y, { align: 'right' });
+  });
+  
+  // Total
+  y += 12;
+  doc.setFillColor(254, 243, 199);
+  doc.setDrawColor(245, 158, 11);
+  doc.setLineWidth(0.5);
+  doc.rect(20, y - 5, 170, 12, 'FD');
+  
+  doc.setFontSize(10);
+  doc.setTextColor(146, 64, 14);
+  doc.text('TOTAL TTC', 25, y + 2);
+  
+  doc.setFontSize(12);
+  doc.setTextColor(245, 158, 11);
+  doc.text(`${currentDevisData.total.toLocaleString('fr-FR')} €`, 165, y + 2, { align: 'right' });
+  
+  // Acompte
+  y += 20;
+  doc.setFontSize(11);
+  doc.setTextColor(146, 64, 14);
+  doc.text(`ACOMPTE À PAYER: ${currentDevisData.acompte.toLocaleString('fr-FR')} €`, 20, y);
+  
+  doc.setFontSize(9);
+  doc.setTextColor(102, 102, 102);
+  doc.text(`Solde à régler à la livraison: ${currentDevisData.solde.toLocaleString('fr-FR')} €`, 20, y + 6);
+  
+  // Conditions
+  y += 20;
+  doc.setFontSize(8);
+  doc.setTextColor(102, 102, 102);
+  doc.text('Conditions:', 20, y);
+  doc.text('• Ce devis est valable 30 jours', 20, y + 5);
+  doc.text(`• L'acompte de ${currentDevisData.acompte.toLocaleString('fr-FR')} € engage le début du projet`, 20, y + 10);
+  doc.text(`• Le solde de ${currentDevisData.solde.toLocaleString('fr-FR')} € est dû à la livraison finale`, 20, y + 15);
+  doc.text('• TVA non applicable, article 293 B du CGI', 20, y + 20);
+  
+  // Signatures
+  y += 35;
+  doc.setFontSize(8);
+  doc.setTextColor(102, 102, 102);
+  doc.text('SIGNATURE DU CLIENT', 20, y);
+  doc.text('POUR SDO WEB', 120, y);
+  
+  if (signatureData) {
+    doc.addImage(signatureData, 'PNG', 20, y + 5, 50, 20);
+  } else {
+    doc.setDrawColor(150, 150, 150);
+    doc.line(20, y + 15, 70, y + 15);
+  }
+  
+  doc.line(120, y + 15, 170, y + 15);
+  doc.setTextColor(26, 26, 26);
+  doc.text('Silvio De Oliveira', 120, y + 20);
+  
+  // Sauvegarde
+  doc.save(`devis-sdo-web-${currentDevisData.devisNum}.pdf`);
+}
+
+function confirmAndPay() {
+  if (!currentDevisData || !signatureData) return;
+  
+  // Sauvegarder les données du devis signé (pourrait être envoyé à un backend)
+  const devisFinal = {
+    ...currentDevisData,
+    signature: signatureData,
+    acceptedAt: new Date().toISOString(),
+    userAgent: navigator.userAgent
+  };
+  
+  console.log('✅ Devis signé:', devisFinal);
+  
+  // Ici tu pourrais envoyer les données à ton backend
+  // fetch('/api/devis', { method: 'POST', body: JSON.stringify(devisFinal) })
+  
+  // Fermer modal et rediriger vers Stripe
+  closeDevisModal();
+  
+  const stripeLink = STRIPE_LINKS[currentDevisData.typeKey];
+  if (stripeLink) {
+    const newWindow = window.open(stripeLink, '_blank');
+    if (!newWindow || newWindow.closed) {
+      window.location.href = stripeLink;
+    }
+  }
+}
+
+// ═══════════════════════════════════════════════════════════════════════
+// ═══ INITIALISATION ═════════════════════════════════════════════════════
+// ═══════════════════════════════════════════════════════════════════════
+
+document.addEventListener('DOMContentLoaded', function() {
+  console.log('✅ SDO Web chargé - Système de devis PDF + Signature actif');
+  
+  // Calculateur
+  const typeSiteSelect = document.getElementById('typeSite');
+  if (typeSiteSelect) {
+    typeSiteSelect.addEventListener('change', calculateDevis);
+  }
+  
+  document.querySelectorAll('#formDevis input[type="checkbox"]').forEach(cb => {
+    cb.addEventListener('change', calculateDevis);
+  });
+  
+  calculateDevis();
+
+  // Bouton de paiement -> ouvre le modal devis
+  const btnPayer = document.getElementById('btnPayerAcompte');
+  if (btnPayer) {
+    btnPayer.addEventListener('click', function(e) {
+      e.preventDefault();
+      openDevisModal();
+    });
+  }
+
+  // Checkbox validation
+  const acceptCheckbox = document.getElementById('acceptDevis');
+  if (acceptCheckbox) {
+    acceptCheckbox.addEventListener('change', checkCanProceed);
+  }
+
+  // Fermer modal sur clic extérieur
+  const modal = document.getElementById('devisModal');
+  if (modal) {
+    modal.addEventListener('click', function(e) {
+      if (e.target === this) closeDevisModal();
+    });
+  }
+
+  // Fermer avec Escape
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') closeDevisModal();
+  });
+});
+</script>
+
+<!-- ═══════════════════════════════════════════════════════════════════════ -->
+<!-- ═══ SCRIPTS ORIGINAUX (NAV, ANIMATIONS, FAQ) ════════════════════════ -->
+<!-- ═══════════════════════════════════════════════════════════════════════ -->
+
+<script>
+
+/* HERO DROPDOWN */
+const heroMainBtn = document.getElementById('heroMainBtn');
+const heroDropdown = document.getElementById('heroDropdown');
+
+if (heroMainBtn && heroDropdown) {
+  heroMainBtn.addEventListener('click', function(e) {
+    e.preventDefault();
+    e.stopPropagation();
+    const isOpen = heroDropdown.style.display === 'block';
+    heroDropdown.style.display = isOpen ? 'none' : 'block';
+    heroMainBtn.style.borderRadius = isOpen ? '100px' : 'var(--r-sm) var(--r-sm) 0 0';
+  });
+
+  // Fermer au clic extérieur
+  document.addEventListener('click', function(e) {
+    if (!heroMainBtn.contains(e.target) && !heroDropdown.contains(e.target)) {
+      heroDropdown.style.display = 'none';
+      heroMainBtn.style.borderRadius = '100px';
+    }
+  });
+
+  // Fermer au clic sur un lien
+  heroDropdown.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', function() {
+      heroDropdown.style.display = 'none';
+      heroMainBtn.style.borderRadius = '100px';
+    });
+  });
+}
+
+/* NAV */
+const nav = document.getElementById('nav');
+window.addEventListener('scroll', () => nav.classList.toggle('scrolled', scrollY > 50), {passive:true});
+
+/* BURGER */
+const burger = document.getElementById('burger'), drawer = document.getElementById('drawer'), overlay = document.getElementById('overlay');
+function toggleMenu(state) {
+  const isOpen = state ?? !drawer.classList.contains('open');
+  burger.classList.toggle('open', isOpen);
+  drawer.classList.toggle('open', isOpen);
+  overlay.classList.toggle('open', isOpen);
+  burger.setAttribute('aria-expanded', isOpen);
+  document.body.style.overflow = isOpen ? 'hidden' : '';
+}
+burger.addEventListener('click', () => toggleMenu());
+overlay.addEventListener('click', () => toggleMenu(false));
+document.querySelectorAll('.dl').forEach(link => link.addEventListener('click', () => toggleMenu(false)));
+
+/* SCROLL REVEAL */
+const observerOptions = {
+  threshold: 0.1,
+  rootMargin: '0px 0px -30px 0px'
+};
+const revealObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+      revealObserver.unobserve(entry.target);
+    }
+  });
+}, observerOptions);
+document.querySelectorAll('.sr').forEach(el => revealObserver.observe(el));
+
+/* COUNTER */
+const counterObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting && entry.target.dataset.count) {
+      const target = parseInt(entry.target.dataset.count);
+      let current = 0;
+      const increment = target / (1500 / 16);
+      const timer = setInterval(() => {
+        current += increment;
+        if (current >= target) {
+          entry.target.textContent = target + '+';
+          clearInterval(timer);
+        } else {
+          entry.target.textContent = Math.floor(current);
         }
+      }, 16);
+      counterObserver.unobserve(entry.target);
+    }
+  });
+}, {threshold: 0.5});
+document.querySelectorAll('[data-count]').forEach(el => counterObserver.observe(el));
 
-        // Lightbox
-        function openLightbox(index) {
-            currentImageIndex = index;
-            const lightbox = document.getElementById('lightbox');
-            const img = document.getElementById('lightbox-img');
-            const caption = document.getElementById('lightbox-caption');
-            const counter = document.getElementById('lightbox-counter');
+/* FAQ */
+document.querySelectorAll('.faq-q').forEach(question => {
+  const toggle = () => {
+    const item = question.closest('.faq-item');
+    const wasOpen = item.classList.contains('open');
+    document.querySelectorAll('.faq-item.open').forEach(i => i.classList.remove('open'));
+    if (!wasOpen) item.classList.add('open');
+  };
+  question.addEventListener('click', toggle);
+  question.addEventListener('keydown', e => {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      toggle();
+    }
+  });
+});
 
-            img.src = portfolioImages[index].src;
-            caption.textContent = portfolioImages[index].caption;
-            counter.textContent = `${index + 1} / ${portfolioImages.length} • ${portfolioImages[index].category}`;
+/* SMOOTH SCROLL */
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+  anchor.addEventListener('click', function(e) {
+    const target = document.querySelector(this.getAttribute('href'));
+    if (target) {
+      e.preventDefault();
+      target.scrollIntoView({behavior: 'smooth', block: 'start'});
+    }
+  });
+});
 
-            lightbox.classList.add('active');
-            document.body.style.overflow = 'hidden';
-        }
-
-        function closeLightbox(event) {
-            if (!event || event.target.id === 'lightbox' || event.target.closest('.lightbox-close')) {
-                document.getElementById('lightbox').classList.remove('active');
-                document.body.style.overflow = '';
-            }
-        }
-
-        function changeImage(direction) {
-            event.stopPropagation();
-            currentImageIndex += direction;
-            if (currentImageIndex < 0) currentImageIndex = portfolioImages.length - 1;
-            if (currentImageIndex >= portfolioImages.length) currentImageIndex = 0;
-
-            const img = document.getElementById('lightbox-img');
-            const caption = document.getElementById('lightbox-caption');
-            const counter = document.getElementById('lightbox-counter');
-
-            img.style.opacity = '0';
-            setTimeout(() => {
-                img.src = portfolioImages[currentImageIndex].src;
-                caption.textContent = portfolioImages[currentImageIndex].caption;
-                counter.textContent = `${currentImageIndex + 1} / ${portfolioImages.length} • ${portfolioImages[currentImageIndex].category}`;
-                img.style.opacity = '1';
-            }, 200);
-        }
-
-        // Navigation clavier
-        document.addEventListener('keydown', e => {
-            if (document.getElementById('lightbox').classList.contains('active')) {
-                if (e.key === 'Escape') closeLightbox();
-                if (e.key === 'ArrowLeft') changeImage(-1);
-                if (e.key === 'ArrowRight') changeImage(1);
-            }
-        });
-
-        // Estimation prix
-        function calculateEstimate() {
-            const type = document.querySelector('input[name="type"]:checked').value;
-            const duration = parseInt(document.getElementById('duration').value);
-            const travel = parseInt(document.getElementById('travel').value);
-            const complexity = document.getElementById('complexity').value;
-            
-            let basePrice = 0;
-            let travelCost = travel;
-
-            if (type === 'photo') {
-                const eventType = document.getElementById('eventType').value;
-
-                if (eventType === 'mariage') {
-                    // Prix fixes pour mariage (max 1000€ pour 12h)
-                    if (duration <= 3) {
-                        basePrice = 250; // Petit mariage (2-3h)
-                    } else if (duration <= 5) {
-                        basePrice = 400; // Demi-journée (4-5h)
-                    } else if (duration <= 7) {
-                        basePrice = 600; // 6-7h
-                    } else if (duration <= 9) {
-                        basePrice = 750; // 8-9h
-                    } else if (duration <= 11) {
-                        basePrice = 900; // 10-11h
-                    } else {
-                        basePrice = 1000; // 12h
-                    }
-                } else {
-                    // Shooting normal
-                    if (duration <= 2) {
-                        basePrice = 200; // 2h
-                    } else if (duration <= 4) {
-                        basePrice = 400; // 4h
-                    } else if (duration <= 6) {
-                        basePrice = 600; // 6h
-                    } else if (duration <= 8) {
-                        basePrice = 800; // 8h
-                    } else if (duration <= 10) {
-                        basePrice = 1000; // 10h
-                    } else {
-                        basePrice = 1200; // 12h
-                    }
-                }
-            } else if (type === 'video') {
-                let editingTime;
-                if (duration <= 2) {
-                    editingTime = complexity === 'simple' ? 3 : (complexity === 'standard' ? 4 : 6);
-                } else if (duration <= 4) {
-                    editingTime = complexity === 'simple' ? 6 : (complexity === 'standard' ? 8 : 10);
-                } else {
-                    editingTime = complexity === 'simple' ? 10 : (complexity === 'standard' ? 14 : 20);
-                }
-                let totalHours = duration + editingTime;
-                basePrice = totalHours * 50;
-                if (complexity === 'complexe') basePrice *= 1.2;
-            } else { // photo + vidéo
-                basePrice = duration * 500;
-            }
-
-            // Prix fixe pour tous les services
-            const totalPrice = Math.floor(basePrice + travelCost);
-            const displayPrice = totalPrice.toLocaleString('fr-BE') + '€';
-
-            document.getElementById('estimatePrice').textContent = displayPrice;
-        }
-
-        document.querySelectorAll('input[name="type"]').forEach(radio => {
-            radio.addEventListener('change', function() {
-                const type = this.value;
-                const label = document.getElementById('estimateLabel');
-                const note = document.getElementById('estimateNote');
-                const eventTypeGroup = document.getElementById('eventTypeGroup');
-                const complexitySelect = document.getElementById('complexity');
-
-                label.textContent = 'Prix du devis :';
-
-                if (type === 'photo') {
-                    complexitySelect.options[0].text = 'Simple (Montage simple)';
-                    eventTypeGroup.style.display = 'block';
-                    const eventType = document.getElementById('eventType').value;
-                    if (eventType === 'mariage') {
-                        note.innerHTML = '* Mariages: 2-3h: 800€ | 4-5h: 1200€ | 6-7h: 1600€ | 8-9h: 2000€ | 10-11h: 2400€ | 12h: 2800€';
-                    } else {
-                        note.innerHTML = '* Shooting normal: packs photos selon durée';
-                    }
-                } else if (type === 'video') {
-                    complexitySelect.options[0].text = 'Simple (Reel Instagram basique)';
-                    eventTypeGroup.style.display = 'block';
-                    note.innerHTML = '* Prix fixe selon complexité + déplacement';
-                } else if (type === 'both') {
-                    complexitySelect.options[0].text = 'Simple (Reel Instagram basique)';
-                    eventTypeGroup.style.display = 'block';
-                    note.innerHTML = '* Prix fixe à 500€/heure + déplacement';
-                }
-
-                calculateEstimate();
-            });
-        });
-
-        window.addEventListener('DOMContentLoaded', function() {
-            const type = document.querySelector('input[name="type"]:checked').value;
-            const label = document.getElementById('estimateLabel');
-            const note = document.getElementById('estimateNote');
-            const complexitySelect = document.getElementById('complexity');
-            const eventTypeGroup = document.getElementById('eventTypeGroup');
-            const eventType = document.getElementById('eventType').value;
-
-            label.textContent = 'Prix du devis :';
-
-            // Afficher le type d'événement pour TOUS les services
-            eventTypeGroup.style.display = 'block';
-
-            if (type === 'photo') {
-                complexitySelect.options[0].text = 'Simple (Montage simple)';
-                if (eventType === 'normal') {
-                    note.innerHTML = '* Shooting normal: 2h: 200€ | 4h: 400€ | 6h: 600€ | 8h: 800€ | 10h: 1000€ | 12h: 1200€';
-                } else {
-                    note.innerHTML = '* Mariages Photo: 2-3h: 250€ | 4-5h: 400€ | 6-7h: 600€ | 8-9h: 750€ | 10-11h: 900€ | 12h: 1000€';
-                }
-            } else if (type === 'video') {
-                complexitySelect.options[0].text = 'Simple (Reel Instagram basique)';
-                if (eventType === 'normal') {
-                    note.innerHTML = '* Vidéo standard: prix fixe selon complexité + déplacement';
-                } else {
-                    note.innerHTML = '* Mariages Vidéo: tarifs sur devis selon complexité';
-                }
-            } else if (type === 'both') {
-                complexitySelect.options[0].text = 'Simple (Reel Instagram basique)';
-                if (eventType === 'normal') {
-                    note.innerHTML = '* Photo+Vidéo: 500€/heure + déplacement';
-                } else {
-                    note.innerHTML = '* Mariages Photo+Vidéo: 500€/heure (minimum 8h recommandé)';
-                }
-            }
-
-            calculateEstimate();
-        });
-
-        // Gestion du formulaire
-        // Écouteur pour le changement de type de photo
-document.getElementById('eventType').addEventListener('change', function() {
-            const eventType = this.value;
-            const note = document.getElementById('estimateNote');
-            const type = document.querySelector('input[name="type"]:checked').value;
-
-            if (type === 'photo') {
-                if (eventType === 'normal') {
-                    note.innerHTML = '* Shooting normal: 2h: 200€ | 4h: 400€ | 6h: 600€ | 8h: 800€ | 10h: 1000€ | 12h: 1200€';
-                } else {
-                    note.innerHTML = '* Mariages Photo: 2-3h: 250€ | 4-5h: 400€ | 6-7h: 600€ | 8-9h: 750€ | 10-11h: 900€ | 12h: 1000€';
-                }
-            } else if (type === 'video') {
-                if (eventType === 'normal') {
-                    note.innerHTML = '* Vidéo standard: prix fixe selon complexité + déplacement';
-                } else {
-                    note.innerHTML = '* Mariages Vidéo: tarifs sur devis selon complexité';
-                }
-            } else if (type === 'both') {
-                if (eventType === 'normal') {
-                    note.innerHTML = '* Photo+Vidéo: 500€/heure + déplacement';
-                } else {
-                    note.innerHTML = '* Mariages Photo+Vidéo: 500€/heure (minimum 8h recommandé)';
-                }
-            }
-            calculateEstimate();
-        });
-
-document.getElementById('bookingForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            const btn = document.getElementById('submitBtn');
-            const successMsg = document.getElementById('successMessage');
-            
-            btn.disabled = true;
-            btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Envoi en cours...';
-            
-            fetch(this.action, {
-                method: 'POST',
-                body: new FormData(this),
-                headers: { 'Accept': 'application/json' }
-            }).then(response => {
-                if (response.ok) {
-                    successMsg.classList.add('show');
-                    this.reset();
-                    calculateEstimate();
-                } else {
-                    alert('Une erreur est survenue. Veuillez réessayer.');
-                }
-            }).catch(error => {
-                alert('Erreur de connexion. Veuillez réessayer.');
-            }).finally(() => {
-                btn.disabled = false;
-                btn.innerHTML = '<i class="fas fa-paper-plane"></i> Envoyer ma demande';
-            });
-        });
-    </script>
+/* COPY EMAIL */
+function copyEmail(email, type) {
+  const el = document.createElement('textarea');
+  el.value = email;
+  document.body.appendChild(el);
+  el.select();
+  document.execCommand('copy');
+  document.body.removeChild(el);
+  alert('📧 Email ' + type + ' copié : ' + email + '\n\nOuvrez votre application mail et collez l\'adresse.');
+}
+</script>
 
 </body>
 </html>
