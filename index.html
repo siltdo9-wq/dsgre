@@ -1634,8 +1634,84 @@ footer {
   }
 }
 
+
+/* === NEW PRICING STYLES === */
+.pricing-sub-box {
+  background: var(--card);
+  border: 1px solid var(--b0);
+  border-radius: var(--r);
+  padding: 2rem;
+  max-width: 1000px;
+  margin: 2rem auto 0;
+  width: 100%;
+}
+.pricing-sub-title {
+  font-family: var(--font-display);
+  font-size: clamp(1.125rem, 3vw, 1.5rem);
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+.pricing-sub-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+}
+@media(min-width: 768px) {
+  .pricing-sub-grid { grid-template-columns: repeat(2, 1fr); gap: 1.5rem; }
+}
+@media(min-width: 1024px) {
+  .pricing-sub-grid { grid-template-columns: repeat(3, 1fr); }
+}
+.pricing-sub-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  padding: 1rem;
+  background: var(--bg);
+  border: 1px solid var(--b0);
+  border-radius: var(--r-sm);
+  transition: all 0.2s var(--ease);
+}
+.pricing-sub-item:hover {
+  border-color: var(--accent-med);
+  background: var(--accent-dim);
+}
+.pricing-sub-ico {
+  font-size: 1.25rem;
+  flex-shrink: 0;
+  margin-top: 0.125rem;
+}
+.pricing-sub-text {
+  font-size: 0.875rem;
+  color: var(--text-2);
+  line-height: 1.5;
+}
+.pricing-sub-text strong {
+  color: var(--text);
+  font-weight: 600;
+  display: block;
+  margin-bottom: 0.25rem;
+}
+.pricing-reassurance {
+  text-align: center;
+  margin-top: 2rem;
+  padding: 1.25rem;
+  background: linear-gradient(135deg, var(--accent-dim) 0%, rgba(251,191,36,0.03) 100%);
+  border: 1px solid var(--accent-med);
+  border-radius: var(--r-sm);
+}
+.pricing-reassurance p {
+  font-family: var(--font-display);
+  font-size: clamp(1rem, 2.5vw, 1.125rem);
+  font-weight: 600;
+  color: var(--accent);
+  margin: 0;
+}
 </style>
 
+<base target="_blank">
 <base target="_blank">
 <base target="_blank">
 <base target="_blank">
@@ -1803,59 +1879,97 @@ footer {
         <div class="tag">Tarifs</div>
         <h2>Tarifs transparents</h2>
       </div>
-      <p class="sub">Des prix clairs, sans surprises. Configurez votre devis personnalisé dans la section contact.</p>
+      <p class="sub">Des prix clairs, sans surprises. Lancez votre site rapidement et laissez-nous gérer le reste.</p>
     </div>
 
     <div class="price-grid">
       <div class="pc sr">
         <h3>Landing Page</h3>
-        <div class="pval">300 € – 500 €</div>
+        <div class="pval">150 €</div>
         <div class="pper">Page unique · 48h</div>
-        <p>Idéale pour lancer un produit ou capturer des leads.</p>
+        <p>Page unique professionnelle idéale pour démarrer rapidement</p>
         <div class="pfs">
           <span class="pf">Design responsive</span>
           <span class="pf">Formulaire de contact</span>
           <span class="pf">SEO de base</span>
         </div>
+        <div style="background:var(--accent-dim); border:1px solid var(--accent-med); border-radius:var(--r-sm); padding:0.75rem 1rem; margin-bottom:1rem; text-align:center;">
+          <div style="font-size:0.75rem; color:var(--text-3); font-weight:600; letter-spacing:0.05em; text-transform:uppercase; margin-bottom:0.25rem;">Abonnement mensuel</div>
+          <div style="font-family:var(--font-display); font-size:1.25rem; font-weight:700; color:var(--accent);">150 €<span style="font-size:0.875rem; color:var(--text-3); font-weight:500;">/mois</span></div>
+          <div style="font-size:0.6875rem; color:var(--text-3); margin-top:0.25rem;">Engagement 12 mois</div>
+        </div>
         <a href="#contact" class="btn-o">Configurer mon devis →</a>
       </div>
-      
+
       <div class="pc star sr">
         <div class="pbadge">Populaire</div>
         <h3>Site Vitrine</h3>
-        <div class="pval">900 € – 1 200 €</div>
-        <div class="pper">3-5 pages · 5-7 jours</div>
-        <p>Solution complète pour votre présence en ligne.</p>
+        <div class="pval">500 €</div>
+        <div class="pper">3-5 pages · 5 à 7 jours</div>
+        <p>Site complet 3 à 5 pages pour présenter votre activité</p>
         <div class="pfs">
           <span class="pf">Design premium sur mesure</span>
           <span class="pf">SEO avancé</span>
           <span class="pf">Support 30 jours</span>
         </div>
+        <div style="background:var(--accent-dim); border:1px solid var(--accent-med); border-radius:var(--r-sm); padding:0.75rem 1rem; margin-bottom:1rem; text-align:center;">
+          <div style="font-size:0.75rem; color:var(--text-3); font-weight:600; letter-spacing:0.05em; text-transform:uppercase; margin-bottom:0.25rem;">Abonnement mensuel</div>
+          <div style="font-family:var(--font-display); font-size:1.25rem; font-weight:700; color:var(--accent);">150 €<span style="font-size:0.875rem; color:var(--text-3); font-weight:500;">/mois</span></div>
+          <div style="font-size:0.6875rem; color:var(--text-3); margin-top:0.25rem;">Engagement 12 mois</div>
+        </div>
         <a href="#contact" class="btn-p">Configurer mon devis →</a>
       </div>
-      
+
       <div class="pc sr">
         <h3>E-commerce</h3>
-        <div class="pval">1 200 € – 2&nbsp;000 €</div>
+        <div class="pval">800 €</div>
         <div class="pper">Boutique complète · 2 sem.</div>
-        <p>Boutique prête à vendre avec paiement sécurisé.</p>
+        <p>Boutique en ligne complète pour vendre vos produits</p>
         <div class="pfs">
           <span class="pf">Catalogue illimité</span>
           <span class="pf">Stripe & PayPal</span>
           <span class="pf">Gestion des stocks</span>
         </div>
+        <div style="background:var(--accent-dim); border:1px solid var(--accent-med); border-radius:var(--r-sm); padding:0.75rem 1rem; margin-bottom:1rem; text-align:center;">
+          <div style="font-size:0.75rem; color:var(--text-3); font-weight:600; letter-spacing:0.05em; text-transform:uppercase; margin-bottom:0.25rem;">Abonnement mensuel</div>
+          <div style="font-family:var(--font-display); font-size:1.25rem; font-weight:700; color:var(--accent);">200 €<span style="font-size:0.875rem; color:var(--text-3); font-weight:500;">/mois</span></div>
+          <div style="font-size:0.6875rem; color:var(--text-3); margin-top:0.25rem;">Engagement 12 mois</div>
+        </div>
         <a href="#contact" class="btn-o">Configurer mon devis →</a>
       </div>
     </div>
 
-    <div class="maint sr">
-      <div>
-        <h4>Maintenance mensuelle</h4>
-        <p>Hébergement, sauvegardes, mises à jour de sécurité et support technique.</p>
+    <!-- Gestion complète incluse -->
+    <div class="pricing-sub-box sr">
+      <h3 class="pricing-sub-title">Gestion complète incluse</h3>
+      <div class="pricing-sub-grid">
+        <div class="pricing-sub-item">
+          <span class="pricing-sub-ico">🔒</span>
+          <div class="pricing-sub-text"><strong>Hébergement sécurisé</strong>Votre site hébergé sur serveurs performants et sécurisés</div>
+        </div>
+        <div class="pricing-sub-item">
+          <span class="pricing-sub-ico">💾</span>
+          <div class="pricing-sub-text"><strong>Sauvegardes automatiques</strong>Backups réguliers pour ne jamais perdre vos données</div>
+        </div>
+        <div class="pricing-sub-item">
+          <span class="pricing-sub-ico">🔄</span>
+          <div class="pricing-sub-text"><strong>Mises à jour régulières</strong>Plugins et système toujours à jour</div>
+        </div>
+        <div class="pricing-sub-item">
+          <span class="pricing-sub-ico">🛠️</span>
+          <div class="pricing-sub-text"><strong>Support technique rapide</strong>Réponse sous 24h en cas de problème</div>
+        </div>
+        <div class="pricing-sub-item">
+          <span class="pricing-sub-ico">✏️</span>
+          <div class="pricing-sub-text"><strong>Modifications simples illimitées</strong>Textes, images, couleurs — on s'occupe de tout</div>
+        </div>
+        <div class="pricing-sub-item">
+          <span class="pricing-sub-ico">👁️</span>
+          <div class="pricing-sub-text"><strong>Surveillance et maintenance</strong>Monitoring 24/7 pour un site toujours en ligne</div>
+        </div>
       </div>
-      <div style="text-align: center;">
-        <div class="maint-price">80 €</div>
-        <div class="maint-per">/mois</div>
+      <div class="pricing-reassurance">
+        <p>✨ Vous ne vous occupez de rien, on gère tout pour vous.</p>
       </div>
     </div>
   </div>
