@@ -1628,14 +1628,10 @@
                     </button>
                 </div>
 
-                
-                <div class="form-group full-width" style="text-align: center;">
-                    <button type="button" class="download-devis-btn" onclick="openDevisModal()">
+                <div class="form-group full-width" id="downloadDevisSection" style="text-align: center; display: none;">
+                    <button type="button" class="submit-btn" id="devisBtn" onclick="generateDevisPDF()" style="background: var(--deep-blue); margin-top: 1rem;">
                         <i class="fas fa-file-invoice"></i> Télécharger mon devis
                     </button>
-                    <p style="font-size: 0.85rem; color: var(--accent-blue); margin-top: 0.5rem;">
-                        <i class="fas fa-info-circle"></i> Générez un devis PDF avec vos informations
-                    </p>
                 </div>
 
                 <div class="form-group full-width">
@@ -1996,6 +1992,8 @@ document.getElementById('bookingForm').addEventListener('submit', function(e) {
             }).then(response => {
                 if (response.ok) {
                     successMsg.classList.add('show');
+                    // Afficher le bouton de téléchargement du devis
+                    if (downloadSection) { downloadSection.style.display = 'block'; }
                     this.reset();
                     calculateEstimate();
                 } else {
@@ -2011,153 +2009,137 @@ document.getElementById('bookingForm').addEventListener('submit', function(e) {
     </script>
 
 
-    <!-- MODAL DEVIS -->
-    <div id="devisModal" class="devis-modal-overlay" onclick="closeDevisModal(event)">
-        <div class="devis-modal-content">
-            <button class="devis-modal-close" onclick="closeDevisModal(event)">&times;</button>
-
-            <div class="devis-paper" id="devisPaper">
-                <div class="devis-header">
-                    <div class="devis-logo-area">
-                        <div class="devis-camera-icon">
-                            <i class="fas fa-camera"></i>
-                        </div>
-                        <div class="devis-title-cloud">
-                            <h2>Devis</h2>
-                        </div>
-                    </div>
-                    <div class="devis-number">
-                        N° <strong id="devisNumber">2024-0001</strong>
-                    </div>
-                    <div class="devis-date-box">
-                        <div class="devis-date-label">Date du devis</div>
-                        <div class="devis-date-value" id="devisDate">20 Mai 2024</div>
-                    </div>
-                    <div class="devis-brand">Chaymassama</div>
-                    <div class="devis-subtitle">Photographie & Vidéographie</div>
-                </div>
-
-                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
-                    <div>
-                        <span class="devis-cloud-label">Client</span>
-                        <div class="devis-box">
-                            <div class="devis-box-row">
-                                <span class="devis-box-label">Nom :</span>
-                                <span class="devis-box-value" id="devisClientName">—</span>
-                            </div>
-                            <div class="devis-box-row">
-                                <span class="devis-box-label">Téléphone :</span>
-                                <span class="devis-box-value" id="devisClientPhone">—</span>
-                            </div>
-                            <div class="devis-box-row">
-                                <span class="devis-box-label">Email :</span>
-                                <span class="devis-box-value" id="devisClientEmail">—</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div>
-                        <span class="devis-cloud-label">Événement</span>
-                        <div class="devis-box">
-                            <div class="devis-box-row">
-                                <span class="devis-box-label">Type :</span>
-                                <span class="devis-box-value" id="devisEventType">—</span>
-                            </div>
-                            <div class="devis-box-row">
-                                <span class="devis-box-label">Date :</span>
-                                <span class="devis-box-value" id="devisEventDate">—</span>
-                            </div>
-                            <div class="devis-box-row">
-                                <span class="devis-box-label">Durée :</span>
-                                <span class="devis-box-value" id="devisDuration">—</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <table class="devis-table">
-                    <thead>
-                        <tr>
-                            <th>Prestations</th>
-                            <th>Détails</th>
-                            <th style="text-align: right;">Prix</th>
-                        </tr>
-                    </thead>
-                    <tbody id="devisTableBody">
-                        <!-- Rempli par JS -->
-                    </tbody>
-                </table>
-
-                <div class="devis-total-box">
-                    <div class="devis-total-row">
-                        <span>Sous-total</span>
-                        <span id="devisSubtotal">0€</span>
-                    </div>
-                    <div class="devis-total-row">
-                        <span>TVA non applicable</span>
-                        <span>-</span>
-                    </div>
-                    <div class="devis-total-row grand-total">
-                        <span>Total TTC</span>
-                        <span id="devisTotal">0€</span>
-                    </div>
-                </div>
-
-                <div class="devis-conditions">
-                    <ul>
-                        <li>Ce devis est valable 30 jours à compter de la date d'émission.</li>
-                        <li>Un acompte de 30% est demandé pour la réservation.</li>
-                        <li>Le solde est à régler le jour de l'événement ou selon accord.</li>
-                        <li>Annulation possible jusqu'à 30 jours avant l'événement.</li>
-                    </ul>
-                </div>
-
-                <div class="devis-footer">
-                    <div class="devis-thanks">Merci pour votre confiance !</div>
-                    <div class="devis-contact-bar">
-                        <span><i class="fas fa-envelope"></i> chaymassama@gmail.com</span>
-                        <span><i class="fab fa-instagram"></i> Chaymassama</span>
-                        <span><i class="fab fa-youtube"></i> Chaymassama</span>
-                        <span><i class="fas fa-phone"></i> 0486 77 91 96</span>
-                    </div>
-                </div>
-            </div>
-
-            <div class="devis-actions">
-                <button class="devis-action-btn primary" onclick="downloadDevisPDF()">
-                    <i class="fas fa-download"></i> Télécharger PDF
-                </button>
-                <button class="devis-action-btn secondary" onclick="closeDevisModal()">
-                    <i class="fas fa-times"></i> Fermer
-                </button>
-            </div>
-        </div>
-    </div>
-
-    <!-- SCRIPT DEVIS -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <script>
-        // Générer un numéro de devis unique
-        function generateDevisNumber() {
-            const now = new Date();
-            const year = now.getFullYear();
-            const random = Math.floor(Math.random() * 9000) + 1000;
-            return year + '-' + random;
-        }
+        // Modal devis (caché par défaut, style comme la photo)
+        const devisModalHTML = `
+        <div id="devisModalOverlay" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.7);z-index:20000;justify-content:center;align-items:center;padding:1rem;backdrop-filter:blur(5px);">
+            <div style="background:linear-gradient(180deg,#E8F4FC 0%,#D0EBF7 50%,#B8E3F0 100%);border-radius:25px;max-width:600px;width:100%;max-height:90vh;overflow-y:auto;position:relative;box-shadow:0 20px 60px rgba(30,95,142,0.3);border:3px solid white;">
+                <button onclick="closeDevisModal()" style="position:absolute;top:15px;right:15px;background:white;border:none;width:40px;height:40px;border-radius:50%;font-size:1.5rem;color:#1E5F8E;cursor:pointer;z-index:10;box-shadow:0 2px 10px rgba(0,0,0,0.1);display:flex;align-items:center;justify-content:center;">&times;</button>
+                <div id="devisPaper" style="padding:2rem;font-family:'Lato',sans-serif;color:#2C3E50;">
+                    <div style="text-align:center;margin-bottom:1.5rem;">
+                        <div style="display:flex;justify-content:center;align-items:center;gap:1rem;margin-bottom:0.5rem;">
+                            <div style="width:70px;height:70px;background:white;border-radius:50%;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 15px rgba(30,95,142,0.2);border:3px solid #1E5F8E;">
+                                <i class="fas fa-camera" style="font-size:2rem;color:#1E5F8E;"></i>
+                            </div>
+                            <div style="background:white;padding:0.5rem 1.5rem;border-radius:50px;box-shadow:0 4px 15px rgba(30,95,142,0.15);border:2px solid #B8E3F0;">
+                                <h2 style="font-family:'Playfair Display',serif;font-size:2rem;color:#1E5F8E;font-style:italic;margin:0;">Devis</h2>
+                            </div>
+                        </div>
+                        <div style="text-align:right;font-size:0.9rem;color:#4A90B8;margin-bottom:1rem;">
+                            N° <strong id="devisNum">2024-0001</strong>
+                        </div>
+                        <div style="background:white;border-radius:15px;padding:0.8rem 1.5rem;text-align:center;margin:0 auto 1.5rem;max-width:250px;box-shadow:0 4px 15px rgba(30,95,142,0.1);border:2px solid #B8E3F0;">
+                            <div style="font-family:'Playfair Display',serif;font-style:italic;color:#1E5F8E;font-size:1rem;">Date du devis</div>
+                            <div style="font-weight:700;color:#2C3E50;margin-top:0.3rem;" id="devisDateDisplay">20 Mai 2024</div>
+                        </div>
+                        <div style="font-family:'Playfair Display',serif;font-size:1.8rem;color:#1E5F8E;margin-top:0.5rem;">Chaymassama</div>
+                        <div style="font-size:0.8rem;letter-spacing:3px;color:#4A90B8;text-transform:uppercase;margin-top:0.3rem;">Photographie & Vidéographie</div>
+                    </div>
 
-        // Formater la date en français
-        function formatDateFR(dateStr) {
-            if (!dateStr) return '—';
-            const date = new Date(dateStr);
-            const months = ['Janvier','Février','Mars','Avril','Mai','Juin','Juillet','Août','Septembre','Octobre','Novembre','Décembre'];
-            return date.getDate() + ' ' + months[date.getMonth()] + ' ' + date.getFullYear();
-        }
+                    <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;">
+                        <div>
+                            <span style="display:inline-block;background:white;padding:0.4rem 1.2rem;border-radius:50px;font-family:'Playfair Display',serif;font-style:italic;color:#1E5F8E;font-size:1.1rem;box-shadow:0 3px 10px rgba(30,95,142,0.1);border:2px solid #B8E3F0;margin-bottom:0.5rem;">Client</span>
+                            <div style="background:rgba(255,255,255,0.7);border-radius:20px;padding:1.2rem;margin-bottom:1rem;border:2px solid white;box-shadow:0 4px 15px rgba(30,95,142,0.08);">
+                                <div style="display:flex;justify-content:space-between;padding:0.5rem 0;border-bottom:1px dashed rgba(30,95,142,0.2);">
+                                    <span style="font-weight:600;color:#1E5F8E;">Nom :</span>
+                                    <span style="color:#2C3E50;font-weight:500;" id="devisName">—</span>
+                                </div>
+                                <div style="display:flex;justify-content:space-between;padding:0.5rem 0;border-bottom:1px dashed rgba(30,95,142,0.2);">
+                                    <span style="font-weight:600;color:#1E5F8E;">Téléphone :</span>
+                                    <span style="color:#2C3E50;font-weight:500;" id="devisPhone">—</span>
+                                </div>
+                                <div style="display:flex;justify-content:space-between;padding:0.5rem 0;">
+                                    <span style="font-weight:600;color:#1E5F8E;">Email :</span>
+                                    <span style="color:#2C3E50;font-weight:500;" id="devisEmail">—</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div>
+                            <span style="display:inline-block;background:white;padding:0.4rem 1.2rem;border-radius:50px;font-family:'Playfair Display',serif;font-style:italic;color:#1E5F8E;font-size:1.1rem;box-shadow:0 3px 10px rgba(30,95,142,0.1);border:2px solid #B8E3F0;margin-bottom:0.5rem;">Événement</span>
+                            <div style="background:rgba(255,255,255,0.7);border-radius:20px;padding:1.2rem;margin-bottom:1rem;border:2px solid white;box-shadow:0 4px 15px rgba(30,95,142,0.08);">
+                                <div style="display:flex;justify-content:space-between;padding:0.5rem 0;border-bottom:1px dashed rgba(30,95,142,0.2);">
+                                    <span style="font-weight:600;color:#1E5F8E;">Type :</span>
+                                    <span style="color:#2C3E50;font-weight:500;" id="devisEventType">—</span>
+                                </div>
+                                <div style="display:flex;justify-content:space-between;padding:0.5rem 0;border-bottom:1px dashed rgba(30,95,142,0.2);">
+                                    <span style="font-weight:600;color:#1E5F8E;">Date :</span>
+                                    <span style="color:#2C3E50;font-weight:500;" id="devisEventDate">—</span>
+                                </div>
+                                <div style="display:flex;justify-content:space-between;padding:0.5rem 0;">
+                                    <span style="font-weight:600;color:#1E5F8E;">Durée :</span>
+                                    <span style="color:#2C3E50;font-weight:500;" id="devisDuration">—</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
-        // Ouvrir le modal devis
-        function openDevisModal() {
+                    <table style="width:100%;border-collapse:separate;border-spacing:0;margin:1rem 0;background:rgba(255,255,255,0.5);border-radius:15px;overflow:hidden;box-shadow:0 4px 15px rgba(30,95,142,0.1);">
+                        <thead>
+                            <tr>
+                                <th style="background:#1E5F8E;color:white;padding:0.8rem;font-size:0.85rem;text-align:left;border-radius:15px 0 0 0;">Prestations</th>
+                                <th style="background:#1E5F8E;color:white;padding:0.8rem;font-size:0.85rem;text-align:left;">Détails</th>
+                                <th style="background:#1E5F8E;color:white;padding:0.8rem;font-size:0.85rem;text-align:right;border-radius:0 15px 0 0;">Prix</th>
+                            </tr>
+                        </thead>
+                        <tbody id="devisTableBody">
+                        </tbody>
+                    </table>
+
+                    <div style="background:white;border-radius:20px;padding:1.2rem;margin-top:1rem;box-shadow:0 4px 15px rgba(30,95,142,0.15);border:2px solid #B8E3F0;">
+                        <div style="display:flex;justify-content:space-between;padding:0.5rem 0;font-size:0.95rem;">
+                            <span>Sous-total</span>
+                            <span id="devisSubtotal">0€</span>
+                        </div>
+                        <div style="display:flex;justify-content:space-between;padding:0.5rem 0;font-size:0.95rem;">
+                            <span>TVA non applicable</span>
+                            <span>-</span>
+                        </div>
+                        <div style="display:flex;justify-content:space-between;padding:0.5rem 0;border-top:2px solid #1E5F8E;margin-top:0.5rem;padding-top:0.8rem;font-size:1.2rem;font-weight:700;color:#1E5F8E;">
+                            <span>Total TTC</span>
+                            <span id="devisTotal">0€</span>
+                        </div>
+                    </div>
+
+                    <div style="background:rgba(255,255,255,0.6);border-radius:15px;padding:1rem;margin-top:1rem;font-size:0.8rem;line-height:1.6;">
+                        <ul style="list-style:none;padding:0;">
+                            <li style="padding-left:1.2rem;position:relative;margin-bottom:0.3rem;"><span style="position:absolute;left:0;font-size:0.7rem;">☁️</span>Ce devis est valable 30 jours à compter de la date d'émission.</li>
+                            <li style="padding-left:1.2rem;position:relative;margin-bottom:0.3rem;"><span style="position:absolute;left:0;font-size:0.7rem;">☁️</span>Un acompte de 30% est demandé pour la réservation.</li>
+                            <li style="padding-left:1.2rem;position:relative;margin-bottom:0.3rem;"><span style="position:absolute;left:0;font-size:0.7rem;">☁️</span>Le solde est à régler le jour de l'événement ou selon accord.</li>
+                            <li style="padding-left:1.2rem;position:relative;"><span style="position:absolute;left:0;font-size:0.7rem;">☁️</span>Annulation possible jusqu'à 30 jours avant l'événement.</li>
+                        </ul>
+                    </div>
+
+                    <div style="text-align:center;margin-top:1.5rem;padding-top:1rem;border-top:2px solid rgba(30,95,142,0.1);">
+                        <div style="font-family:'Playfair Display',serif;font-style:italic;font-size:1.3rem;color:#1E5F8E;margin-bottom:0.8rem;">Merci pour votre confiance !</div>
+                        <div style="display:flex;justify-content:center;gap:1.5rem;flex-wrap:wrap;font-size:0.85rem;color:#4A90B8;">
+                            <span style="display:flex;align-items:center;gap:0.3rem;"><i class="fas fa-envelope"></i> chaymassama@gmail.com</span>
+                            <span style="display:flex;align-items:center;gap:0.3rem;"><i class="fab fa-instagram"></i> Chaymassama</span>
+                            <span style="display:flex;align-items:center;gap:0.3rem;"><i class="fab fa-youtube"></i> Chaymassama</span>
+                            <span style="display:flex;align-items:center;gap:0.3rem;"><i class="fas fa-phone"></i> 0486 77 91 96</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div style="display:flex;gap:1rem;justify-content:center;padding:1rem 2rem 2rem;flex-wrap:wrap;">
+                    <button onclick="downloadDevisPDF()" style="display:inline-flex;align-items:center;gap:0.5rem;padding:0.8rem 1.5rem;border-radius:50px;font-weight:700;font-size:0.95rem;cursor:pointer;transition:all 0.3s;border:none;font-family:'Lato',sans-serif;background:#1E5F8E;color:white;box-shadow:0 4px 15px rgba(30,95,142,0.3);">
+                        <i class="fas fa-download"></i> Télécharger PDF
+                    </button>
+                    <button onclick="closeDevisModal()" style="display:inline-flex;align-items:center;gap:0.5rem;padding:0.8rem 1.5rem;border-radius:50px;font-weight:700;font-size:0.95rem;cursor:pointer;transition:all 0.3s;border:2px solid #1E5F8E;font-family:'Lato',sans-serif;background:white;color:#1E5F8E;">
+                        <i class="fas fa-times"></i> Fermer
+                    </button>
+                </div>
+            </div>
+        </div>`;
+
+        // Injecter le modal dans le body
+        document.body.insertAdjacentHTML('beforeend', devisModalHTML);
+
+        function generateDevisModal() {
             const form = document.getElementById('bookingForm');
 
-            // Récupérer les valeurs du formulaire
+            // Récupérer les valeurs
             const name = form.querySelector('#name').value || '—';
             const phone = form.querySelector('#phone').value || '—';
             const email = form.querySelector('#email').value || '—';
@@ -2166,122 +2148,66 @@ document.getElementById('bookingForm').addEventListener('submit', function(e) {
             const duration = form.querySelector('#duration').value;
             const eventType = form.querySelector('#eventType').value;
             const travel = form.querySelector('#travel').value;
-            const complexity = form.querySelector('#complexity').value;
+            const price = document.getElementById('estimatePrice').textContent;
 
             // Mettre à jour le devis
-            document.getElementById('devisNumber').textContent = generateDevisNumber();
-            document.getElementById('devisDate').textContent = formatDateFR(new Date());
-            document.getElementById('devisClientName').textContent = name;
-            document.getElementById('devisClientPhone').textContent = phone;
-            document.getElementById('devisClientEmail').textContent = email;
-            document.getElementById('devisEventDate').textContent = formatDateFR(date);
+            const now = new Date();
+            document.getElementById('devisNum').textContent = now.getFullYear() + '-' + Math.floor(Math.random()*9000+1000);
+            document.getElementById('devisDateDisplay').textContent = now.toLocaleDateString('fr-FR', {day:'numeric', month:'long', year:'numeric'});
+            document.getElementById('devisName').textContent = name;
+            document.getElementById('devisPhone').textContent = phone;
+            document.getElementById('devisEmail').textContent = email;
+            document.getElementById('devisEventDate').textContent = date ? new Date(date).toLocaleDateString('fr-FR') : '—';
             document.getElementById('devisDuration').textContent = duration + ' heures';
 
-            const typeLabels = {
-                'photo': 'Photographie',
-                'video': 'Vidéographie',
-                'both': 'Photo + Vidéo'
-            };
-            const eventLabels = {
-                'mariage': 'Mariage',
-                'normal': 'Standard'
-            };
+            const typeLabels = { 'photo': 'Photographie', 'video': 'Vidéographie', 'both': 'Photo + Vidéo' };
+            const eventLabels = { 'mariage': 'Mariage', 'normal': 'Standard' };
             document.getElementById('devisEventType').textContent = typeLabels[type] + ' — ' + eventLabels[eventType];
 
-            // Calculer et afficher les lignes du devis
+            // Calculer et afficher les lignes
             const tbody = document.getElementById('devisTableBody');
             tbody.innerHTML = '';
 
             let total = 0;
-
-            // Prestation principale
-            const priceText = document.getElementById('estimatePrice').textContent;
-            const basePrice = parseInt(priceText.replace(/[^0-9]/g, '')) || 0;
+            const basePrice = parseInt(price.replace(/[^0-9]/g, '')) || 0;
 
             let serviceName = typeLabels[type];
             let serviceDetail = duration + 'h — ' + eventLabels[eventType];
             if (type === 'video') {
-                const complexityLabels = {
-                    'simple': 'Montage simple',
-                    'standard': 'Montage standard',
-                    'complexe': 'Montage complexe'
-                };
+                const complexityLabels = { 'simple': 'Montage simple', 'standard': 'Montage standard', 'complexe': 'Montage complexe' };
+                const complexity = form.querySelector('#complexity').value;
                 serviceDetail += ' — ' + complexityLabels[complexity];
             }
 
-            tbody.innerHTML += `
-                <tr>
-                    <td>
-                        <div class="service-name">☁️ ${serviceName}</div>
-                        <div class="service-detail">${serviceDetail}</div>
-                    </td>
-                    <td>Couverture complète de l'événement<br>Photos/vidéos retouchées HD</td>
-                    <td class="price-cell">${basePrice}€</td>
-                </tr>
-            `;
+            tbody.innerHTML += `<tr><td style="padding:0.7rem 0.8rem;border-bottom:1px solid rgba(30,95,142,0.1);font-size:0.9rem;"><div style="font-weight:600;color:#1E5F8E;">☁️ ${serviceName}</div><div style="font-size:0.8rem;color:#4A90B8;">${serviceDetail}</div></td><td style="padding:0.7rem 0.8rem;border-bottom:1px solid rgba(30,95,142,0.1);font-size:0.9rem;">Couverture complète de l'événement<br>Photos/vidéos retouchées HD</td><td style="padding:0.7rem 0.8rem;border-bottom:1px solid rgba(30,95,142,0.1);text-align:right;font-weight:700;color:#1E5F8E;white-space:nowrap;">${basePrice}€</td></tr>`;
             total += basePrice;
 
-            // Déplacement
             if (parseInt(travel) > 0) {
-                tbody.innerHTML += `
-                    <tr>
-                        <td>
-                            <div class="service-name">☁️ Déplacement</div>
-                            <div class="service-detail">${travel} min de Liège</div>
-                        </td>
-                        <td>Frais de déplacement</td>
-                        <td class="price-cell">${travel}€</td>
-                    </tr>
-                `;
+                tbody.innerHTML += `<tr><td style="padding:0.7rem 0.8rem;border-bottom:1px solid rgba(30,95,142,0.1);font-size:0.9rem;"><div style="font-weight:600;color:#1E5F8E;">☁️ Déplacement</div><div style="font-size:0.8rem;color:#4A90B8;">${travel} min de Liège</div></td><td style="padding:0.7rem 0.8rem;border-bottom:1px solid rgba(30,95,142,0.1);font-size:0.9rem;">Frais de déplacement</td><td style="padding:0.7rem 0.8rem;border-bottom:1px solid rgba(30,95,142,0.1);text-align:right;font-weight:700;color:#1E5F8E;white-space:nowrap;">${travel}€</td></tr>`;
                 total += parseInt(travel);
             }
 
-            // Montage vidéo (si applicable)
             if (type === 'video' || type === 'both') {
-                tbody.innerHTML += `
-                    <tr>
-                        <td>
-                            <div class="service-name">☁️ Montage professionnel</div>
-                            <div class="service-detail">Inclus dans la prestation</div>
-                        </td>
-                        <td>Color grading, transitions, sound design</td>
-                        <td class="price-cell">Inclus</td>
-                    </tr>
-                `;
+                tbody.innerHTML += `<tr><td style="padding:0.7rem 0.8rem;border-bottom:1px solid rgba(30,95,142,0.1);font-size:0.9rem;"><div style="font-weight:600;color:#1E5F8E;">☁️ Montage professionnel</div><div style="font-size:0.8rem;color:#4A90B8;">Inclus dans la prestation</div></td><td style="padding:0.7rem 0.8rem;border-bottom:1px solid rgba(30,95,142,0.1);font-size:0.9rem;">Color grading, transitions, sound design</td><td style="padding:0.7rem 0.8rem;border-bottom:1px solid rgba(30,95,142,0.1);text-align:right;font-weight:700;color:#1E5F8E;white-space:nowrap;">Inclus</td></tr>`;
             }
 
-            // Livraison HD
-            tbody.innerHTML += `
-                <tr>
-                    <td>
-                        <div class="service-name">☁️ Livraison HD</div>
-                        <div class="service-detail">Format numérique</div>
-                    </td>
-                    <td>Galerie privée en ligne + fichiers HD</td>
-                    <td class="price-cell">Inclus</td>
-                </tr>
-            `;
+            tbody.innerHTML += `<tr><td style="padding:0.7rem 0.8rem;font-size:0.9rem;"><div style="font-weight:600;color:#1E5F8E;">☁️ Livraison HD</div><div style="font-size:0.8rem;color:#4A90B8;">Format numérique</div></td><td style="padding:0.7rem 0.8rem;font-size:0.9rem;">Galerie privée en ligne + fichiers HD</td><td style="padding:0.7rem 0.8rem;text-align:right;font-weight:700;color:#1E5F8E;white-space:nowrap;">Inclus</td></tr>`;
 
-            // Mettre à jour les totaux
             document.getElementById('devisSubtotal').textContent = total + '€';
             document.getElementById('devisTotal').textContent = total + '€';
 
             // Afficher le modal
-            document.getElementById('devisModal').classList.add('active');
+            document.getElementById('devisModalOverlay').style.display = 'flex';
             document.body.style.overflow = 'hidden';
         }
 
-        // Fermer le modal
-        function closeDevisModal(event) {
-            if (!event || event.target.id === 'devisModal' || event.target.closest('.devis-modal-close')) {
-                document.getElementById('devisModal').classList.remove('active');
-                document.body.style.overflow = '';
-            }
+        function closeDevisModal() {
+            document.getElementById('devisModalOverlay').style.display = 'none';
+            document.body.style.overflow = '';
         }
 
-        // Télécharger le devis en PDF
         async function downloadDevisPDF() {
-            const btn = document.querySelector('.devis-action-btn.primary');
+            const btn = document.querySelector('#devisModalOverlay button[onclick="downloadDevisPDF()"]');
             const originalText = btn.innerHTML;
             btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Génération...';
             btn.disabled = true;
@@ -2290,7 +2216,6 @@ document.getElementById('bookingForm').addEventListener('submit', function(e) {
                 const { jsPDF } = window.jspdf;
                 const element = document.getElementById('devisPaper');
 
-                // Capturer le devis en image
                 const canvas = await html2canvas(element, {
                     scale: 2,
                     useCORS: true,
@@ -2298,8 +2223,6 @@ document.getElementById('bookingForm').addEventListener('submit', function(e) {
                 });
 
                 const imgData = canvas.toDataURL('image/png');
-
-                // Créer le PDF
                 const pdf = new jsPDF('p', 'mm', 'a4');
                 const pdfWidth = pdf.internal.pageSize.getWidth();
                 const pdfHeight = pdf.internal.pageSize.getHeight();
@@ -2311,12 +2234,9 @@ document.getElementById('bookingForm').addEventListener('submit', function(e) {
 
                 pdf.addImage(imgData, 'PNG', imgX, imgY, imgWidth * ratio, imgHeight * ratio);
 
-                // Nom du fichier
-                const clientName = document.getElementById('devisClientName').textContent;
-                const devisNum = document.getElementById('devisNumber').textContent;
-                const fileName = `Devis_Chaymassama_${devisNum}_${clientName.replace(/[^a-zA-Z0-9]/g, '_')}.pdf`;
-
-                pdf.save(fileName);
+                const clientName = document.getElementById('devisName').textContent;
+                const devisNum = document.getElementById('devisNum').textContent;
+                pdf.save('Devis_Chaymassama_' + devisNum + '_' + clientName.replace(/[^a-zA-Z0-9]/g, '_') + '.pdf');
 
             } catch (error) {
                 console.error('Erreur PDF:', error);
@@ -2327,9 +2247,13 @@ document.getElementById('bookingForm').addEventListener('submit', function(e) {
             }
         }
 
-        // Navigation clavier pour le modal devis
+        // Fonction appelée par le bouton après validation
+        function generateDevisPDF() {
+            generateDevisModal();
+        }
+
         document.addEventListener('keydown', e => {
-            if (document.getElementById('devisModal').classList.contains('active')) {
+            if (document.getElementById('devisModalOverlay').style.display === 'flex') {
                 if (e.key === 'Escape') closeDevisModal();
             }
         });
