@@ -1993,6 +1993,7 @@ document.getElementById('bookingForm').addEventListener('submit', function(e) {
                 if (response.ok) {
                     successMsg.classList.add('show');
                     // Afficher le bouton de téléchargement du devis
+                    const downloadSection = document.getElementById('downloadDevisSection');
                     if (downloadSection) { downloadSection.style.display = 'block'; }
                     this.reset();
                     calculateEstimate();
