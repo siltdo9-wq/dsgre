@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Accès VIP</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      min-height: 100vh;
+      background: #0d0d0d;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Segoe UI', system-ui, sans-serif;
+      color: #fff;
+      padding: 24px;
+    }
+
+    .card {
+      background: #161616;
+      border: 1px solid #2a2a2a;
+      border-radius: 16px;
+      padding: 48px 40px;
+      max-width: 420px;
+      width: 100%;
+      text-align: center;
+    }
+
+    .badge {
+      display: inline-block;
+      background: #5865F2;
+      color: #fff;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      padding: 6px 14px;
+      border-radius: 100px;
+      margin-bottom: 28px;
+    }
+
+    h1 {
+      font-size: 28px;
+      font-weight: 700;
+      line-height: 1.25;
+      margin-bottom: 16px;
+    }
+
+    h1 span {
+      color: #5865F2;
+    }
+
+    p {
+      color: #888;
+      font-size: 15px;
+      line-height: 1.6;
+      margin-bottom: 36px;
+    }
+
+    .price {
+      font-size: 44px;
+      font-weight: 800;
+      color: #fff;
+      margin-bottom: 4px;
+    }
+
+    .price sup {
+      font-size: 20px;
+      vertical-align: super;
+      font-weight: 600;
+    }
+
+    .price-label {
+      color: #555;
+      font-size: 13px;
+      margin-bottom: 32px;
+    }
+
+    .btn {
+      display: block;
+      width: 100%;
+      background: #5865F2;
+      color: #fff;
+      font-size: 16px;
+      font-weight: 700;
+      padding: 16px;
+      border-radius: 10px;
+      text-decoration: none;
+      transition: background 0.2s;
+      cursor: pointer;
+      border: none;
+    }
+
+    .btn:hover {
+      background: #4752c4;
+    }
+
+    .divider {
+      border: none;
+      border-top: 1px solid #222;
+      margin: 28px 0;
+    }
+
+    .perks {
+      list-style: none;
+      text-align: left;
+    }
+
+    .perks li {
+      color: #aaa;
+      font-size: 14px;
+      padding: 7px 0;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .perks li::before {
+      content: '✓';
+      color: #5865F2;
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="card">
+    <div class="badge">Discord VIP</div>
+
+    <h1>Rejoins le <span>serveur VIP</span></h1>
+
+    <p>Accède à du contenu exclusif, des conseils et une communauté privée réservée aux membres.</p>
+
+    <div class="price"><sup>€</sup>4,99</div>
+    <div class="price-label">paiement unique</div>
+
+    <a href="https://buy.stripe.com/00w6oGbGoabE3S3eb4ew80g" class="btn">Rejoindre maintenant →</a>
+
+    <hr class="divider" />
+
+    <ul class="perks">
+      <li>Accès immédiat au Discord VIP</li>
+      <li>Contenu exclusif réservé aux membres</li>
+      <li>Communauté privée</li>
+      <li>Support prioritaire</li>
+    </ul>
+  </div>
+
+</body>
+</html>
